@@ -1,0 +1,127 @@
+<!-- breadcrumb -->
+
+<nav *ngIf = "true" class="breadcrumb" style="margin-top:-10px">
+  <a class="breadcrumb-item" [routerLink]="['/ProjectData/timeline']">Timeline</a>
+  <span class="breadcrumb-item active">Timeline</span>
+</nav>
+
+<!-- breadcrumb -->
+
+
+<table>
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+  
+      </tr>
+  
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of responseData; let a = index">
+  
+        <td>
+          <h6>{{data.projectName}}</h6>
+        </td>
+  
+        <td>
+          <ul class="timeline" id="timeline">
+<!-- projects -->
+              <li *ngIf="data.projects !=null" class="li complete">
+                  <div class="timestamp">
+                  </div>
+                  <div class="status">
+                    <h6>Projects</h6>
+                  </div>
+                </li>
+                <li *ngIf="data.projects ==null" class="li ">
+                  <div class="timestamp">
+                  </div>
+                  <div class="status">
+      
+                    <a [routerLink]="" (click)="relativeLink(data)">
+                      <h6>Projects </h6>
+                    </a>
+                  </div>
+                </li>
+<!-- validate Api -->
+            <li *ngIf="data.validateApi !=null" class="li complete">
+              <div class="timestamp">
+              </div>
+              <div class="status">
+                <h6>API - Validator</h6>
+              </div>
+            </li>
+            <li *ngIf="data.validateApi ==null" class="li ">
+              <div class="timestamp">
+              </div>
+              <div class="status">
+  
+                <a [routerLink]="" (click)="relativeLink(data)">
+                  <h6> API - Validator </h6>
+                </a>
+              </div>
+            </li>
+  
+            <li *ngIf="data.flows !=null" class="li complete">
+              <div class="timestamp">
+              </div>
+              <div class="status">
+                <h6> Flows</h6>
+              </div>
+            </li>
+            <li *ngIf="data.flows ==null" class="li">
+              <div class="timestamp">
+              </div>
+              <div class="status">
+                <a [routerLink]="" (click)="relativeLink(data)">
+                  <h6> Flows</h6>
+                </a>
+              </div>
+            </li>
+  
+  
+  
+            <li *ngIf="data.mapping !=null" class="li complete">
+              <div class="timestamp">
+              </div>
+              <div class="status">
+          <h6> Mapping </h6>
+        </div>
+              
+            </li>
+            <li *ngIf="data.mapping == null" class="li ">
+              <div class="timestamp">
+              </div>
+              <div class="status">
+                <a [routerLink]="" (click)="relativeLink(data)">
+                  <h6> Mapping</h6>
+                </a>
+              </div>
+            </li>
+<!--   
+            <li *ngIf="data.probableApi !=null" class="li  complete">
+              <div class="timestamp">
+              </div>
+              <div class="status">
+                <h6> Probable API</h6>
+              </div>
+            </li>
+  
+            <li *ngIf="data.probableApi ==null" class="li">
+              <div class="timestamp">
+              </div>
+              <div class="status">
+                <a [routerLink]="" (click)="relativeLink(data)">
+                  <h6>Probable API </h6>
+                </a>
+              </div>
+            </li> -->
+          </ul>
+        </td>
+  
+  
+  
+      </tr>
+    </tbody>
+  </table>

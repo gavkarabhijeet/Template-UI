@@ -1,0 +1,280 @@
+<nav *ngIf="true" class="breadcrumb" style="margin-top:-10px">
+  <a class="breadcrumb-item" [routerLink]="['/ProjectData/Maker']">Maker</a>
+</nav>
+<!-- Ng Spinner -->
+<ngx-spinner size="medium" color="#f07800" type="ball-spin"></ngx-spinner>
+<!-- Search bar -->
+<div class="form-group row">
+  <label class="col-md-2" id="usersSize">Makers</label>
+  <div *ngIf="displaySearch" class="col-md-6">
+    <form>
+      <input type='text' class="form-control" id="searchCss" autocomplete="off" placeholder='Search'
+        (keyup)='updateFilter($event)' />
+    </form>
+  </div>
+</div>
+
+<!--  Search bar ends -->
+
+<!-- Table -->
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div *ngIf="isEmpty" id="displayTableCss1">
+          <p id="displayTableCss2">
+            <b> No Data Available </b>
+          </p>
+          <img id="imageCss" src="./../../../assets/images/drawkit-folder-man-monochrome-400px.png" alt="logo" />
+        </div>
+        <div *ngIf="displayTable">
+          <div class="col-lg-12" id="tableDivCss">
+            <div class="card">
+              <div class="card-body" id="tableResponsive">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class="bg-success text-white" id="theadCss">
+                      <tr>
+                        <th class="displayTableCss3">Sr.No</th>
+                        <th class="displayTableCss4">Organisation </th>
+                        <th class="displayTableCss5"> Name </th>
+
+                        <th class="displayTableCss6">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        *ngFor="let data of usersDataForApproval| paginate: { itemsPerPage: 5, currentPage:p};let a=index">
+                        <td class="displayTableCss7">{{data.no}}</td>
+                        <td class="displayTableCss8">
+                         {{data.organisation}}</td>
+                        <td class="displayTableCss9">{{data.firstName}} {{data.lastName}}</td>
+
+                        <td class="displayTableCss10">
+
+                         
+
+                          <!-- View template ends -->
+
+                          <!-- View template ends -->
+                          <i class="fas fa-edit" ngbTooltip="Edit Details" placement="bottom" id="iconButton1"
+                            (click)="editUser(data, editUserDetails)" id="editDetails">
+                          </i>
+
+
+                          <!-- Edit Button -->
+
+                          <ng-template #editUserDetails let-c="close" let-d="dismiss">
+                            <div class="modal-header">
+                              <h4 class="modal-title" id="modal-basic-title">Edit User Details</h4>
+                              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <form [formGroup]="editUserDetailsForm"
+                                (ngSubmit)="submitUserDetails(editUserDetailsForm.value)">
+                                <!-- Account Number -->
+                                <div class="form-group row">
+                                  <label id="pName" class="col-sm-4  control-label col-form-label">Account
+                                    No.:</label>
+                                  <div class="col-sm-6">
+                                    <input type="text" id="editAccountNo" autocomplete="off" class="form-control"
+                                      [formControl]="editUserDetailsForm.controls['editAccountNo']"
+                                      formControlName="editAccountNo">
+                                  </div>
+
+                                </div>
+                                <!-- Account Number ends -->
+                                <!-- Organization -->
+                                <div class="form-group row">
+                                  <label id="fontStyle" class="col-sm-4 control-label col-form-label">Organisation :
+                                  </label>
+                                  <div class="col-sm-6">
+                                    <input type="text" id="editOrganisation" class="form-control"
+                                      [formControl]="editUserDetailsForm.controls['editOrganisation']"
+                                      formControlName="editOrganisation">
+
+                                  </div>
+
+                                </div>
+                                <!-- Organization ends -->
+                                <!-- First name -->
+                                <div class="form-group row">
+                                  <label id="fontStyle" class="col-sm-4 control-label col-form-label">First Name :
+                                  </label>
+                                  <div class="col-sm-6">
+                                    <input type="text" id="editFirstName" class="form-control"
+                                      [formControl]="editUserDetailsForm.controls['editFirstName']"
+                                      formControlName="editFirstName">
+
+                                  </div>
+
+                                </div>
+                                <!-- First name ends -->
+                                <!-- Last name -->
+                                <div class="form-group row">
+                                  <label id="fontStyle" class="col-sm-4 control-label col-form-label">Last Name :
+                                  </label>
+                                  <div class="col-sm-6">
+                                    <input type="text" id="editLastName" class="form-control"
+                                      [formControl]="editUserDetailsForm.controls['editLastName']"
+                                      formControlName="editLastName">
+
+                                  </div>
+
+                                </div>
+                                <!-- Last Name ends -->
+                                <!-- UAT Url -->
+                                <div class="form-group row">
+                                  <label id="pName" class="col-sm-4  control-label col-form-label">UAT Url:</label>
+                                  <div class="col-sm-6">
+                                    <input type="text" id="editUatUrl" autocomplete="off" class="form-control"
+                                      [formControl]="editUserDetailsForm.controls['editUatUrl']"
+                                      formControlName="editUatUrl">
+                                  </div>
+
+                                </div>
+                                <!-- UAT Url ends -->
+                                <!-- Prod Url -->
+                                <div class="form-group row">
+                                  <label id="pName" class="col-sm-4  control-label col-form-label">Production
+                                    Url:</label>
+                                  <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="editProdUrl" autocomplete="off"
+                                      [formControl]="editUserDetailsForm.controls['editProdUrl']"
+                                      formControlName="editProdUrl">
+                                  </div>
+
+                                </div>
+                                <!-- Prod Url ends -->
+
+                                <!-- IP -->
+
+                                <div class="form-group row">
+                                  <label id="pName" class="col-sm-4  control-label col-form-label">IP :</label>
+                                  <div class="col-sm-6">
+                                    <input type="text" id="editIP" autocomplete="off" class="form-control"
+                                      [formControl]="editUserDetailsForm.controls['editIP']" formControlName="editIP">
+                                  </div>
+                                </div>
+
+                                <!-- IP ends -->
+                                <!-- Port -->
+
+                                <div class="form-group row">
+                                  <label id="pName" class="col-sm-4  control-label col-form-label">Port :</label>
+                                  <div class="col-sm-6">
+                                    <input type="text" id="editPort" autocomplete="off" class="form-control"
+                                      [formControl]="editUserDetailsForm.controls['editPort']"
+                                      formControlName="editPort">
+                                  </div>
+                                </div>
+
+                                <!-- Port ends -->
+                                <!-- Van -->
+
+                                <div class="form-group row">
+                                  <label id="pName" class="col-sm-4  control-label col-form-label">Van :</label>
+                                  <div class="col-sm-6">
+                                    <input type="text" id="editVan" autocomplete="off" class="form-control"
+                                      [formControl]="editUserDetailsForm.controls['editVan']" formControlName="editVan">
+                                  </div>
+                                </div>
+
+                                <!-- Van ends -->
+                                <!-- Client  Code Profunds-->
+                                <div class="form-group row">
+                                  <label id="pName" class="col-sm-4  control-label col-form-label">Client
+                                    Code for Profunds:</label>
+                                  <div class="col-sm-6">
+                                    <input type="text" id="editClientCodeProfunds" autocomplete="off" class="form-control"
+                                      [formControl]="editUserDetailsForm .controls['editClientCodeProfunds']"
+                                      formControlName="editClientCodeProfunds">
+                                  </div>
+
+                                </div>
+                                <!-- Client  code Profunds ends -->
+                                 <!-- Format code Profunds Code -->
+                                 <div class="form-group row">
+                                  <label id="pName" class="col-sm-4  control-label col-form-label">Format
+                                    Code for Profunds:</label>
+                                  <div class="col-sm-6">
+                                    <input type="text" id="editFormatCodeProfunds" autocomplete="off" class="form-control"
+                                      [formControl]="editUserDetailsForm.controls['editFormatCodeProfunds']"
+                                      formControlName="editFormatCodeProfunds">
+                                  </div>
+
+                                </div>
+                                <!-- Format  code Profunds ends -->
+                                 <!-- Client Code -->
+                                 <div class="form-group row">
+                                  <label id="pName" class="col-sm-4  control-label col-form-label">Client
+                                    Code of the flow:</label>
+                                  <div class="col-sm-6">
+                                    <input type="text" id="editClientCode" autocomplete="off" class="form-control"
+                                      [formControl]="editUserDetailsForm.controls['editClientCode']"
+                                      formControlName="editClientCode">
+                                  </div>
+
+                                </div>
+                                <!-- Client code ends -->
+                                <!-- Format Code -->
+                                <div class="form-group row">
+                                  <label id="pName" class="col-sm-4  control-label col-form-label">Format
+                                    Code of the flow:</label>
+                                  <div class="col-sm-6">
+                                    <input type="text" id="editFormatCode" autocomplete="off" class="form-control"
+                                      [formControl]="editUserDetailsForm.controls['editFormatCode']"
+                                      formControlName="editFormatCode">
+                                  </div>
+                                </div>
+                                <!-- Format code ends -->
+                                <button type="submit" style="color:white;border:none;background:#f07800;" id="submitButtonCss"
+                                  class="btn btn-warning">Submit</button>
+
+
+                              </form>
+                              <!-- Form to add new project ends -->
+                            </div>
+                          </ng-template>
+                          <!-- Edit Button -->
+                          <!-- Send for Approval -->
+                          <button   id="approvalButton" (click)="sendForApproval(data)"
+                          class="btn btn-warning">Send for Approval</button>
+                          
+
+                          <!-- Send for Approval ends -->
+
+                          <!-- Reject -->
+                          <button   id="rejectButton"  (click)="rejectFromMaker(data)"
+                          class="btn btn-warning">Reject</button>
+                         
+
+                          <!-- Reject -->
+                        </td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+
+                    <!-- Pagination starts -->
+                    <div id="paginationCss">
+                      <pagination-controls class="my-pagination" [responsive]="true" (pageChange)="p=$event;">
+                      </pagination-controls>
+                    </div>
+                    <!-- Pagination ends -->
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Table ends -->

@@ -1,0 +1,210 @@
+<!-- breadcrumb -->
+<nav *ngIf="true" class="breadcrumb" id="breadCrumbCss">
+    <a class="breadcrumb-item" [routerLink]="['/ProjectData/api-validator']">API Validator</a>
+</nav>
+<!-- breadcrumb -->
+<label id="labelCss">
+    Test and monitor the APIs
+</label>
+<br>
+<br>
+<div class="row">
+    <div class="col-md-12" id="div1">
+        <label class="col-md-2" id="labelMethod">Method</label>
+        <label class="col-md-2" id="labelUrl"> Url</label>
+        <div class="form-group row">
+            <div class="col-md-2">
+                <select id="select1" class="browser-default custom-select" required [(ngModel)]="method"
+                    [ngModelOptions]="{standalone: true}">
+                    <option *ngFor="let value of methods" [ngValue]="value.value">
+                        {{value.value}}
+                    </option>
+                </select>
+            </div>
+            <div class="col-md-8">
+                <input type="text" style="width:100%" [(ngModel)]="url" class="form-control"
+                    [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-warning" id="submitUrl"
+                    (click)="submitUrl(requestText,method,url,authUsername,authPassword,authorizationToken)">Test</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <ngb-tabset [justify]="currentJustify" style="border:1px !important;">
+                    <ngb-tab title="Authorization">
+                        <ng-template ngbTabContent>
+                            <br>
+                            <label id="basicAuthCss">Basic Auth</label>
+                            <div class="form-group row">
+                                <div class="col-md-2">
+                                    <label id="usernameCss">Enter Username : </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="textarea" [(ngModel)]="authUsername" class="form-control"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-2">
+                                    <label id="usernameCss">Enter Password :</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="textarea" [(ngModel)]="authPassword" class="form-control"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Headers">
+                        <ng-template ngbTabContent>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input *ngIf="addMore" id="firstTextbox" type="text" class="form-control"
+                                        placeholder="Key" [(ngModel)]="firstKey"
+                                        (ngModelChange)="textKeyChanged($event)">
+                                </div>
+                                <div class="col-md-4">
+                                    <input *ngIf="addMore" id="secondTextbox" type="text" class="form-control"
+                                        placeholder="Value" [(ngModel)]="firstValue"
+                                        (ngModelChange)="textValueChanged($event)">
+                                </div>
+                                <!-- <div class="col-md-2">
+                                        <button type="button" style="margin-left: 10px" *ngIf="clickAgain"
+                                            (click)="addOne(firstKey, firstValue)" class="btn btn-success">
+                                            Add New Pair</button>
+                                    </div> -->
+                                <br>
+
+                                <div *ngFor="let container of containers; let i = index;" [(ngModel)]="miningname"
+                                    ngDefaultControl style="width:100%">
+                                    <ng-container>
+                                        <div class="form-group row">
+                                            <div class="col-md-4">
+                                                <br>
+                                                <input *ngIf="addMore" id="firstTextbox" type="text"
+                                                    class="form-control" placeholder="Key"
+                                                    [(ngModel)]="container.key2Name"
+                                                    (ngModelChange)="textKeyChangedMore($event,i)">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <br>
+                                                <input *ngIf="addMore" id="secondTextbox" type="text"
+                                                    class="form-control" placeholder="Value"
+                                                    [(ngModel)]="container.value2Name"
+                                                    (ngModelChange)="textValueChangedMore($event,i)">
+                                            </div>
+
+                                            <!-- <div class="col-md-1">
+                                                    <button type="button" id="addButton" (click)="addOneMore(key2Name,value2Name)"
+                                                        class="btn btn-success"> + </button>
+                                                </div> -->
+                                            <div class="col-md-1">
+                                                <br>
+                                                <button type="button" id="subtractButton" (click)="deleteOneMore(i)"> <i
+                                                        class="fas fa-trash-alt"></i> </button>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <br>
+                            <div *ngIf="showButton">
+                                <button type="button" style="margin-left: 10px;background:#f07800;"
+                                    (click)="addOne(firstKey, firstValue)" class="btn btn-warning">
+                                    Add New Pair</button>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Body">
+                        <ng-template ngbTabContent>
+                            <br>
+                            <label id="requestResponseCss">Enter Request/JSON : </label>
+                            <div id="textArea1">
+                                <textarea type="textarea" style="border:2%;" [(ngModel)]="requestText"
+                                    class="form-control" [ngModelOptions]="{standalone: true}"
+                                    id="requestJson"></textarea>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Response">
+                        <ng-template ngbTabContent>
+                            <br>
+                            <label id="statusCss">Status: </label>{{  statusCode }} {{ statusResponse}}
+                            <div id="textArea2">
+                                <textarea type="textarea" [(ngModel)]="responseText" class="form-control"
+                                    [ngModelOptions]="{standalone: true}" id="requestStatus"> </textarea>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<hr>
+
+<!-- NPM Text box -->
+
+<div class="col-md-12" id="listedApi">
+
+    <div>
+        <h4> Listed APIs to test - </h4>
+    </div>
+
+    <!-- Table -->
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="bg-success text-white" id="theadCss">
+                            <tr>
+                                <th id="textCenterCss"> Sr.No. </th>
+                                <th id="textCenterCss"> URl / Service Name </th>
+
+                                <th *ngIf="status"> Status </th>
+                                <th> Test </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr
+                                *ngFor="let data of validatorData| paginate: { itemsPerPage: 5, currentPage: p };let a=index">
+                                <td id="textCenterCss">{{a+1}}</td>
+                                <td id="textCenterCss">{{data.url}}</td>
+
+                                <td >
+                                        <div *ngIf="data.status == 'ok'" class="complete">
+
+                                            </div>
+                                            <div *ngIf="data.status == 'no'" class="incomplete">
+        
+                                            </div>
+                                </td>
+                                <td>
+                                    <button type="button" id="buttonCSS" class="btn btn-warning" (click)="check(data)">Test</button>
+
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <div id="paginationCss">
+                        <pagination-controls class="my-pagination" (pageChange)="p= $event"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

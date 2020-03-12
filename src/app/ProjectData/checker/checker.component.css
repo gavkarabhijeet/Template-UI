@@ -1,0 +1,123 @@
+#approveButtonCss{
+    color:white;
+    border:none;
+    background:#f07800;
+    margin-left: 20px;
+}
+
+#tableResponsiveDiv{
+    margin-top: -77px;
+  }
+
+  #theadCss{
+    background: #0B3C6D !important;
+    border:none;
+  }
+
+
+#imageCss{
+  width:240px;height:240px;
+}
+
+#displayTableCss{
+
+  text-align: center;
+  font-family:Arial, Helvetica, sans-serif;
+} 
+
+
+#displayTableCss3{
+  text-align: center;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+#displayTableCss4{
+  text-align: center;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+#displayTableCss5{
+  text-align: center;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+#displayTableCss6{
+  text-align: center;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+#displayTableCss7{
+  text-align: center;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+#displayTableCss8{
+  text-align: center;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+#displayTableCss9{
+  text-align: center;
+  font-family:Arial, Helvetica, sans-serif;
+}
+#displayTableCss10{
+  text-align: center;
+  font-family:Arial, Helvetica, sans-serif;
+}
+#displayTableCss11{
+  text-align: center;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+#usersSize{
+  font-size: 195%;
+}
+
+#searchCss{
+  height:46px !important;
+}
+
+#paginationCss{
+  padding-left:250px;
+}
+
+
+/* Responsive layout */
+
+@media (min-width: 320px) and (max-width: 480px) {
+ 
+  #paginationCss{
+    padding-left:0px !important;
+  }
+
+  .fa-eye:before {
+    content: "\f06e";
+    margin-left: 45px;
+}
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+ 
+  #paginationCss{
+    padding-left:0px !important;
+  }
+
+  .fa-eye:before {
+    content: "\f06e";
+    margin-left: 45px;
+}
+} 
+@media (min-width: 768px) and (max-width: 1024px) {
+  #paginationCss{
+    padding-left:45px !important;
+  }
+  
+  .fa-eye:before {
+    content: "\f06e";
+    margin-left: 45px;
+}
+
+}
+@media (min-width:1025px) and (max-width: 1919px){
+
+}

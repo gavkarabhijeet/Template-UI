@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"SCF_DB_04122018.Organisation"}],"uuid":"8d3bc8877b91487aa072b0918f04137f"}

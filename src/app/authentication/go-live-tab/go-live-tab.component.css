@@ -1,0 +1,32 @@
+@media only screen and (max-width: 768px) {
+    .dataEvent {
+      width: 50px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    }
+    #trailCSS{
+      height: 102px;
+      border-radius: 10px;
+      border: 1px solid lightgrey;
+      padding: 20px; 
+      width: 100%;margin-top:1%
+    }
+  }
+  @media only screen and (min-width: 768px) {
+    .dataEvent {
+      width: 100%; 
+    }
+    #trailCSS{
+      height: 62px;
+      border-radius: 10px;
+      border: 1px solid lightgrey;
+      padding: 20px; 
+      width: 100%;margin-top:1%
+    }
+  }
+  .headerButton {
+    background-color: #f5821f;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+  }

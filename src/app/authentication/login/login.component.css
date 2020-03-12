@@ -1,0 +1,268 @@
+.textLabelColor{
+  color:#8c8b8b
+  }
+.input{
+    background-color: #f3f5f5!important;
+    height:50px!important;
+  }
+.authenticationImage{
+  margin-left: 55%;
+    height: 316px;
+    width: 250px;
+}
+.myalert{
+  position: fixed;
+    top: 70px; 
+    left:75%;
+    width: 50%;
+    border-radius: 5px;
+    
+}
+.myalert2{
+  position: fixed;
+    top: 70px; 
+    left:75%;
+    width: 50%;
+    border-radius: 5px;
+    
+}
+.myalert3{
+  position: fixed;
+    top: 70px; 
+    left:75%;
+    width: 50%;
+    border-radius: 5px;
+    
+}
+.myalert4{
+  position: fixed;
+    top: 70px; 
+    left:75%;
+    width: 50%;
+    border-radius: 5px;
+    
+}
+.myalert5{
+  position: fixed;
+    top: 70px; 
+    left:75%;
+    width: 50%;
+    border-radius: 5px;
+    
+}
+.myalert6{
+  position: fixed;
+    top: 70px; 
+    left:75%;
+    width: 50%;
+    border-radius: 5px;
+    
+}
+.myalert7{
+  position: fixed;
+    top: 70px; 
+    left:75%;
+    width: 50%;
+    border-radius: 5px;
+    
+}
+.myalert8{
+  position: fixed;
+    top: 70px; 
+    left:75%;
+    width: 50%;
+    border-radius: 5px;
+    
+}
+.myalert9{
+  position: fixed;
+    top: 70px; 
+    left:75%;
+    width: 50%;
+    border-radius: 5px;
+    
+}
+.myalert10{
+  position: fixed;
+    top: 70px; 
+    left:75%;
+    width: 50%;
+    border-radius: 5px;
+    
+}
+.caplogo:hover {
+  cursor: pointer;
+  animation: spin 10s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#captcha {
+  margin-left: 5px;
+}
+.middleLogo {
+  height: 40%;
+  width: 39%;
+}
+/* .pageLogo{
+   height:40px;width:150px; //not required now
+} */
+.error {
+  color: rgb(223, 55, 55);
+  font-size: 15px;
+  margin-left: 0%;
+}
+.img1 {
+  width: 70%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.img3 {
+  width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text1 {
+  font-size: 16px;
+}
+.text2 {
+  font-size: 13px;
+}
+.data {
+  width: 70%;
+  /* position: fixed; */
+  left: 22%;
+}
+#img1 {
+  width: 155%;
+  --aspect-ratio-w: 4;
+  --aspect-ratio-h: 3;
+}
+#img2 {
+  width: 211%;
+  --aspect-ratio-w: 4;
+  --aspect-ratio-h: 3;
+}
+.carousel-indicators li {
+  background-color: #f5821f;
+  height: 5px;
+}
+.carousel-indicators .active {
+  background-color: #f5821f;
+  height: 5px;
+}
+.line {
+  border-bottom: 1px solid #8c8b8b;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#loginButtonCss {
+  background: #f07800 !important;
+  border: none;
+}
+#resetButtonCss {
+  background: #f07800 !important;
+  border: none;
+}
+#backButtonCss {
+  background: #f07800 !important;
+  border: none;
+}
+#linkCss {
+  color: #0b3c6d !important;
+}
+#img3 {
+  height: 40%;
+  width: 39%;
+}
+
+.home-carousal .slick-slide {
+  padding: 10px;
+}
+
+.slick-slider {
+  width: 90%;
+  margin: auto;
+}
+
+.loginnav-btn {
+  height: 47px;
+  position: absolute;
+  width: 26px;
+  cursor: pointer;
+  top: 100px !important;
+}
+
+.prev-slide.slick-disabled,
+.next-slide.slick-disabled {
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+.prev-slide {
+  background: url("/assets/back-button.png") no-repeat scroll 0 0;
+  left: -33px;
+}
+
+.next-slide {
+  background: url("/assets/next-button.png") no-repeat scroll -24px 0px;
+  right: -33px;
+}
+
+/* .prev-slide:hover {
+  background-position: 0px -53px;
+}
+ 
+.next-slide:hover {
+  background-position: -24px -53px;
+} */
+
+.loginButton {
+  background-color: #f5821f;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+}
+
+.auth-wrapper {
+  min-height: 90vh;
+}
+
+/* Responsive */
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .displaySide {
+    width: 100%;
+  }
+}
+@media (min-width: 481px) and (max-width: 767px) {
+  .displaySide {
+    left: 8%;
+    width: 100%;
+  }
+  /* .auth-wrapper .auth-box.on-sidebar {
+      height:157% !important;
+    } */
+
+  .data {
+    /* position: fixed; */
+    background: white !important;
+    left: 13% !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .data {
+    /* position: fixed; */
+    left: 17% !important;
+  }
+}

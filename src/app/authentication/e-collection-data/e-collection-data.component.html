@@ -1,0 +1,94 @@
+<header class="topbar" [attr.data-navbarbg]="options.navbarbg" style="    background: #f07800;position: fixed;width:100%;">
+  <nav class="navbar top-navbar navbar-expand-md" [ngClass]="(options.navbarbg=='skin6')?'navbar-light':'navbar-dark'">
+    <!-- ============================================================== -->
+    <!-- [attr.data-navbarbg]="options.navbarbg" -->
+    <div class="navbar-collapse collapse" id="navbarSupportedContent" style="background:#f07800;"
+      [ngbCollapse]="!isCollapsed">
+      <div>
+        <b class="logo-icon">
+          <img style="width: 175%;
+                          margin-left: 18%;" src="assets/images/ICICIlogo.png" alt="homepage" class="dark-logo" />
+        </b>
+      </div>
+      <app-navigation (toggleSidebar)="toggleSidebarType()" class="w-100"></app-navigation>
+      <div (mouseover)="changeColorSignUp=true" (mouseout)="changeColorSignUp=false" style="width:11%">
+        <span *ngIf="!changeColorSignUp"> <a (click)="registerClicked();"
+                style="color:white;margin-right:2%;font-weight:bold;font-size:125%;">Register</a> </span>
+        <span *ngIf="changeColorSignUp"> <a (click)="registerClicked();"
+                style="color:#0B3C6D;;margin-right:2%;font-weight:bold;font-size:125%;cursor:pointer">Register</a> </span>
+
+    </div>
+    <div style="margin-right:3%">
+        <div (mouseover)="changeColor=true" (mouseout)="changeColor=false">
+            <span *ngIf="!changeColor"> <a [href]="loginPath"
+                    style="color:white;font-weight:bold;margin-right: 2%;font-size: 125%;">Login</a> </span>
+            <span *ngIf="changeColor"> <a [href]="loginPath"
+                    style="color:#0B3C6D;;font-weight:bold;margin-right: 2%;font-size: 125%;">Login</a> </span>
+        </div>
+    </div>
+    </div>
+  </nav>
+</header>
+<div class="card">
+  <div class="card-body">
+    <h1 style="color:#942926">
+      E-Collection
+    </h1>
+    <div style="text-align: justify">
+      e-Collections facilitates identification of the details of collections received through RTGS and NEFT. Through
+      this product, you can avail customized MIS for credits received from your dealers and other business partners
+      through RTGS and NEFT.
+      Facilitates online and prompt availability of funds
+      Customised MIS for quick reconciliation
+      Option of sending payment confirmation to the Payers
+      MIS reporting at hierarchy/ structure level and options of validation
+    </div>
+    <br>
+    <!-- <div style="float: right;">
+      <div class="inner">
+        <button class="btn btn-block btn-lg btn-warning" type="button" id="proceedButtonCss"
+          (click)="proceedButton()">Proceed</button>
+      </div>
+      <div class="inner">
+        <button class="btn btn-block btn-lg btn-warning" type="button" id="backButtonCss"
+          (click)="backbutton()">Back</button>
+      </div>
+    </div> -->
+    <div *ngFor="let data of imageDetails">
+      <ngb-accordion #acc="ngbAccordion">
+        <ngb-panel title="{{data.imageName}}">
+          <ng-template ngbPanelContent>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <span style="text-align: justify">e-Collections facilitates identification of the details of collections
+                  received through RTGS and
+                  NEFT. Through
+                  this product, you can avail customized MIS for credits received from your dealers and other business
+                  partners
+                  through RTGS and NEFT.
+                  Facilitates online and prompt availability of funds
+                  Customised MIS for quick reconciliation
+                  Option of sending payment confirmation to the Payers
+                  MIS reporting at hierarchy/ structure level and options of validation
+                </span>
+                <div style="margin-top:10%;">
+                  <a (click)="dataSelected(data)"
+                    style="text-decoration: underline;color: #2962ff;cursor:pointer;font-family: Times New Roman;font-style:oblique;">Would you like to Register for
+                    this
+                    service?</a>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <img id="img" src="{{data.imagePath}}" alt="{{data.imageName}}" style="width:100%;" />
+              </div>
+            </div>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </div>
+  </div>
+</div>
+<div>
+  <footer class="footer text-center" style="background: #0B3C6D !important;">
+  </footer>
+</div>

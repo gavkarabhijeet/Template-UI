@@ -1,0 +1,428 @@
+
+<!-- Timeline -->
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+
+    </tr>
+
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of timelineData; let a = index">
+
+      <td>
+        <h6>{{data.projectName}}</h6>
+      </td>
+
+      <td>
+        <ul class="timeline" id="timeline">
+<!-- projects -->
+            <li *ngIf="data.projects !=null" class="li complete">
+                <div class="timestamp">
+                </div>
+                <div class="status">
+                  <h6>Projects</h6>
+                </div>
+              </li>
+              <li *ngIf="data.projects ==null" class="li ">
+                <div class="timestamp">
+                </div>
+                <div class="status">
+    
+                  <a [routerLink]="" (click)="relativeLink(data)">
+                    <h6>Projects </h6>
+                  </a>
+                </div>
+              </li>
+<!-- validate Api -->
+          <li *ngIf="data.products !=null" class="li complete">
+            <div class="timestamp">
+            </div>
+            <div class="status">
+              <h6>Products</h6>
+            </div>
+          </li>
+          <li *ngIf="data.products ==null" class="li ">
+            <div class="timestamp">
+            </div>
+            <div class="status">
+
+              <a [routerLink]="" (click)="relativeLink(data)">
+                <h6> Products </h6>
+              </a>
+            </div>
+          </li>
+
+          <li *ngIf="data.flows !=null" class="li complete">
+            <div class="timestamp">
+            </div>
+            <div class="status">
+              <h6> Flows</h6>
+            </div>
+          </li>
+          <li *ngIf="data.flows ==null" class="li">
+            <div class="timestamp">
+            </div>
+            <div class="status">
+              <a [routerLink]="" (click)="relativeLink(data)">
+                <h6> Flows</h6>
+              </a>
+            </div>
+          </li>
+
+
+
+          <li *ngIf="data.mapping !=null" class="li complete">
+            <div class="timestamp">
+            </div>
+            <div class="status">
+        <h6> Mapping </h6>
+      </div>
+            
+          </li>
+          <li *ngIf="data.mapping == null" class="li ">
+            <div class="timestamp">
+            </div>
+            <div class="status">
+              <a [routerLink]="" (click)="relativeLink(data)">
+                <h6> Mapping</h6>
+              </a>
+            </div>
+          </li>
+  
+          <li *ngIf="data.sitSubmission !=null" class="li  complete">
+            <div class="timestamp">
+            </div>
+            <div class="status">
+              <h6> SIT </h6>
+            </div>
+          </li>
+
+          <li *ngIf="data.sitSubmission ==null" class="li">
+            <div class="timestamp">
+            </div>
+            <div class="status">
+              <a [routerLink]="" (click)="relativeLink(data)">
+                <h6>SIT </h6>
+              </a>
+            </div>
+          </li> 
+
+          <li *ngIf="data.uatSubmission !=null" class="li  complete">
+            <div class="timestamp">
+            </div>
+            <div class="status">
+              <h6> UAT</h6>
+            </div>
+          </li>
+
+          <li *ngIf="data.uatSubmission ==null" class="li">
+            <div class="timestamp">
+            </div>
+            <div class="status">
+              <a [routerLink]="" (click)="relativeLink(data)">
+                <h6>UAT </h6>
+              </a>
+            </div>
+          </li> 
+        </ul>
+      </td>
+
+
+
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- Timeline ends -->
+
+
+
+<ngx-spinner size="medium" color="#f07800" type="ball-spin"></ngx-spinner>
+<!-- breadcrumb -->
+<div class="form-group row">
+  <label class="col-md-2" id="projectSize">Project</label>
+  <div *ngIf="displaySearch" class="col-md-6">
+    <form>
+      <input type='text' class="form-control" id="searchCss" autocomplete="off" placeholder='Search'
+        (keyup)='updateFilter($event)' />
+    </form>
+  </div>
+  <button class="btn btn-outline-warning" id="addProject" placement="bottom"
+    ngbTooltip="Click here to Add a new Project" (click)=" addProject(content) ;">Add
+    Project</button>
+</div>
+<!-- Project and searchbar Add Project Button Ends-->
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card">
+          <div class="card-body">
+            <!-- Modal to Add Project Opens -->
+            <ng-template #content let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Add Project Details</h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="addProjectCreationData"
+                  (ngSubmit)="projectCreationData(addProjectCreationData.value) ;">
+                  <!-- Project Name -->
+                  <div class="form-group row">
+                    <label id = "pName" class="col-sm-4  control-label col-form-label">Project Name :</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" id="projectName" autocomplete="off"
+                        [formControl]="addProjectCreationData .controls['projectName']" formControlName="projectName"
+                        placeholder="Enter Project Name">
+                    </div>
+                    <div>
+                      <p class="error"  id = "fontStyle"
+                        *ngIf="addProjectCreationData.get('projectName').hasError('required') && addProjectCreationData.get('projectName').touched">
+                        <span class="glyphicon glyphicon-alert"></span>Project Name is required</p>
+                    </div>
+                    <div>
+                      <p  id = "fontStyle" class="error" *ngIf="addProjectCreationData.get('projectName').hasError('pattern') ">
+                        <span class="glyphicon glyphicon-alert"></span>Special Characters Not Allowed</p>
+                    </div>
+                  </div>
+                  <!-- Project Name -->
+                  <!--Version  -->
+                  <div class="form-group row">
+                    <label  id = "fontStyle"class="col-sm-4 control-label col-form-label">Version :</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" id="version" placeholder=" Enter Version"
+                        autocomplete="off" [formControl]="addProjectCreationData.controls['version']"
+                        formControlName="version">
+                    </div>
+                    <div>
+                      <p class="error" id = "fontStyle"
+                        *ngIf="addProjectCreationData.get('version').hasError('required') && addProjectCreationData.get('version').touched">
+                        <span class="glyphicon glyphicon-alert"></span>Version is required</p>
+                    </div>
+                    <div>
+                      <p id = "fontStyle" class="error" *ngIf="addProjectCreationData.get('version').hasError('pattern')">
+                        <span class="glyphicon glyphicon-alert"></span>Special Characters Not Allowed</p>
+                    </div>
+                  </div>
+                  <button type="submit"  style="color:white;border:none;background:#f07800;"
+                    [disabled]="!addProjectCreationData.valid " id="buttonCss" class="btn btn-warning">Submit</button>
+
+                </form>
+                <!-- Form to add new project ends -->
+              </div>
+            </ng-template>
+            <!-- Modal to Add Project Ends -->
+          </div>
+        </div>
+        <!-- Image Display if No data available starts -->
+        <div *ngIf="isEmpty" id="displayTableCss9">
+          <p id="displayTableCss10">
+            <b> No Data Available </b>
+          </p>
+          <img id="imageCss" src="assets/images/drawkit-folder-man-monochrome-400px.png" alt="logo" />
+        </div>
+        <!-- Image Display if No data available ends -->
+        <div *ngIf="displayTable">
+          <div class="col-lg-12" id="tableDivCss">
+            <div class="card">
+              <div class="card-body" id="tableResponsive">
+                <div class="table-responsive">
+                  <!-- Actual table Starts -->
+                  <table class="table">
+                    <!-- Table Heading Starts -->
+                    <thead class="bg-success text-white" id="theadCss">
+                      <tr>
+                        <th id="displayTableCss11">Id </th>
+                        <th id="displayTableCss12"> Name </th>
+                        <th id="displayTableCss13"> Version </th>
+                        <th id="displayTableCss14">Actions</th>
+                      </tr>
+                    </thead>
+                    <!-- Table Heading Ends -->
+                    <!-- Data inside Table starts -->
+                    <tbody>
+                      <tr *ngFor="let data of projectData| paginate: { itemsPerPage: 5, currentPage:p};let a=index">
+                        <td id="displayTableCss15">{{data.index}}</td>
+                        <td id="displayTableCss16">{{data.projectName}}</td>
+                        <td id="displayTableCss17">{{data.version}}</td>
+                        <td id="displayTableCss18">
+                          <!-- View Products Button icon -->
+                          <button id="iconButton1" aria-label = "products" type="button" placement="bottom" ngbTooltip="View Products"
+                            (click)="viewProducts(data,a)"><i class="fas fa-eye"></i></button>
+                          <!-- View Flows Button icon -->
+                          <div *ngIf="data.flows[0]" id="iconButtonFlows">
+                            <button id="iconButtonFlows1" aria-label ="flows" type="button" placement="bottom" ngbTooltip="View Flows"
+                              (click)="viewFlow(data,a)"><i class="fas fa-eye"></i></button></div>
+                          <!-- Edit Project Button icon -->
+                          <button id="iconButton2" type="button" aria-label ="EditProject" placement="bottom" ngbTooltip="Edit Project"
+                            (click)="editProjectsData(data,contentEdit)"><i class="far fa-edit"></i></button>
+                          <!-- Upload Data Button icon -->
+                          <button id="iconButton3" type="button" aria-label = "uploadData" placement="bottom" ngbTooltip="Upload Data"
+                            (click)="editProject(data,contentUpload)"><i class="fas fa-upload"></i></button>
+                         <!-- View Mapping Button icon -->
+                         <button id="iconButton4" type="button" aria-label ="mapping" placement="bottom" ngbTooltip="View Mapping"
+                         (click)="viewMapping(data,a)"><i class="fas fa-eye"></i></button>
+                         
+                            <!-- Delete Project Button icon -->
+                          <button id="iconButton5" type="button" aria-label = " deleteProject" placement="bottom" ngbTooltip="Delete Project"
+                            (click)="deleteProject(data)"><i class="fas fa-trash-alt"></i></button>
+                          <!-- Modal Opens for Edit Details -->
+                          <ng-template #contentEdit let-c="close" let-d="dismiss">
+                            <div class="modal-header">
+                              <h4 class="modal-title" id="modal-basic-title">Edit Details</h4>
+                              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="col-md-12">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <form>
+                                      <div class="form-group row">
+                                        <label class="col-sm-4  control-label ">Project Name :</label>
+                                        <div class="col-sm-6">
+                                          <input type="text" id="editChosenProjectName" class="form-control"
+                                            #model="ngModel" [(ngModel)]="editChosenProjectName"
+                                            [ngModelOptions]="{standalone: true}" placeholder="Enter Project Name">
+                                        </div>
+                                        <div *ngIf="this.displayProjectNameError == true" class="error">
+                                          <p>
+                                            Project Name is Required
+                                          </p>
+                                        </div>
+                                      </div>
+                                      <div class="form-group row">
+                                        <label class="col-sm-4  control-label ">Version :</label>
+                                        <div class="col-sm-6">
+                                          <input type="text" class="form-control" id="editChosenProjectVersion"
+                                            placeholder=" Enter Version" [(ngModel)]="editChosenProjectVersion"
+                                            [ngModelOptions]="{standalone: true}">
+                                        </div>
+                                      </div>
+
+                                      <div *ngIf="this.displayVersionError == true" class="error">
+                                        <p>
+                                          Version is Required
+                                        </p>
+                                      </div>
+                                      <div>
+                                      </div>
+                                      <button type="submit" id="buttonCss"
+                                        (click)="projectEditData(editChosenProjectName,editChosenProjectVersion) ;"
+                                        style="color:white;border:none;background:#f07800;"
+                                        class="btn btn-warning">Submit</button>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Modal Closes for Edit Details -->
+                          <!-- Upload file/url/json  Modal Starts-->
+                          <ng-template #contentUpload let-c="close" let-d="dismiss">
+                            <div class="modal-header">
+                              <h4 class="modal-title" id="modal-basic-title">Upload Data</h4>
+                              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="col-md-12">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <ngb-tabset>
+                                      <ngb-tab>
+                                        <ng-template ngbTabTitle><b>Upload WSDL/YAML/JSON File</b></ng-template>
+                                        <ng-template ngbTabContent>
+                                          <br>
+                                          <br>
+                                          <form>
+                                            <div class="col-sm-13 form-group">
+                                              <input type="file" (change)="fileChangeEvent($event)" 
+                                                  required
+                                                placeholder="Upload a file" multiple />
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <button (click)="submitFile(data)" id="buttonCss"
+                                              class="btn btn-warning">Submit</button>
+                                          </form>
+                                        </ng-template>
+                                      </ngb-tab>
+                                      <ngb-tab>
+                                        <ng-template ngbTabTitle><b>URL</b></ng-template>
+                                        <ng-template ngbTabContent>
+                                          <br>
+                                          <br>
+                                          <br>
+                                          <form [formGroup]="urlUploadData">
+                                            <div class="col-lg-10  form-group">
+                                              <input type="url" id="urlCss" placeholder="Enter Url" class="form-control"
+                                                [formControl]="urlUploadData.controls['urlUpload']"
+                                                [(ngModel)]="requestUrl">
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <button (click)="submitUrl(requestUrl)" class="btn btn-warning"
+                                              [disabled]="!urlUploadData.valid" id="buttonCss">Submit</button>
+                                          </form>
+                                        </ng-template>
+                                      </ngb-tab>
+                                      <ngb-tab>
+                                        <ng-template ngbTabTitle><b>JSON</b></ng-template>
+                                        <ng-template ngbTabContent>
+                                          <form [formGroup]="jsonUploadData">
+                                            <div class="form-group">
+                                              <textarea type="textarea" [(ngModel)]="requestJSON" class="form-control"
+                                                [formControl]="jsonUploadData.controls['jsonUpload']"
+                                                id="jsonCss"></textarea>
+                                              <br>
+                                              <br>
+                                              <button (click)="submitJson(requestJSON)" id="buttonCss"
+                                                [disabled]="!jsonUploadData.valid"
+                                                class="btn btn-outline-dark">Submit</button>
+                                            </div>
+                                          </form>
+                                        </ng-template>
+                                      </ngb-tab>
+                                    </ngb-tabset>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <!-- Upload file/url/json  Modal Starts  -->
+                        </td>
+                      </tr>
+                    </tbody>
+                    <!-- Data inside Table ends -->
+                  </table>
+                  <!-- Actual Table ends -->
+                  <!-- Pagination starts -->
+                  <div id="paginationCss">
+                    <pagination-controls class="my-pagination" [responsive]="true" (pageChange)="p=$event;">
+                    </pagination-controls>
+                  </div>
+                  <!-- Pagination ends -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--row & card ends -->

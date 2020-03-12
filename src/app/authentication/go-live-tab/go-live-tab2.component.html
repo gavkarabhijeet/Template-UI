@@ -1,0 +1,127 @@
+<div style="background-color:#f3f5f5;">
+        <div class="card" style="background-color:#f3f5f5;">
+            <div class="card-body" style="background-color:#f3f5f5;">
+                            <div style="border-radius: 10px;
+                            border: 1px solid lightgrey;
+                            background-color:#ffffff;
+                            width: 100%;height:80px;padding-top:2.3%">
+                            <div class="row">
+                                    <div class="col-md-3" style="text-align:center">{{version}}</div>
+                                    <div class="col-md-3" style="text-align:center">{{projectName}}</div>
+                                    <div class="col-md-3" style="text-align:center">{{clientCode}}</div>
+                                    <div class="col-md-3" style="text-align:center">{{productName}}</div>
+                            </div>
+                           
+                            <!-- <span>{{projectValue.version}}</span>
+                            <span style="margin-left:2%">{{ projectValue.projectName }}</span>
+                            <span style="margin-left:2%">{{ clientCode }}</span>
+                            <span style="margin-left:2%">{{ projectValue.productName }}</span> -->
+                          </div>
+            </div>
+    </div>
+    <!-- Tabset Starts here -->
+    
+      <div class="col-md-12">
+      <div class="card-body" style="background-color:#ffffff;">
+            <div id="trailCSS" *ngFor="let data of displayActivities; let i = index">
+                    <div class="row">
+                            <div class="col-md-6">
+                                    {{ data.activity }}
+                                  </div>
+                                  <div *ngIf="initiateUATFlag == false" class="col-md-6">NOT STARTED</div>
+                                  <div *ngIf="initiateUATFlag == true" class="col-md-6">IN PROCESS</div>
+                        </div>
+                </div>
+        </div>
+        <div class="row">
+                <div class="col-md-9"></div>
+                <div class="col-md-3">
+        <div *ngIf="showButton == true">
+          <button class="btn headerButton m-10 buttons"
+          disabled
+                  style="border-color: grey;
+                  float:right;
+                  background-color: #f3f5f5;
+                  color:#465F75;
+                  border-radius: 4px;
+                  border-width: 2px;"
+                    type="submit" (click)="finalProcess('uat')">
+                    <span>Ready For Production</span>
+                  </button>
+        </div>
+        <div *ngIf="showButton == false">
+                <button class="btn headerButton m-10 buttons"
+                [disabled]="readyForProd"
+                        style="border-color: grey;
+                        float:right;
+                        background-color: #f3f5f5;
+                        color:#465F75;
+                        border-radius: 4px;
+                        border-width: 2px;"
+                          type="submit" (click)="finalProcess('uat')">
+                          <span>Ready For Production</span>
+                        </button>
+              </div>
+              </div>
+              </div>
+      </div>
+      
+      <br />
+      <div  class="alert alert-success" *ngIf="statusSIT" role="alert">
+        {{ statusSIT }}
+      </div>
+    <hr color="#ffffff" id="lasthr" style="margin-top: 10%;"/>
+    
+    <!-- Tabset ends here -->
+    <!-- <hr color="#f5821f" />
+      <div class="row">
+        <p style="margin-left: 30px;font-size: 40px;">App Status</p>
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <ul class="timeline timeline-left">
+                <li
+                  class="timeline-inverted timeline-item"
+                  *ngFor="
+                    let activity of auditTrailData | slice: 0:show;
+                    let i = index
+                  "
+                >
+                  <div class="timeline-badge success">
+                    <i class="fas fa-thumbs-up"></i>
+                  </div>
+      
+                  <div class="timeline-panel" style="background-color: #f1f1f1;">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title">
+                        {{ activity.status }}
+                      </h4>
+                    </div>
+                    <div class="timeline-body">
+                      <p>{{ activity.timeStamp }}</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <div
+                class="row"
+                *ngIf="show < recentActivity.length"
+                (click)="increaseShow()"
+              >
+                <button class="btn pageButtons m-10 w-100" type="button">
+                  <span>View More Activity</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      <hr class="line" />
+      <footer class="footer text-right" id="footerCss">
+        <p style="color: black">Â© 2018 ICICI. API Developer</p>
+      </footer>
+      -->
+      </div>
+     

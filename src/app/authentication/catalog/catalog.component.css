@@ -1,0 +1,29 @@
+.bg-white {
+    background-color:rgb(236, 234, 234) !important;
+}
+
+.verticalLine1{
+    border-right: 1px solid #d8dde2;
+    padding-left: 20px;
+    padding-right:20px;
+    padding-top: 0% !important;
+    padding-bottom: 0% !important;
+}
+
+.verticalLine2{
+    border-right: 1px solid #d8dde2;
+    padding-left: 20px;
+    padding-right:20px;
+    padding-top: 0% !important;
+    padding-bottom: 0% !important;
+}
+
+
+td{
+    padding:0px !important;
+}
+
+.spacing{
+    margin-left: 10px;
+}
+

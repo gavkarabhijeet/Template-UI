@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"ApiMiningData.sequenceDiagram"}],"uuid":"26db3e7f1562415f9b6047329861ba74"}

@@ -1,0 +1,83 @@
+.circle {
+    display: block;
+  height: 23px;
+  width: 23px;
+  line-height: 23px;
+  
+  -moz-border-radius: 30px; /* or 50% */
+  border-radius: 30px; /* or 50% */
+  
+  background-color: #4E9AF7;
+  color: white;
+  text-align: center;
+  }
+  .circle1{
+      margin-left: 466%;
+      margin-top: 137%;
+  }
+  .circle2{
+    margin-left: 496%;
+    margin-top: 163%;
+    background-color: #fff;
+    color: #D3D2D7;
+    border: 1px solid #D3D2D7;
+}
+.circle3{
+    margin-left: 498%;
+    margin-top: 45%;
+    background-color: #fff;
+    color: #D3D2D7;
+    border: 1px solid #D3D2D7;
+    
+}
+::ng-deep .nav-pills .nav-link.active{
+    color: #007bff !important;
+    background-color: white !important;
+    border-bottom: 2px solid #007bff !important;
+    }
+    ::ng-deep .nav-pills .nav-link{
+    color: #d3d2d7 !important;
+    }
+    ::ng-deep .card-body{
+    background-color: #e9e9eb;
+    }
+
+    .cancelButton{
+        color: #4E9AF7;
+         /* margin-bottom: 1%; */
+    }
+    .prevButton{
+        color: #4E9AF7;
+    }
+    .nextButton{
+        background-color: #4E9AF7; color: white;   
+    }
+    
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .topDiv{
+        /* margin-left: 20%; */
+    }
+}
+@media (min-width: 481px) and (max-width: 767px) {
+    .topDiv{
+        margin-left: 0%;
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    .topDiv{
+        margin-left: 17%;
+    }
+    .prevButton{
+        margin-left: 20%;
+    }
+    
+}
+@media (min-width:1025px) and (max-width: 1919px){
+    .topDiv{
+        margin-left: 18%;
+    }
+    .prevButton{
+        margin-left: 21%;
+    }
+}

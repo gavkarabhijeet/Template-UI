@@ -1,0 +1,1151 @@
+<div style="background-color:#f3f5f5;">
+        <div class="card" style="background-color:#f3f5f5;">
+            <div class="card-body" style="background-color:#f3f5f5;">
+                            <div style="border-radius: 10px;
+                            border: 1px solid lightgrey;
+                            background-color:#ffffff;
+                            width: 100%;height:80px;padding-top:2.3%">
+                            <div class="row">
+                                    <div class="col-md-3" style="text-align:center">Version : {{projectValue?.version}}</div>
+                                    <div class="col-md-3" style="text-align:center">App Name : {{projectValue?.projectName}}</div>
+                                    <div class="col-md-3" style="text-align:center">Client Code : {{clientCode}}</div>
+                                    <div class="col-md-3" style="text-align:center">Product Name : {{projectValue?.productName}}</div>
+                            </div>
+                           
+                            <!-- <span>{{projectValue.version}}</span>
+                            <span style="margin-left:2%">{{ projectValue.projectName }}</span>
+                            <span style="margin-left:2%">{{ clientCode }}</span>
+                            <span style="margin-left:2%">{{ projectValue.productName }}</span> -->
+                          </div>
+            </div>
+</div>
+
+<button type="button" id="initiateModal" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" hidden>click me</button>
+<ng-terminal #term [dataSource]="writeSubject" [displayOption]="displayOptionBounded"></ng-terminal>
+<!-- Tabset Starts here -->
+<ngb-tabset
+  type="pills"
+  class="custom-pills nav-justified mainTabset"
+  #t="ngbTabset"
+  [(activeId)]="exp"
+  [disabled]="sitTab"
+>
+  <ngb-tab id="sit" title="SIT" [destroyOnHide]="hideShow">
+    <ng-template ngbTabContent>
+      <!-- <div class="row" style="margin:1%;">
+        <div class="col-md-2" *ngIf="displayInitiateSITButton">
+               <button type="button" (click)="initiatesSITButton()" class="btn btn-success">
+                    Initiate SIT
+                 </button>
+               
+               </div>
+        <div class="col-md-2">
+          <button
+            class="btn"
+            (click)="initiateTest();"
+            style="color:#ffffff;background: #053c6d;font-size: 16px;font-family: Arial, Helvetica, sans-serif;"
+            [disabled]="hideShow"
+          >
+            Initiate SIT
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <h2
+          id="api"
+          style="font-family: Arial, Helvetica, sans-serif;font-size: 16px;"
+        >
+          <strong>Sample Message:</strong>
+
+        </h2>
+        <a id="back-to-top"  class="btn btn-light btn-lg back-to-top" role="button" (click)="scroll()" ><i class="fas fa-chevron-up" style="color: white;"
+          ngbTooltip="Goto Top" tooltipClass="my-custom-class"></i></a>
+        <a id="back-to-top1"  class="btn btn-light btn-lg back-to-top1" role="button" (click)="scroll1()" ><i class="fas fa-chevron-down" style="color: white;" ngbTooltip="Goto Bottom"
+          ></i></a>
+        <br /><br />
+        <div *ngIf="showButton == true">
+          <button
+            class="btn"
+            style="color:#ffffff;background: #053c6d;font-size: 16px;font-family: Arial, Helvetica, sans-serif;margin-left: 60%;margin-top: 20px; height: 80%; width: 12%;"
+            [disabled]="showButton"
+            (click)="initiatesUAT('uat')"
+          >
+            Ready for UAT
+          </button>
+        </div>
+        <div *ngIf="showButton == false">
+          <button
+            class="btn"
+            style="color:#ffffff;background: #053c6d;font-size: 16px;font-family: Arial, Helvetica, sans-serif;margin-left: 60%;margin-top: 20px; height: 80%; width: 12%;"
+            (click)="initiatesUAT('uat')"
+            [disabled]="allSuccess"
+           
+          >
+            Ready for UAT
+          </button>
+        </div>
+      </div> -->
+      <br/>
+      <div class="col-md-12">
+      <div class="card-body" style="background-color:#ffffff;">
+            <div id="trailCSS" *ngFor="let data of devOpsStatusArray; let i = index">
+      <div class="row">
+              <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'code_checked_out-SIT' ||
+                      data.event == 'application_deployment_unit_created-SIT' ||
+                      data.event ==
+                        'application_deployment_unit_configuration_updated-SIT' ||
+                      data.event == 'application_deployed-SIT' ||
+                      data.event == 'application_proxy_deployed-SIT' ||
+                      data.event == 'test_data_prepared-SIT' ||
+                      data.event == 'test_data_deployed-SIT' ||
+                      data.event == 'running_tests-SIT' ||
+                      data.event == 'test_run_completed-SIT' ||
+                      data.event == 'recording_test_results-SIT' ||
+                      data.event == 'code_checked_out_TXN_REV-SIT' ||
+                      data.event ==
+                        'application_deployment_unit_created_TXN_REV-SIT' ||
+                      data.event ==
+                        'application_deployment_unit_configuration_updated_TXN_REV-SIT' ||
+                      data.event == 'application_deployed_TXN_REV-SIT' ||
+                      data.event == 'application_proxy_deployed_TXN_REV-SIT'||
+                      data.event == 'test_data_prepared_TXN_REV-SIT' ||
+                      data.event ==
+                        'test_data_deployed_TXN_REV-SIT' ||
+                      data.event ==
+                        'running_tests_TXN_REV-SIT' ||
+                      data.event == 'test_run_completed_TXN_REV-SIT' ||
+                      data.event == 'recording_test_results_TXN_REV-SIT' 
+                    "
+                  >
+                    {{ data.event }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'code_checked_out-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'application_deployment_unit_created-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event ==
+                        'application_deployment_unit_configuration_updated-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'application_deployed-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'application_proxy_deployed-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'test_data_prepared-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'test_data_deployed-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'running_tests-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'test_run_completed-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'recording_test_results-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <!-- --------FAILED----------- -->
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'code_checked_out-SIT' &&
+                      data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'application_deployment_unit_created-SIT' &&
+                      data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event ==
+                        'application_deployment_unit_configuration_updated-SIT' &&
+                      data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'application_deployed-SIT' &&
+                      data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'application_proxy_deployed-SIT' &&
+                      data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'test_data_prepared-SIT' &&
+                      data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'test_data_deployed-SIT' &&
+                      data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'running_tests-SIT' && data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'test_run_completed-SIT' &&
+                      data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'recording_test_results-SIT' &&
+                      data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <!-- TRANSACTION REVERSAL EVENTS-SUCCESS -->
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'code_checked_out_TXN_REV-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event ==
+                        'application_deployment_unit_created_TXN_REV-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event ==
+                        'application_deployment_unit_configuration_updated_TXN_REV-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'application_deployed_TXN_REV-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'application_proxy_deployed_TXN_REV-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'test_data_prepared_TXN_REV-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'test_data_deployed_TXN_REV-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'running_tests_TXN_REV-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'test_run_completed_TXN_REV-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'recording_test_results_TXN_REV-SIT' &&
+                      data.status == 'SUCCESS'
+                    "
+                    style="color:green"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <!-- TRANSACTION REVERSAL EVENTS -FAILED-->
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'code_checked_out_TXN_REV-SIT' &&
+                      data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event ==
+                        'application_deployment_unit_created_TXN_REV-SIT' &&
+                      data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event ==
+                        'application_deployment_unit_configuration_updated_TXN_REV-SIT' &&
+                      data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'application_deployed_TXN_REV-SIT' &&
+                      data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'application_proxy_deployed_TXN_REV-SIT' &&
+                      data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'test_data_prepared_TXN_REV-SIT' &&
+                      data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'test_data_deployed_TXN_REV-SIT' &&
+                      data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'running_tests_TXN_REV-SIT' &&
+                      data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'test_run_completed_TXN_REV-SIT' &&
+                      data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  <div class="col-md-6"
+                    *ngIf="
+                      data.event == 'recording_test_results_TXN_REV-SIT' &&
+                      data.status == 'FAILED'
+                    "
+                    style="color:red"
+                  >
+                    {{ data.status }}
+                  </div>
+                  
+      </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+              <div *ngIf="isLoad">
+                <br />
+                <div class="d-flex align-items-center">
+                  <strong>&nbsp;&nbsp;Loading...............</strong>
+                  <div
+                    class="spinner-grow ml-auto"
+                    role="status"
+                    aria-hidden="true"
+                  ></div>
+                </div>
+                <br />
+              </div>
+            </div>
+            <div class="col-md-2">
+                    <div *ngIf="showButton == true">
+                        <button class="btn headerButton m-10 buttons"
+                        [disabled]="showButton"
+                                style="border-color: grey;
+                                float:right;
+                                background-color: #f3f5f5;
+                                color:#465F75;
+                                border-radius: 4px;
+                                border-width: 2px;"
+                                  type="submit" (click)="initiatesUAT('uat')">
+                                  <span>Ready for UAT</span>
+                                </button>
+                      </div>
+                      <div >
+                        <button
+                        class="btn headerButton m-10 buttons"
+                        style="border-color: grey;
+                                float:right;
+                                background-color: #f3f5f5;
+                                color:#465F75;
+                                border-radius: 4px;
+                                border-width: 2px;"  
+                        (click)="initiatesUAT('uat')"
+                          [disabled]="allSuccess"
+                         
+                        >
+                          Ready for UAT
+                        </button>
+                      </div>
+            </div>
+        </div>
+      </div>
+      
+      <br />
+      <div  class="alert alert-success" *ngIf="statusSIT" role="alert">
+        {{ statusSIT }}
+      </div>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab id="uat" title="UAT" [disabled]="uatTab">
+    <ng-template ngbTabContent>
+        <br/>
+        <div class="col-md-12">
+        <div class="card-body" style="background-color:#ffffff;">
+              <div id="trailCSS" *ngFor="let data of UATStatusArray; let i = index">
+        <div class="row">
+                <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'code_checked_out-UAT' ||
+                        data.event == 'application_deployment_unit_created-UAT' ||
+                        data.event ==
+                          'application_deployment_unit_configuration_updated-UAT' ||
+                        data.event == 'application_deployed-UAT' ||
+                        data.event == 'application_proxy_deployed-UAT' ||
+                        data.event == 'test_data_prepared-UAT' ||
+                        data.event == 'test_data_deployed-UAT' ||
+                        data.event == 'running_tests-UAT' ||
+                        data.event == 'test_run_completed-UAT' ||
+                        data.event == 'recording_test_results-UAT' ||
+                        data.event == 'code_checked_out_TXN_REV-UAT' ||
+                        data.event ==
+                          'application_deployment_unit_created_TXN_REV-UAT' ||
+                        data.event ==
+                          'application_deployment_unit_configuration_updated_TXN_REV-UAT' ||
+                        data.event == 'application_deployed_TXN_REV-UAT' ||
+                        data.event == 'application_proxy_deployed_TXN_REV-UAT'||
+                        data.event == 'test_data_prepared_TXN_REV-UAT' ||
+                        data.event ==
+                          'test_data_deployed_TXN_REV-UAT' ||
+                        data.event ==
+                          'running_tests_TXN_REV-UAT' ||
+                        data.event == 'test_run_completed_TXN_REV-UAT' ||
+                        data.event == 'recording_test_results_TXN_REV-UAT' 
+                      "
+                    >
+                      {{ data.event }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'code_checked_out-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'application_deployment_unit_created-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event ==
+                          'application_deployment_unit_configuration_updated-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'application_deployed-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'application_proxy_deployed-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'test_data_prepared-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'test_data_deployed-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'running_tests-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'test_run_completed-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'recording_test_results-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <!-- --------FAILED----------- -->
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'code_checked_out-UAT' &&
+                        data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'application_deployment_unit_created-UAT' &&
+                        data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event ==
+                          'application_deployment_unit_configuration_updated-UAT' &&
+                        data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'application_deployed-UAT' &&
+                        data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'application_proxy_deployed-UAT' &&
+                        data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'test_data_prepared-UAT' &&
+                        data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'test_data_deployed-UAT' &&
+                        data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'running_tests-UAT' && data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'test_run_completed-UAT' &&
+                        data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'recording_test_results-UAT' &&
+                        data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <!-- TRANSACTION REVERSAL EVENTS-SUCCESS -->
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'code_checked_out_TXN_REV-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event ==
+                          'application_deployment_unit_created_TXN_REV-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event ==
+                          'application_deployment_unit_configuration_updated_TXN_REV-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'application_deployed_TXN_REV-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'application_proxy_deployed_TXN_REV-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'test_data_prepared_TXN_REV-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'test_data_deployed_TXN_REV-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'running_tests_TXN_REV-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'test_run_completed_TXN_REV-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'recording_test_results_TXN_REV-UAT' &&
+                        data.status == 'SUCCESS'
+                      "
+                      style="color:green"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <!-- TRANSACTION REVERSAL EVENTS -FAILED-->
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'code_checked_out_TXN_REV-UAT' &&
+                        data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event ==
+                          'application_deployment_unit_created_TXN_REV-UAT' &&
+                        data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event ==
+                          'application_deployment_unit_configuration_updated_TXN_REV-UAT' &&
+                        data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'application_deployed_TXN_REV-UAT' &&
+                        data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'application_proxy_deployed_TXN_REV-UAT' &&
+                        data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'test_data_prepared_TXN_REV-UAT' &&
+                        data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'test_data_deployed_TXN_REV-UAT' &&
+                        data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'running_tests_TXN_REV-UAT' &&
+                        data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'test_run_completed_TXN_REV-UAT' &&
+                        data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    <div class="col-md-6"
+                      *ngIf="
+                        data.event == 'recording_test_results_TXN_REV-UAT' &&
+                        data.status == 'FAILED'
+                      "
+                      style="color:red"
+                    >
+                      {{ data.status }}
+                    </div>
+                    
+        </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-9"><div *ngIf="isLoad2">
+                <br />
+                <div class="d-flex align-items-center">
+                  <strong>&nbsp;&nbsp;Loading...............</strong>
+                  <div
+                    class="spinner-grow ml-auto"
+                    role="status"
+                    aria-hidden="true"
+                  ></div>
+                </div>
+                <br />
+              </div></div>
+              <div class="col-md-3">
+                  <div class="row">
+                      <div *ngIf="showButton == true">
+                        <button
+                        class="btn headerButton m-10 buttons"
+                          [disabled]="showButton"
+                          (click)="initiatesUAT()"
+                          style="border-color: grey;
+                                background-color: #f3f5f5;
+                                color:#465F75;
+                                border-radius: 4px;
+                                border-width: 2px;"
+                        >
+                          <span>Initiate UAT </span>
+                        </button>
+                      </div>
+                      <div *ngIf="showButton == false">
+                        <button class="btn headerButton m-10 buttons"
+                          [disabled]="UatInitiated"
+                          (click)="initiatesUAT()"
+                          style="border-color: grey;
+                                background-color: #f3f5f5;
+                                color:#465F75;
+                                border-radius: 4px;
+                                border-width: 2px;">
+                          <span>Initiate UAT </span>
+                          </button>
+                      </div>
+                      <div *ngIf="showButton == false">
+                        <a
+                        
+                          
+                          ><button
+                          class="btn headerButton m-10 buttons"
+                          (click)="gotoNextTab()"
+                            [disabled]="UatProgress"
+                            style="border-color: grey;
+                                background-color: #f3f5f5;
+                                color:#465F75;
+                                border-radius: 4px;
+                                border-width: 2px;">
+                            <span>Certify UAT</span>
+                          </button>
+                        </a>
+                      </div>
+                      <div *ngIf="showButton == true">
+                        <a
+                          ><button class="btn headerButton m-10 buttons"
+                          (click)="gotoNextTab()"
+                            disabled
+                            style="border-color: grey;
+                                background-color: #f3f5f5;
+                                color:#465F75;
+                                border-radius: 4px;
+                                border-width: 2px;">
+                            <span>Certify UAT</span>
+                          </button>
+                        </a>
+                      </div>
+                    </div>
+              </div>
+          </div>
+        </div>
+        
+        <br />
+    </ng-template>
+  </ngb-tab>
+  <!-- <ngb-tab id="production" title="Production">
+      <ng-template ngbTabContent>
+        <div class="card-body">
+          <div class="col-md-4">
+            <button
+              class="btn "
+              style="color:#ffffff;background: #053c6d;font-size: 16px;font-family: Arial, Helvetica, sans-serif;"
+            >
+              <span>Initiate Production</span>
+            </button>
+          </div>
+          <br />
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">DevOps Operations</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of displayActivities; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ data.activity }}</td>
+                <td *ngIf="initiateUATFlag == 'false'">NOT STARTED</td>
+                <td *ngIf="initiateUATFlag == 'true'">IN PROCESS</td>
+      
+            
+              </tr>
+            </tbody>
+          </table>
+          <br />
+        
+        </div>
+      </ng-template>
+      </ngb-tab> -->
+</ngb-tabset>
+<hr color="#ffffff" id="lasthr" style="margin-top: 10%;"/>
+
+<!-- Tabset ends here -->
+<!-- <hr color="#f5821f" />
+      <div class="row">
+        <p style="margin-left: 30px;font-size: 40px;">App Status</p>
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <ul class="timeline timeline-left">
+                <li
+                  class="timeline-inverted timeline-item"
+                  *ngFor="
+                    let activity of auditTrailData | slice: 0:show;
+                    let i = index
+                  "
+                >
+                  <div class="timeline-badge success">
+                    <i class="fas fa-thumbs-up"></i>
+                  </div>
+      
+                  <div class="timeline-panel" style="background-color: #f1f1f1;">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title">
+                        {{ activity.status }}
+                      </h4>
+                    </div>
+                    <div class="timeline-body">
+                      <p>{{ activity.timeStamp }}</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <div
+                class="row"
+                *ngIf="show < recentActivity.length"
+                (click)="increaseShow()"
+              >
+                <button class="btn pageButtons m-10 w-100" type="button">
+                  <span>View More Activity</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      <hr class="line" />
+      <footer class="footer text-right" id="footerCss">
+        <p style="color: black">Â© 2018 ICICI. API Developer</p>
+      </footer>
+      -->
+      </div>
+      <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header" >
+        <h4 class="modal-title" >
+        Backend Process Panel:
+        </h4>
+        
+        </div>
+        
+        <div class="modal-body">
+        <ng-terminal #termModal [dataSource]="writeSubject" [displayOption]="displayOptionBounded"></ng-terminal>
+        
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
+        </div>
+        </div>
+        </div>
+        </div>

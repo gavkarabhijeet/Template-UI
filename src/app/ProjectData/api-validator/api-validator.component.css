@@ -1,0 +1,317 @@
+
+#servicesSize{
+    font-size: 195%;
+}
+#div1{
+    margin-bottom: 4%;
+}
+#breadCrumbCss{
+    margin-top:-18px;
+    font-size:120%;
+    font-family: Arial;
+}
+#labelCss{
+    font-size:135%;
+    font-family: Arial;
+}
+#labelMethod{
+    font-family: Arial;
+}
+#labelUrl{
+    font-family: Arial;
+}
+#searchCss{
+    height:46px;
+}
+#addService{
+    margin-left: 750px! important;
+    color:white;border:none;
+    background:#f07800;
+    margin-top: -46px;
+}
+#buttonCss{
+    color:white;
+    border:none;
+    background:#f07800;
+}
+#textCenterCss{
+    text-align: center;
+}
+#imageCss{
+    width:240px;height:240px;
+}
+#tableDiv{
+    margin-top:-77px;
+}
+#theadCss{
+    background: #0B3C6D !important;
+    border:none;
+}
+#iconCss{
+    border:none;
+    background-color:#f7f7f7;
+    margin-left:5px;
+}
+#paginationCss{
+    padding-left:250px;
+}
+.dark-modal .modal-content {
+  background-color: #009efb;
+  color: white;
+}
+.dark-modal .close {
+  color: white;
+}
+.light-blue-backdrop {
+  background-color: #5cb3fd;
+}
+
+
+.complete{
+    content: "";
+    width : 20px;
+    height : 20px;
+border-radius:25px;
+/* border:1px solid #ddd; */
+top:-15px;
+left:42px;
+transition: all 200ms ease-in;
+    border-top: 2px solid green;
+    background-color: green;
+}
+
+
+.incomplete{
+    content: "";
+    width : 20px;
+    height : 20px;
+border-radius:25px;
+/* border:1px solid #ddd; */
+top:-15px;
+left:42px;  
+transition: all 200ms ease-in;
+    border-top: 2px solid red;
+    background-color: red;
+}
+
+
+#submitButton{
+    color:white;border:none;background:#f07800;margin-left:672px
+}
+
+#authUsername{
+    height:80px;width:400px;overflow-wrap: break-word;
+}
+#basicAuthCss{
+    font-size: 100%;
+    font-family: Arial;
+    padding-left: 4%;
+}
+#usernameCss{
+    font-size: 100%;
+    font-family: Arial;
+    padding-left: 4%;
+}
+#requestResponseCss{
+    font-size: 100%;
+    font-family: Arial;
+    padding-left: 4%;
+}
+#textArea2{
+    padding-left: 4%;
+}
+#textArea1{
+    padding-left:4%;
+}
+#buttonCSS
+{
+color:white;
+border:none;
+background:#f07800;
+}
+#statusCss{
+    font-size: 100%;
+    font-family: Arial;
+    padding-left: 4%; 
+}
+#authPassword{
+    height:80px;width:400px;overflow-wrap: break-word;
+}   
+#select1{
+    width:100%;
+}
+
+#authToken{
+    height:100px;
+    width:900px;
+    overflow-wrap: break-word;
+}
+
+#requestJson{
+
+    height:120px;width:900px;overflow-wrap: break-word;
+}
+
+
+#requestStatus{
+    height:120px;width:900px;overflow-wrap: break-word;
+}
+
+#wallet{
+    color:white;border:none;background:#f07800;margin-left:30px
+}
+
+#submitUrl{
+    color:white;border:none;background:#f07800;width:65%
+}
+
+#firstTextbox{
+
+    width:100%;
+    margin-left:5px;
+}
+
+#secondTextbox{
+    width:100%;
+    margin-left:5px;
+}
+
+#addButton{
+
+    margin-left: 10px
+}
+
+#subtractButton{
+    background-color: white !important;
+    border: none;
+    padding-top: 11%;
+}
+
+#tdStyle{
+
+    width:100%;
+}
+
+
+#listedApi{
+
+   width:100%;
+
+}
+
+@media (min-width: 320px) and (max-width: 480px){
+    #authUsername{
+        height:30px;
+        width:260px;
+        overflow-wrap: break-word;
+    }
+    
+    #authPassword{
+        height:30px;
+        width:260px;
+        overflow-wrap: break-word;
+    }
+    
+
+#authToken{
+    height:100px;
+    width:260px;
+    overflow-wrap: break-word;
+}
+
+#requestJson{
+
+    height:120px;width:260px;overflow-wrap: break-word;
+}
+
+
+#requestStatus{
+    height:120px;width:260px;overflow-wrap: break-word;
+}
+#wallet{
+    margin-left:-16px
+}
+
+#listedApi{
+        margin-top:800px;
+        width:100%
+}
+}
+
+@media (min-width:481px) and (max-width: 767px){
+    #wallet{
+        margin-left: 13px;
+    }
+    #authUsername{
+        height:30px;width:400px;
+    }
+    
+    #authPassword{
+        height:30px;width:400px;
+    }
+    
+
+#authToken{
+    height:100px;
+    width:400px;
+    overflow-wrap: break-word;
+}
+
+#requestJson{
+
+    height:120px;width:400px;
+}
+
+
+#requestStatus{
+    height:120px;width:400px;
+}
+
+#listedApi{
+    margin-top:500px;
+    width:100%
+}
+}
+
+
+@media (min-width: 768px) and (max-width:1024px){
+
+    #wallet{
+        margin-left: 13px;
+    }
+    #authUsername{
+       width:250px;
+       overflow-wrap: break-word;
+    }
+    
+    #authPassword{
+        width:250px;
+        overflow-wrap: break-word;
+    }
+    
+
+#authToken{
+   
+    width:650px;
+    overflow-wrap: break-word;
+    
+}
+
+#requestJson{
+
+   width:650px;
+   overflow-wrap: break-word;
+}
+
+
+#requestStatus{
+    width:650px;
+    overflow-wrap: break-word;
+}
+
+
+#listedApi{
+    margin-top:200px;
+    width:100%
+}
+}

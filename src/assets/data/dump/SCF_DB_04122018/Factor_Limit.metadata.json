@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"SCF_DB_04122018.Factor_Limit"}],"uuid":"68c1df8f5dc64e39bc9a5fc707f8b559"}

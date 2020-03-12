@@ -1,0 +1,225 @@
+<header
+  class="topbar"
+  [attr.data-navbarbg]="options.navbarbg"
+  style=" background: #ffffff;height:60px;position: fixed;width:100%;"
+>
+  <nav
+    class="navbar navbar-expand-lg navbar-light bg-white navbar-custom border-bottom"
+    style="background: #f5821f !important;height:60px;"
+  >
+    <a [routerLink]="['/authentication/Checker']">
+    <img
+      alt="img"
+      src="assets/images/ICICI Bank Logo Orange Bg.png"
+      style="width: 173px;
+      height: 39px;"
+      class="img-fluid "
+    />
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="toggleNavbar()"
+      style="justify-content: right;"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div
+      class="collapse navbar-collapse pl-20 "
+      [ngClass]="{ show: navbarOpen }"
+      style="padding-left: 70%;"
+    >
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a [routerLink]="['']"
+            ><span
+              class="m-10 p-r-20"
+              style="font-size: 16px;font-family: Arial,Helvetica,sans-serif;color:white !important;"
+              >Home</span
+            ></a
+          >
+        </li>
+        <li>
+          <a [routerLink]="['']"
+            ><span
+              class="m-10 p-r-20"
+              style="font-size: 16px;font-family: Arial,Helvetica,sans-serif;color:white !important;"
+              >Logout</span
+            ></a
+          >
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<div class="card">
+  <div class="card-body " style="margin-top: 90px;">
+    <div class="row">
+      <!-- Profile Photo -->
+      
+      <!-- Profile Photo ends -->
+
+      <!-- Three tabs -->
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <ngb-tabset type="pills" class="custom-pills border-bottom">
+           
+              <ngb-tab>
+                <ng-template ngbTabTitle>Overview</ng-template>
+                <ng-template ngbTabContent>
+                  <p
+                    class="title m-b-10 m-t-10"
+                    style="font-size: 25px;color: #053c6d"
+                  >
+                    Recent Approvals
+                  </p>
+                  <!-- <div class="row card-group"> -->
+                  <!-- <div class="col-6"> -->
+                  <div class="row">
+                    <div class="card col-6" *ngFor="let i of newData">
+                      <div
+                        class="card-body border box"
+                        style="cursor:pointer;background-color: #f1f1f1;"
+                      >
+                        <div>
+                          <span
+                            ><b>{{ i.firstName }}</b
+                            ><b class="pl-1">{{ i.lastName }}</b></span
+                          >
+                        </div>
+                        <div>
+                          <span
+                            ><b>{{ i.orgName }}</b></span
+                          >
+                        </div>
+
+                        <div class="row">
+                          <span class="col-md-8" style="padding-top: 10%;">
+                            <i
+                              class="fa fa-check-circle"
+                              style="font-size:18px;color:green"
+                            ></i>
+                            Approved</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- </div> -->
+                  <!-- </div> -->
+                  <hr class="line" />
+
+                 
+                </ng-template>
+              </ngb-tab>
+              <!-- <ngb-tab [disabled]=checkListTab class="profileTabs" title="Check List for Production">
+                  <ng-template ngbTabContent>
+                       <app-checker-page></app-checker-page>
+                  </ng-template>
+                </ngb-tab> -->
+            </ngb-tabset>
+          </div>
+        </div>
+      </div>
+      <!-- Three tabs ends -->
+    </div>
+  </div>
+</div>
+<hr class="line" />
+<!-- <footer class="footer text-right" id="footerCss">
+  <p style="color: black">Â© 2018 ICICI. API Developer</p>
+</footer> -->
+<footer class="footer text-right" id="footercss">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <div>
+      <p style="text-align:left" class="db-white">Curious about what’s next</p>
+      </div>
+      <div>
+          <p class="db-lighterblue" style="text-align:left">Subscribe to our newsletter to keep up with updates,
+              events and more.
+              </p>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-7 col-xs-12 col-sm-12 d-none d-lg-block">
+            <input class="emailInput inputField form-control form-control-line" type="email"
+            placeholder="Email address"/>
+        </div>
+        <div class="col-md-5 col-xs-12 col-sm-12 d-none d-lg-block">
+            <div class="input-group mb-3">
+                <div (click)="loginData(addLoginData.value)" class="module-border-wrap" style="border-radius: 4px;">
+                    <div class="subscribeButton" style=" border: 2px solid transparent;
+                    border-radius: 1px;
+                    cursor: pointer;
+                    transition: border-color .2s;">
+                    <span style="text-align: center;">Subscribe</span>
+                    </div></div>
+              </div>
+        </div>
+        </div>
+        <div class="d-sm-none">
+            <input class="emailInput inputField form-control form-control-line" type="email"
+            placeholder="Email address"/>
+            <br/>
+            <div class="input-group mb-3">
+                <div (click)="loginData(addLoginData.value)" class="module-border-wrap" style="border-radius: 4px;">
+                    <div class="subscribeButton" style=" border: 2px solid transparent;
+                    border-radius: 1px;
+                    cursor: pointer;
+                    transition: border-color .2s;">
+                    <span style="text-align: center;">Subscribe</span>
+                    </div></div>
+              </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 col-sm-2 col-lg-1">
+              <div style="float:center">
+                  <input type="checkbox">
+<span class="checkmark"></span>
+              </div>
+            </div>
+          <div class="col-xs-8 col-sm-8 col-lg-9" style="text-align:center">
+              <p class="db-lighterblue">I agree that Deutsche Bank AG sends me newsletters about Deutsche Bank API Program. I can withdraw my consent at any time by sending an e-mail to newsletter.dbapi@db.com. For further information please see our Data Privacy Notice.</p>
+          </div>
+        </div>
+    </div>
+    </div>  
+    <br/>
+    <br/>
+    <div class="border-h-dark"></div>
+    <!-- <p id="footerContent">Â© 2018 ICICI. API Developer {{version}}</p> -->
+    <br/>
+    <div class="row">
+        <div class="col-md-1"></div>
+      <div class="col-md-3">
+        <p style="text-align:center" class="db-lighterblue">© 2019 Deutsche Bank AG, Frankfurt am Main</p>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-6">
+          <a><small class="db-lighterblue">Release Notes</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">FAQ</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">Imprint</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">Terms and Conditions</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">Cookie Note</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">Privacy Notice</small></a>
+      </div>
+    </div>
+    </footer>

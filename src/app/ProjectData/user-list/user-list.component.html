@@ -1,0 +1,640 @@
+<nav *ngIf="true" class="breadcrumb" style="margin-top:-10px">
+  <a class="breadcrumb-item" [routerLink]="['/ProjectData/UserList']">UserList</a>
+  <!-- <span class="breadcrumb-item active">Projects</span> -->
+</nav>
+<!-- Ng Spinner -->
+<ngx-spinner size="medium" color="#f07800" type="ball-spin"></ngx-spinner>
+<div class="form-group row">
+  <label class="col-md-2" id="usersSize">Users</label>
+  <div *ngIf="displaySearch" class="col-md-6">
+    <form>
+      <input type='text' class="form-control" id="searchCss" autocomplete="off" placeholder='Search'
+        (keyup)='updateFilter($event)' />
+    </form>
+  </div>
+</div>
+<!-- <div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div *ngIf="isEmpty" id="displayTableCss">
+          <p id="displayTableCss">
+            <b> No Data Available </b>
+          </p>
+          <img id="imageCss" src="assets/images/drawkit-folder-man-monochrome-400px.png" alt="logo" />
+        </div>
+        <div *ngIf="displayTable">
+          <div class="col-lg-12" id="tableDivCss">
+            <div class="card">
+              <div class="card-body" id="tableResponsive">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="bg-success text-white" id="theadCss">
+                            <tr>
+                              <th class="displayTableCss">Sr.No</th>
+                              <th class="displayTableCss">First Name </th>
+                              <th class="displayTableCss">Last Name  </th>
+                              <th class="displayTableCss"> Status </th>
+                              <th class="displayTableCss">Action</th>
+                            </tr>
+                          </thead>  
+                          <tbody>
+                            <tr *ngFor="let data of usersDataForApproval| paginate: { itemsPerPage: 5, currentPage:p};let a=index">
+                             <td class="displayTableCss">{{a+1}}</td>
+                              <td class="displayTableCss">
+                                  <button id="iconButton3" type="button" placement="bottom" ngbTooltip="On Click" 
+                                  (click)="openData(data)"> {{data.username}}</button> </td>
+                              <td class="displayTableCss">{{data.firstName}} {{data.lastName}}</td>
+                              <td class="displayTableCss" *ngIf="data.isActive === false; else status">
+                                <label>new</label>
+                              </td>
+                              <ng-template #status>
+                              <td   class="displayTableCss">
+                               <label>Approved</label>
+                              </td>
+                              </ng-template>
+                              <td class="displayTableCss" *ngIf="data.isActive === false; else Approved">
+                                <button id="iconButton1" type="button" placement="bottom" ngbTooltip="Approve User" class="btn btn-warning"
+                            (click)="approvedUser(data)">Approve</button>
+                              </td>
+                              <ng-template #Approved>
+                              <td   class="displayTableCss">
+                                  <button id="iconButton2" type="button" placement="bottom" ngbTooltip="Approve User" class="btn btn-warning"
+                                  (click)="approvedUserDelete(data)">Delete</button>
+                              </td>
+                            </ng-template>
+                            </tr>
+                          </tbody>      
+                    </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <!-- <h5 class="card-title">Number of {{presentField}} fields - {{lengthOfData}}</h5> -->
+      <ngb-tabset type="pills" #tabRef="ngbTabset">
+        <ngb-tab id="tabApprove">
+          <ng-template ngbTabTitle>Approvals</ng-template>
+
+          <h3 class="card-title">Approved - 2</h3>
+          <ng-template ngbTabContent>
+            <div *ngIf="isEmptyApproved" id="displayTableCss1">
+              <p id="displayTableCss2">
+                <b> No Data Available </b>
+              </p>
+              <img id="imageCss" src="./../../../assets/images/drawkit-folder-man-monochrome-400px.png" alt="logo" />
+            </div>
+            <div *ngIf="displayTableApproved">
+              <div class="col-lg-12" id="tableDivCss">
+                <div class="card">
+                  <div class="card-body" id="tableResponsive">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead class="bg-success text-white" id="theadCss">
+                          <tr>
+                            <th id="displayTableCss3">Sr.No</th>
+                            <th class="displayTableCss4">Organisation </th>
+                            <th class="displayTableCss5"> Name </th>
+                            <th class="displayTableCss6"> Status </th>
+                            <th class="displayTableCss7" >Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr
+                            *ngFor="let data of usersApprovedData| paginate: { itemsPerPage: 10, currentPage:p};let a=index">
+                            <td class="displayTableCss8">{{a+1}}</td>
+                            <td class="displayTableCss9">
+                              {{data.organisation}} </td>
+                            <td class="displayTableCss10">{{data.firstName}} {{data.lastName}}</td>
+                            <td class="displayTableCss11">
+                              <label>{{data.status}}</label>
+                            </td>
+
+                            <td class="displayTableCss14">
+
+                              <!-- View Approved Button icon id="userDetails"-->
+                            
+                                <i class="fas fa-eye" aria-label="viewApproval" id="viewDetails" type="button"  placement="bottom"
+                                  ngbTooltip="Click here to view User Details"
+                                  (click)=" viewDetails(data,viewDetails1) ;"></i>
+                                
+                              <!-- Modal to Add Project Opens -->
+                              <ng-template #viewDetails1 let-c="close" let-d="dismiss">
+                                <div class="modal-header">
+                                  <h4 class="modal-title" id="modal-basic-title">View User Details</h4>
+                                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <!-- Account Number -->
+
+
+                                <div class="modal-body">
+                                  <div class="row">
+                                    <label id="pName" class="col-sm-4  control-label col-form-label">Account
+                                      No.:</label>
+                                    <div class="col-sm-6">
+                                      {{viewAccountNumber}}
+                                    </div>
+                                  </div>
+                                  <!-- Account Number ends -->
+                                  <!-- Organization -->
+                                  <div class="row">
+                                    <label id="fontStyle" class="col-sm-4 control-label col-form-label">Organisation:
+                                    </label>
+                                    <div class="col-sm-6">
+                                      {{viewOrganisation}}
+                                    </div>
+                                  </div>
+                                  <!-- Organization ends -->
+                                  <!-- UAT Url -->
+                                  <div class="row">
+                                    <label id="pName" class="col-sm-4  control-label col-form-label">UAT Url:</label>
+                                    <div class="col-sm-6">
+                                      {{viewUATUrl}}
+                                    </div>
+                                  </div>
+
+                                  <!-- UAT Url ends -->
+                                  <!-- Prod Url -->
+                                  <div class="row">
+                                    <label id="pName" class="col-sm-4  control-label col-form-label">Production
+                                      Url:</label>
+                                    <div class="col-sm-6">
+                                      {{viewProdUrl}}
+                                    </div>
+                                  </div>
+                                  <!-- Prod Url ends -->
+                                  <!-- Client Code -->
+                                  <div class="row">
+                                    <label id="pName" class="col-sm-4  control-label col-form-label">Client
+                                      Code:</label>
+                                    <div class="col-sm-6">
+                                      {{viewClientCode}}
+                                    </div>
+                                  </div>
+
+                                  <!-- Client code ends -->
+                                  <!-- Format Code -->
+                                  <div class="row">
+                                    <label id="pName" class="col-sm-4  control-label col-form-label">Format
+                                      Code:</label>
+                                    <div class="col-sm-6">
+                                      {{viewFormatCode}}
+                                    </div>
+                                  </div>
+                                  <!-- Format code ends -->
+                                  <button id="okButton" (click)="closeViewDetails()" class="btn btn-warning">Ok</button>
+
+                                  <!--  view User Details ends -->
+                                </div>
+                              </ng-template>
+                            
+                            <!-- Modal to View User Details Ends -->
+                            <!--    Edit Approved data button -->
+                          
+                              <i class="fas fa-edit" ngbTooltip="Click here to edit User Details" placement="bottom"
+                                (click)=" editDetails(data,editUserDetails1) ;" id="editDetails" >
+                              </i>
+                              <!-- Modal to Add Project Opens -->
+                              <ng-template #editUserDetails1 let-c="close" let-d="dismiss">
+                                <div class="modal-header">
+                                  <h4 class="modal-title" id="modal-basic-title">Edit User Details</h4>
+                                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <form [formGroup]="editUserDetailsForm"
+                                    (ngSubmit)="submitUserEditDetails(editUserDetailsForm.value)">
+                                    <!-- Account Number -->
+                                    <div class="form-group row">
+                                      <label id="pName" class="col-sm-4  control-label col-form-label">Account
+                                        No.:</label>
+                                      <div class="col-sm-6">
+                                        <input type="text" id="editAccountNo" autocomplete="off" class="form-control"
+                                          [formControl]="editUserDetailsForm.controls['editAccountNo']"
+                                          formControlName="editAccountNo">
+                                      </div>
+
+                                    </div>
+                                    <!-- Account Number ends -->
+                                    <!-- Organization -->
+                                    <div class="form-group row">
+                                      <label id="fontStyle" class="col-sm-4 control-label col-form-label">Organisation:
+                                      </label>
+                                      <div class="col-sm-6">
+                                        <input type="text" id="editOrganisation" class="form-control"
+                                          [formControl]="editUserDetailsForm.controls['editOrganisation']"
+                                          formControlName="editOrganisation">
+
+                                      </div>
+
+                                    </div>
+                                    <!-- Organization ends -->
+                                    <!-- UAT Url -->
+                                    <div class="form-group row">
+                                      <label id="pName" class="col-sm-4  control-label col-form-label">UAT Url:</label>
+                                      <div class="col-sm-6">
+                                        <input type="text" id="editUatUrl" autocomplete="off" class="form-control"
+                                          [formControl]="editUserDetailsForm.controls['editUatUrl']"
+                                          formControlName="editUatUrl">
+                                      </div>
+
+                                    </div>
+                                    <!-- UAT Url ends -->
+                                    <!-- Prod Url -->
+                                    <div class="form-group row">
+                                      <label id="pName" class="col-sm-4  control-label col-form-label">Production
+                                        Url:</label>
+                                      <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="editProdUrl" autocomplete="off"
+                                          [formControl]="editUserDetailsForm .controls['editProdUrl']"
+                                          formControlName="editProdUrl">
+                                      </div>
+
+                                    </div>
+                                    <!-- Prod Url ends -->
+                                    <!-- Client Code -->
+                                    <div class="form-group row">
+                                      <label id="pName" class="col-sm-4  control-label col-form-label">Client
+                                        Code:</label>
+                                      <div class="col-sm-6">
+                                        <input type="text" id="editClientCode" autocomplete="off" class="form-control"
+                                          [formControl]="editUserDetailsForm .controls['editClientCode']"
+                                          formControlName="editClientCode">
+                                      </div>
+
+                                    </div>
+                                    <!-- Client code ends -->
+                                    <!-- Format Code -->
+                                    <div class="form-group row">
+                                      <label id="pName" class="col-sm-4  control-label col-form-label">Format
+                                        Code:</label>
+                                      <div class="col-sm-6">
+                                        <input type="text" id="editFormatCode" autocomplete="off" class="form-control"
+                                          [formControl]="editUserDetailsForm.controls['editFormatCode']"
+                                          formControlName="editFormatCode">
+                                      </div>
+                                    </div>
+                                    <!-- Format code ends -->
+                                    <button type="submit" style="color:white;border:none;background:#f07800;"
+                                      id="buttonCss" class="btn btn-warning">Submit</button>
+
+
+                                  </form>
+                                  <!-- Form to add new project ends -->
+                                </div>
+                              </ng-template>
+                            
+<!-- id="deleteButtonCss"  delete Approved button -->
+                              <i class="fas fa-trash-alt" (click)="deleteApproved(data)"  placement="bottom" ngbTooltip="Delete User"  id = "deleteDetails" >
+                              </i>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+
+
+        <ngb-tab id="tabPending">
+          <ng-template ngbTabTitle>Pending</ng-template>
+          <h3 class="card-title">Pending - 2</h3>
+          <ng-template ngbTabContent>
+            <div *ngIf="isEmptyPending" id="displayTableCss15">
+              <p id="displayTableCss16">
+                <b> No Data Available </b>
+              </p>
+              <img id="imageCss" src="./../../../assets/images/drawkit-folder-man-monochrome-400px.png" alt="logo" />
+            </div>
+            <div *ngIf="displayTablePending">
+              <div class="col-lg-12" id="tableDivCss">
+                <div class="card">
+                  <div class="card-body" id="tableResponsive">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead class="bg-success text-white" id="theadCss">
+                          <tr>
+                            <th id="displayTableCss3">Sr.No</th>
+                            <th class="displayTableCss4">Organisation </th>
+                            <th class="displayTableCss5"> Name </th>
+                            <th class="displayTableCss6"> Status </th>
+                            <th class="displayTableCss7" >Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr
+                            *ngFor="let data of usersPendingData| paginate: { itemsPerPage: 10, currentPage:p};let a=index">
+                            <td class="displayTableCss22">{{a+1}}</td>
+                            <td class="displayTableCss23">{{data.organisation}} </td>
+
+                            <td class="displayTableCss24">{{data.firstName}} {{data.lastName}}</td>
+
+                            <td class="displayTableCss27"> {{data.status}}</td>
+
+
+                            <td class="displayTableCss29">
+                              <button id="iconButton2" type="button" placement="bottom" ngbTooltip="Approve User"
+                                class="btn btn-warning" (click)="pendingUser(data,enterDetails1)">Approve</button>
+                              <!-- Modal to Add Project Opens -->
+                              <ng-template #enterDetails1 let-c="close" let-d="dismiss">
+                                <div class="modal-header">
+                                  <h4 class="modal-title" id="modal-basic-title">Enter User Details</h4>
+                                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <form [formGroup]="enterDetailsForm"
+                                    (ngSubmit)="enterUserDetails(enterDetailsForm.value) ;">
+                                    <div class="form-group row">
+                                      <label id="pName" class="col-sm-4  control-label col-form-label">Account
+                                        No.:</label>
+                                      <div class="col-sm-6">
+                                        <input type="text" id="enteredAccountNo" autocomplete="off"
+                                          [formControl]="enterDetailsForm.controls['enteredAccountNo']"
+                                          class="form-control" formControlName="enteredAccountNo">
+                                      </div>
+
+                                    </div>
+                                    <!-- Account Number ends -->
+                                    <!-- Organization -->
+                                    <div class="form-group row">
+                                      <label id="fontStyle" class="col-sm-4 control-label col-form-label">Organisation:
+                                      </label>
+                                      <div class="col-sm-6">
+                                        <input type="text" id="enteredOrganisation" class="form-control"
+                                          [formControl]="enterDetailsForm.controls['enteredOrganisation']"
+                                          formControlName="enteredOrganisation">
+
+                                      </div>
+
+                                    </div>
+                                    <!-- Organization ends -->
+                                    <!-- UAT Url -->
+                                    <div class="form-group row">
+                                      <label id="pName" class="col-sm-4  control-label col-form-label">UAT
+                                        Url:</label>
+                                      <div class="col-sm-6">
+                                        <input type="text" id="enteredUatUrl" autocomplete="off"
+                                          [formControl]="enterDetailsForm.controls['enteredUatUrl']"
+                                          class="form-control" formControlName="enteredUatUrl">
+                                      </div>
+
+                                    </div>
+                                    <!-- UAT Url ends -->
+                                    <!-- Prod Url -->
+                                    <div class="form-group row">
+                                      <label id="pName" class="col-sm-4  control-label col-form-label">Production
+                                        Url:</label>
+                                      <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="enteredProdUrl" autocomplete="off"
+                                          [formControl]="enterDetailsForm .controls['enteredProdUrl']"
+                                          formControlName="enteredProdUrl">
+                                      </div>
+
+                                    </div>
+                                    <!-- Prod Url ends -->
+                                    <!-- Client Code -->
+                                    <div class="form-group row">
+                                      <label id="pName" class="col-sm-4  control-label col-form-label">Client
+                                        Code:</label>
+                                      <div class="col-sm-6">
+                                        <input type="text" id="enterClientCode" autocomplete="off"
+                                          [formControl]="enterDetailsForm.controls['enterClientCode']"
+                                          class="form-control" formControlName="enterClientCode">
+                                      </div>
+                                      <p class="error" id="fontStyle"
+                                        *ngIf="enterDetailsForm.get('enterClientCode').hasError('required')">
+                                        <span class="glyphicon glyphicon-alert"></span>*required</p>
+
+                                    </div>
+                                    <!-- Client code ends -->
+                                    <!-- Format Code -->
+                                    <div class="form-group row">
+                                      <label id="pName" class="col-sm-4  control-label col-form-label">Format
+                                        Code:</label>
+                                      <div class="col-sm-6">
+                                        <input type="text" id="enterFormatCode" autocomplete="off" class="form-control"
+                                          [formControl]="enterDetailsForm?.controls['enterFormatCode']"
+                                          formControlName="enterFormatCode">
+                                      </div>
+                                      <p class="error" id="fontStyle"
+                                        *ngIf="enterDetailsForm?.get('enterFormatCode').hasError('required') ">
+                                        <span class="glyphicon glyphicon-alert"></span>*required</p>
+
+                                    </div>
+                                    <!-- Format code ends -->
+                                    <button type="submit" style="color:white;border:none;background:#f07800;"
+                                      id="buttonCss" [disabled]="!enterDetailsForm.valid"
+                                      class="btn btn-warning">Submit</button>
+
+
+                                  </form>
+                                  <!-- Form to enter new Details ends -->
+                                </div>
+                              </ng-template>
+                              <!-- Modal to Add Project Ends -->
+                            
+
+                            
+                              <button id="iconButton2" type="button" placement="bottom" ngbTooltip="Reject User"
+                                class="btn btn-warning" (click)="rejectUser(data)">Reject</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab  id="tabRejected">
+          <ng-template ngbTabTitle>Rejected</ng-template>
+
+          <ng-template ngbTabContent>
+            <div *ngIf="isEmptyRejected" id="displayTableCss15">
+              <p id="displayTableCss16">
+                <b> No Data Available </b>
+              </p>
+              <img id="imageCss" src="./../../../assets/images/drawkit-folder-man-monochrome-400px.png" alt="logo" />
+            </div>
+            <div *ngIf="displayTableRejected">
+              <div class="col-lg-12" id="tableDivCss">
+                <div class="card">
+                  <div class="card-body" id="tableResponsive">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead class="bg-success text-white" id="theadCss">
+                          <tr>
+                            <th id="displayTableCss3">Sr.No</th>
+                            <th class="displayTableCss4">Organisation </th>
+                            <th class="displayTableCss5"> Name </th>
+                            <th class="displayTableCss6"> Status </th>
+                            <th class="displayTableCss7" >Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr
+                            *ngFor="let data of rejectedUsersData| paginate: { itemsPerPage: 10, currentPage:p};let a=index">
+                            <td class="displayTableCss22">{{a+1}}</td>
+                            <td class="displayTableCss23">{{data.organisation}} </td>
+
+                            <td class="displayTableCss24">{{data.firstName}} {{data.lastName}}</td>
+
+                            <td class="displayTableCss27"> {{data.status}}</td>
+
+                            <!-- id="userDetails" -->
+                            <td class="displayTableCss28">
+                              <!-- <button class="btn btn-warning"  placement="bottom"
+                                ngbTooltip="Click here to view Rejected User Details"
+                                (click)=" viewRejectedDetails(data,viewDetails2) ;">View
+                                Details</button> -->
+                                <i class="fas fa-eye" aria-label="viewApproval" id="viewDetailsStatus" placement="bottom"
+                                ngbTooltip="Click here to view Rejected User Details"
+                                (click)=" viewRejectedDetails(data,viewDetails2) ;"></i>
+  
+
+
+
+                              <!-- Modal to Add Project Opens -->
+                              <ng-template #viewDetails2 let-c="close" let-d="dismiss">
+                                <div class="modal-header">
+                                  <h4 class="modal-title" id="modal-basic-title">View User Details</h4>
+                                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <!-- Account Number -->
+
+
+                                <div class="modal-body">
+                                  <div class="row">
+                                    <label id="pName" class="col-sm-4  control-label col-form-label">Account
+                                      No.:</label>
+                                    <div class="col-sm-6">
+                                      {{rejectedAccountNumber}}
+                                    </div>
+                                  </div>
+                                  <!-- Account Number ends -->
+                                  <!-- Organization -->
+                                  <div class="row">
+                                    <label id="fontStyle" class="col-sm-4 control-label col-form-label">Organisation:
+                                    </label>
+                                    <div class="col-sm-6">
+                                      {{rejectedOrganisation}}
+                                    </div>
+                                  </div>
+                                  <!-- Organization ends -->
+                                  <!-- UAT Url -->
+                                  <div class="row">
+                                    <label id="pName" class="col-sm-4  control-label col-form-label">UAT Url:</label>
+                                    <div class="col-sm-6">
+                                      {{rejectedUATUrl}}
+                                    </div>
+                                  </div>
+
+                                  <!-- UAT Url ends -->
+                                  <!-- Prod Url -->
+                                  <div class="row">
+                                    <label id="pName" class="col-sm-4  control-label col-form-label">Production
+                                      Url:</label>
+                                    <div class="col-sm-6">
+                                      {{rejectedProdUrl}}
+                                    </div>
+                                  </div>
+                                  <!-- Prod Url ends -->
+                                  <!-- Client Code -->
+                                  <div class="row">
+                                    <label id="pName" class="col-sm-4  control-label col-form-label">Client
+                                      Code:</label>
+                                    <div class="col-sm-6">
+                                      {{rejectedClientCode}}
+                                    </div>
+                                  </div>
+
+                                  <!-- Client code ends -->
+                                  <!-- Format Code -->
+                                  <div class="row">
+                                    <label id="pName" class="col-sm-4  control-label col-form-label">Format
+                                      Code:</label>
+                                    <div class="col-sm-6">
+                                      {{rejectedFormatCode}}
+                                    </div>
+                                  </div>
+                                  <!-- Format code ends -->
+                                  <button id="okButton" (click)="closeViewDetails()" class="btn btn-warning">Ok</button>
+
+                                  <!--  view User Details ends -->
+                                </div>
+                              </ng-template>
+                              <i class="fas fa-edit" placement="bottom" ngbTooltip="Change Status"
+                               (click)="changeStatus(data, changeDetails)" id="editDetailsStatus" >
+                            </i>
+
+                              
+                              <!-- Modal for drop down of status change -->
+
+                              <!-- Modal to Add Project Opens -->
+                              <ng-template #changeDetails let-c="close" let-d="dismiss">
+                                <div class="modal-header">
+                                  <h4 class="modal-title" id="modal-basic-title">View User Details</h4>
+                                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                               
+                                <div class="modal-body">
+                                <div class="card">
+                                  <div class="card-body">
+                                <div text="center" class="col-md-6">
+                                  <div ngbDropdown class="d-inline-block">
+                                    <button class="btn btn-outline-warning" id="dropdownBasic1"
+                                      ngbDropdownToggle>Select</button>
+                                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+
+                                      <button class="dropdown-item" *ngFor="let value of newStatus"
+                                        (click)="changeStatusValue(value)">{{value}}</button>
+                                    </div>
+                                  </div>
+                                </div></div></div>
+                               
+                                <!-- Format code ends -->
+                                <button id="changeRejectButton" (click)="changeRejectDetails()"
+                                  class="btn btn-warning">Ok</button>
+                                </div>
+                               
+                              </ng-template>
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,288 @@
+<form class="form-horizontal form-material" [formGroup]="addRegisterData"
+(ngSubmit)="findInvalidControls(addRegisterData.value)">
+<div>
+    <div  style="text-align: center">
+        <div class="row">
+            <div class="col-md-8 topDiv" >
+                   <img src="../../../assets/images/bank.png" style="width: 16%;margin-top:2%;" class="img-responsive">
+                    <p><b>Configure your organizational details</b></p>
+            </div>
+           <div>
+               <!-- <span class="circle circle1"></span> -->
+           </div>
+           </div>
+       </div>
+       <ngb-tabset [destroyOnHide]="false" type="pills" (tabChange)="tabChange($event) "  class="custom-pills nav-justified mainTabset" id="ngbTabset" [(activeId)]="exp"        >
+        <ngb-tab  id="basicDetails" title="Basic Details" >
+          <ng-template ngbTabContent>
+            <div class="floating-form" style="background-color: #E9E9EB;padding-top: 1%;padding-bottom: 3%;">
+              <div class="row" style="margin-left: 6%;margin-top: 3%;"> 
+              <div class="floating-label col-md-6" >      
+                  <input class="floating-input" type="text" placeholder=" " formControlName="organization">
+                  <span class="highlight"></span>
+                  <label *ngIf="
+                  !addRegisterData
+                    .get('organization')
+                    .hasError('pattern') 
+                ">Organization Name</label>
+                
+          
+                  <label *ngIf="
+                  addRegisterData
+                    .get('organization')
+                    .hasError('pattern')
+                " style="color: red;">Please enter Valid Organization Name</label>
+                  <!-- <div>
+                    <p class="error" *ngIf="
+                        addRegisterData
+                          .get('organization')
+                          .hasError('required') &&
+                        addRegisterData.get('organization').touched
+                      ">
+                      <span class="glyphicon glyphicon-alert"></span>Please enter Organization name
+                    </p>
+                  </div> -->
+                </div>
+                <div class="floating-label col-md-6">      
+                  <input class="floating-input" type="text" placeholder=" " formControlName="accountNumber" maxlength="22">
+                  <span class="highlight"></span>
+                  <label *ngIf="
+                  !addRegisterData
+                    .get('accountNumber')
+                    .hasError('pattern') 
+                ">Account Number</label>
+                  <label *ngIf="
+                  addRegisterData
+                    .get('accountNumber')
+                    .hasError('pattern')
+                " style="color: red;">Please enter valid Account Number</label>
+                </div>
+              </div>
+               <div class="row" style="margin-left: 6%;margin-top: 4%;">
+                <div class="floating-label col-md-6">      
+                  <input class="floating-input" type="text" placeholder=" " formControlName="amName">
+                  <span class="highlight"></span>
+                  <label *ngIf="
+                  !addRegisterData
+                    .get('amName')
+                    .hasError('pattern')
+                ">Account Manager Name</label>
+                  <label *ngIf="
+                  addRegisterData
+                    .get('amName')
+                    .hasError('pattern')
+                " style="color: red;">Please enter valid AM Name</label>
+                  <!-- <div>
+                    <p class="error" *ngIf="
+                        addRegisterData
+                          .get('amName')
+                          .hasError('required') &&
+                        addRegisterData.get('amName').touched
+                      ">
+                      <span class="glyphicon glyphicon-alert"></span>Please enter AM Name
+                    </p>
+                  </div> -->
+                </div>
+                <div class="floating-label col-md-6">      
+                  <input class="floating-input" type="text" placeholder=" " formControlName="amMobile" maxlength="10">
+                  <span class="highlight"></span>
+                  <label *ngIf="
+                  !addRegisterData
+                    .get('amMobile')
+                    .hasError('pattern')
+                ">AM / IM Mobile Number</label>
+                  <label *ngIf="
+                  addRegisterData
+                    .get('amMobile')
+                    .hasError('pattern')
+                " style="color: red;">Please enter valid AM/IM Mobile</label>
+                </div>
+              </div>
+              <div class="row" style="margin-left: 6%;padding-bottom: 4%;margin-top: 4%;">
+
+              <div class="floating-label col-md-6">      
+                <input class="floating-input" type="text" placeholder=" " formControlName="amEmail">
+                <span class="highlight"></span>
+                <label *ngIf="
+                !addRegisterData
+                  .get('amEmail')
+                  .hasError('pattern')
+              ">AM / IM Email Id</label>
+                <label *ngIf="
+                addRegisterData
+                  .get('amEmail')
+                  .hasError('pattern')
+              " style="color: red;">Please enter valid AM/IM Email Id</label>
+                <!-- <div>
+                  <p class="error" *ngIf="
+                      addRegisterData
+                        .get('amEmail')
+                        .hasError('required') &&
+                      addRegisterData.get('amEmail').touched
+                    ">
+                    <span class="glyphicon glyphicon-alert"></span>Please enter Email-Id
+                  </p>
+                </div> -->
+              </div>
+              </div>
+            </div>
+            <hr>
+              <div   >
+                <button type="button" class="btn cancelButton col-md-3" [routerLink]="['']">Cancel</button>
+                <button type="button" class="btn prevButton col-md-3" (click)="prevTab()"> < Previous step</button>
+                <button type="button" class="btn nextButton col-md-3" (click)="nextTab()" >Next step ></button>
+                </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="businessDetails" class="mainTabs" title="Business  Details">
+          <ng-template ngbTabContent>
+            <div class="floating-form" style="background-color: #E9E9EB;padding-top: 5%;
+            padding-bottom: 12.7%;">
+              <div class="row" style="margin-left: 6%;margin-top: 3%;"> 
+              <div class="floating-label col-md-6" >      
+                  <input class="floating-input" type="text" placeholder=" " formControlName="firstNameBusiness">
+                  <span class="highlight"></span>
+                  <label *ngIf="
+                  !addRegisterData
+                    .get('firstNameBusiness')
+                    .hasError('pattern')
+                ">First Name</label>
+                  <label *ngIf="
+                  addRegisterData
+                    .get('firstNameBusiness')
+                    .hasError('pattern')
+                " style="color: red;">Please Enter Valid First Name</label>
+                </div>
+                <div class="floating-label col-md-6">      
+                  <input class="floating-input" type="text" placeholder=" " formControlName="lastNameBusiness">
+                  <span class="highlight"></span>
+                  <label *ngIf="
+                  !addRegisterData
+                    .get('lastNameBusiness')
+                    .hasError('pattern')
+                ">Last Number</label>
+                  <label *ngIf="
+                  addRegisterData
+                    .get('lastNameBusiness')
+                    .hasError('pattern')
+                " style="color: red;">Please enter valid Last Name</label>
+                </div>
+              </div>
+               <div class="row" style="margin-left: 6%;margin-top: 4%;">
+                <div class="floating-label col-md-6">      
+                  <input class="floating-input" type="text" placeholder=" " formControlName="mobileNumberBusiness" maxlength="10">
+                  <span class="highlight"></span>
+                  <label *ngIf="
+                  !addRegisterData
+                    .get('mobileNumberBusiness')
+                    .hasError('pattern')
+                ">Mobile Number</label>
+                  <label *ngIf="
+                  addRegisterData
+                    .get('mobileNumberBusiness')
+                    .hasError('pattern')
+                " style="color: red;">Please enter valid Mobile Number</label>
+                </div>
+                <div class="floating-label col-md-6">      
+                  <input class="floating-input" type="text" placeholder=" " formControlName="emailIdBusiness">
+                  <span class="highlight"></span>
+                  <label *ngIf="
+                  !addRegisterData
+                    .get('emailIdBusiness')
+                    .hasError('pattern')
+                ">Email Id</label>
+                  <label *ngIf="
+                  addRegisterData
+                    .get('emailIdBusiness')
+                    .hasError('pattern')
+                " style="color: red;">Please enter Valid Email Id</label>
+                </div>
+              </div>
+              
+            </div>
+            <hr>
+              <div   >
+                <button type="button" class="btn cancelButton col-md-3" [routerLink]="['']">Cancel</button>
+                <button type="button" class="btn prevButton col-md-3" (click)="prevTab2()"> < Previous step</button>
+                <button type="button" class="btn nextButton col-md-3" (click)="nextTab2()" >Next step ></button>
+                </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="itDetails" class="mainTabs" title="IT Details">
+          <ng-template ngbTabContent>
+          
+              <div class="floating-form" style="background-color: #E9E9EB;padding-top: 5%; padding-bottom: 12.7%;">
+                <div class="row" style="margin-left: 6%;margin-top: 3%;"> 
+                <div class="floating-label col-md-6" >      
+                    <input class="floating-input" type="text" placeholder=" " formControlName="firstNameIt">
+                    <span class="highlight"></span>
+                    <label *ngIf="
+                    !addRegisterData
+                      .get('firstNameIt')
+                      .hasError('pattern')
+                  " >First Name</label>
+                    <label *ngIf="
+                    addRegisterData
+                      .get('firstNameIt')
+                      .hasError('pattern')
+                  " style="color: red;">Please enter valid First Name</label>
+                  </div>
+                  <div class="floating-label col-md-6">      
+                    <input class="floating-input" type="text" placeholder=" " formControlName="lastNameIt">
+                    <span class="highlight"></span>
+                    <label *ngIf="
+                    !addRegisterData
+                      .get('lastNameIt')
+                      .hasError('pattern')
+                  ">Last Name</label>
+                    <label *ngIf="
+                    addRegisterData
+                      .get('lastNameIt')
+                      .hasError('pattern')
+                  " style="color: red;">Please enter valid Last Name</label>
+                  </div>
+                </div>
+                 <div class="row" style="margin-left: 6%;margin-top: 4%;">
+                  <div class="floating-label col-md-6">      
+                    <input class="floating-input" type="text" placeholder=" " formControlName="mobileNumberIt" maxlength="10">
+                    <span class="highlight"></span>
+                    <label *ngIf="
+                    !addRegisterData
+                      .get('mobileNumberIt')
+                      .hasError('pattern')
+                  ">Mobile Number</label>
+                    <label *ngIf="
+                    addRegisterData
+                      .get('mobileNumberIt')
+                      .hasError('pattern')
+                  " style="color: red;">Please enter valid Mobile Number</label>
+                  </div>
+                  <div class="floating-label col-md-6">      
+                    <input class="floating-input" type="text" placeholder=" " formControlName="emailIdIt">
+                    <span class="highlight"></span>
+                    <label *ngIf="
+                    !addRegisterData
+                      .get('emailIdIt')
+                      .hasError('pattern')
+                  ">Email Id</label>
+                    <label *ngIf="
+                    addRegisterData
+                      .get('emailIdIt')
+                      .hasError('pattern')
+                  " style="color: red;">Please enter valid Email Id</label>
+                  </div>
+                </div>
+                
+              </div>
+              <hr>
+              <div   >
+                <button type="button" class="btn cancelButton col-md-3" [routerLink]="['']">Cancel</button>
+                <button type="button" class="btn prevButton col-md-3" (click)="prevTab3($event)"> < Previous step</button>
+                <button type="button" class="btn nextButton col-md-3" (click)="nextTab3($event)">Next step ></button>
+                </div>
+            
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+</div>
+</form>

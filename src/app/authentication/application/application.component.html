@@ -1,0 +1,497 @@
+<form class="form-horizontal form-material" [formGroup]="addSubmitData"
+(ngSubmit)="findInvalidControls(addSubmitData.value)">
+<div>
+    <div  style="text-align: center">
+        <div class="row">
+            <div class="col-md-8 topDiv">
+                   <img src="../../../assets/images/pins.png" style="width: 16%;margin-top:2%;" class="img-responsive">
+                    <p id="mainId"><b>Configure your application connectivity</b></p>
+            </div>
+           <div>
+               <span class="circle circle1"></span>
+           </div>
+           </div>
+       </div>
+       <ngb-tabset [destroyOnHide]="false" type="pills" (tabChange)="tabChange($event) "  class="custom-pills nav-justified mainTabset" id="ngbTabset" [(activeId)]="exp">
+        <ngb-tab id="serviceDetails"  title="Service Details" >
+          <ng-template ngbTabContent>
+            <div class="floating-form main-form" style="background-color: #E9E9EB;padding-top: 1%;">
+                <div class="row" style="margin-left: 6%;margin-top: 2%;"> 
+                    <div class="floating-label col-md-6">  
+                        <select class="floating-select" onclick="this.setAttribute('value', this.value);" value="" formControlName="webService">
+                          <option value="" hidden></option>
+                          <option value="SOAP Web Service">SOAP Web Service</option>
+                          <option value="REST API-JSON">REST API-JSON</option>
+                          <option value="REST API-XML">REST API-XML</option>
+                        </select>
+                        <span class="highlight"></span>
+                        <label *ngIf="!dropDown" >Type of Web Service</label>
+                        <label *ngIf="dropDown" style="top: -18px;
+                        font-size: 14px;
+                        color: #5264AE;">Type of Web Service</label>
+                      </div>
+                      <div class="floating-label col-md-6">  
+                        <select class="floating-select" onclick="this.setAttribute('value', this.value);" value="" formControlName="methodType" >
+                          <option value="" hidden></option>
+                          <option value="POST">POST</option>
+                          <option value="GET">GET</option>
+                        </select>
+                        <span class="highlight"></span>
+                        <label *ngIf="!dropDown1">HTTP Method Type</label>
+                        <label *ngIf="dropDown1" style="top: -18px;
+                        font-size: 14px;
+                        color: #5264AE;">HTTP Method Type</label>
+                      </div>
+                </div>
+                <div class="row" style="margin-left: 6%;margin-top: 2%;"> 
+                    <div class="floating-label col-md-6">  
+                        <select class="floating-select" onclick="this.setAttribute('value', this.value);" value="" formControlName="checksumReq">
+                          <option value="" hidden></option>
+                          <option value="YES">YES</option>
+                          <option value="NO">NO</option>
+                        </select>
+                        <span class="highlight"></span>
+                        <label *ngIf="!dropDown2">Checksum Required :</label>
+                        <label *ngIf="dropDown2" style="top: -18px;
+                        font-size: 14px;
+                        color: #5264AE;">Checksum Required :</label>
+                      </div>
+                      <div class="floating-label col-md-6">  
+                        <select class="floating-select" onclick="this.setAttribute('value', this.value);" value="" formControlname="encryUsed">
+                          <option  value="" hidden></option>
+                          <option value="YES">YES</option>
+                          <option value="NO">NO</option>
+                        </select>
+                        <span class="highlight"></span>
+                        <label *ngIf="!dropDown3">Encryption Used :</label>
+                        <label *ngIf="dropDown3" style="top: -18px;
+                        font-size: 14px;
+                        color: #5264AE;">Encryption Used :</label>
+                      </div>
+                    <!-- <div class="floating-label col-md-12">  
+                        <div class="row">
+                            <div class="col-md-3">
+                              <label>Checksum Required :</label>
+                            </div>
+                            <div class="col-md-3">
+                              <label for="radio1">
+                                <input id="radio1" name="value1" type="radio" value="Yes"  />
+                                Yes
+                              </label>
+                              <label style="margin-left: 28%;">
+                                <input type="radio" value="No"  />
+                                No
+                              </label>
+                            </div> -->
+                            <!-- <div class="col-md-1"></div> -->
+                            <!-- <div class="col-md-3">
+                              <label>Encryption Used :</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label style="margin-left: -14%;">
+                                    <input type="radio"  />
+                                    Yes
+                                  </label>
+                              <label style="margin-left: 14%;">
+                                <input type="radio"/>
+                            No
+                              </label>
+                            </div> -->
+                            <!-- <div class="col-md-1"></div> -->
+                          <!-- </div>
+                          
+
+                      </div>
+                      <div class="floating-label col-md-6">   -->
+                        <!-- <input type="radio"> -->
+                      <!-- </div> -->
+                </div>
+                
+              </div>
+              <hr>
+              <div   >
+                <button type="button" class="btn cancelButton col-md-3" [routerLink]="['']">Cancel</button>
+                <button type="button" class="btn prevButton col-md-3" (click)="prevTab()"> < Previous step</button>
+                <button type="button" class="btn nextButton col-md-3" (click)="nextTab()">Next step ></button>
+                </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="uatDetails"  class="mainTabs" title="UAT Details">
+            <ng-template ngbTabContent>
+                <div class="floating-form" style="background-color: #E9E9EB;padding-top: 1%;">
+                  <div class="row" style="margin-left: 6%;margin-top: 2%;"> 
+                  <div class="floating-label col-md-6" >      
+                      <input class="floating-input" type="text" placeholder=" " formControlName="hostNameUat">
+                      <span class="highlight"></span>
+                      <label *ngIf="
+                      !addSubmitData
+                        .get('hostNameUat')
+                        .hasError('pattern')
+                    ">Host Name</label>
+                      <label *ngIf="
+                      addSubmitData
+                        .get('hostNameUat')
+                        .hasError('pattern')
+                    " style="color: red;">Please enter valid Host Name</label>
+                    
+                    </div>
+                    <div class="floating-label col-md-6">      
+                      <input class="floating-input" type="text" placeholder=" " formControlName="uatIp">
+                      <span class="highlight"></span>
+                      <label *ngIf="
+                      !addSubmitData
+                            .get('uatIp')
+                            .hasError('pattern')">UAT IP</label>
+                      <label *ngIf="
+                      addSubmitData
+                            .get('uatIp')
+                            .hasError('pattern')
+                        " style="color: red;">Please Enter Valid UAT IP</label>
+                      <!-- <div>
+                        <p class="error" *ngIf="
+                        addSubmitData
+                              .get('uatIp')
+                              .hasError('pattern')
+                          ">
+                          <span class="glyphicon glyphicon-alert"></span>Please Enter Valid IP
+                        </p>
+                      </div> -->
+                    </div>
+                  </div>
+                   <div class="row" style="margin-left: 6%;margin-top: 2%;">
+                    <div class="floating-label col-md-6">      
+                      <input class="floating-input" type="text" placeholder=" " formControlName="uatPort">
+                      <span class="highlight"></span>
+                      <label *ngIf="
+                      !addSubmitData
+                        .get('uatPort')
+                        .hasError('pattern')
+                    ">UAT Port</label>
+                      <label *ngIf="
+                      addSubmitData
+                        .get('uatPort')
+                        .hasError('pattern')
+                    " style="color: red;">Please enter valid Uat Port</label>
+                      
+                    </div>
+                    <div class="floating-label col-md-6">  
+                        <select name="state" class="floating-select"   onclick="this.setAttribute('value', this.value);" value="" placeholder="state" formControlName="communicationProtocol">
+                          <option selected="selected" value="" hidden ></option>
+                          <option value="HTTP">HTTP</option>
+                          <option value="HTTPS">HTTPS</option>
+                        </select>
+                        <span class="highlight"></span>
+                        <label *ngIf="!dropDown4">Select Communicaton protocol :</label>
+                        <label *ngIf="dropDown4" style="top: -18px;
+                        font-size: 14px;
+                        color: #5264AE;">Select Communicaton protocol :</label>
+                      </div>
+                  </div>
+                  <div class="row " style="margin-left: 6%;margin-top: 2%; "> 
+                    <div class="floating-label col-md-6" > 
+                        <input class="floating-input" type="text" placeholder=" " formControlName="serviceTimeoutUat">
+
+                        <span class="highlight"></span>
+                        <label *ngIf="
+                        !addSubmitData
+                          .get('serviceTimeoutUat')
+                          .hasError('pattern')
+                      ">Service Timeout for UAT </label>
+                        <label *ngIf="
+                        addSubmitData
+                          .get('serviceTimeoutUat')
+                          .hasError('pattern')
+                      " style="color: red;">Please enter valid Service Timeout</label>
+                      </div>
+                      <div class="floating-label col-md-6">      
+                        <input class="floating-input" type="text" placeholder=" " 
+                        formControlName="serviceUrlUat">
+                        <span class="highlight"></span>
+                        <label *ngIf="
+                        !addSubmitData
+                          .get('serviceUrlUat')
+                          .hasError('pattern')
+                      ">Service URL for UAT </label>
+                        <label *ngIf="
+                        addSubmitData
+                          .get('serviceUrlUat')
+                          .hasError('pattern')
+                      " style="color: red;">Please enter valid Service Url</label>
+                      </div>
+                    </div>
+                    <div class="row" style="margin-left: 6%;margin-top: 2%;"> 
+                        <div class="floating-label col-md-6" >      
+                            <input class="floating-input" type="text" placeholder=" " formControlName="serviceNameUat">
+                            <span class="highlight"></span>
+                            <label *ngIf="
+                            !addSubmitData
+                              .get('serviceNameUat')
+                              .hasError('pattern')
+                          ">Service Name for UAT </label>
+                            <label *ngIf="
+                           addSubmitData
+                              .get('serviceNameUat')
+                              .hasError('pattern')
+                          " style="color: red;">Please enter valid Service Name</label>
+                            
+                          </div>
+                          <div class="floating-label col-md-6" >      
+                            <input class="floating-input" type="file" placeholder=" " formControlName="fileUploadUat" (change)="
+                            uatUpload1Uploaded($event)
+                          ">
+                            <span class="highlight"></span>
+                            <label>File Upload for UAT </label>
+                            <!-- <div class="form-group">
+                              <input type="file" (change)="
+                              uatUpload1Uploaded($event)"  class="file">
+                              <div class="input-group col-xs-12">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+                                <input type="text" formControlName="fileUploadUat" class="form-control input-lg" disabled placeholder="Upload file">
+                                <span class="input-group-btn">
+                                  <button class="browse btn btn-primary input-lg" type="button"><i class="glyphicon glyphicon-search"></i> Browse</button>
+                                </span>
+                              </div>
+                            </div> -->
+                          </div>
+                        </div>
+                  
+                </div>
+                <hr>
+                <div  >
+                  <button type="button" class="btn cancelButton col-md-3" [routerLink]="['']">Cancel</button>
+                  <button type="button" class="btn prevButton col-md-3" (click)="prevTab2()" > < Previous step</button>
+                  <button type="button" class="btn nextButton col-md-3" (click)="nextTab2()">Next step ></button>
+                  </div>
+              </ng-template>
+
+              
+          <!-- <ng-template ngbTabContent>
+           <div style="margin-top: 2%;">
+            <ngb-accordion>
+                <ngb-panel>
+                    <ng-template ngbPanelTitle>
+                        <span style="color: red;height: 10%;">hello</span>
+                    </ng-template>
+                <ng-template ngbPanelContent>
+                   
+                        <div class="floating-form" style="margin-top: 2%;background-color: #E9E9EB;padding-top: 2.5%;">
+                          <div class="row" style="margin-left: 6%;margin-top: 3%;"> 
+                          <div class="floating-label col-md-6" >      
+                              <input class="floating-input" type="text" placeholder=" ">
+                              <span class="highlight"></span>
+                              <label>Host Name</label>
+                            </div>
+                            <div class="floating-label col-md-6">      
+                              <input class="floating-input" type="text" placeholder=" ">
+                              <span class="highlight"></span>
+                              <label>UAT IP</label>
+                            </div>
+                          </div>
+                           <div class="row" style="margin-left: 6%;padding-bottom: 4%;margin-top: 4%;">
+                            <div class="floating-label col-md-6">      
+                              <input class="floating-input" type="text" placeholder=" ">
+                              <span class="highlight"></span>
+                              <label>UAT Port</label>
+                            </div>
+                            <div class="floating-label col-md-6">  
+                                <select class="floating-select" onclick="this.setAttribute('value', this.value);" value="">
+                                  <option value=""></option>
+                                  <option value="1">HTTP</option>
+                                  <option value="2">HTTPS</option>
+                                </select>
+                                <span class="highlight"></span>
+                                <label>Select Communication protocol</label>
+                              </div>
+                          </div>
+                          
+                        </div>
+                        
+                      
+                </ng-template>
+                </ngb-panel>
+                <ngb-panel title="Panel Two">
+                    <ng-template ngbPanelContent>
+                   
+                        <div class="floating-form" style="margin-top: 2%;background-color: #E9E9EB;padding-top: 2.5%;">
+                          <div class="row" style="margin-left: 6%;margin-top: 3%;"> 
+                          <div class="floating-label col-md-6" >      
+                              <input class="floating-input" type="text" placeholder=" ">
+                              <span class="highlight"></span>
+                              <label>Host Name</label>
+                            </div>
+                            <div class="floating-label col-md-6">      
+                              <input class="floating-input" type="text" placeholder=" ">
+                              <span class="highlight"></span>
+                              <label>UAT IP</label>
+                            </div>
+                          </div>
+                           <div class="row" style="margin-left: 6%;padding-bottom: 4%;margin-top: 4%;">
+                            <div class="floating-label col-md-6">      
+                              <input class="floating-input" type="text" placeholder=" ">
+                              <span class="highlight"></span>
+                              <label>UAT Port</label>
+                            </div>
+                            <div class="floating-label col-md-6">  
+                                <select class="floating-select" onclick="this.setAttribute('value', this.value);" value="">
+                                  <option value=""></option>
+                                  <option value="1">HTTP</option>
+                                  <option value="2">HTTPS</option>
+                                </select>
+                                <span class="highlight"></span>
+                                <label>Select Communication protocol</label>
+                              </div>
+                          </div>
+                          
+                        </div>
+                        
+                      
+                </ng-template>
+                </ngb-panel>
+              
+                </ngb-accordion>
+            </div>
+          </ng-template> -->
+           
+          
+        </ngb-tab>
+        <ngb-tab id="prodDetails" class="mainTabs" title="Prod Details">
+            <ng-template ngbTabContent>
+                <div class="floating-form" style="background-color: #E9E9EB;padding-top: 1%;">
+                  <div class="row" style="margin-left: 6%;margin-top: 2%;"> 
+                  <div class="floating-label col-md-6" >      
+                      <input class="floating-input" type="text" placeholder=" " formControlName="hostNameProd">
+                      <span class="highlight"></span>
+                      <label *ngIf="
+                      !addSubmitData
+                         .get('hostNameProd')
+                         .hasError('pattern')
+                     ">Host Name</label>
+                      <label *ngIf="
+                      addSubmitData
+                         .get('hostNameProd')
+                         .hasError('pattern')
+                     " style="color: red;">Please enter valid Host Name</label>
+                    </div>
+                    <div class="floating-label col-md-6">      
+                      <input class="floating-input" type="text" placeholder=" " formControlName="prodIp">
+                      <span class="highlight"></span>
+                      <label *ngIf="
+                      !addSubmitData
+                         .get('prodIp')
+                         .hasError('pattern')
+                     ">Prod IP</label>
+                      <label *ngIf="
+                      addSubmitData
+                         .get('prodIp')
+                         .hasError('pattern')
+                     " style="color: red;">Please enter valid Prod IP</label>
+                    </div>
+                  </div>
+                   <div class="row" style="margin-left: 6%;margin-top: 2%;">
+                    <div class="floating-label col-md-6">      
+                      <input class="floating-input" type="text" placeholder=" " formControlName="prodPort">
+                      <span class="highlight"></span>
+                      <label *ngIf="
+                      !addSubmitData
+                         .get('prodPort')
+                         .hasError('pattern')
+                     ">Prod Port</label>
+                      <label *ngIf="
+                      addSubmitData
+                         .get('prodPort')
+                         .hasError('pattern')
+                     " style="color: red;">Please enter valid Prod Port</label>
+                    </div>
+                    <div class="floating-label col-md-6">  
+                        <select class="floating-select" onclick="this.setAttribute('value', this.value);" value="" formControlName="commProtocol">
+                          <option value="" hidden></option>
+                          <option value="HTTP">HTTP</option>
+                          <option value="HTTPS">HTTPS</option>
+                        </select>
+                        <span class="highlight"></span>
+                        <label *ngIf="!dropDown5">Select Communicaton protocol :</label>
+                        <label *ngIf="dropDown5" style="top: -18px;
+                        font-size: 14px;
+                        color: #5264AE;">Select Communicaton protocol :</label>
+                      </div>
+                  </div>
+                  <div class="row " style="margin-left: 6%;margin-top: 2%; "> 
+                    <div class="floating-label col-md-6" >      
+                        <input class="floating-input" type="text" placeholder=" "
+                        formControlName="serviceTimeoutProd">
+                        <span class="highlight"></span>
+                        <label *ngIf="
+                        !addSubmitData
+                           .get('serviceTimeoutProd')
+                           .hasError('pattern')
+                       ">Service Timeout for Prod </label>
+                        <label *ngIf="
+                        addSubmitData
+                           .get('serviceTimeoutProd')
+                           .hasError('pattern')
+                       " style="color: red;">Please enter valid Service Timeout</label>
+                      </div>
+                      <div class="floating-label col-md-6">      
+                        <input class="floating-input" type="text" placeholder=" "
+                        formControlName="serviceUrlProd">
+                        <span class="highlight"></span>
+                        <label *ngIf="
+                        !addSubmitData
+                           .get('serviceUrlProd')
+                           .hasError('pattern')
+                       ">Service URL for Prod </label>
+                        <label *ngIf="
+                        addSubmitData
+                           .get('serviceUrlProd')
+                           .hasError('pattern')
+                       " style="color: red;">Please enter valid Service URL</label>
+                      </div>
+                    </div>
+                    <div class="row" style="margin-left: 6%;margin-top: 2%;"> 
+                        <div class="floating-label col-md-6" >      
+                            <input class="floating-input" type="text" placeholder=" " formControlName="serviceNameProd">
+                            <span class="highlight"></span>
+                            <label *ngIf="
+                            !addSubmitData
+                               .get('serviceNameProd')
+                               .hasError('pattern')
+                           ">Service Name for Prod </label>
+                            <label *ngIf="
+                            addSubmitData
+                               .get('serviceNameProd')
+                               .hasError('pattern')
+                           " style="color: red;">Please enter valid Service Name</label>
+                          </div>
+                          <div class="floating-label col-md-6">      
+                            <input class="floating-input" type="file" placeholder=" " formControlName="fileUploadProd"  (change)="
+                          prodUpload1Uploaded($event)
+                        ">
+                            <span class="highlight"></span>
+                            <label>File Upload for Prod </label>
+                            <!-- <div class="form-group">
+                              <input type="file" (change)="
+                              prodUpload1Uploaded($event)"  class="file">
+                              <div class="input-group col-xs-12">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+                                <input type="text" formControlName="fileUploadProd" class="form-control input-lg" disabled placeholder="Upload file">
+                                <span class="input-group-btn">
+                                  <button class="browse btn btn-primary input-lg" type="button"><i class="glyphicon glyphicon-search"></i> Browse</button>
+                                </span>
+                              </div>
+                            </div> -->
+                          </div>
+                        </div>
+                  
+                </div>
+                <hr>
+                <div  >
+                  <button type="button" class="btn cancelButton col-md-3" [routerLink]="['']">Cancel</button>
+                  <button type="button" class="btn prevButton col-md-3" (click)="prevTab3()" > < Previous step</button>
+                  <button type="button" [disabled]="subscribeFlag" class="btn nextButton col-md-3" (click)="nextTab3()">Subscribe</button>
+                  </div>
+              </ng-template>
+        </ngb-tab>
+       
+      </ngb-tabset>
+</div>
+</form>

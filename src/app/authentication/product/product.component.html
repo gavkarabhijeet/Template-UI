@@ -1,0 +1,81 @@
+<div>
+    <div  style="text-align: center">
+     <div class="row" style="margin-top: -4;">
+         <div class="col-md-8 topDiv">
+                <img src="../../../assets/images/bag4.png" style="width: 16%;margin-top:2%;" class="img-responsive">
+                 <p><b>Choose a Product-flow combination</b></p>
+         </div>
+        <div>
+            <!-- <span class="circle circle1">1</span> -->
+        </div>
+        </div>
+    </div>
+    <div>
+    <p style="color: #0a0e30;font-weight: bolder;" class="col-md-4 col-xl-4 col-lg-4" >Select a Product</p>
+
+    <div class="row" style="margin-top: -3%;">
+        
+        <div class="offset-xl-3  col-md-3 col-xl-2 col-sm-6 col-lg-2" >
+           <a style="cursor: pointer"><img id="flowimg1" src="../../../assets/images/accounts_dark_hover.svg" style="height: 80%; width: 130%;" class="img-fluid img-thumnails" (click)="selectFlow1()"></a>
+           <h6>AccountInsights</h6>
+
+        </div>
+        <div class="col-md-3 col-xl-2 col-sm-6 col-lg-2" >
+
+            <a style="cursor: pointer"><img id="flowimg2" src="../../../assets/images/age_certificate_normal.svg" style="height: 80%; width: 130%;" class="img-fluid" (click)="selectFlow2()"></a>
+            <h6>AgeCertificate</h6>
+        
+        </div>
+        <div class="col-md-3 col-xl-2 col-sm-6 col-lg-2" >
+            <a style="cursor: pointer"><img id="flowimg3" src="../../../assets/images/transaction_certificate_normal.svg" style="height: 80%; width: 130%;" class="img-fluid" (click)="selectFlow3()"></a>
+            <h6>IncomeRentCheck</h6>
+
+        </div>
+        <!-- <div class="col-md-3 col-xl-2 col-sm-6 col-lg-2" >
+            <a style="cursor: pointer"><img id="flowimg4" src="../../../assets/images/Kqmv0kqaXT.jpg" style="height: 90%; width: 100%;" class="img-fluid" (click)="selectFlow4()"></a>
+
+        </div> -->
+   
+        <div class="" >
+        <!-- <span class="circle circle2">2</span> -->
+        </div>
+    </div>
+</div>
+<br> 
+<div style="margin-top: -3%;">
+    <p style="color:#0a0e30;font-weight: bolder;" class="col-md-4 col-xl-4 col-lg-4">Select a Product Variant</p>
+
+    <div class="row" style="margin-top: -2%;" >
+        <div class="offset-xl-3 col-md-3 col-xl-2 col-sm-6 col-lg-2 " >
+            <a style="cursor: pointer"><img id="flowimg5" src="../../../assets/E-collection/12months.svg" style="height: 60%; width: 100%;" class="img-fluid" (click)="selectFlow5()"></a>
+            <h6 style="text-align: center;">Transaction details</h6>
+
+
+        </div>
+        <div class="col-md-3 col-xl-2 col-sm-6 col-lg-2" >
+
+            <a style="cursor: pointer"><img id="flowimg6" src="../../../assets/E-collection/credit_cards_hover.svg" style="height: 60%; width: 100%;" class="img-fluid" (click)="selectFlow6()"></a>
+            <h6 style="text-align: center;">Credit card information</h6>
+            
+        </div>
+        <div class="col-md-3 col-xl-2 col-sm-6 col-lg-2" >
+            <a style="cursor: pointer"><img id="flowimg7" src="../../../assets/E-collection/Current_and _deposit _accounts.svg" style="height: 60%; width: 100%;" class="img-fluid" (click)="selectFlow7()"></a>
+            <h6 style="text-align: center;">Current and deposit accounts</h6>
+            
+        </div>
+        <!-- <div class="col-md-3 col-xl-2 col-sm-6 col-lg-2" >
+            <a style="cursor: pointer"><img id="flowimg8" src="../../../assets/images/Kqmv0kqaXT.jpg" style="height: 90%; width: 100%;" class="img-fluid" (click)="selectFlow8()"></a>
+
+        </div> -->
+        <div class="" >
+            <!-- <span class="circle circle3">3</span> -->
+            </div>
+    </div>
+</div>
+<hr style="margin-top: -1%;">
+              <div style="margin-top: -1%;"  >
+                <button type="button" class="btn cancelButton col-md-3" [routerLink]="['']">Cancel</button>
+                <!-- <button type="button" class="btn prevButton col-md-3"> < Previous step</button> -->
+                <button type="button" class="btn nextButton col-md-3" (click)="nextTab($event)" [disabled]="nextButton" style="float: right;">Next step ></button>
+                </div>
+</div>

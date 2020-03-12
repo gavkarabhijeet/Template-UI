@@ -1,0 +1,999 @@
+<header
+  class="topbar"
+  id="topbar1"
+  [attr.data-navbarbg]="options.navbarbg"
+  style="  background: #ffffff;height: 50px;position: fixed;width:100%;transition: top 0.2s ease-in-out;"
+>
+
+ <!--Navbar -->
+<nav class="navbarColor mb-1 navbar navbar-expand-lg navbar-dark info-color border-bottom" style="height: 55px !important">
+  <div>
+    <div class="navbarBankName">Deutsche Bank</div>
+    <div class="navbarAPIProgram">API Program</div>
+  </div>
+  
+  <!-- <a class="navbar-brand">
+    <img
+      alt="img"
+      src="assets/images/ICICI Bank Logo Orange Bg.png"
+      style="width: 173px;
+         height: 39px;"
+      class="img-fluid"
+    />
+  </a> -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+    aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-4" >
+    <ul class="navbar-nav ml-auto">
+      <!-- <li class="nav-item " style="background: #f5821f !important;">
+        <a class="nav-link" [routerLink]="['']">
+          <span
+            
+          style="font-size: 16px;font-family: Arial,Helvetica,sans-serif;color:white !important;"
+          >Home</span>
+        </a>
+      </li> -->
+      <li class="nav-item d-sm-none">
+        <a id="loginButton" class="nav-link" data-toggle="modal" data-target=".bd-example-modal">
+        <span class="navLinkColor" style="font-size: 16px;;">Login</span>
+        </a>
+      </li>
+      <li class="nav-item d-none d-lg-block">
+        <a id="loginButton1" class="nav-link" data-toggle="modal" data-target=".bd-example-modal-xl">
+        <span class="navLinkColor" style="font-size: 16px;;">Login</span>
+        </a>
+      </li>
+      <li class="nav-item">
+          <a id="loginButton1" class="nav-link" (click)="onSubscribe()">
+          <span class="navLinkColor" style="font-size: 16px;">Subscribe Now!</span>
+          </a>
+        </li>
+      <!-- <div class="module-border-wrap" style="border-radius: 5px;">
+          <div class="module" style=" border: 2px solid transparent;
+          border-radius: 5px;
+          transition: border-color .2s;">
+          Subscribe Now!
+          </div></div> -->
+      <!-- <li class="nav-item">
+        <a class="nav-link navbarColor" (click)="clickSubscription()">&nbsp;
+          <i class="fa fa-puzzle-piece home-color"><i class="navLinkColor" style="font-family: Arial,Helvetica,sans-serif;">&nbsp;Subscribe Now !</i></i></a>
+      </li> -->
+    </ul>
+  </div>
+</nav>
+<!--/.Navbar -->
+</header>
+
+<!-- <div class="container" style="bottom: 10%">
+  <div class="home-carousal">
+    <div id="demo" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li
+          *ngFor="let slide of slides; let i = index"
+          [ngClass]="{ active: i == 0 }"
+          data-target="#carouselExampleIndicators"
+          data-slide-to="i"
+        ></li>
+      </ol>
+      <div class="container carousel-inner">
+        <div
+          class="carousel-item"
+          *ngFor="let slide of slides; let i = index"
+          [ngClass]="{ active: i == 0 }"
+          style="height:500px"
+        >
+          <img src="{{ slide.img }}" alt="Random first slide" width="100%" />
+          <div>
+            <strong style="color:#053c6d">
+              {{ slide.description }}
+            </strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="line m-t-20" />
+
+<div class="title text-center p-10" style="margin-top: 15px;">
+  <p style="font-size: 40px;color:#053c6d !important;">Featured Products</p>
+</div>
+
+<div class="row">
+  <div
+    class="col-md-4 col-sm-6 center-block"
+    id="mainDiv1Css"
+    *ngFor="let product of productData"
+  >
+    <div class="section-box-ten">
+      <a
+        style="cursor: pointer"
+        (click)="onClick(product)"
+        id="{{ product.productName }}"
+      >
+        <figure>
+          <h3>{{ product.productName }}</h3>
+          <p>
+            {{
+              product.description.length > 300
+                ? (product.description | slice: 0:300) + "..."
+                : product.description
+            }}
+          </p>
+          <b>
+            <h4 class="btn btn-read" style="color: #F5821F">Read More</h4>
+          </b>
+        </figure>
+        <img
+          alt="front"
+          src="{{ configURL }}Images/Products/{{ product.fileName }}"
+          class="img-responsive"
+          width="100%"
+        />
+      </a>
+    </div>
+  </div>
+</div> -->
+<div class="card">
+   
+    <div class="card-body" style="margin-top:35px">
+        <div class="row layoutMiddle">
+            <div class="card col-sm-12 col-md-8" style="min-height: 500px;">
+                <div class="title text-center p-b-20">
+                    <strong style="font-size: 20px;color:#273843 !important;">
+                        Deutsche Bank API Program
+                    </strong>
+                  </div>
+                  <div class="row">
+                      <div
+                        class="col-md-4 col-sm-4 p-b-10 center-block"
+                        id="mainDiv1Css">
+                        <span style="font-size: 20px;color:#273843 !important;">Select a Product</span>
+                      </div>
+                  </div>
+                   
+                  <div class="row">
+                    <div
+                      class="col-md-3 col-sm-3 p-b-40 center-block"
+                      id="mainDiv1Css"
+                      *ngFor="let product of productData"
+                      [ngClass]="{highlightProduct: imagePath == product.fileName,Products: imagePath != product.fileName}"
+                    >
+                      
+                          <img style="cursor: pointer;height:168px"
+                          (click)="getServices(product)"
+                          id="{{ product.productName }}"
+                            alt="front"
+                            src="{{ product.fileName }}"
+                            width="100%"
+                          />
+                      <div><p class="productNameText">{{ product.pName }}</p></div>
+                    </div>
+                  </div>
+                  <br/>
+    <div *ngIf="dataFormatted.length > 0" class="row">
+        <div
+        class="col-md-12 col-sm-12 p-b-10 center-block"
+        id="mainDiv1Css">
+        <div class="w-100">
+            <span style="font-size: 20px;color:#273843 !important;">Choose a Product Variant</span>
+        </div>
+        <div>
+          <br/>
+        <div id="carouselSlide" class="carousel slide" data-ride="carousel">
+          <div class="container carousel-inner">
+            <div class="carousel-item" *ngFor="let dataf of dataFormatted; let i = index"
+              [ngClass]="{ active: i == 0 }">
+              <div class="row">
+                <div class="col-xs-3 col-sm-3 col-md-3" *ngFor="let data of dataf">
+                  <div (click)="data2(data)" [ngClass]="{
+                      highlight: selectedIndex1 == data.serviceId,
+                      Nothighlighted: selectedIndex1 != data.serviceId
+                    }" style="cursor: pointer; padding: 0px; height:168px;">
+                    <img style="height:123px;" src="{{ imageUrl }}Images/Services/{{
+                        data.fileName
+                      }}" alt="" width="90%" />
+                      <div>
+                          <p style="text-align:center;font-size: 14px;color:#273843">
+                            {{ data.serviceName }}
+                          </p>
+                        </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+      <br/>
+      <br/>
+      <br/>
+      <div *ngIf="dataFormatted.length > 0" class="row">
+      <div class="col-md-6"><button (click)="onSubscribe()" class="btn btn-grey">Proceed</button></div>
+      </div>
+            </div>
+            <div
+    class="col-sm-12 col-md-4 m-0 d-none d-lg-block"
+  >
+  <img src={{imagePath}} style="margin-top:20%;height:350px;width:350px">
+  </div>
+      </div>
+</div>
+</div>
+
+<!-- <div class="row layoutMiddle">
+  <div class="card col-sm-12 col-md-8" style="min-height: 500px;margin-top:50px;">
+    <div class="card-body">
+      <div class="title text-center p-b-20">
+        <strong style="font-size: 20px;color:#273843 !important;">
+            Deutsche Bank API Program
+        </strong>
+      </div>
+      <div class="row">
+          <div
+            class="col-md-4 col-sm-4 p-b-10 center-block"
+            id="mainDiv1Css">
+            <span style="font-size: 20px;color:#273843 !important;">Select a Product</span>
+          </div>
+      </div>
+       
+      <div class="row">
+        <div
+          class="col-md-3 col-sm-3 p-b-40 center-block"
+          id="mainDiv1Css"
+          *ngFor="let product of productData"
+          [ngClass]="{highlightProduct: imagePath == product.fileName,Products: imagePath != product.fileName}"
+        >
+          
+              <img style="cursor: pointer;height:168px"
+              (click)="getServices(product)"
+              id="{{ product.productName }}"
+                alt="front"
+                src="{{ product.fileName }}"
+                width="100%"
+              />
+          <div><p class="productNameText">{{ product.pName }}</p></div>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div *ngIf="dataFormatted.length > 0" class="row">
+        <div
+        class="col-md-12 col-sm-12 p-b-10 center-block"
+        id="mainDiv1Css">
+        <div class="w-100">
+            <span style="font-size: 20px;color:#273843 !important;">Choose a Product Variant</span>
+        </div>
+        <div>
+          <br/>
+        <div id="carouselSlide" class="carousel slide" data-ride="carousel">
+          <div class="container carousel-inner">
+            <div class="carousel-item" *ngFor="let dataf of dataFormatted; let i = index"
+              [ngClass]="{ active: i == 0 }">
+              <div class="row">
+                <div class="col-xs-3 col-sm-3 col-md-3" *ngFor="let data of dataf">
+                  <div (click)="data2(data)" [ngClass]="{
+                      highlight: selectedIndex1 == data.serviceId,
+                      Nothighlighted: selectedIndex1 != data.serviceId
+                    }" style="cursor: pointer; padding: 0px; height:168px;">
+                    <img style="height:123px;" src="{{ imageUrl }}Images/Services/{{
+                        data.fileName
+                      }}" alt="" width="90%" />
+                      <div>
+                          <p style="text-align:center;font-size: 14px">
+                            {{ data.serviceName }}
+                          </p>
+                        </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+      <br/>
+      <br/>
+      <br/>
+      <div *ngIf="dataFormatted.length > 0" class="row">
+      <div class="col-md-6"><button (click)="onSubscribe()" class="btn btn-grey">Proceed</button></div>
+      </div>
+  </div>
+  <div
+    class="card col-sm-12 col-md-4 border-right border-secondary m-0 d-none d-lg-block"
+    style="border-style: solid; "
+  >
+  <img src={{imagePath}} style="margin-top:20%;height:350px;width:350px">
+  </div>
+</div> -->
+<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"> 
+  <div class="modal-dialog modal-xl"> 
+    <div class="modal-content"> 
+        <div class="row">
+            <div class="col-md-6 d-none d-lg-block" style="background-color: #f3f5f5;">
+                <div style="margin-top:10%;">
+                    <img class="authenticationImage" src="/assets/images/developement_icon_1.svg">
+                  <br />
+                </div>
+                <br />
+                <br />
+                <div>
+                    <h2 style="text-align:center">Log in to your dbAPI account</h2>
+                <div class="col-md-11" style="margin-left:6%">
+                    <p style="font-size:20px">This will take you straight to your account dashboard where you can access your test users.</p>
+                </div>
+                    
+                  </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div [ngClass]="{ 'd-none': recoverform }">
+                  <div>
+                      <br/>
+                      <div class="col-md-11">
+                          <button type="button" style="float:right" class="close" data-dismiss="modal" aria-label="Close" #closeBtn>
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                  </div>
+                  <br/>
+                    <div class="col-md-10">
+                        <form
+                 class="form-horizontal m-t-20"
+                 id="loginform"
+               >
+               <div class="input-group mb-3">
+                      <h2>
+                      Log in
+                      </h2>
+                    </div>
+                      </form>
+                      </div>
+                    <br />
+                    <div class="col-md-10">
+                       <form
+                class="form-horizontal m-t-20"
+                id="loginform"
+                [formGroup]="addLoginData"
+                (ngSubmit)="loginData(addLoginData.value)"
+              >
+              <div class="input-group mb-3">
+                  <input
+                    type="text"
+                    class="input form-control form-control"
+                    id="loginUsername"
+                    autocomplete="off"
+                    [formControl]="addLoginData.controls['username']"
+                    formControlName="username"
+                    placeholder="Username"
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                  />
+                </div>
+                <div>
+                  <p
+                    class="error"
+                    *ngIf="
+                      addLoginData.get('username').hasError('required') &&
+                      addLoginData.get('username').touched
+                    "
+                  >
+                    <span class="glyphicon glyphicon-alert"></span>Username is
+                    required
+                  </p>
+                </div>
+                <div class="input-group mb-3">
+                  <input
+                    type="password"
+                    class="input form-control form-control"
+                    id="loginPassword"
+                    autocomplete="off"
+                    placeholder="Password"
+                    [formControl]="addLoginData.controls['password']"
+                    formControlName="password"
+                    aria-label="Password"
+                    aria-describedby="basic-addon1"
+                  />
+                </div>
+                <div>
+                  <p
+                    class="error"
+                    *ngIf="
+                      addLoginData.get('password').hasError('required') &&
+                      addLoginData.get('password').touched
+                    "
+                  >
+                    <span class="glyphicon glyphicon-alert"></span>Password is
+                    required
+                  </p>
+                </div>
+                <div class="input-group mb-3">
+                    <div id="captcha"></div>
+                </div> 
+                <div class="input-group mb-3">
+                    <div class="mb-3">
+                        <div class="row">
+                          <div><input type="text" formControlName="captchaField" [formControl]="addLoginData.controls['captchaField']" class="input form-control" id="capField" #calValue (keyup)="capCheck(calValue.value)" style="margin-left: 15px;">
+                          </div>
+                           <img src="assets/images/Refresh2.jpg" (click)=createCaptcha() class="img-fluid image caplogo" style="margin-left: 15px;margin-top: 0 px;height: 45px;">
+                           </div>
+                        </div>
+                </div>
+                
+                  <div>
+                      <p
+                        class="error"
+                        *ngIf="
+                              this.cap==true;
+                         
+                        "
+                      >
+                        <span class="glyphicon glyphicon-alert">Invalid Captcha</span>
+                      </p>
+                    </div>
+                    <div>
+                        <p
+                          class="error"
+                          *ngIf="
+                                this.cap==false;
+                           
+                          "
+                        >
+                          <span class="glyphicon glyphicon-alert"></span>
+                        </p>
+                      </div>
+                      <div>
+                        <p
+                          class="error"
+                          *ngIf="
+                            addLoginData.get('captchaField').hasError('required') &&
+                            addLoginData.get('captchaField').touched
+                          "
+                        >
+                          <span class="glyphicon glyphicon-alert"></span>Captcha is
+                          required
+                        </p>
+                      </div>
+            <select
+                  formControlName="selectRole"
+                  placeholder="Select Role"
+                   id="xyz"
+                  class="input inputField form-control form-control-line browser-default custom-select"
+                >
+                  <option disabled value="">Select Role</option><option *ngFor="let data of roles" value="{{ data.value }}"
+                    >{{ data.name }}
+                  </option>
+                </select>
+    
+                <!-- <div class="form-group text-center">
+                  <div class=" col-xs-10 p-b-20">
+                    <button
+                      class="btn loginButton m-t-20 w-100"
+                      style="background:#053c6d;color:white;font-size: 16px;font-family: Arial, Helvetica, sans-serif;"
+                      type="submit"
+                    >
+                      Sign In
+                    </button>
+                  </div>
+                </div> -->
+                <br/>
+    <div class="input-group mb-3">
+        <a
+        (click)="showRecoverForm()"
+        style="color:#39C3E7"
+        href="javascript:void(0)"
+        id="to-recover"
+        id="linkCss"
+        >Forgot Password?</a
+      >
+    </div>
+    <br/>
+    <div class="input-group mb-3">
+        <!-- <button
+        class="btn loginButton m-t-20 w-100"
+        style="background:#053c6d;color:white;font-size: 16px;font-family: Arial, Helvetica, sans-serif;"
+        type="submit"
+      >
+        Log in
+      </button> -->
+      <div (click)="loginData(addLoginData.value)" class="module-border-wrap" style="border-radius: 4px;cursor: pointer;">
+          <div class="logInButton" style=" border: 2px solid transparent;
+          border-radius: 1px;
+          transition: border-color .2s;">
+          <span style="text-align: center;">Log in</span>
+          </div></div>
+    </div>
+    <br/>
+                </form>
+                    </div>
+                  </div>
+            </div>
+          </div>
+    </div> 
+  </div> 
+</div>
+<div class="modal fade bd-example-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"> 
+  <div id="modalPage" class="modal-dialog"> 
+    <div class="modal-content"> 
+        <div class="row">
+            <div class="col-md-6 d-none d-lg-block" style="background-color: #f3f5f5;">
+                <div style="margin-top:10%;">
+                    <img class="authenticationImage" src="/assets/images/developement_icon_1.svg">
+                  <br />
+                </div>
+                <br />
+                <br />
+                <div>
+                    <h2 style="text-align:center">Log in to your dbAPI account</h2>
+                <div class="col-md-11" style="margin-left:6%">
+                    <p style="font-size:20px">This will take you straight to your account dashboard where you can access your test users.</p>
+                </div>
+                    
+                  </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div [ngClass]="{ 'd-none': recoverform }">
+                  <div>
+                      <br/>
+                      <div class="col-md-11">
+                          <button type="button" style="float:right" class="close" data-dismiss="modal" aria-label="Close" #closeBtn>
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                  </div>
+                  <br/>
+                    <div class="col-md-10">
+                        <form
+                 class="form-horizontal m-t-20"
+                 id="loginform"
+               >
+               <div class="input-group mb-3">
+                      <h2>
+                      Log in
+                      </h2>
+                    </div>
+                      </form>
+                      </div>
+                    <br />
+                    <div class="col-md-10">
+                       <form
+                class="form-horizontal m-t-20"
+                id="loginform"
+                [formGroup]="addLoginData"
+                (ngSubmit)="loginData(addLoginData.value)"
+              >
+              <div class="input-group mb-3">
+                  <input
+                    type="text"
+                    class="input form-control form-control"
+                    id="loginUsername"
+                    autocomplete="off"
+                    [formControl]="addLoginData.controls['username']"
+                    formControlName="username"
+                    placeholder="Username"
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                  />
+                </div>
+                <div>
+                  <p
+                    class="error"
+                    *ngIf="
+                      addLoginData.get('username').hasError('required') &&
+                      addLoginData.get('username').touched
+                    "
+                  >
+                    <span class="glyphicon glyphicon-alert"></span>Username is
+                    required
+                  </p>
+                </div>
+                <div class="input-group mb-3">
+                  <input
+                    type="password"
+                    class="input form-control form-control"
+                    id="loginPassword"
+                    autocomplete="off"
+                    placeholder="Password"
+                    [formControl]="addLoginData.controls['password']"
+                    formControlName="password"
+                    aria-label="Password"
+                    aria-describedby="basic-addon1"
+                  />
+                </div>
+                <div>
+                  <p
+                    class="error"
+                    *ngIf="
+                      addLoginData.get('password').hasError('required') &&
+                      addLoginData.get('password').touched
+                    "
+                  >
+                    <span class="glyphicon glyphicon-alert"></span>Password is
+                    required
+                  </p>
+                </div>
+                <div class="input-group mb-3">
+                    <div id="captcha"></div>
+                </div> 
+                <div class="input-group mb-3">
+                    <div class="mb-3">
+                        <div class="row">
+                          <div><input type="text" formControlName="captchaField" [formControl]="addLoginData.controls['captchaField']" class="input form-control" id="capField" #calValue (keyup)="capCheck(calValue.value)" style="margin-left: 15px;">
+                          </div>
+                           <img src="assets/images/Refresh2.jpg" (click)=createCaptcha() class="img-fluid image caplogo" style="margin-left: 15px;margin-top: 0 px;height: 45px;">
+                           </div>
+                        </div>
+                </div>
+                
+                  <div>
+                      <p
+                        class="error"
+                        *ngIf="
+                              this.cap==true;
+                         
+                        "
+                      >
+                        <span class="glyphicon glyphicon-alert">Invalid Captcha</span>
+                      </p>
+                    </div>
+                    <div>
+                        <p
+                          class="error"
+                          *ngIf="
+                                this.cap==false;
+                           
+                          "
+                        >
+                          <span class="glyphicon glyphicon-alert"></span>
+                        </p>
+                      </div>
+                      <div>
+                        <p
+                          class="error"
+                          *ngIf="
+                            addLoginData.get('captchaField').hasError('required') &&
+                            addLoginData.get('captchaField').touched
+                          "
+                        >
+                          <span class="glyphicon glyphicon-alert"></span>Captcha is
+                          required
+                        </p>
+                      </div>
+            <select
+                  formControlName="selectRole"
+                  placeholder="Select Role"
+                   id="xyz"
+                  class="input inputField form-control form-control-line browser-default custom-select"
+                >
+                  <option disabled value="">Select Role</option><option *ngFor="let data of roles" value="{{ data.value }}"
+                    >{{ data.name }}
+                  </option>
+                </select>
+                <br/>
+    <div class="input-group mb-3">
+        <a
+        (click)="showRecoverForm()"
+        style="color:#39C3E7"
+        href="javascript:void(0)"
+        id="to-recover"
+        id="linkCss"
+        >Forgot Password?</a
+      >
+    </div>
+    <br/>
+    <div class="input-group mb-3">
+      <div (click)="loginData(addLoginData.value)" class="module-border-wrap" style="border-radius: 4px;">
+          <div class="logInButton" style=" border: 2px solid transparent;
+          border-radius: 1px;
+          cursor: pointer;
+          transition: border-color .2s;">
+          <span style="text-align: center;">Log in</span>
+          </div></div>
+    </div>
+    <br/>
+                </form>
+                    </div>
+                  </div>
+            </div>
+          </div>
+    </div> 
+  </div> 
+</div>
+
+<!-- <ng-template #content2  let-c="close" let-d="dismiss">
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    <br/>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6">
+            <div style="margin-top:50px;">
+                <img class="authenticationImage" src="/assets/images/developement_icon_1.svg">
+              <br />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div [ngClass]="{ 'd-none': recoverform }">
+                <div class="loginHeader">
+                  <h2>
+                  Log in
+                  </h2>
+                </div>
+                <br />
+                <div class="row">
+                   <form
+            class="form-horizontal m-t-20"
+            id="loginform"
+            [formGroup]="addLoginData"
+            (ngSubmit)="loginData(addLoginData.value)"
+          >
+          <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control form-control"
+                id="loginUsername"
+                autocomplete="off"
+                [formControl]="addLoginData.controls['username']"
+                formControlName="username"
+                placeholder="Username"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+              />
+            </div>
+            <div>
+              <p
+                class="error"
+                *ngIf="
+                  addLoginData.get('username').hasError('required') &&
+                  addLoginData.get('username').touched
+                "
+              >
+                <span class="glyphicon glyphicon-alert"></span>Username is
+                required
+              </p>
+            </div>
+            <div class="input-group mb-3">
+              <input
+                type="password"
+                class="form-control form-control"
+                id="loginPassword"
+                autocomplete="off"
+                placeholder="Password"
+                [formControl]="addLoginData.controls['password']"
+                formControlName="password"
+                aria-label="Password"
+                aria-describedby="basic-addon1"
+              />
+            </div>
+            <div>
+              <p
+                class="error"
+                *ngIf="
+                  addLoginData.get('password').hasError('required') &&
+                  addLoginData.get('password').touched
+                "
+              >
+                <span class="glyphicon glyphicon-alert"></span>Password is
+                required
+              </p>
+            </div>
+            <div id="captcha" style="font-family: Georgia;font-size: 26px;font-weight: bold;font-style: italic;"></div> 
+            <div class="mb-3">
+              <div class="row">
+                <div><input type="text" formControlName="captchaField" [formControl]="addLoginData.controls['captchaField']" class="form-control" id="capField" #calValue (keyup)="capCheck(calValue.value)" style="margin-left: 10px;">
+                </div>
+               
+                  
+                 
+                 <img src="assets/images/Refresh2.jpg" (click)=createCaptcha() class="img-fluid image caplogo" style="margin-left: 15px;margin-top: 0 px;height: 35px;">
+                 </div>
+              </div>
+              <div>
+                  <p
+                    class="error"
+                    *ngIf="
+                          this.cap==true;
+                     
+                    "
+                  >
+                    <span class="glyphicon glyphicon-alert">Invalid Captcha</span>
+                  </p>
+                </div>
+                <div>
+                    <p
+                      class="error"
+                      *ngIf="
+                            this.cap==false;
+                       
+                      "
+                    >
+                      <span class="glyphicon glyphicon-alert"></span>
+                    </p>
+                  </div>
+                  <div>
+                    <p
+                      class="error"
+                      *ngIf="
+                        addLoginData.get('captchaField').hasError('required') &&
+                        addLoginData.get('captchaField').touched
+                      "
+                    >
+                      <span class="glyphicon glyphicon-alert"></span>Captcha is
+                      required
+                    </p>
+                  </div>
+        <select
+              formControlName="selectRole"
+              placeholder="Select Role"
+               id="xyz"
+              class="inputField form-control form-control-line browser-default custom-select"
+            >
+              <option disabled value="">Select Role</option><option *ngFor="let data of roles" value="{{ data.value }}"
+                >{{ data.name }}
+              </option>
+            </select>
+
+            <div class="form-group text-center">
+              <div class=" col-xs-10 p-b-20">
+                <button
+                  class="btn loginButton m-t-20 w-100"
+                  style="background:#053c6d;color:white;font-size: 16px;font-family: Arial, Helvetica, sans-serif;"
+                  type="submit"
+                >
+                  Sign In
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-12  ">
+                <div class="custom-control custom-checkbox ">
+                  <a
+                    style="padding-left:100px;"
+                    (click)="showRecoverForm()"
+                    href="javascript:void(0)"
+                    id="to-recover"
+                    class="text-dark "
+                    id="linkCss"
+                    ><i class="fa fa-lock m-r-5"></i> Forgot Password?</a
+                  >
+                </div>
+              </div>
+            </div>
+            </form>
+                </div>
+              </div>
+        </div>
+      </div>
+          </div>
+    </ng-template> -->
+    <footer class="footer text-right" id="footercss">
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <div class="row">
+          <div class="col-md-1"></div>
+      <div class="col-md-4">
+        <div>
+        <p style="text-align:left" class="db-white">Curious about what’s next</p>
+        </div>
+        <div>
+            <p class="db-lighterblue" style="text-align:left">Subscribe to our newsletter to keep up with updates,
+                events and more.
+                </p>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-7 col-xs-12 col-sm-12 d-none d-lg-block">
+              <input class="emailInput inputField form-control form-control-line" type="email"
+              placeholder="Email address"/>
+          </div>
+          <div class="col-md-5 col-xs-12 col-sm-12 d-none d-lg-block">
+              <div class="input-group mb-3">
+                  <div (click)="loginData(addLoginData.value)" class="module-border-wrap" style="border-radius: 4px;">
+                      <div class="subscribeButton" style=" border: 2px solid transparent;
+                      border-radius: 1px;
+                      cursor: pointer;
+                      transition: border-color .2s;">
+                      <span style="text-align: center;">Subscribe</span>
+                      </div></div>
+                </div>
+          </div>
+          </div>
+          <div class="d-sm-none">
+              <input class="emailInput inputField form-control form-control-line" type="email"
+              placeholder="Email address"/>
+              <br/>
+              <div class="input-group mb-3">
+                  <div (click)="loginData(addLoginData.value)" class="module-border-wrap" style="border-radius: 4px;">
+                      <div class="subscribeButton" style=" border: 2px solid transparent;
+                      border-radius: 1px;
+                      cursor: pointer;
+                      transition: border-color .2s;">
+                      <span style="text-align: center;">Subscribe</span>
+                      </div></div>
+                </div>
+          </div>
+          <div class="row">
+              <div class="col-xs-2 col-sm-2 col-lg-1">
+                <div style="float:center">
+                    <input type="checkbox">
+  <span class="checkmark"></span>
+                </div>
+              </div>
+            <div class="col-xs-8 col-sm-8 col-lg-9" style="text-align:center">
+                <p class="db-lighterblue">I agree that Deutsche Bank AG sends me newsletters about Deutsche Bank API Program. I can withdraw my consent at any time by sending an e-mail to newsletter.dbapi@db.com. For further information please see our Data Privacy Notice.</p>
+            </div>
+          </div>
+      </div>
+      </div>  
+      <br/>
+      <br/>
+      <div class="border-h-dark"></div>
+      <!-- <p id="footerContent">Â© 2018 ICICI. API Developer {{version}}</p> -->
+      <br/>
+      <div class="row">
+          <div class="col-md-1"></div>
+        <div class="col-md-3">
+          <p style="text-align:center" class="db-lighterblue">© 2019 Deutsche Bank AG, Frankfurt am Main</p>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
+            <a><small class="db-lighterblue">Release Notes</small></a>
+            &nbsp;|&nbsp;
+            <a><small class="db-lighterblue">FAQ</small></a>
+            &nbsp;|&nbsp;
+            <a><small class="db-lighterblue">Imprint</small></a>
+            &nbsp;|&nbsp;
+            <a><small class="db-lighterblue">Terms and Conditions</small></a>
+            &nbsp;|&nbsp;
+            <a><small class="db-lighterblue">Cookie Note</small></a>
+            &nbsp;|&nbsp;
+            <a><small class="db-lighterblue">Privacy Notice</small></a>
+        </div>
+      </div>
+      </footer>
+
+      <div class="alert myalert alert-info" id="a" >
+          <i class="fa fa-info-circle" style="margin-right: 15px;"></i>Please Enter All the Fields
+          </div>
+          <div class="alert myalert2 alert-info" id="c">
+            <i class="fa fa-thumbs-down" style="margin-right: 15px;"></i>This Subscription has been Rejected <br>by Checker
+          </div>
+          <div class="alert myalert3 alert-info" id="b" >
+            <i class="fa fa-hourglass-half" style="margin-right: 15px;"></i>Waiting for Approval!
+          </div>
+          <div class="alert myalert4 alert-success" id="d" >
+            <i class="fa fa-thumbs-up" style="margin-right: 15px;"></i>
+            Logged In Successfully
+          </div>
+          <div class="alert myalert5 alert-danger" id="e" ><i class="fa fa-times-circle" style="margin-right: 15px;"></i>
+            Username or password is incorrect
+          </div>
+          <div class="alert myalert6 alert-danger" id="f" ><i class="fa fa-times-circle" style="margin-right: 15px;"></i>
+            Please Enter Username and Password
+          </div>
+          <div class="alert myalert7 alert-danger" id="g" ><i class="fa fa-times-circle" style="margin-right: 15px;"></i>
+            Please Enter Password
+          </div>
+          <div class="alert myalert8 alert-danger" id="h" ><i class="fa fa-times-circle" style="margin-right: 15px;"></i>
+            Please Enter Username
+          </div>
+          <div class="alert myalert9 alert-danger" id="i" ><i class="fa fa-info-circle" style="margin-right: 15px;"></i>
+            Role is not present for the user!
+          </div>
+          <div class="alert myalert9 alert-danger" id="wrong" ><i class="fa fa-info-circle" style="margin-right: 15px;"></i>
+          Username or Password is incorrect
+          </div>
+          <div class="alert myalert10 alert-info" id="j" ><i class="fa fa-envelope" style="margin-right: 15px;"></i>  Link has been sent to your Registered Email Id
+          </div>

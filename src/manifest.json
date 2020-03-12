@@ -1,0 +1,56 @@
+{
+    "short_name": "ICICI",
+    "name": "ICICI_App",
+    "icons": [
+      {
+        "src": "assets/images/drawkit-folder-man-monochrome-400px.png",
+        "type": "image/png",
+        "sizes": "385x330"
+      },
+      {
+        "src": "assets/images/error-404-monochrome-800px.png",
+        "type": "image/png",
+        "sizes": "800x800"
+      },
+  {
+        "src": "assets/images/fd-invest-your-idle-fund-new-primer.jpg",
+        "type": "image/png",
+        "sizes": "1920x903"
+      },
+      {
+        "src": "assets/images/icici_bank_logo_symbol.png",
+        "type": "image/png",
+        "sizes": "3400x730"
+      },
+      {
+        "src": "assets/images/icici_bank_logo_text.png",
+        "type": "image/png",
+        "sizes": "2809x394"
+      },
+      {
+        "src": "assets/images/ICICI-Bank-PNG-Icon-1024x1024.png",
+        "type": "image/png",
+        "sizes": "1024x1024"
+      },
+      {
+        "src": "assets/images/insta.BIZ.banner.d.jpg.png",
+        "type": "image/png",
+        "sizes": "928x250"
+      },
+      {
+        "src": "assets/images/rsz_webpnet-resizeimage.png",
+        "type": "image/png",
+        "sizes": "1435x500"
+      },
+      {
+        "src": "assets/images/1.jpg",
+        "type": "image/png",
+        "sizes": "600x600"
+      }
+     
+    ],
+    "start_url": "/authentication/login",
+    "background_color": "#3367D6",
+    "display": "standalone",
+    "theme_color": "#3367D6"
+  }

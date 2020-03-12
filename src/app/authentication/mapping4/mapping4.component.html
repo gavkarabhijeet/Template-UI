@@ -1,0 +1,1064 @@
+<!-- breadcrumb -->
+<ngx-spinner size="medium" color="#f07800" type="ball-spin"></ngx-spinner>
+
+<div class="card" id="card-css">
+  <div class="card-body">
+
+    <div class="form-group row">
+      <label class="col-md-2" id="mappingSize">Mapping</label>
+      <!-- Buttons shown on top beside Mapping Starts-->
+      <div>
+
+        <!-- Template for  Upload Source and Target File Starts -->
+
+        <button class="btn btn-secondary m-10" [disabled]="disabledMapping4Check" id="captureButton" type="button"
+          placement="bottom" ngbTooltip="Download Field Mapping" (click)="capture()">Capture
+          PDF</button>
+          <button class="btn btn-secondary m-10" id="generateButton" type="button" placement="bottom" [disabled]="disabledMapping4Check"
+          ngbTooltip="Click to initiate multiple backend tasks within iXpress Platform" (click)="saveDataOfMapping();">Save</button>
+
+        <button class="btn btn-secondary m-10" [disabled]="disabledMapping4Check" id="generateButton" type="button"
+          placement="bottom" ngbTooltip="Click to initiate multiple backend tasks within iXpress Platform"
+          (click)=" submitForMapping()">Submit</button>
+      </div>
+      <!-- Buttons shown on top beside mapping Ends getClientUrl(clientUrl)-->
+      <div class="col-md-4 myResp" >
+          <label class="input-group " for="vanNumber">Please enter a valid VAN Number for testing</label>
+          <div class="input-group">
+          <span style="color:red">*</span>
+          <input type="text" class="myresp" size="30" id="vanNumber" maxlength="20" [(ngModel)]="vanNumber" (keyup)="checkVan()" />
+        </div>
+          <div>
+          <p class="error" *ngIf="ansName == false "
+          >
+          <span class="glyphicon glyphicon-alert">Invalid VAN number</span>
+          </p>
+          </div>
+          </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <ngb-tabset>
+          <ngb-tab>
+            <ng-template ngbTabTitle><b>Request</b></ng-template>
+            <ng-template ngbTabContent>
+
+              <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="card">
+                        <div class="card-body">
+                          <!-- Template for Add Details Starts -->
+
+                          <!-- Template for  Upload Source and Target File Ends -->
+                          <!-- Table Starts -->
+                          <div class="col-lg-12" id="tableDivCss">
+                            <div class="card">
+                              <div class="card-body" id="tableResponsive"
+                                style="margin-left: -7% !important;margin-right:-7%;">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                      <thead class="bg-success text-white" id="theadCss">
+                                          <tr>
+                                            <th id="displayTableCss2" colspan="4"> {{organisation}} </th>
+                                            <!-- <th colspan="15" id="borderlessCol1"> </th> -->
+                                            <th id="displayTableCss3" colspan="5"> ICICI</th>
+                                            <th id="displayTableCss4" colspan="9">Mapping Data</th>
+                                          </tr>
+                                          <tr>
+    
+                                            <th id="displayTableCss2" colspan="4"> Application Data </th>
+    
+                                            <th colspan="1" id="borderlessCol1"> </th>
+                                            <th id="displayTableCss3" colspan="4"> Application Data </th>
+                                            <th colspan="1" id="borderlessCol1"> </th>
+                                            <th id="displayTableCss4" colspan="9"></th>
+                                          </tr>
+                                          <tr>
+                                            <th id="displayTableCss1" rowspan="1">Field ID </th>
+                                            <th id="theadCss2" colspan="3">Field Name</th>
+                                            <!-- <th id="theadCss3" colspan="1">Details</th> -->
+    
+    
+                                            <th colspan="1" id="borderlessCol2"> </th>
+                                            <th id="theadCss5" colspan="3">Field Name</th>
+                                            <th id="theadCss8" colspan="1">Details</th>
+    
+                                            <th colspan="1" id="borderlessCol2"> </th>
+                                            <th id="theadCss9" colspan="2">Field ID</th>
+                                            <th id="theadCss11" colspan="2">ICICI <br> Field Name</th>
+                                            <th id="theadCss11" colspan="2">Client <br> Field Name</th>
+    
+                                            <th id="theadCss12" colspan="2">Data <br> Type Verified</th>
+                                            <!-- <th id="theadCss12" colspan="3">Sample Value</th> -->
+                                            <!-- <th id="theadCss10" colspan="3">Remarks</th> -->
+                                            <th id="displayTableCss5" rowspan="1"> Actions</th>
+    
+                                          </tr>
+                                        </thead>
+    
+                                    <tbody>
+                                      <tr *ngFor="let data of requestData; let i=index;let a=index">
+                                        <td id="id1">{{data.id}}</td>
+                                        <td colspan="3" id="clientName1">{{data.sfieldName}}</td>
+                                        <!-- <td colspan="1" id="descriptionName1">
+                                              <i class="fas fa-info-circle"
+                                                (click)="detailsClientRequest(a,data,detailsClientReq)">
+                                              </i>
+                                            </td> -->
+                                        <td colspan="1" id="borderlessCol3"> </td>
+
+                                        <td colspan="3" id="tfieldName1"><span *ngIf="data.urgencyName == 'Mandatory'"
+                                            style="color:red">*</span>{{data.tfieldName}}</td>
+
+                                        <td *ngIf="data.tdataType==null" colspan="1" id="descriptionName1">
+
+                                          <label></label>
+                                        </td>
+                                        <td *ngIf="data.tdataType!=null" colspan="1" id="descriptionName2">
+
+                                          <i class="fas fa-info-circle"
+                                            (click)="descriptionRequest(a,data,informationRequest)" id="arrowCss">
+                                          </i>
+
+                                        </td>
+
+                                        <td colspan="1" id="borderlessCol33"> </td>
+
+                                        <td colspan="2" id="directRowNo1" style="width:100%;height:100%;"><textarea
+                                            type="text" [readonly]="isReadOnly" [(ngModel)]="data.directRowNo"
+                                            placeholder="Enter the Field ID"
+                                            (change)="enterDirectRowNumberRequest(data,$event.target.value)"></textarea>
+                                        </td>
+                                        <td colspan="2" id="tfieldNameMapping1" style="width:100px;height:38px;">
+                                          {{data.tfieldNameMapping}}</td>
+
+                                        <td colspan="2" id="sourceFieldName1" style="width:100px;height:38px;">
+                                          {{data.sourceFieldName}}</td>
+
+                                        <td colspan="2" style="width:100px;height:38px;" id="datatypeVerified"
+                                          *ngIf="(data.backgroundColor == 'false' && data.datatypeVerified!=null)"
+                                          style="color: red"><b>
+                                            {{data.datatypeVerified}}</b></td>
+
+                                        <td colspan="2" style="width:100px;height:38px;" id="datatypeVerified"
+                                          *ngIf="(data.backgroundColor == 'true'  && data.datatypeVerified!=null)">
+                                          {{data.datatypeVerified}} </td>
+
+                                        <td colspan="2" *ngIf="data.datatypeVerified==null" id="datatypeVerified"
+                                          style="width:100px;height:38px;">{{data.datatypeVerified}}</td>
+
+                                    
+                                        <td id="deleteButton1">
+                                          <i *ngIf="!isReadOnly" class="fas fa-trash-alt"
+                                            (click)="deleteValueRequest(data)" id="iconCss">
+                                          </i>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Table Ends -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab>
+            <ng-template ngbTabTitle><b>Response</b></ng-template>
+            <ng-template ngbTabContent>
+              <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="card">
+                        <div class="card-body">
+
+                          <!-- Template for  Upload Source and Target File Ends -->
+                          <!-- Table Starts -->
+                          <div class="col-lg-12" id="tableDivCss">
+                            <div class="card">
+                              <div class="card-body" id="tableResponsive"
+                                style="margin-left: -7% !important;margin-right:-7%;">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                      <thead class="bg-success text-white" id="theadCss">
+                                          <tr>
+                                            <th id="displayTableCss2" colspan="4"> {{organisation}} </th>
+                                            <!-- <th colspan="15" id="borderlessCol1"> </th> -->
+                                            <th id="displayTableCss3" colspan="5"> ICICI</th>
+                                            <th id="displayTableCss4" colspan="9">Mapping Data</th>
+                                          </tr>
+                                          <tr>
+    
+                                            <th id="displayTableCss2" colspan="4"> Application Data </th>
+    
+                                            <th colspan="1" id="borderlessCol4"> </th>
+                                            <th id="displayTableCss3" colspan="4"> Application Data </th>
+                                            <th colspan="1" id="borderlessCol4"> </th>
+                                            <th id="displayTableCss4" colspan="9"></th>
+    
+                                          </tr>
+                                          <tr>
+                                            <!-- client -->
+                                            <th id="displayTableCss1" rowspan="1">Field ID </th>
+                                            <th id="theadCss14" colspan="3">Field Name</th>
+                                            <!-- <th id = "theadCss15" colspan="1">Details</th>  -->
+                                            <th colspan="1" id="borderlessCol5"> </th>
+                                            <th id="theadCss17" colspan="3">Field Name</th>
+                                            <th id="theadCss20" colspan="1">Details</th>
+    
+                                            <th colspan="1" id="borderlessCol5"> </th>
+    
+    
+                                            <th id="theadCss21" colspan="2">Field ID</th>
+                                            <th id="theadCss22" colspan="2">ICICI <br> Field Name</th>
+                                            <th id="theadCss23" colspan="2">Client <br> Field Name</th>
+                                            <th id="theadCss24" colspan="2">Data <br> Type Verified</th>
+                                            <!-- <th id="theadCss24" colspan="3">Sample Value</th> -->
+                                            <!-- <th id="theadCss16" colspan="3">Remarks</th> -->
+                                            <th id="displayTableCss5" rowspan="1"> Actions</th>
+    
+                                          </tr>
+                                        </thead>
+    
+                                    <tbody>
+                                      <tr *ngFor="let data of responseData; let a=index">
+                                        <td id="id2">{{data.id}}</td>
+                                        <!-- client -->
+                                        <td colspan="3" id="sfieldName2">{{data.sfieldName}}</td>
+                                        <!-- <td colspan="1" id="descriptionName1">
+                                                <i class="fas fa-info-circle"
+                                                  (click)="detailsClientResponse(a,data,detailsClientResp)">
+                                                </i>
+                                              </td> -->
+
+                                        <td colspan="1" id="borderlessCol6"> </td>
+                                        <!-- icici -->
+                                        <td colspan="3" id="tfieldName2"><span *ngIf="data.urgencyName == 'Mandatory'"
+                                            style="color:red">*</span>{{data.tfieldName}}</td>
+                                        <td *ngIf="data.tdataType==null" colspan="1" id="descriptionName3">
+
+                                          <label></label>
+                                        </td>
+                                        <td *ngIf="data.tdataType!=null" colspan="1" id="descriptionName4">
+
+                                          <i class="fas fa-info-circle"
+                                            (click)="descriptionResponse(a,data,informationResponse)" id="arrowCss">
+                                          </i>
+                                        </td>
+                                        <td colspan="1" id="borderlessCol33"> </td>
+
+                                        <td colspan="2" style="width:100%;height:100%;padding:0px"><textarea type="text"
+                                          [(ngModel)]="data.directRowNo" [readonly]="isReadOnly"
+                                            placeholder="Enter the Field ID" id="directRowNo2"
+                                            (change)="enterDirectRowNumberResponse(data,$event.target.value)"></textarea>
+                                        </td>
+                                        <td colspan="2" style="width:100px;height:38px;" id="tfieldNameMapping2">
+                                          {{data.tfieldNameMapping}}
+                                        </td>
+                                        <td colspan="2" style="width:100px;height:38px;" id="sourceFieldName2">
+                                          {{data.sourceFieldName}}
+                                        </td>
+
+                                        <td colspan="2" style="width:100px;height:38px;" id="datatypeVerified3"
+                                          *ngIf="(data.backgroundColor == 'false' && data.datatypeVerified!=null)"
+                                          style="color: red"><b>
+                                            {{data.datatypeVerified}}</b></td>
+
+                                        <td colspan="2" style="width:100px;height:38px;" id="datatypeVerified4"
+                                          *ngIf="(data.backgroundColor == 'true'  && data.datatypeVerified!=null)">
+                                          {{data.datatypeVerified}} </td>
+
+                                        <td colspan="2" *ngIf="data.datatypeVerified==null" id="datatypeVerified5"
+                                          style="width:100px;height:38px;">{{data.datatypeVerified}}</td>
+
+                              
+                                        <td id="deleteIcon2">
+
+                                          <!-- <i class=" fas fa-arrow-circle-left"
+                                                (click)="addFieldValueResponse(a,data,resetModal2)" id="arrowCss">
+                                              </i> -->
+                                          <!-- <i class="fas fa-edit" (click)="editValueModalResponse(a,data,editModal2)"
+                                            id="iconCss">
+                                          </i>-->
+                                          <i *ngIf="!isReadOnly" class="fas fa-trash-alt"
+                                            (click)="deleteValueResponse1(data)" id="iconCss1">
+                                          </i>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Table Ends -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+
+          <!-- PART -2 / FILE -2 -->
+
+          <ngb-tab>
+            <ng-template ngbTabTitle><b>Request</b></ng-template>
+            <ng-template ngbTabContent>
+
+              <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="card">
+                        <div class="card-body">
+                          <!-- Template for Add Details Starts -->
+
+                          <!-- Template for  Upload Source and Target File Ends -->
+                          <!-- Table Starts -->
+                          <div class="col-lg-12" id="tableDivCss">
+                            <div class="card">
+                              <div class="card-body" id="tableResponsive"
+                                style="margin-left: -7% !important;margin-right:-7%;">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                      <thead class="bg-success text-white" id="theadCss">
+                                          <tr>
+                                            <th id="displayTableCss2" colspan="4"> {{organisation}} </th>
+                                            <!-- <th colspan="15" id="borderlessCol1"> </th>
+                                             -->
+                                             <th id="displayTableCss3" colspan="5"> ICICI</th>
+                                            <th id="displayTableCss4" colspan="9">Mapping Data</th>
+                                          </tr>
+                                          <tr>
+    
+                                            <th id="displayTableCss22" colspan="4"> Application Data </th>
+    
+                                            <th colspan="1" id="borderlessCol12"> </th>
+                                            <th id="displayTableCss32" colspan="4"> Application Data </th>
+                                            <th colspan="1" id="borderlessCol12"> </th>
+                                            <th id="displayTableCss42" colspan="9"></th>
+                                            <!-- <th id="displayTableCss5" rowspan="1"> Actions</th> -->
+                                          </tr>
+                                          <tr>
+                                            <!-- <th id="theadCss1" colspan="2">Client Path</th> -->
+                                            <th id="displayTableCss12" rowspan="1">Field ID </th>
+                                            <th id="theadCss22" colspan="3">Field Name</th>
+                                            <!-- <th id="theadCss3" colspan="1">Data Type</th>
+                                                <th id = "theadCss25" colspan="1">Field size</th> -->
+                                            <!-- <th id="theadCss32" colspan="1">Details</th> -->
+    
+    
+                                            <th colspan="1" id="borderlessCol22"> </th>
+                                            <th id="theadCss52" colspan="3">Field Name</th>
+                                            <!-- <th id="theadCss6" colspan="1">Data Type</th>
+                                                <th id = "thead26" colspan="1">Field size</th> -->
+                                            <!-- <th id="theadCss7" colspan="2">Priority</th> -->
+                                            <th id="theadCss82" colspan="1">Details</th>
+    
+                                            <!-- <th id="theadCss4" colspan="2">ICICI Path</th> -->
+                                            <th colspan="1" id="borderlessCol22"> </th>
+                                            <th id="theadCss92" colspan="2">Field ID</th>
+                                            <th id="theadCss112" colspan="2">ICICI <br> Field Name</th>
+                                            <th id="theadCss112" colspan="2">Client <br> Field Name</th>
+    
+                                            <th id="theadCss122" colspan="2">Data <br> Type Verified</th>
+                                            <!-- <th id = "theadCss122" colspan="3">Sample Value</th> -->
+                                            <!-- <th id="theadCss102" colspan="3">Remarks</th> -->
+                                            <th id="displayTableCss52" rowspan="1"> Actions</th>
+    
+                                          </tr>
+                                        </thead>
+    
+                                    <tbody>
+                                      <tr *ngFor="let data of requestData2; let i=index;let a=index">
+                                        <td id="id12">{{data.id}}</td>
+                                        <td colspan="3" id="clientName12">{{data.sfieldName}}</td>
+                                        <!-- <td colspan="1" id="descriptionName12">
+                                          <i class="fas fa-info-circle"
+                                            (click)="detailsClientRequest2(a,data,detailsClientReq2)">
+                                          </i>
+                                        </td> -->
+                                        <td colspan="1" id="borderlessCol32"> </td>
+
+                                        <td colspan="3" id="tfieldName12"><span *ngIf="data.urgencyName == 'Mandatory'"
+                                            style="color:red">*</span>{{data.tfieldName}}</td>
+
+                                        <td *ngIf="data.tdataType==null" colspan="1" id="descriptionName12">
+
+                                          <label></label>
+                                        </td>
+                                        <td *ngIf="data.tdataType!=null" colspan="1" id="descriptionName22">
+
+                                          <i class="fas fa-info-circle"
+                                            (click)="descriptionRequest2(a,data,informationRequest2)" id="arrowCss2">
+                                          </i>
+
+                                        </td>
+
+                                        <td colspan="1" id="borderlessCol33"> </td>
+
+                                        <td colspan="2" id="directRowNo12" style="width:100%;height:100%;"><textarea
+                                            type="text" [readonly]="isReadOnly" [(ngModel)]="data.directRowNo"
+                                            placeholder="Enter the Field ID"
+                                            (change)="enterDirectRowNumberRequest2(data,$event.target.value)"></textarea>
+                                        </td>
+                                        <td colspan="2" id="tfieldNameMapping12" style="width:100px;height:38px;">
+                                          {{data.tfieldNameMapping}}</td>
+
+                                        <td colspan="2" id="sourceFieldName12" style="width:100px;height:38px;">
+                                          {{data.sourceFieldName}}</td>
+
+                                        <td colspan="2" style="width:100px;height:38px;" id="datatypeVerified2"
+                                          *ngIf="(data.backgroundColor == 'false' && data.datatypeVerified!=null)"
+                                          style="color: red"><b>
+                                            {{data.datatypeVerified}}</b></td>
+
+                                        <td colspan="2" style="width:100px;height:38px;" id="datatypeVerified2"
+                                          *ngIf="(data.backgroundColor == 'true'  && data.datatypeVerified!=null)">
+                                          {{data.datatypeVerified}} </td>
+
+                                        <td colspan="2" *ngIf="data.datatypeVerified==null" id="datatypeVerified2"
+                                          style="width:100px;height:38px;">{{data.datatypeVerified}}</td>
+                                        <td id="deleteButton12">
+                                          <i *ngIf="!isReadOnly" class="fas fa-trash-alt"
+                                            (click)="deleteValueRequest2(data)" id="iconCss">
+                                          </i>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Table Ends -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab>
+            <ng-template ngbTabTitle><b>Response</b></ng-template>
+            <ng-template ngbTabContent>
+              <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="card">
+                        <div class="card-body">
+
+                          <!-- Template for  Upload Source and Target File Ends -->
+                          <!-- Table Starts -->
+                          <div class="col-lg-12" id="tableDivCss">
+                            <div class="card">
+                              <div class="card-body" id="tableResponsive"
+                                style="margin-left: -7% !important;margin-right:-7%;">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                      <thead class="bg-success text-white" id="theadCss">
+                                          <tr>
+                                            <th id="displayTableCss2" colspan="4"> {{organisation}} </th>
+                                            <!-- <th colspan="15" id="borderlessCol1"> </th> -->
+                                            <th id="displayTableCss3" colspan="5"> ICICI</th>
+                                            <th id="displayTableCss4" colspan="9">Mapping Data</th>
+                                          </tr>
+                                          <tr>
+    
+                                            <th id="displayTableCss22" colspan="4"> Application Data </th>
+    
+                                            <th colspan="1" id="borderlessCol42"> </th>
+                                            <th id="displayTableCss32" colspan="4">  Application Data </th>
+                                            <th colspan="1" id="borderlessCol42"> </th>
+                                            <th id="displayTableCss42" colspan="9"></th>
+    
+                                          </tr>
+                                          <tr>
+                                            <!-- client -->
+                                            <!-- <th id="theadCss13" colspan="2">Client Path</th> -->
+                                            <th id="displayTableCss12" rowspan="1">Field ID </th>
+                                            <th id="theadCss142" colspan="3">Field Name</th>
+                                            <!-- <th id="theadCss15" colspan="1"> Data Type</th>-->
+                                            <!-- <th id = "theadCss152" colspan="1">Details</th>  -->
+                                            <th colspan="1" id="borderlessCol52"> </th>
+                                            <!-- icici -->
+                                            <th id="theadCss172" colspan="3">Field Name</th>
+                                            <th id="theadCss202" colspan="1">Details</th>
+    
+                                            <th colspan="1" id="borderlessCol52"> </th>
+    
+    
+                                            <th id="theadCss212" colspan="2">Field ID</th>
+                                            <th id="theadCss222" colspan="2">ICICI <br> Field Name</th>
+                                            <th id="theadCss232" colspan="2">Client <br> Field Name</th>
+                                            <th id="theadCss242" colspan="2">Data <br> Type Verified</th>
+                                            <!-- <th id="theadCss242" colspan="3">Sample Value</th> -->
+                                            <!-- <th id="theadCss162" colspan="3">Remarks</th> -->
+                                            <th id="displayTableCss52" rowspan="1"> Actions</th>
+    
+                                          </tr>
+                                        </thead>
+    
+                                    <tbody>
+                                      <tr *ngFor="let data of responseData2; let a=index">
+                                        <td id="id22">{{data.id}}</td>
+                                        <!-- client -->
+                                        <!-- <td colspan="2">{{data.sourceName}}</td> -->
+                                        <td colspan="3" id="sfieldName22">{{data.sfieldName}}</td>
+                                        <!-- <td colspan="1" id="descriptionName12">
+                                                <i class="fas fa-info-circle"
+                                                  (click)="detailsClientResponse2(a,data,detailsClientResp2)">
+                                                </i>
+                                              </td> -->
+
+                                        <td colspan="1" id="borderlessCol62"> </td>
+                                        <!-- icici -->
+                                        <td colspan="3" id="tfieldName22"><span *ngIf="data.urgencyName == 'Mandatory'"
+                                            style="color:red">*</span>{{data.tfieldName}}</td>
+                                        <td *ngIf="data.tdataType==null" colspan="1" id="descriptionName32">
+
+                                          <label></label>
+                                        </td>
+                                        <td *ngIf="data.tdataType!=null" colspan="1" id="descriptionName42">
+
+                                          <i class="fas fa-info-circle"
+                                            (click)="descriptionResponse2(a,data,informationResponse2)" id="arrowCss">
+                                          </i>
+                                        </td>
+                                        <td colspan="1" id="borderlessCol33"> </td>
+
+                                        <td colspan="2" style="width:100%;height:100%;padding:0px"><textarea type="text"
+                                            [(ngModel)]="data.directRowNo" [readonly]="isReadOnly"
+                                            placeholder="Enter the Field ID" id="directRowNo22"
+                                            (change)="enterDirectRowNumberResponse2(data,$event.target.value)"></textarea>
+                                        </td>
+                                        <td colspan="2" style="width:100px;height:38px;" id="tfieldNameMapping22">
+                                          {{data.tfieldNameMapping}}
+                                        </td>
+                                        <td colspan="2" style="width:100px;height:38px;" id="sourceFieldName22">
+                                          {{data.sourceFieldName}}
+                                        </td>
+
+                                        <td colspan="2" style="width:100px;height:38px;" id="datatypeVerified32"
+                                          *ngIf="(data.backgroundColor == 'false' && data.datatypeVerified!=null)"
+                                          style="color: red"><b>
+                                            {{data.datatypeVerified}}</b></td>
+
+                                        <td colspan="2" style="width:100px;height:38px;" id="datatypeVerified42"
+                                          *ngIf="(data.backgroundColor == 'true'  && data.datatypeVerified!=null)">
+                                          {{data.datatypeVerified}} </td>
+
+                                        <td colspan="2" *ngIf="data.datatypeVerified==null" id="datatypeVerified52"
+                                          style="width:100px;height:38px;">{{data.datatypeVerified}}</td>
+
+                                        <!-- <td colspan="3"  style="width:100%;height:100%;padding:0px"><textarea
+                                                type="text" value="{{data.expectedValue}}" placeholder="Enter sample value"
+                                                (change)="enterExpectedValueResponse2(data,$event.target.value)"></textarea>
+                                            </td> -->
+                                        <!-- <td *ngIf = "data.tfieldName == 'PaymentMode'"   colspan="3" >
+  
+                                              <div ngbDropdown class="d-inline-block"   >   
+                                                <button class="btn btn-outline-secondary" id="dropdownBasic1" ngbDropdownToggle>Select sample value</button>
+                                                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" >
+                                                  <button class="dropdown-item"  (click)="enterExpectedValueResponse2(data,'NEFT / RTGS / IMPS / FT')" style = "background-color: #dee2e6;">NEFT / RTGS / IMPS / FT</button>
+                                                  <button class="dropdown-item" (click)="enterExpectedValueResponse2(data,'N / R / I / FT')" style = "background-color: #dee2e6;" >N / R / I / FT</button>
+                                                  
+                                                </div>
+                                              </div>
+                                            </td>
+                                              <td *ngIf = "data.tfieldName != 'PaymentMode'" colspan="3" id="directRowNo1" style="width:100%;height:100%;"><textarea
+                                                type="text" value="{{data.expectedValue}}" placeholder="Enter sample value"
+                                                (change)="enterExpectedValueResponse2(data,$event.target.value)"></textarea>
+                                            </td> -->
+
+                                        <!-- <td  colspan = "3"  id = "remarksResponse2">
+                                              <textarea type="text" value="{{data.remarksResponse}}"
+                                                placeholder="Enter a remark"
+                                                (change)="remarksResponse2(data,$event.target.value)"></textarea>
+    
+                                            </td> -->
+
+                                        <td id="deleteIcon2">
+
+                                          <!-- <i class=" fas fa-arrow-circle-left"
+                                                (click)="addFieldValueResponse(a,data,resetModal2)" id="arrowCss">
+                                              </i> -->
+                                          <!-- <i class="fas fa-edit" (click)="editValueModalResponse(a,data,editModal2)"
+                                            id="iconCss">
+                                          </i>-->
+                                          <i *ngIf="!isReadOnly" class="fas fa-trash-alt"
+                                            (click)="deleteValueResponse12(data)" id="iconCss1">
+                                          </i>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Table Ends -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+
+
+
+          <!-- PART - 2 / FILE -2 ends -->
+        </ngb-tabset>
+      </div>
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+
+    <!-- Details Client Request Value -->
+
+
+
+    <ng-template #detailsClientReq let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <br>
+        <table>
+          <tbody>
+            <tr>
+
+              <td>
+                <label>Data Type</label>
+              </td>
+              <td>
+                <label>{{dataTypeClientRequest}}</label>
+
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- </div> -->
+        <br>
+
+      </div>
+
+    </ng-template>
+
+
+    <!--  Details Client Request ends-->
+
+
+
+
+    <!-- Details ICICI Request Value -->
+
+
+
+    <ng-template #informationRequest let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <label>Data Type : </label>
+              </td>
+              <td>
+                <label>{{dataTypeICICIRequest}}</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>Field size : </label>
+              </td>
+              <td>
+                <label>{{fsizeICICIRequest}}</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>Description :</label>
+              </td>
+              <td>
+                <label>{{descriptionICICIRequest}}</label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </ng-template>
+
+
+    <!--  Details ICICI Request ends-->
+
+    <!-- Details Client Response Value -->
+
+
+
+    <ng-template #detailsClientResp let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <label>Data Type</label>
+              </td>
+              <td>
+                <label>{{dataTypeClientResponse}}</label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+
+
+
+
+    <!-- Details Client Response Modal ends -->
+
+
+
+    <!-- Details ICICI Response Value -->
+
+
+
+    <ng-template #informationResponse let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <label>Data Type : </label>
+              </td>
+              <td>
+                <label>{{dataTypeICICIResponse}}</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+
+                <label>Field size : </label>
+              </td>
+              <td>
+                <label>{{fsizeICICIResponse}}</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>Urgency :</label>
+              </td>
+              <td>
+                <label>{{urgencyNameICICIResponse}}</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>Description :</label>
+              </td>
+              <td>
+                <label>{{descriptionICICIResponse}}</label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+
+    <!-- Details ICICI Response Modal ends -->
+
+    <!-- Details Client Url Value -->
+
+    <ng-template #clientUrl let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-lg-4">
+            <label>Client Url</label>
+          </div>
+          <div class="col-lg-8">
+            <input type="text" style="width: 250%" placeholder="enter a url" [(ngModel)]="url"
+              [ngModelOptions]="{standalone: true}">
+          </div>
+        </div>
+        <br>
+
+        <div><button class="btn btn-secondary" style="margin-left:400px" (click)="submitForMapping(url)">Submit</button>
+        </div>
+
+      </div>
+    </ng-template>
+    <!-- Details Client Url Modal ends -->
+
+    <!-- PART -2 / FILE -2  -->
+
+    <br>
+    <br>
+    <br>
+
+    <!-- Details Client Request Value -->
+
+    <ng-template #detailsClientReq2 let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <br>
+        <table>
+          <tbody>
+            <tr>
+
+              <td>
+                <label>Data Type</label>
+              </td>
+              <td>
+                <label>{{dataTypeClientRequest2}}</label>
+
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- </div> -->
+        <br>
+
+      </div>
+
+    </ng-template>
+
+    <!--  Details Client Request ends-->
+
+
+    <!-- Details ICICI Request Value -->
+
+    <ng-template #informationRequest2 let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <label>Data Type : </label>
+              </td>
+              <td>
+                <label>{{dataTypeICICIRequest2}}</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>Field size : </label>
+              </td>
+              <td>
+                <label>{{fsizeICICIRequest2}}</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>Description :</label>
+              </td>
+              <td>
+                <label>{{descriptionICICIRequest2}}</label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </ng-template>
+
+
+    <!--  Details ICICI Request ends-->
+
+    <!-- Details Client Response Value -->
+
+
+
+    <ng-template #detailsClientResp2 let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <label>Data Type</label>
+              </td>
+              <td>
+                <label>{{dataTypeClientResponse2}}</label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+
+
+
+
+    <!-- Details Client Response Modal ends -->
+
+
+
+    <!-- Details ICICI Response Value -->
+
+
+
+    <ng-template #informationResponse2 let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <label>Data Type : </label>
+              </td>
+              <td>
+                <label>{{dataTypeICICIResponse2}}</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+
+                <label>Field size : </label>
+              </td>
+              <td>
+                <label>{{fsizeICICIResponse2}}</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>Urgency :</label>
+              </td>
+              <td>
+                <label>{{urgencyNameICICIResponse2}}</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>Description :</label>
+              </td>
+              <td>
+                <label>{{descriptionICICIResponse2}}</label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+
+    <!-- Details ICICI Response Modal ends -->
+
+    <!-- Details Client Url Value -->
+
+
+
+    <ng-template #clientUrl let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-lg-4">
+            <label>Client Url</label>
+          </div>
+          <div class="col-lg-8">
+            <input type="text" style="width: 250%" placeholder="enter a url" [(ngModel)]="url"
+              [ngModelOptions]="{standalone: true}">
+          </div>
+        </div>
+        <br>
+
+        <div><button class="btn btn-secondary" style="margin-left:400px" (click)="submitForMapping(url)">Submit</button>
+        </div>
+
+      </div>
+    </ng-template>
+
+
+
+
+
+    <!-- PART - 2 / FILE -2 ends -->
+
+  </div>
+</div>
+
+
+
+<!-- <hr class="line" color="#f5821f;" />
+  <footer class="footer  text-right" id="footerCss">
+    <p style="color: black">Â© 2018 ICICI. API Developer</p>
+  </footer> -->

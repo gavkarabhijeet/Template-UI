@@ -1,0 +1,264 @@
+
+<div class="card">
+  <div class="mappingMainHeaderDiv">
+    <h3 class="mappingMainHeader">API Requests Mapping</h3>
+    <div class="col-md-1" *ngIf="isLoading">
+      <div class="spinner-grow text-primary" role="status">
+         <span class="sr-only">Loading...</span>
+      </div>
+   </div>
+    <div>
+      <div class="mappingMainHeaderInputSpan">*Please Enter Valid VAN Number For Testing</div>
+      <input #vanNum (keyup)="vanValue(vanNum.value)"  class="input inputField form-control form-control-line" [(ngModel)] = "vanNumber"/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="yourFeildHeader">Your API Fields</div>
+      <div class="card yourFeildHeaderValues" *ngFor = "let API of requestDataSource">
+        <div class="card-body" (dragstart)="dragStart($event)" draggable="true">
+          {{API.sfieldName}}
+        </div>
+         <!-- <div class="card-body">
+          Virtual Accpount Number
+        </div>
+        <div class="card-body">
+          Transaction Code
+        </div>
+        <div class="card-body">
+          Utr Number
+        </div>
+        <div class="card-body">
+          Sender Name
+        </div>
+        <div class="card-body">
+          Date
+        </div>
+        <div class="card-body">
+          Sender IFSC Code
+        </div>
+        <div class="card-body">
+          Remitter Account Number
+        </div>
+        <div class="card-body">
+          Mode
+        </div>
+        <div class="card-body">
+          Status
+        </div>
+        <div class="card-body">
+          Sender To Receiver Information
+        </div> 
+        <div class="card-body">
+        </div> -->
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="row iciciFeildHeaderDiv">
+        <div class="col-md-3">
+          <span class="iciciFeildHeader">ICICI API Fields</span>
+          <div class="card" *ngFor = "let API of requestData">
+            <div class="card-body" (drop)="drop($event)"  >
+              {{API.tfieldName}}
+            </div>
+            <!-- <div class="card-body">
+              VirtualAccpountNumber
+            </div>
+            <div class="card-body">
+              TransactionAction
+            </div>
+            <div class="card-body">
+              UTR
+            </div>
+            <div class="card-body">
+              SenderIFSC
+            </div>
+            <div class="card-body">
+              SenderInformation
+            </div>
+            <div class="card-body">
+              SenderAccountNumber
+            </div>
+            <div class="card-body">
+              Sender Name
+            </div>
+            <div class="card-body">
+              PaymentMode
+            </div>
+            <div class="card-body">
+              CustomerAccountNumber
+            </div>
+            <div class="card-body">
+              TransactionDate
+            </div>
+            <div class="card-body">
+              Status
+            </div> -->
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="row">
+            <span class="mappingTableHeader1">Mapped Fields</span>
+            <span class="mappingTableHeader2">
+              <i>Please drag and drop "Your API Field" name onto an ICICI Find
+                name to map the largest field to source field.</i>
+            </span>
+          </div>
+          <table class="mappingtable">
+            <tr *ngFor = "let data of requestData">
+              <td>
+                <div class="tableRow">
+                  <span *ngIf = "data.sourceFieldName == '-'" class="col-md-4 yourApiTableSpan" (drop)="drop(data,data.id)" (dragover)="allowDrop($event)" (dragleave)="dragLeave($event)" (dragenter)="dragEnter($event)">{{messageLabel1}}</span>
+               
+                    <span *ngIf = "data.sourceFieldName != '-'" class="col-md-4 yourApiTableSpan">{{data.sourceFieldName}}</span>
+                
+                  <span *ngIf = "data.tfieldNameMapping == '-'" class="col-md-4 iciciApiTableSpan">{{messageLabel2}}</span>
+                  
+                    <span *ngIf = "data.tfieldNameMapping != '-'" class="col-md-4 iciciApiTableSpan">{{data.tfieldName}}</span>
+                  <input *ngIf = "data.operation == ''" placeholder="Remarks" class="col-md-3" />
+                  <input *ngIf = "data.operation != ''" placeholder="Remarks" class="col-md-3" />{{data.operation}}
+                  <span class="removespan"><img src="../../../assets/backspace.png" draggable="false" class="backSpaceLogo" (click) = "deleteRow(data)" /></span>
+                </div>
+              </td>
+            </tr>
+            <!-- <tr>
+              <td>
+                <div class="tableRow">
+                  <span class="yourAPI">{{ messageLabel1 }}</span>  
+                  <span class="ICICIAPI">{{ messageLabel2 }}</span>
+                  <input placeholder="Remarks" />
+                  <span><img src="../../../assets/backspace.png" draggable="false" class="backSpaceLogo"/></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="tableRow">
+                  <span class="yourAPI">{{ messageLabel1 }}</span>
+                  <span class="ICICIAPI">{{ messageLabel2 }}</span>
+                  <input placeholder="Remarks" />
+                  <span><img src="../../../assets/backspace.png" draggable="false" class="backSpaceLogo"/></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="tableRow">
+                  <span class="yourAPI">{{ messageLabel1 }}</span>
+                  <span class="ICICIAPI">{{ messageLabel2 }}</span>
+                  <input placeholder="Remarks" />
+                  <span><img src="../../../assets/backspace.png" draggable="false" class="backSpaceLogo"/></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="tableRow">
+                  <span class="yourAPI">{{ messageLabel1 }}</span>
+                  <span class="ICICIAPI">{{ messageLabel2 }}</span>
+                  <input placeholder="Remarks" />
+                  <span><img src="../../../assets/backspace.png" draggable="false" class="backSpaceLogo"/></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="tableRow">
+                  <span class="yourAPI">{{ messageLabel1 }}</span>
+                  <span class="ICICIAPI">{{ messageLabel2 }}</span>
+                  <input placeholder="Remarks" />
+                  <span><img src="../../../assets/backspace.png" draggable="false" class="backSpaceLogo"/></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="tableRow">
+                  <span class="yourAPI">{{ messageLabel1 }}</span>
+                  <span class="ICICIAPI">{{ messageLabel2 }}</span>
+                  <input placeholder="Remarks" />
+                  <span><img src="../../../assets/backspace.png" draggable="false" class="backSpaceLogo"/></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="tableRow">
+                  <span class="yourAPI">{{ messageLabel1 }}</span>
+                  <span class="ICICIAPI">{{ messageLabel2 }}</span>
+                  <input placeholder="Remarks" />
+                  <span><img src="../../../assets/backspace.png" draggable="false" class="backSpaceLogo"/></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="tableRow">
+                  <span class="yourAPI">{{ messageLabel1 }}</span>
+                  <span class="ICICIAPI">{{ messageLabel2 }}</span>
+                  <input placeholder="Remarks" />
+                  <span><img src="../../../assets/backspace.png" draggable="false" class="backSpaceLogo"/></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="tableRow">
+                  <span class="yourAPI">{{ messageLabel1 }}</span>
+                  <span class="ICICIAPI">{{ messageLabel2 }}</span>
+                  <input placeholder="Remarks" />
+                  <span><img src="../../../assets/backspace.png" draggable="false" class="backSpaceLogo"/></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="tableRow">
+                  <span class="yourAPI">{{ messageLabel1 }}</span>
+                  <span class="ICICIAPI">{{ messageLabel2 }}</span>
+                  <input placeholder="Remarks" />
+                  <span><img src="../../../assets/backspace.png" draggable="false" class="backSpaceLogo"/></span>
+                </div>
+              </td>
+            </tr> -->
+          </table>
+        </div>
+      </div>
+      <div class="SubmitBtnDiv"> 
+        <button [disabled]="submitFlag" type="button" class="btn btn-primary btn-sm btn-danger" (click)="submitForMapping();">
+          Submit
+        </button>
+      </div>
+      <!-- <div class="bs-example" *ngIf="submitFlag">
+        <div class="progress" style="height: 20px;">
+            <div id="proBar" class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%;margin-top: 1%;">80%</div>
+        </div>
+        
+    </div> -->
+    </div>
+  </div>
+</div>
+<div class="alert myalert alert-danger" id="a">
+  <i class="fa fa-wifi" style="margin-right: 15px;"></i>ERROR WHILE RETRIEVING MAPPING DATA...<br> CHECK INTERNET ACCESS
+</div>
+<div class="alert myalert alert-success" id="b">
+  <i class="fa fa-check-circle" style="margin-right: 15px;"></i>Response for ESQL 1:{{this.msg}}
+</div>
+<div class="alert myalert alert-danger" id="c">
+  <i class="fa fa-times-circle" style="margin-right: 15px;"></i>ESQL1 Response.Please Try Again..{{this.errmsg}}
+</div>
+<div class="alert myalert alert-success" id="d">
+  <i class="fa fa-check-circle" style="margin-right: 15px;"></i>Response for  Yaml:{{this.yamlmsg}}
+</div>
+<div class="alert myalert alert-danger" id="e">
+  <i class="fa fa-times-circle" style="margin-right: 15px;"></i>ERROR IN YAML 1 ENCOUNTERED
+</div>
+<div class="alert myalert alert-danger" id="f">
+  <i class="fa fa-times-circle" style="margin-right: 15px;"></i>Please try again..Something went wrong
+</div>
+<div class="alert myalert alert-danger" id="g">
+  <i class="fa fa-times-circle" style="margin-right: 15px;"></i>ERROR IN INITIATE SIT ENCOUNTERED
+</div>
+<div class="alert myalert alert-success" id="save">
+  <i class="fa fa-check-circle" style="margin-right: 15px;"></i>Data Saved Successfully
+</div>

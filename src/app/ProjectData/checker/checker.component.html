@@ -1,0 +1,196 @@
+<nav *ngIf="true" class="breadcrumb" style="margin-top:-10px">
+  <a class="breadcrumb-item" [routerLink]="['/ProjectData/Checker']">Checker</a>
+  <!-- <span class="breadcrumb-item active">Projects</span> -->
+</nav>
+<!-- Ng Spinner -->
+<ngx-spinner size="medium" color="#f07800" type="ball-spin"></ngx-spinner>
+<div class="form-group row">
+  <label class="col-md-2" id="usersSize">Checkers</label>
+  <div *ngIf="displaySearch" class="col-md-6">
+    <form>
+      <input type='text' class="form-control" id="searchCss" autocomplete="off" placeholder='Search'
+        (keyup)='updateFilter($event)' />
+    </form>
+  </div>
+</div>
+
+
+<!-- Checker Table -->
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div *ngIf="isEmpty" id="displayTableCss">
+          <p id="displayTableCss">
+            <b> No Data Available </b>
+          </p>
+          <img id="imageCss" src="assets/images/drawkit-folder-man-monochrome-400px.png" alt="logo" />
+        </div>
+        <div *ngIf="displayTable">
+          <div class="col-lg-12" id="tableDivCss">
+            <div class="card">
+              <div class="card-body" id="tableResponsive">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class="bg-success text-white" id="theadCss">
+                      <tr>
+                        <th id="displayTableCss3">Sr.No</th>
+                        <th class="displayTableCss4">Organisation </th>
+                        <th class="displayTableCss5"> Name </th>
+                        <th class="displayTableCss7">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        *ngFor="let data of viewForApproval| paginate: { itemsPerPage: 5, currentPage:p};let a=index">
+                        <td class="displayTableCss8">{{a+1}}</td>
+                        <td class="displayTableCss9">
+                          {{data.organisation}}</td>
+                        <td class="displayTableCss10">{{data.firstName}} {{data.lastName}}</td>
+                        <td class="displayTableCss11">
+                          <!-- view button -->
+                          <i class="fas fa-eye" aria-label="viewMaker" id="iconButton1"  placement="bottom"
+                            ngbTooltip="View User Details" (click)="viewUser(data , viewUserDetails)"></i>
+                          <!-- view button -->
+                          
+                            <!-- View template -->
+                          <ng-template #viewUserDetails let-c="close" let-d="dismiss">
+                            <div class="modal-header">
+                              <h4 class="modal-title" id="modal-basic-title">View User Details</h4>
+                              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <!-- Account Number -->
+                          
+                            <div class="modal-body">
+                              <div class="row">
+                                <label id="pName" class="col-sm-4  control-label col-form-label">Account
+                                  No.:</label>
+                                <div class="col-sm-6">
+                                  {{viewAccountNumber}}
+                                </div>
+                              </div>
+                              <!-- Account Number ends -->
+                              <!-- Organization -->
+                              <div class="row">
+                                <label id="fontStyle" class="col-sm-4 control-label col-form-label">Organisation:
+                                </label>
+                                <div class="col-sm-6">
+                                  {{viewOrganisation}}
+                                </div>
+                              </div>
+                              <!-- Organization ends -->
+                               <!-- First name Code -->
+                               <div class="row">
+                                  <label id="pName" class="col-sm-4  control-label col-form-label">First Name:
+                                    </label>
+                                  <div class="col-sm-6">
+                                    {{viewFirstName}}
+                                  </div>
+                                </div>
+                                <!-- First name  code ends -->
+                                 <!-- Last name Code -->
+                              <div class="row">
+                                  <label id="pName" class="col-sm-4  control-label col-form-label">Last Name:</label>
+                                  <div class="col-sm-6">
+                                    {{viewLastName}}
+                                  </div>
+                                </div>
+                                <!-- Last name code ends -->
+                              <!-- UAT Url -->
+                              <div class="row">
+                                <label id="pName" class="col-sm-4  control-label col-form-label">UAT Url:</label>
+                                <div class="col-sm-6">
+                                  {{viewUATUrl}}
+                                </div>
+                              </div>
+
+                              <!-- UAT Url ends -->
+                              <!-- Prod Url -->
+                              <div class="row">
+                                <label id="pName" class="col-sm-4  control-label col-form-label">Production
+                                  Url:</label>
+                                <div class="col-sm-6">
+                                  {{viewProdUrl}}
+                                </div>
+                              </div>
+                              <!-- Prod Url ends -->
+                              <!-- IP -->
+                              <div class="row">
+                                  <label id="pName" class="col-sm-4  control-label col-form-label">IP:</label>
+                                  <div class="col-sm-6">
+                                    {{viewIP}}
+                                  </div>
+                                </div>
+                                <!-- IP code ends -->
+                                <!-- Port Url -->
+                              <div class="row">
+                                  <label id="pName" class="col-sm-4  control-label col-form-label">Port:</label>
+                                  <div class="col-sm-6">
+                                    {{viewPort}}
+                                  </div>
+                                </div>
+                                <!-- Port code ends -->
+                                 <!-- Van Code -->
+                              <div class="row">
+                                  <label id="pName" class="col-sm-4  control-label col-form-label">Van:</label>
+                                  <div class="col-sm-6">
+                                    {{viewVan}}
+                                  </div>
+                                </div>
+  
+                                <!-- Van code ends -->
+                              <!-- Client Code -->
+                              <div class="row">
+                                <label id="pName" class="col-sm-4  control-label col-form-label">Client
+                                  Code:</label>
+                                <div class="col-sm-6">
+                                  {{viewClientCode}}
+                                </div>
+                              </div>
+
+                              <!-- Client code ends -->
+                              <!-- Format Code -->
+                              <div class="row">
+                                <label id="pName" class="col-sm-4  control-label col-form-label">Format
+                                  Code:</label>
+                                <div class="col-sm-6">
+                                  {{viewFormatCode}}
+                                </div>
+                              </div>
+                              <!-- Format code ends -->
+                              <button id="okButton" (click)="closeViewDetails()" class="btn btn-warning">Ok</button>
+
+                              <!--  view User Details ends -->
+                            </div>
+                          </ng-template>
+
+                          <!-- View template ends -->
+                          <button id="approveButtonCss" type="button" placement="bottom" ngbTooltip="Approve User"
+                            class="btn btn-warning" (click)="approveUser(data)">Approve</button>
+                        </td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+                   <!-- Pagination starts -->
+                   <div id="paginationCss">
+                    <pagination-controls class="my-pagination" [responsive]="true" (pageChange)="p=$event;">
+                    </pagination-controls>
+                  </div>
+                  <!-- Pagination ends -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Checker Table -->

@@ -1,0 +1,194 @@
+<header
+  class="topbar"
+  [attr.data-navbarbg]="options.navbarbg"
+  style=" background: #ffffff;height:60px;position: fixed;width:100%;"
+>
+  <nav
+    class="navbar navbar-expand-lg navbar-light bg-white navbar-custom border-bottom"
+    style="background: #f5821f !important;height:60px;"
+  >
+    <!-- <a style="background: white !important;"> -->
+      <img
+      alt="img"
+      src="assets/images/ICICI Bank Logo Orange Bg.png"
+      style="width: 173px;
+         height: 50px;"
+      class="img-fluid"
+      />
+    <!-- </a> -->
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="toggleNavbar()"
+      style="justify-content: right;"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div
+      class="collapse navbar-collapse pl-20 "
+      [ngClass]="{ show: navbarOpen }"
+      style="padding-left: 50%;"
+    >
+    <div>
+      <br/>
+      <!-- <div (click)="logout()">Logout</div> -->
+    <div style="color:white">Welcome {{firstName}}</div>
+     <div *ngIf="lastLoggedIn != undefined " style="color:white">You last logged in on {{lastLoggedIn | date}} &nbsp; {{lastLoggedIn | date: "HH:mm:ss"}}</div>&nbsp;
+    </div>
+    <div>
+      <ul class="navbar-nav float-right">
+        <li class="nav-item dropdown show " ngbDropdown placement="bottom-right">
+            <a ngbDropdownToggle class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
+                aria-haspopup="true" aria-expanded="false">
+                <img src="assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY" ngbDropdownMenu>
+                <!-- <span class="with-arrow triangle">
+                    <span class="triangle" style="background: #f07800;"></span>
+                </span> -->
+                 <span class="with-arrow  ">
+                    <span class="bg -primary " ></span>
+                </span>
+                <!-- <div class="d-flex no-block align-items-center p-15 bg-primary text-white m-b-10">
+                    <div class="">
+                        <img src="assets/images/users/1.jpg" alt="user" class="img-circle" width="60" >
+                    </div>
+                      width: 190px;  text-overflow: ellipsis; 
+                    <div >
+                        <h4 style="
+                        white-space: nowrap; 
+                        overflow: hidden; 
+                      ">{{userData[0].firstName}} {{userData[0].lastName}}</h4>
+                      
+                    </div>
+                </div> -->
+                <a class="dropdown-item" [routerLink]="['/change-password/changePassword']">
+                    <i class="ti-user m-r-5 m-l-5"></i> Change Password</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item pointer" (click)="logout();">
+                    <i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+              
+                
+            </div>
+        </li>
+    
+    </ul>
+    </div>
+      <!-- <div>You last logged in on {{lastLoggedIn | date}} &nbsp; {{lastLoggedIn | date: "HH:mm:ss"}}</div>&nbsp; -->
+    
+      <!-- <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a [routerLink]="['/change-password/changePassword']"
+            ><span
+              class="m-10 p-r-20"
+              style="font-size: 16px;font-family: Arial,Helvetica,sans-serif;color:white !important;"
+              >Change Password</span
+            ></a
+          >
+        </li>
+        <li>
+          <a [routerLink]="['']"
+            ><span
+              class="m-10 p-r-20"
+              style="font-size: 16px;font-family: Arial,Helvetica,sans-serif;color:white !important;"
+              >Logout</span
+            ></a
+          >
+        </li>
+      </ul> -->
+    </div>
+  </nav>
+</header>
+
+<div class="card">
+  <div class="card-body " style="margin-top: 90px;">
+    <div class="row">
+      <!-- Profile Photo -->
+      
+      <!-- Profile Photo ends -->
+
+      <!-- Three tabs -->
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <ngb-tabset type="pills" class="custom-pills border-bottom">
+              <ngb-tab class="profileTabs" >
+                  <ng-template ngbTabTitle>
+                      <div class="row">
+                          Production Ready Request &nbsp;
+                        <span class="circle">{{ listOfProductionInitiatedRequest.length }}</span>
+                      
+                      </div>
+                    </ng-template>
+               
+                <ng-template ngbTabContent>
+                  <br />
+                  <div style="margin:1%;">
+                        <i class="fa fa-info"></i> : Click on the card to fill Check list
+                      </div>
+                  <div class="row">
+                      <div class="card col-6" *ngFor="let i of listOfProductionInitiatedRequest">
+                      
+                        <div
+                          class="card-body border box"
+                          style="cursor:pointer;background-color: #f1f1f1;"
+                          >
+                          <div>
+                            <span><strong>Project Name : </strong>{{ i.projectName }}</span>
+                            <br/>
+                            <span><strong>Organisation Name : </strong>{{ i.orgName }}</span>
+                            <br/>
+                            <!-- <div *ngIf="i.status==Ready for Production Request Initiated"> -->
+                            <strong>Status : </strong><b class="pl-1" style="color:green">{{ i.status }}</b>
+                          <!-- </div> -->
+                          </div>
+                          <div class="row">
+                              <div
+                                 class="col-md-8"
+                                 style="padding-top:5%;padding-left:0%;"
+                               >
+                                
+                               </div>
+                               <div
+                                 class="col-md-4"
+                                 style="padding-top: 4%; text-align: right;"
+                               >
+                                 <!-- [routerLink]="['/authentication/makerDetails']" -->
+                                 <button
+                                   class="btn"
+                                   [routerLink]="['/authentication/checkproduction']" [queryParams]="{ projectId: i.projectId}"
+                                   style="width:35%; background-color: #053c6d !important; font-family: Arial, Helvetica, sans-serif !important; color:#ffffff !important;"
+                                 >
+                                   View
+                                 </button>
+                               </div>
+                             </div>
+                        </div>
+                        
+                      
+                      </div>
+                    </div>
+                  <!-- <app-checker-page></app-checker-page> -->
+                  
+                </ng-template>
+              </ngb-tab>
+              <!-- <ngb-tab [disabled]=checkListTab class="profileTabs" title="Check List for Production">
+                  <ng-template ngbTabContent>
+                       <app-checker-page></app-checker-page>
+                  </ng-template>
+                </ngb-tab> -->
+            </ngb-tabset>
+          </div>
+        </div>
+      </div>
+      <!-- Three tabs ends -->
+    </div>
+  </div>
+</div>
+<hr class="line" />
+<footer class="footer text-right" id="footerCss">
+  <p style="color: black">Â© 2018 ICICI. API Developer</p>
+</footer>
+

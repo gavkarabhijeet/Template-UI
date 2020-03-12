@@ -1,0 +1,2911 @@
+<!-- Body starts here -->
+<ngx-spinner size="medium" color="#f07800" type="ball-spin"></ngx-spinner>
+<div class="card" style="width:100%">
+  <div class="card-body">
+    <form
+      class="form-horizontal form-material"
+      [formGroup]="updateRegisterData"
+      (ngSubmit)="submitDetails(updateRegisterData.value)"
+    >
+      <!-- Tabset Starts here -->
+      <ngb-tabset
+        type="pills"
+        class="custom-pills nav-justified mainTabset"
+        #t="ngbTabset"
+      >
+        <!-- changes by sanchita -->
+        <ngb-tab id="serviceDetails" class="mainTabs" title="Service Details">
+          <ng-template ngbTabContent>
+            <div class="card-body">
+              <div *ngIf="productData == 'eCollections'" class="row">
+                <div class="col-md-8 col-xs-6 p-r-25">
+                  <p class="title" style="font-size: 25px">Service Details</p>
+                  <hr class="style-one" />
+                  <br />
+                  <div class="row">
+                    <div
+                      class="col-md-6 col-xs-6 mb-sm-4"
+                      *ngIf="readyForProductionFlag == 'false'"
+                    >
+                      <label class="textLabelColor" for="webServiceType">Type of Web Service</label>
+                      <input
+                        readonly
+                        id="webServiceType"
+                        type="text"
+                        placeholder="Type of Web Service"
+                        class="input inputField form-control form-control-line"
+                        formControlName="webServiceType"
+                      />
+                    </div>
+                    <div
+                      class="col-md-6 col-xs-6 mb-sm-4"
+                      *ngIf="readyForProductionFlag == 'true'"
+                    >
+                      <label class="textLabelColor" for="webServiceType">Type of Web Service</label>
+                      <input
+                        id="webServiceType"
+                        type="text"
+                        placeholder="Type of Web Service"
+                        class="input inputField form-control form-control-line"
+                        formControlName="webServiceType"
+                        readonly
+                      />
+                    </div>
+                    <div
+                      class="col-md-6 col-xs-6"
+                      *ngIf="readyForProductionFlag == 'false'"
+                    >
+                      <label class="textLabelColor" for="communicationProtocol"
+                        >HTTP Method Type</label
+                      >
+                      <input
+                        readonly
+                        id="communicationProtocol"
+                        type="text"
+                        placeholder="HTTP Method Type"
+                        class="input inputField form-control form-control-line"
+                        [value]="
+                          productToDisplay.products[0].services[0]
+                            .communicationProtocol
+                        "
+                      />
+                    </div>
+                    <div
+                      class="col-md-6 col-xs-6"
+                      *ngIf="readyForProductionFlag == 'true'"
+                    >
+                      <label class="textLabelColor" for="communicationProtocol"
+                        >HTTP Method Type</label
+                      >
+                      <input
+                        id="communicationProtocol"
+                        type="text"
+                        placeholder="HTTP Method Type"
+                        class="input inputField form-control form-control-line"
+                        [value]="
+                          productToDisplay.products[0].services[0]
+                            .communicationProtocol
+                        "
+                        readonly
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3 col-xs-3">
+                      <label class="p-l-10" for="encryptionMethod"
+                        >Checksum Required :</label
+                      >
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                      {{
+                        this.productToDisplay.products[0].services[0]
+                          .encryptionMethod
+                      }}
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                      <label class="p-l-10" for="encryptionMethod"
+                        >Encryption Method :</label
+                      >
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                      {{
+                        this.productToDisplay.products[0].services[0]
+                          .encryptionMethod
+                      }}
+                    </div>
+                  </div>
+                  <br />
+                  <hr class="style-one" />
+                  <!-- changes are here -->
+                  <ngb-accordion #acc="ngbAccordion">
+                    <ngb-panel title="UAT Details" id="static-4">
+                      <ng-template ngbPanelContent>
+                        <div class="border border-secondary">
+                          <br />
+                          <div style="margin:1%">
+                            <div class="col-md-6 col-xs-6">
+                              <p class="title" style="font-size: 18px;">
+                                UAT Details
+                              </p>
+                            </div>
+                          </div>
+
+                          <div style="margin:1%" class="row">
+                            <div
+                              class="col-md-6 col-xs-6 mb-sm-4"
+                              *ngIf="readyForProductionFlag == 'false'"
+                            >
+                              <label for="uatUsername">UAT Host Name</label>
+                              <input
+                                readonly
+                                id="uatUsername"
+                                type="text"
+                                placeholder="UAT Host Name"
+                                class="input inputField form-control form-control-line"
+                                [value]="
+                                  productToDisplay.products[0].services[0]
+                                    .hostNameUat
+                                "
+                              />
+                            </div>
+                            <div
+                              class="col-md-6 col-xs-6 mb-sm-4"
+                              *ngIf="readyForProductionFlag == 'true'"
+                            >
+                              <label for="uatUsername">UAT Host Name</label>
+                              <input
+                                id="uatUsername"
+                                type="text"
+                                placeholder="UAT Host Name"
+                                class="input inputField form-control form-control-line"
+                                [value]="
+                                  productToDisplay.products[0].services[0]
+                                    .hostNameUat
+                                "
+                                readonly
+                              />
+                            </div>
+                            <div
+                              class="col-md-6 col-xs-6"
+                              *ngIf="readyForProductionFlag == 'false'"
+                            >
+                              <label for="prodUsername">UAT IP</label>
+                              <input
+                                readonly
+                                id="uatIp"
+                                type="text"
+                                placeholder="UAT IP"
+                                class="input inputField form-control form-control-line"
+                                formControlName="uatIp"
+                              />
+                            </div>
+                            <div
+                              class="col-md-6 col-xs-6"
+                              *ngIf="readyForProductionFlag == 'true'"
+                            >
+                              <label for="prodUsername">UAT IP</label>
+                              <input
+                                id="uatIp"
+                                type="text"
+                                placeholder="UAT IP"
+                                class="input inputField form-control form-control-line"
+                                formControlName="uatIp"
+                                readonly
+                              />
+                            </div>
+                          </div>
+                          <br />
+                          <div style="margin:1%" class="row">
+                            <div
+                              class="col-md-6 col-xs-6 mb-sm-6"
+                              *ngIf="readyForProductionFlag == 'false'"
+                            >
+                              <label for="prodPort">UAT Port</label>
+
+                              <input
+                                readonly
+                                id="uatPort"
+                                type="text"
+                                placeholder="UAT Port"
+                                class="input inputField form-control form-control-line"
+                                formControlName="uatPort"
+                              />
+                            </div>
+                            <div
+                              class="col-md-6 col-xs-6 mb-sm-6"
+                              *ngIf="readyForProductionFlag == 'true'"
+                            >
+                              <label for="prodPort">UAT Port</label>
+
+                              <input
+                                id="uatPort"
+                                type="text"
+                                placeholder="UAT Port"
+                                class="input inputField form-control form-control-line"
+                                formControlName="uatPort"
+                                readonly
+                              />
+                            </div>
+                            <div class="col-md-4 ">
+                              Note:Preferred port is 9443. The series of Port
+                              from 8050 to 8150 are not available at bank’s end
+                              for white listing
+                            </div>
+                          </div>
+                          <div style="margin:1%" class="row">
+                            <div
+                              class="col-md-6 col-xs-6 mb-sm-6"
+                              *ngIf="readyForProductionFlag == 'false'"
+                            >
+                              <label class="textLabelColor" for="prodPort"
+                                >Communication Protocol</label
+                              >
+                              <input
+                                readonly
+                                id="communication"
+                                type="text"
+                                placeholder="Communication Protocol"
+                                class="input inputField form-control form-control-line"
+                                [value]="
+                                  productToDisplay.products[0].services[0]
+                                    .communicationProtocolUAT
+                                "
+                              />
+                            </div>
+                            <div
+                              class="col-md-6 col-xs-6 mb-sm-6"
+                              *ngIf="readyForProductionFlag == 'true'"
+                            >
+                              <label class="textLabelColor" for="prodPort"
+                                >Communication Protocol</label
+                              >
+                              <input
+                                id="communication"
+                                type="text"
+                                placeholder="Communication Protocol"
+                                class="input inputField form-control form-control-line"
+                                [value]="
+                                  productToDisplay.products[0].services[0]
+                                    .communicationProtocolUAT
+                                "
+                                readonly
+                              />
+                            </div>
+                            <div
+                              class="offset-md-1 col-md-4 col-xs-4 mb-sm-4"
+                              style="margin-left:0%;"
+                            >
+                              <strong
+                                >HTTP Certificate :
+                                {{
+                                  productToDisplay.products[0].services[0]
+                                    .httpCertificateUAT
+                                }}
+                              </strong>
+                            </div>
+                          </div>
+
+                          <br />
+                          <div style="margin:2%">
+                            <ngb-tabset
+                              class="nav-justified serviceDetailsTabs"
+                              style="padding: 0px !important;"
+                            >
+                              <ngb-tab>
+                                <ng-template ngbTabTitle
+                                  >Uploaded Swagger for your API</ng-template
+                                >
+
+                                <ng-template ngbTabContent>
+                                  <br />
+                                  <br />
+                                  <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-2">
+                                      <label
+                                        ><strong
+                                          >Service Time Out :
+                                        </strong></label
+                                      >
+                                    </div>
+                                    <div class="col-md-3">
+                                      <p>
+                                        {{
+                                          productToDisplay.products[0]
+                                            .services[0].serviceTimeOutUAT
+                                        }}
+                                      </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <label
+                                        ><strong>Service URL : </strong></label
+                                      >
+                                    </div>
+                                    <div class="col-md-2">
+                                      <p>
+                                        {{
+                                          productToDisplay.products[0]
+                                            .services[0].serviceURLUAT
+                                        }}
+                                      </p>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                  </div>
+                                  <!-- <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-2">
+                                      <label
+                                        ><strong>Service Name : </strong></label
+                                      >
+                                    </div>
+                                    <div class="col-md-3">
+                                      <p>
+                                        {{
+                                          productToDisplay.products[0]
+                                            .services[0].serviceNameInputUAT
+                                        }}
+                                      </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <label
+                                        ><strong>UAT File : </strong></label
+                                      >
+                                    </div>
+                                    <div class="col-md-3">
+                                      <div>
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0].uatFile1
+                                          }}
+                                        </p>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                  </div> -->
+                                  <div class="row">
+                                   <div class="col-md-1"></div>
+                                   <div class="col-md-2">
+                                   <label><strong>Service Name : </strong></label>
+                                   </div>
+                                   <div class="col-md-3">
+                                   <p>
+                                   {{
+                                   productToDisplay.products[0].services[0].serviceNameInputUAT
+                                   }}
+                                   </p>
+                                   </div>
+                                   <div class="col-md-2" *ngIf="showUploads == false">
+                                   <label><strong>UAT File : </strong></label>
+                                   </div>
+                                   <div class="col-md-3" *ngIf="showUploads == false">
+                                   <p>
+                                   {{
+                                   productToDisplay.products[0].services[0].uatFile1
+                                   }}
+                                   </p>
+                                   </div>
+                                   <div class="col-md-5" *ngIf="showUploads == true">
+                                   <div class="input-group">
+                                   <input
+                                   readonly
+                                   type="text"
+                                   placeholder="Upload UAT File"
+                                   value="{{
+                                   productToDisplay.products[0].services[0].uatFile1
+                                   }}"
+                                   class="input inputField form-control form-control-line"
+                                   formControlName="updateUploadUatFile"
+                                   />
+                                   <span class="input-group-btn">
+                                   <button
+                                   class="btn uploadButton"
+                                   (click)="updateUploadUatFile()"
+                                   style="width:100%; background-color: #051b2d; color: #ffffff"
+                                   type="button"
+                                   >
+                                   Browse
+                                   </button>
+                                   <input
+                                   type="file"
+                                   accept=".wsdl , .yaml"
+                                   id="updateUploadUatFile"
+                                   (change)="
+                                   updateUploadUatFileEvent($event)
+                                   "
+                                   style="display:none"
+                                   />
+                                   </span>
+                                   </div>
+                                   <div class="col-md-6">
+                                   <p class="error" *ngIf="
+                                   uploadFlag == 'notproperFile' "
+                                   >
+                                   <span class="glyphicon glyphicon-alert">Please Upload yaml or wsdl file</span>
+                                   </p>
+                                   </div>
+                                   <div class="col-md-6">
+                                   <p class="error" *ngIf="
+                                   uploadFlag == 'properFile' "
+                                   >
+                                   <span class="glyphicon glyphicon-alert"></span>
+                                   </p>
+                                   </div>
+                                   </div>
+                                   </div>
+                                   
+                                   
+                                
+                                   
+                                   
+                                  <br />
+                                  <div
+                                    *ngIf="
+                                      serviceName ===
+                                      'ECollection with Two Level Validation at Bank and Client’s End'
+                                    "
+                                  >
+                                    <div class="row">
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-2">
+                                        <label
+                                          ><strong
+                                            >Service Timeout :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-3">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0].serviceTimeOutUAT2
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-3">
+                                        <label
+                                          ><strong
+                                            >Service URL :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-2">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0].serviceURLUAT2
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-1"></div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-2">
+                                      <label><strong>Service Name : </strong></label>
+                                      </div>
+                                      <div class="col-md-3">
+                                      <p>
+                                      {{
+                                      productToDisplay.products[0].services[0].serviceNameInputUAT2
+                                      }}
+                                      </p>
+                                      </div>
+                                      <div class="col-md-2" *ngIf="showUploads == false">
+                                      <label><strong>UAT File : </strong></label>
+                                      </div>
+                                      <div class="col-md-3" *ngIf="showUploads == false">
+                                      <p>
+                                      {{
+                                      productToDisplay.products[0].services[0].uatFile1
+                                      }}
+                                      </p>
+                                      </div>
+                                      <div class="col-md-5" *ngIf="showUploads == true">
+                                      <div class="input-group">
+                                      <input
+                                      readonly
+                                      type="text"
+                                      placeholder="Upload UAT File"
+                                      value="{{
+                                      productToDisplay.products[0].services[0].uatFile2
+                                      }}"
+                                      class="input inputField form-control form-control-line"
+                                      formControlName="updateUploadUatFile2"
+                                      />
+                                      <span class="input-group-btn">
+                                      <button
+                                      class="btn uploadButton"
+                                      (click)="updateUploadUatFile2()"
+                                      style="width:100%; background-color: #051b2d; color: #ffffff"
+                                      type="button"
+                                      >
+                                      Browse
+                                      </button>
+                                      <input
+                                      type="file"
+                                      accept=".wsdl , .yaml"
+                                      id="updateUploadUatFile2"
+                                      (change)="
+                                      updateUploadUatFileEvent2($event)
+                                      "
+                                      style="display:none"
+                                      />
+                                      </span>
+                                      </div>
+                                      <div class="col-md-6">
+                                      <p class="error" *ngIf="
+                                      uploadFlag == 'notproperFile' "
+                                      >
+                                      <span class="glyphicon glyphicon-alert">Please Upload yaml or wsdl file</span>
+                                      </p>
+                                      </div>
+                                      <div class="col-md-6">
+                                      <p class="error" *ngIf="
+                                      uploadFlag == 'properFile' "
+                                      >
+                                      <span class="glyphicon glyphicon-alert"></span>
+                                      </p>
+                                      </div>
+                                      </div>
+                                      </div>
+                                  </div>
+                                  <br />
+                                  <div *ngIf="displayTransactionReversal">
+                                    <div
+                                      class="input-group"
+                                      *ngIf="displayInputReversalForUAT == true"
+                                    >
+                                      <div class="col-md-6">
+                                        <input
+                                          type="text"
+                                          placeholder="Service Timeout"
+                                          class="inputField form-control form-control-line"
+                                          #serviceTimeoutReversal1
+                                          (keyup)="
+                                            serviceTimeoutRev1(
+                                              serviceTimeoutReversal1.value
+                                            )
+                                          "
+                                        />
+                                      </div>
+
+                                      <div class="col-md-6">
+                                        <input
+                                          type="text"
+                                          placeholder="Service URL"
+                                          class="inputField form-control form-control-line"
+                                          #serviceUrlReversal1
+                                          (keyup)="
+                                            serviceUrlRev1(
+                                              serviceUrlReversal1.value
+                                            )
+                                          "
+                                        />
+                                      </div>
+                                    </div>
+                                    <br />
+                                    <div
+                                      class="input-group"
+                                      *ngIf="displayInputReversalForUAT == true"
+                                    >
+                                      <div class="col-md-6 ">
+                                        <input
+                                          type="text"
+                                          placeholder="Service Name"
+                                          class="inputField form-control form-control-line"
+                                          #serviceNameReversal1
+                                          (keyup)="
+                                            serviceNameRev1(
+                                              serviceNameReversal1.value
+                                            )
+                                          "
+                                        />
+                                      </div>
+                                      <div class="col-md-6 input-group">
+                                        <input
+                                          readonly
+                                          type="text"
+                                          placeholder="Transaction Reversal"
+                                          class="inputField form-control form-control-line"
+                                          formControlName="uploadTransactionReversal2"
+                                        />
+                                        <span class="input-group-btn">
+                                          <button
+                                            class="btn "
+                                            (click)="
+                                              uploadTransactionReversal2()
+                                            "
+                                            style="width:100%; background-color: #053c6d; color: #ffffff"
+                                            type="button"
+                                          >
+                                            Upload
+                                          </button>
+                                          <input
+                                            type="file"
+                                            accept=".wsdl , .yaml"
+                                            id="uploadTransactionReversal2"
+                                            (change)="
+                                              uploadTransactionReversal2Event(
+                                                $event
+                                              )
+                                            "
+                                            style="display:none"
+                                          />
+                                        </span>
+                                      </div>
+                                      <div class="col-md-6"></div>
+                                      <div class="col-md-6">
+                                        <span style="color:green">{{
+                                          message
+                                        }}</span>
+                                      </div>
+                                      <div class="col-md-6"></div>
+                                      <div class="col-md-6">
+                                        <p
+                                          class="error"
+                                          *ngIf="fileFlag == 'notproperFile'"
+                                        >
+                                          <span
+                                            class="glyphicon glyphicon-alert"
+                                            >Please Upload yaml or wsdl
+                                            file</span
+                                          >
+                                        </p>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <p
+                                          class="error"
+                                          *ngIf="fileFlag == 'properFile'"
+                                        >
+                                          <span
+                                            class="glyphicon glyphicon-alert"
+                                          ></span>
+                                        </p>
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="row"
+                                      *ngIf="
+                                        displayInputReversalForUAT == false
+                                      "
+                                    >
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-2">
+                                        <label
+                                          ><strong
+                                            >Service Time Out :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-3">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0]
+                                              .serviceTimeoutReversal1
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-3">
+                                        <label
+                                          ><strong
+                                            >Service URL :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-2">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0].serviceUrlReversal1
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-1"></div>
+                                    </div>
+                                    <div
+                                      class="row"
+                                      *ngIf="
+                                        displayInputReversalForUAT == false
+                                      "
+                                    >
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-2">
+                                        <label
+                                          ><strong
+                                            >Service Name :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-3">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0].serviceNameReversal1
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-3">
+                                        <label
+                                          ><strong
+                                            >Reversal File :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-3">
+                                        <div>
+                                          <p>
+                                            {{
+                                              productToDisplay.products[0]
+                                                .services[0].reversalFile1
+                                            }}
+                                          </p>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-1"></div>
+                                    </div>
+                                  </div>
+                                  <!-- 2nd div for transaction reversal -->
+                                  <br />
+                                  <div
+                                    *ngIf="
+                                      displayTransactionReversal &&
+                                      serviceName ==
+                                        'ECollection with Two Level Validation at Bank and Client’s End'
+                                    "
+                                  >
+                                    <div
+                                      class="input-group"
+                                      *ngIf="
+                                        displayInputReversalForUAT2 == true
+                                      "
+                                    >
+                                      <div class="col-md-6">
+                                        <input
+                                          type="text"
+                                          placeholder="Service Timeout"
+                                          class="inputField form-control form-control-line"
+                                          #serviceTimeoutReversal2
+                                          (keyup)="
+                                            serviceTimeoutRev2(
+                                              serviceTimeoutReversal2.value
+                                            )
+                                          "
+                                        />
+                                      </div>
+
+                                      <div class="col-md-6">
+                                        <input
+                                          type="text"
+                                          placeholder="Service URL"
+                                          class="inputField form-control form-control-line"
+                                          #serviceUrlReversal2
+                                          (keyup)="
+                                            serviceUrlRev2(
+                                              serviceUrlReversal2.value
+                                            )
+                                          "
+                                        />
+                                      </div>
+                                    </div>
+                                    <br />
+                                    <div
+                                      class="input-group"
+                                      *ngIf="
+                                        displayInputReversalForUAT2 == true
+                                      "
+                                    >
+                                      <div class="col-md-6 ">
+                                        <input
+                                          type="text"
+                                          placeholder="Service Name"
+                                          class="inputField form-control form-control-line"
+                                          #serviceNameReversal2
+                                          (keyup)="
+                                            serviceNameRev2(
+                                              serviceNameReversal2.value
+                                            )
+                                          "
+                                        />
+                                      </div>
+                                      <div class="col-md-6 input-group">
+                                        <input
+                                          readonly
+                                          type="text"
+                                          placeholder="Transaction Reversal"
+                                          class="inputField form-control form-control-line"
+                                          formControlName="uploadTransactionReversal"
+                                        />
+                                        <span class="input-group-btn">
+                                          <button
+                                            class="btn "
+                                            (click)="
+                                              uploadTransactionReversal()
+                                            "
+                                            style="width:100%; background-color: #053c6d; color: #ffffff"
+                                            type="button"
+                                          >
+                                            Upload
+                                          </button>
+                                          <input
+                                            type="file"
+                                            accept=".wsdl , .yaml"
+                                            id="uploadTransactionReversal"
+                                            (change)="
+                                              uploadTransactionReversalEvent(
+                                                $event
+                                              )
+                                            "
+                                            style="display:none"
+                                          />
+                                        </span>
+                                      </div>
+                                      <div class="col-md-6"></div>
+                                      <div class="col-md-6">
+                                        <span style="color:green">{{
+                                          message2
+                                        }}</span>
+                                      </div>
+                                      <div class="col-md-6"></div>
+                                      <div class="col-md-6">
+                                        <p
+                                          class="error"
+                                          *ngIf="fileFlag2 == 'notproperFile'"
+                                        >
+                                          <span
+                                            class="glyphicon glyphicon-alert"
+                                            >Please Upload yaml or wsdl
+                                            file</span
+                                          >
+                                        </p>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <p
+                                          class="error"
+                                          *ngIf="fileFlag2 == 'properFile'"
+                                        >
+                                          <span
+                                            class="glyphicon glyphicon-alert"
+                                          ></span>
+                                        </p>
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="row"
+                                      *ngIf="
+                                        displayInputReversalForUAT2 == false
+                                      "
+                                    >
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-2">
+                                        <label
+                                          ><strong
+                                            >Service Time Out :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-3">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0]
+                                              .serviceTimeoutReversal2
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-3">
+                                        <label
+                                          ><strong
+                                            >Service URL :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-2">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0].serviceUrlReversal2
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-1"></div>
+                                    </div>
+                                    <div
+                                      class="row"
+                                      *ngIf="
+                                        displayInputReversalForUAT2 == false
+                                      "
+                                    >
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-2">
+                                        <label
+                                          ><strong
+                                            >Service Name :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-3">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0].serviceNameReversal2
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-3">
+                                        <label
+                                          ><strong
+                                            >Reversal File :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-3">
+                                        <div>
+                                          <p>
+                                            {{
+                                              productToDisplay.products[0]
+                                                .services[0].reversalFile2
+                                            }}
+                                          </p>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-1"></div>
+                                    </div>
+                                  </div>
+                                  <br />
+                                  <br />
+                                </ng-template>
+                              </ngb-tab>
+                            </ngb-tabset>
+                          </div>
+                          <br />
+                        </div>
+                      </ng-template>
+                    </ngb-panel>
+                  </ngb-accordion>
+                  <!-- changes ends here -->
+                  <hr class="style-one" />
+                  <br />
+                  <div class="row">
+                    <div class="col-md-6 col-xs-6 mb-sm-4">
+                      <label class="textLabelColor" for="retryAttempts"
+                        >Retry attempts on failure/no response (in secs)</label
+                      >
+                      <select
+                        readonly
+                        id="retryAttempts"
+                        placeholder="Retry attempts on failure/no response"
+                        class="input inputField form-control form-control-line browser-default custom-select"
+                        [value]="
+                          productToDisplay.products[0].services[0].retryAttempts
+                        "
+                        disabled="readyForProductionFlag"
+                      >
+                        <option disabled value=""
+                          >Retry attempts on failure/no response (in
+                          secs)</option
+                        >
+                        <!-- <option value="0">0</option>
+ <option value="3">3</option>
+ <option value="5">5</option>
+ <option value="10">10</option> -->
+                        <option value="retry-count-100"
+                          >Retry attempts on failure or no response : 100
+                        </option>
+                        <option value="retry-till-eod-8PM"
+                          >Retry interval : Till 8 pm</option
+                        >
+                        <option value="retry-till-eod"
+                          >Retry interval : At eod Only</option
+                        >
+                        <option value="retry-till-12H"
+                          >Retry interval : Till 12 hrs</option
+                        >
+                        <option value="Till EOD at defined interval"
+                          >Till EOD at defined interval</option
+                        >
+                      </select>
+                    </div>
+                    <div class="col-md-6 col-xs-6">
+                      <label class="textLabelColor" for="actionOnNoRes"
+                        >Action to be taken on no response</label
+                      >
+                      <select
+                        readonly
+                        id="actionOnNoRes"
+                        placeholder="Action to be taken on no response"
+                        class="input inputField form-control form-control-line browser-default custom-select"
+                        [value]="
+                          productToDisplay.products[0].services[0].actionOnNoRes
+                        "
+                        disabled="readyForProductionFlag"
+                      >
+                        <option disabled value=""
+                          >Action to be taken on no response</option
+                        >
+                        <option value="NA">NA</option>
+                        <option value="At eod only">At eod only</option>
+                      </select>
+                    </div>
+                  </div>
+                  <br />
+                  <hr class="style-one" />
+                  <ngb-accordion #acc="ngbAccordion">
+                    <ngb-panel title="Production Details" id="static-4">
+                      <ng-template ngbPanelContent>
+                        <div class="border border-secondary">
+                          <br />
+                          <div style="margin:1%">
+                            <div class="col-md-6 col-xs-6">
+                              <p class="title" style="font-size: 18px;">
+                                Production Details
+                              </p>
+                            </div>
+                          </div>
+
+                          <div style="margin:1%" class="row">
+                            <div
+                              class="col-md-6 col-xs-6 mb-sm-4"
+                              *ngIf="readyForProductionFlag == 'false'"
+                            >
+                              <label class="textLabelColor" for="uatUsername">Production IP</label>
+                              <input
+                                readonly
+                                id="prodIp"
+                                type="text"
+                                placeholder="Production IP"
+                                class="input inputField form-control form-control-line"
+                                formControlName="prodIp"
+                              />
+                            </div>
+                            <div
+                              class="col-md-6 col-xs-6 mb-sm-4"
+                              *ngIf="readyForProductionFlag == 'true'"
+                            >
+                              <label class="textLabelColor" for="uatUsername">Production IP</label>
+                              <input
+                                id="prodIp"
+                                type="text"
+                                placeholder="Production IP"
+                                class="input inputField form-control form-control-line"
+                                formControlName="prodIp"
+                                readonly
+                              />
+                            </div>
+                            <div
+                              class="col-md-6 col-xs-6"
+                              *ngIf="readyForProductionFlag == 'false'"
+                            >
+                              <label class="textLabelColor" for="prodUsername"
+                                >Production Host Name</label
+                              >
+                              <input
+                                readonly
+                                id="prodUsername"
+                                type="text"
+                                placeholder="Production Host Name"
+                                class="input inputField form-control form-control-line"
+                                [value]="
+                                  productToDisplay.products[0].services[0]
+                                    .hostNameProd
+                                "
+                              />
+                            </div>
+                            <div
+                              class="col-md-6 col-xs-6"
+                              *ngIf="readyForProductionFlag == 'true'"
+                            >
+                              <label class="textLabelColor" for="prodUsername"
+                                >Production Host Name</label
+                              >
+                              <input
+                                id="prodUsername"
+                                type="text"
+                                placeholder="Production Host Name"
+                                class="input inputField form-control form-control-line"
+                                [value]="
+                                  productToDisplay.products[0].services[0]
+                                    .hostNameProd
+                                "
+                                readonly
+                              />
+                            </div>
+                          </div>
+                          <br />
+                          <div style="margin:1%" class="row">
+                            <div
+                              class="col-md-6 col-xs-6 mb-sm-6"
+                              *ngIf="readyForProductionFlag == 'false'"
+                            >
+                              <label class="textLabelColor" for="prodPort">Production Port</label>
+
+                              <input
+                                readonly
+                                id="prodPort"
+                                type="text"
+                                placeholder="Production Port"
+                                class="input inputField form-control form-control-line"
+                                formControlName="prodPort"
+                              />
+                            </div>
+                            <div
+                              class="col-md-6 col-xs-6 mb-sm-6"
+                              *ngIf="readyForProductionFlag == 'true'"
+                            >
+                              <label class="textLabelColor" for="prodPort">Production Port</label>
+
+                              <input
+                                id="prodPort"
+                                type="text"
+                                placeholder="Production Port"
+                                class="input inputField form-control form-control-line"
+                                formControlName="prodPort"
+                                readonly
+                              />
+                            </div>
+                            <div class="col-md-4 ">
+                              Note:Preferred port is 9443. The series of Port
+                              from 8050 to 8150 are not available at bank’s end
+                              for white listing
+                            </div>
+                          </div>
+                          <div style="margin:1%" class="row">
+                            <div
+                              class="col-md-6 col-xs-6 mb-sm-6"
+                              *ngIf="readyForProductionFlag == 'false'"
+                            >
+                              <label class="textLabelColor" for="prodPort"
+                                >Communication Protocol</label
+                              >
+                              <input
+                                readonly
+                                type="text"
+                                placeholder="Protocol"
+                                class="input inputField form-control form-control-line"
+                                [value]="
+                                  productToDisplay.products[0].services[0]
+                                    .communicationProtocolProd
+                                "
+                              />
+                            </div>
+                            <div
+                              class="col-md-6 col-xs-6 mb-sm-6"
+                              *ngIf="readyForProductionFlag == 'true'"
+                            >
+                              <label class="textLabelColor" for="prodPort"
+                                >Communication Protocol</label
+                              >
+                              <input
+                                type="text"
+                                placeholder="Protocol"
+                                class="input inputField form-control form-control-line"
+                                [value]="
+                                  productToDisplay.products[0].services[0]
+                                    .communicationProtocolProd
+                                "
+                                readonly
+                              />
+                            </div>
+                            <div
+                              class="offset-md-1 col-md-4 col-xs-4 mb-sm-4"
+                              style="margin-left:0%;"
+                            >
+                              <strong
+                                >HTTP Certificate :
+
+                                {{
+                                  productToDisplay.products[0].services[0]
+                                    .httpCertificateProd
+                                }}
+                              </strong>
+                            </div>
+                          </div>
+
+                          <br />
+                          <div style="margin:2%">
+                            <ngb-tabset
+                              class="nav-justified serviceDetailsTabs"
+                              style="padding: 0px !important;"
+                            >
+                              <ngb-tab>
+                                <ng-template ngbTabTitle
+                                  >Uploaded Swagger for your API</ng-template
+                                >
+
+                                <ng-template ngbTabContent>
+                                  <br />
+                                  <br />
+                                  <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-2">
+                                      <label
+                                        ><strong
+                                          >Service Time Out :
+                                        </strong></label
+                                      >
+                                    </div>
+                                    <div class="col-md-3">
+                                      <p>
+                                        {{
+                                          productToDisplay.products[0]
+                                            .services[0].serviceTimeOutProd
+                                        }}
+                                      </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <label
+                                        ><strong>Service URL : </strong></label
+                                      >
+                                    </div>
+                                    <div class="col-md-2">
+                                      <p>
+                                        {{
+                                          productToDisplay.products[0]
+                                            .services[0].serviceURLProd
+                                        }}
+                                      </p>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                  </div>
+                                  <div class="row">
+                                   <div class="col-md-1"></div>
+                                   <div class="col-md-2" >
+                                   <label><strong>Service Name : </strong></label>
+                                   </div>
+                                   <div class="col-md-3" >
+                                   <p>
+                                   {{
+                                   productToDisplay.products[0].services[0].serviceNameInputProd
+                                   }}
+                                   </p>
+                                   </div>
+                                   <div class="col-md-2" *ngIf="showUploads == false">
+                                          <label><strong>Prod File : </strong></label>
+                                          </div>
+                                          <div class="col-md-3" *ngIf="showUploads == false">
+                                          <p>
+                                          {{
+                                          productToDisplay.products[0].services[0].prodFile1
+                                          }}
+                                          </p>
+                                          </div>
+                                   <div class="col-md-5" *ngIf="showUploads == true">
+                                   <div class="input-group">
+                                   <input
+                                   readonly
+                                   type="text"
+                                   placeholder="Upload UAT File"
+                                   value="{{
+                                   productToDisplay.products[0].services[0].prodFile1
+                                   }}"
+                                   class="input inputField form-control form-control-line"
+                                   formControlName="updateUploadProdFile"
+                                   />
+                                   <span class="input-group-btn">
+                                   <button
+                                   class="btn uploadButton"
+                                   (click)="updateUploadProdFile()"
+                                   style="width:100%; background-color: #051b2d; color: #ffffff"
+                                   type="button"
+                                   >
+                                   Browse
+                                   </button>
+                                   <input
+                                   type="file"
+                                   accept=".wsdl , .yaml"
+                                   id="updateUploadProdFile"
+                                   (change)="
+                                   updateUploadProdFileEvent($event)
+                                   "
+                                   style="display:none"
+                                   />
+                                   </span>
+                                   </div>
+                                   <div class="col-md-6">
+                                   <p class="error" *ngIf="
+                                   uploadFlagProd == 'notproperFile' "
+                                   >
+                                   <span class="glyphicon glyphicon-alert">Please Upload yaml or wsdl file</span>
+                                   </p>
+                                   </div>
+                                   <div class="col-md-6">
+                                   <p class="error" *ngIf="
+                                   uploadFlagProd == 'properFile' "
+                                   >
+                                   <span class="glyphicon glyphicon-alert"></span>
+                                   </p>
+                                   </div>
+                                   </div>
+                                   </div>
+                                  <br />
+                                  <div
+                                    *ngIf="
+                                      serviceName ===
+                                      'ECollection with Two Level Validation at Bank and Client’s End'
+                                    "
+                                  >
+                                    <div class="row">
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-2">
+                                        <label
+                                          ><strong
+                                            >Service Timeout :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-3">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0].serviceTimeOutProd2
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-3">
+                                        <label
+                                          ><strong
+                                            >Service URL :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-2">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0].serviceURLProd2
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-1"></div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-2" >
+                                      <label><strong>Service Name : </strong></label>
+                                      </div>
+                                      <div class="col-md-3" >
+                                      <p>
+                                      {{
+                                      productToDisplay.products[0].services[0].serviceNameInputProd2
+                                      }}
+                                      </p>
+                                      </div>
+                                      <div class="col-md-2" *ngIf="showUploads == false">
+                                             <label><strong>Prod File : </strong></label>
+                                             </div>
+                                             <div class="col-md-3" *ngIf="showUploads == false">
+                                             <p>
+                                             {{
+                                             productToDisplay.products[0].services[0].prodFile2
+                                             }}
+                                             </p>
+                                             </div>
+                                      <div class="col-md-5" *ngIf="showUploads == true">
+                                      <div class="input-group">
+                                      <input
+                                      readonly
+                                      type="text"
+                                      placeholder="Upload UAT File"
+                                      value="{{
+                                      productToDisplay.products[0].services[0].prodFile2
+                                      }}"
+                                      class="input inputField form-control form-control-line"
+                                      formControlName="updateUploadProdFile2"
+                                      />
+                                      <span class="input-group-btn">
+                                      <button
+                                      class="btn uploadButton"
+                                      (click)="updateUploadProdFile2()"
+                                      style="width:100%; background-color: #051b2d; color: #ffffff"
+                                      type="button"
+                                      >
+                                      Browse
+                                      </button>
+                                      <input
+                                      type="file"
+                                      accept=".wsdl , .yaml"
+                                      id="updateUploadProdFile2"
+                                      (change)="
+                                      updateUploadProdFileEvent2($event)
+                                      "
+                                      style="display:none"
+                                      />
+                                      </span>
+                                      </div>
+                                      <div class="col-md-6">
+                                      <p class="error" *ngIf="
+                                      uploadFlagProd == 'notproperFile' "
+                                      >
+                                      <span class="glyphicon glyphicon-alert">Please Upload yaml or wsdl file</span>
+                                      </p>
+                                      </div>
+                                      <div class="col-md-6">
+                                      <p class="error" *ngIf="
+                                      uploadFlagProd == 'properFile' "
+                                      >
+                                      <span class="glyphicon glyphicon-alert"></span>
+                                      </p>
+                                      </div>
+                                      </div>
+                                      </div>
+                                  </div>
+                                  <br />
+                                  <div *ngIf="displayTransactionReversal">
+                                    <div
+                                      class="input-group"
+                                      *ngIf="
+                                        displayInputReversalForProd1 == true
+                                      "
+                                    >
+                                      <div class="col-md-6">
+                                        <input
+                                          type="text"
+                                          placeholder="Service Timeout"
+                                          class="inputField form-control form-control-line"
+                                          #serviceTimeoutReversalProd1
+                                          (keyup)="
+                                            serviceTimeoutRevProd1(
+                                              serviceTimeoutReversalProd1.value
+                                            )
+                                          "
+                                        />
+                                      </div>
+
+                                      <div class="col-md-6">
+                                        <input
+                                          type="text"
+                                          placeholder="Service URL"
+                                          class="inputField form-control form-control-line"
+                                          #serviceUrlReversalProd1
+                                          (keyup)="
+                                            serviceUrlRevProd1(
+                                              serviceUrlReversalProd1.value
+                                            )
+                                          "
+                                        />
+                                      </div>
+                                    </div>
+                                    <br />
+                                    <div
+                                      class="input-group"
+                                      *ngIf="
+                                        displayInputReversalForProd1 == true
+                                      "
+                                    >
+                                      <div class="col-md-6 ">
+                                        <input
+                                          type="text"
+                                          placeholder="Service Name"
+                                          class="inputField form-control form-control-line"
+                                          #serviceNameReversalProd1
+                                          (keyup)="
+                                            serviceNameRevProd1(
+                                              serviceNameReversalProd1.value
+                                            )
+                                          "
+                                        />
+                                      </div>
+                                      <div class="col-md-6 input-group">
+                                        <input
+                                          readonly
+                                          type="text"
+                                          placeholder="Transaction Reversal"
+                                          class="inputField form-control form-control-line"
+                                          formControlName="reveralFileProd1"
+                                        />
+                                        <span class="input-group-btn">
+                                          <button
+                                            class="btn "
+                                            (click)="reversalFileprodUpload1()"
+                                            style="width:100%; background-color: #053c6d; color: #ffffff"
+                                            type="button"
+                                          >
+                                            Upload
+                                          </button>
+                                          <input
+                                            type="file"
+                                            accept=".wsdl , .yaml"
+                                            id="prodReversal1"
+                                            (change)="
+                                              prodUpload1Uploaded($event)
+                                            "
+                                            style="display:none"
+                                          />
+                                        </span>
+                                      </div>
+                                      <div class="col-md-6"></div>
+                                      <div class="col-md-6">
+                                        <span style="color:green">{{
+                                          messageProd1
+                                        }}</span>
+                                      </div>
+                                      <div class="col-md-6"></div>
+                                      <div class="col-md-6">
+                                        <p
+                                          class="error"
+                                          *ngIf="fileFlag3 == 'notproperFile'"
+                                        >
+                                          <span
+                                            class="glyphicon glyphicon-alert"
+                                            >Please Upload yaml or wsdl
+                                            file</span
+                                          >
+                                        </p>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <p
+                                          class="error"
+                                          *ngIf="fileFlag3 == 'properFile'"
+                                        >
+                                          <span
+                                            class="glyphicon glyphicon-alert"
+                                          ></span>
+                                        </p>
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="row"
+                                      *ngIf="
+                                        displayInputReversalForProd1 == false
+                                      "
+                                    >
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-2">
+                                        <label
+                                          ><strong
+                                            >Service Time Out :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-3">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0]
+                                              .serviceTimeoutReversalProd1
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-3">
+                                        <label
+                                          ><strong
+                                            >Service URL :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-2">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0]
+                                              .serviceUrlReversalProd1
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-1"></div>
+                                    </div>
+                                    <div
+                                      class="row"
+                                      *ngIf="
+                                        displayInputReversalForProd1 == false
+                                      "
+                                    >
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-2">
+                                        <label
+                                          ><strong
+                                            >Service Name :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-3">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0]
+                                              .serviceNameReversalProd1
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-3">
+                                        <label
+                                          ><strong
+                                            >Reversal File :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-3">
+                                        <div>
+                                          <p>
+                                            {{
+                                              productToDisplay.products[0]
+                                                .services[0].reversalFileProd1
+                                            }}
+                                          </p>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-1"></div>
+                                    </div>
+                                  </div>
+                                  <!-- 2nd div for transaction reversal -->
+                                  <br />
+                                  <div
+                                    *ngIf="
+                                      displayTransactionReversal &&
+                                      serviceName ==
+                                        'ECollection with Two Level Validation at Bank and Client’s End'
+                                    "
+                                  >
+                                    <div
+                                      class="input-group"
+                                      *ngIf="
+                                        displayInputReversalForProd2 == true
+                                      "
+                                    >
+                                      <div class="col-md-6">
+                                        <input
+                                          type="text"
+                                          placeholder="Service Timeout"
+                                          class="inputField form-control form-control-line"
+                                          #serviceTimeoutReversalProd2
+                                          (keyup)="
+                                            serviceTimeoutRevProd2(
+                                              serviceTimeoutReversalProd2.value
+                                            )
+                                          "
+                                        />
+                                      </div>
+
+                                      <div class="col-md-6">
+                                        <input
+                                          type="text"
+                                          placeholder="Service URL"
+                                          class="inputField form-control form-control-line"
+                                          #serviceUrlReversalProd2
+                                          (keyup)="
+                                            serviceUrlRevProd2(
+                                              serviceUrlReversalProd2.value
+                                            )
+                                          "
+                                        />
+                                      </div>
+                                    </div>
+                                    <br />
+                                    <div
+                                      class="input-group"
+                                      *ngIf="
+                                        displayInputReversalForProd2 == true
+                                      "
+                                    >
+                                      <div class="col-md-6 ">
+                                        <input
+                                          type="text"
+                                          placeholder="Service Name"
+                                          class="inputField form-control form-control-line"
+                                          #serviceNameReversalProd2
+                                          (keyup)="
+                                            serviceNameRevProd2(
+                                              serviceNameReversalProd2.value
+                                            )
+                                          "
+                                        />
+                                      </div>
+                                      <div class="col-md-6 input-group">
+                                        <input
+                                          readonly
+                                          type="text"
+                                          placeholder="Transaction Reversal"
+                                          class="inputField form-control form-control-line"
+                                          formControlName="reversalprodFile2"
+                                        />
+                                        <span class="input-group-btn">
+                                          <button
+                                            class="btn "
+                                            (click)="prodUpload2()"
+                                            style="width:100%; background-color: #053c6d; color: #ffffff"
+                                            type="button"
+                                          >
+                                            Upload
+                                          </button>
+                                          <input
+                                            type="file"
+                                            accept=".wsdl , .yaml"
+                                            id="prodUpload2"
+                                            (change)="
+                                              prodUpload2Uploaded($event)
+                                            "
+                                            style="display:none"
+                                          />
+                                        </span>
+                                      </div>
+                                      <div class="col-md-6"></div>
+                                      <div class="col-md-6">
+                                        <span style="color:green">{{
+                                          messageProd2
+                                        }}</span>
+                                      </div>
+                                      <div class="col-md-6"></div>
+                                      <div class="col-md-6">
+                                        <p
+                                          class="error"
+                                          *ngIf="fileFlag4 == 'notproperFile'"
+                                        >
+                                          <span
+                                            class="glyphicon glyphicon-alert"
+                                            >Please Upload yaml or wsdl
+                                            file</span
+                                          >
+                                        </p>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <p
+                                          class="error"
+                                          *ngIf="fileFlag4 == 'properFile'"
+                                        >
+                                          <span
+                                            class="glyphicon glyphicon-alert"
+                                          ></span>
+                                        </p>
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="row"
+                                      *ngIf="
+                                        displayInputReversalForProd2 == false
+                                      "
+                                    >
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-2">
+                                        <label
+                                          ><strong
+                                            >Service Time Out :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-3">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0]
+                                              .serviceTimeoutReversalProd2
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-3">
+                                        <label
+                                          ><strong
+                                            >Service URL :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-2">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0]
+                                              .serviceUrlReversalProd2
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-1"></div>
+                                    </div>
+                                    <div
+                                      class="row"
+                                      *ngIf="
+                                        displayInputReversalForProd2 == false
+                                      "
+                                    >
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-2">
+                                        <label
+                                          ><strong
+                                            >Service Name :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-3">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0]
+                                              .serviceNameReversalProd2
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-3">
+                                        <label
+                                          ><strong
+                                            >Reversal File :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-3">
+                                        <div>
+                                          <p>
+                                            {{
+                                              productToDisplay.products[0]
+                                                .services[0].reversalFileProd2
+                                            }}
+                                          </p>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-1"></div>
+                                    </div>
+                                  </div>
+                                  <br />
+                                  <br />
+                                </ng-template>
+                              </ngb-tab>
+                            </ngb-tabset>
+                          </div>
+                          <br />
+                        </div>
+                      </ng-template>
+                    </ngb-panel>
+                  </ngb-accordion>
+                </div>
+                <div
+                  class="col-md-4 col-xs-6 p-l-20"
+                  style="background: #f1f1f1;"
+                >
+                  <p
+                    class="title"
+                    style="font-size: 25px;font-family: Arial, Helvetica, sans-serif;"
+                  >
+                    Selected Product-Feature
+                  </p>
+                  <hr class="style-one" />
+                  <br />
+                  <div style="margin-left:10%" class="row">
+                    <!-- <div class="col-md-7 col-xs-6 m-t-10">
+ <p style="font-size: 16px">{{summaryProductName}}</p>
+ </div> -->
+                  </div>
+                  <div class="row">
+                    <p style="font-size: 16px">
+                      <strong>Product Name : </strong>AccountInsights
+                    </p>
+                  </div>
+                  <hr class="style-one" />
+                  <div class="row">
+                    <strong style="font-size: 16px">Service Name : </strong>
+                    <p style="font-size: 16px" *ngIf="serviceName">
+                      {{ serviceName }}
+                      <!-- {{
+ serviceName.length > 25
+ ? (serviceName | slice: 0:25) + "..."
+ : serviceName
+ }} -->
+                    </p>
+                  </div>
+                  <hr class="style-one" />
+                </div>
+              </div>
+              <!-- changes made in isurePay -->
+              <div *ngIf="productData == 'iSurePay'" class="row">
+                <div class="col-md-8 col-xs-6 p-r-25">
+                  <p class="title" style="font-size: 25px">Service Details</p>
+                  <hr class="style-one" />
+                  <br />
+                  <div class="row">
+                    <div
+                      class="col-md-6 col-xs-6 mb-sm-4"
+                      *ngIf="readyForProductionFlag == 'false'"
+                    >
+                      <label class="textLabelColor" for="webServiceType">Type of Web Service</label>
+                      <input
+                        readonly
+                        id="webServiceType"
+                        type="text"
+                        placeholder="Type of Web Service"
+                        class="input inputField form-control form-control-line"
+                        formControlName="webServiceType"
+                      />
+                    </div>
+                    <div
+                      class="col-md-6 col-xs-6 mb-sm-4"
+                      *ngIf="readyForProductionFlag == 'true'"
+                    >
+                      <label class="textLabelColor" for="webServiceType">Type of Web Service</label>
+                      <input
+                        id="webServiceType"
+                        type="text"
+                        placeholder="Type of Web Service"
+                        class="input inputField form-control form-control-line"
+                        formControlName="webServiceType"
+                        readonly
+                      />
+                    </div>
+                    <div
+                      class="col-md-6 col-xs-6"
+                      *ngIf="readyForProductionFlag == 'false'"
+                    >
+                      <label class="textLabelColor" for="communicationProtocol"
+                        >HTTP Method Type</label
+                      >
+                      <input
+                        readonly
+                        id="communicationProtocol"
+                        type="text"
+                        placeholder="HTTP Method Type"
+                        class="input inputField form-control form-control-line"
+                        [value]="
+                          productToDisplay.products[0].services[0]
+                            .isure_communication_protocol
+                        "
+                      />
+                    </div>
+                    <div
+                      class="col-md-6 col-xs-6"
+                      *ngIf="readyForProductionFlag == 'true'"
+                    >
+                      <label class="textLabelColor" for="communicationProtocol"
+                        >HTTP Method Type</label
+                      >
+                      <input
+                        id="communicationProtocol"
+                        type="text"
+                        placeholder="HTTP Method Type"
+                        class="input inputField form-control form-control-line"
+                        [value]="
+                          productToDisplay.products[0].services[0]
+                            .isure_communication_protocol
+                        "
+                        readonly
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3 col-xs-3">
+                      <label class="p-l-10" for="encryptionMethod"
+                        >Checksum Required :</label
+                      >
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                      {{
+                        this.productToDisplay.products[0].services[0]
+                          .encryptionMethod
+                      }}
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                      <label class="p-l-10" for="encryptionMethod"
+                        >Encryption Method :</label
+                      >
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                      {{
+                        this.productToDisplay.products[0].services[0]
+                          .encryptionMethod
+                      }}
+                    </div>
+                  </div>
+                  <hr class="style-one" />
+                  <br />
+                  <div class="row">
+                    <div class="col-md-3 col-xs-3">
+                      <label class="p-l-10" for="encryptionMethod"
+                        >Expected transaction per day :</label
+                      >
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                      {{
+                        this.productToDisplay.products[0].services[0].txnPerday
+                      }}
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                      <label class="p-l-10" for="encryptionMethod"
+                        >Validation request parameter :</label
+                      >
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                      {{
+                        this.productToDisplay.products[0].services[0]
+                          .reqParameter
+                      }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="control-label p-l-10 "
+                          >Mode of payment:</label
+                        >
+                        <div class="col-md-6">
+                          <p>
+                            {{ productToDisplay.products[0].paymentOptionType }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="control-label  p-l-10"
+                          >Payment Details:</label
+                        >
+                        <div class="col-md-6">
+                          <p>
+                            {{ productToDisplay.products[0].paymentDetails }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <hr class="style-one" />
+                  <ngb-accordion #acc="ngbAccordion">
+                    <ngb-panel title="UAT Details" id="static-4">
+                      <ng-template ngbPanelContent>
+                        <div class="border border-secondary">
+                          <br />
+                          <div style="margin:1%">
+                            <div class="col-md-6 col-xs-6">
+                              <p class="title" style="font-size: 18px;">
+                                UAT Details
+                              </p>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-1 col-xs-1"></div>
+
+                            <div
+                              class="col-md-4 col-xs-4 mb-sm-4"
+                              *ngIf="readyForProductionFlag == 'false'"
+                            >
+                              <label for="uatUsername">UAT Host Name</label>
+                              <input
+                                readonly
+                                id="uatUsername"
+                                type="text"
+                                placeholder="UAT Host Name"
+                                class="input inputField form-control form-control-line"
+                                [value]="
+                                  productToDisplay.products[0].services[0]
+                                    .hostNameUat
+                                "
+                              />
+                            </div>
+                            <div
+                              class="col-md-4 col-xs-4 mb-sm-4"
+                              *ngIf="readyForProductionFlag == 'true'"
+                            >
+                              <label for="uatUsername">UAT Host Name</label>
+                              <input
+                                id="uatUsername"
+                                type="text"
+                                placeholder="UAT Host Name"
+                                class="input inputField form-control form-control-line"
+                                [value]="
+                                  productToDisplay.products[0].services[0]
+                                    .hostNameUat
+                                "
+                                readonly
+                              />
+                            </div>
+                            <div class="col-md-1 col-xs-1"></div>
+
+                            <div
+                              class="col-md-4 col-xs-4 mb-sm-4"
+                              *ngIf="readyForProductionFlag == 'false'"
+                            >
+                              <label for="uatIp">UAT IP</label>
+                              <input
+                                id="uatIp"
+                                type="text"
+                                placeholder="UAT IP"
+                                class="input inputField form-control form-control-line"
+                                formControlName="uatIp"
+                                readonly
+                              />
+                            </div>
+                            <div
+                              class="col-md-4 col-xs-4 mb-sm-4"
+                              *ngIf="readyForProductionFlag == 'true'"
+                            >
+                              <label for="uatIp">UAT IP</label>
+                              <input
+                                readonly
+                                id="uatIp"
+                                type="text"
+                                placeholder="UAT IP"
+                                class="input inputField form-control form-control-line"
+                                formControlName="uatIp"
+                                readonly
+                              />
+                            </div>
+
+                            <div class="col-md-1 col-xs-1"></div>
+                          </div>
+                          <br />
+                          <div class="row">
+                            <div class="col-md-1 col-xs-1"></div>
+
+                            <div
+                              class="col-md-4 col-xs-4 mb-sm-4"
+                              *ngIf="readyForProductionFlag == 'false'"
+                            >
+                              <label for="uatPort">UAT Port</label>
+                              <input
+                                readonly
+                                id="uatPort"
+                                type="text"
+                                placeholder="UAT Port"
+                                class="input inputField form-control form-control-line"
+                                formControlName="uatPort"
+                              />
+                            </div>
+                            <div
+                              class="col-md-4 col-xs-4 mb-sm-4"
+                              *ngIf="readyForProductionFlag == 'true'"
+                            >
+                              <label for="uatPort">UAT Port</label>
+                              <input
+                                id="uatPort"
+                                type="text"
+                                placeholder="UAT Port"
+                                class="input inputField form-control form-control-line"
+                                formControlName="uatPort"
+                                readonly
+                              />
+                            </div>
+                            <div class="col-md-1 col-xs-1"></div>
+
+                            <div class="col-md-4">
+                              <h6 class="secondary-text" style="color:grey">
+                                Note:Preferred port is 9443. The series of Port
+                                from 8050 to 8150 are not available at bank’s
+                                end for white listing
+                              </h6>
+                            </div>
+                            <div class="col-md-1 col-xs-1"></div>
+                          </div>
+                          <br />
+                          <div class="row">
+                            <div class="col-md-1 col-xs-1"></div>
+                            <div
+                              class="col-md-4 col-xs-4 mb-sm-4"
+                              *ngIf="readyForProductionFlag == 'false'"
+                            >
+                              <label class="textLabelColor" for="communication"
+                                >Communication Protocol</label
+                              >
+                              <input
+                                readonly
+                                id="communication"
+                                type="text"
+                                placeholder="Communication Protocol"
+                                class="input inputField form-control form-control-line"
+                                [value]="
+                                  productToDisplay.products[0].services[0]
+                                    .communicationProtocolUAT
+                                "
+                              />
+                            </div>
+                            <div
+                              class="col-md-4 col-xs-4 mb-sm-4"
+                              *ngIf="readyForProductionFlag == 'true'"
+                            >
+                              <label class="textLabelColor" for="communication"
+                                >Communication Protocol</label
+                              >
+                              <input
+                                readonly
+                                id="communication"
+                                type="text"
+                                placeholder="Communication Protocol"
+                                class="input inputField form-control form-control-line"
+                                [value]="
+                                  productToDisplay.products[0].services[0]
+                                    .communicationProtocolUAT
+                                "
+                              />
+                            </div>
+                            <div class="offset-md-1 col-md-4 col-xs-4 mb-sm-4">
+                              <strong>HTTP Certificate :</strong>
+                              {{
+                                productToDisplay.products[0].services[0]
+                                  .httpCertificateUAT
+                              }}
+                            </div>
+       
+                          </div>
+                          <br />
+                          <div style="margin:2%">
+                            <ngb-tabset
+                              class="serviceDetailsTabs"
+                              style="padding: 0px !important;"
+                            >
+                              <ngb-tab>
+                                <ng-template ngbTabTitle
+                                  >Uploaded Swagger for your API</ng-template
+                                >
+                                <ng-template ngbTabContent>
+                                  <br />
+
+                                  <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-2">
+                                      <label
+                                        ><strong
+                                          >Service Timeout :
+                                        </strong></label
+                                      >
+                                    </div>
+                                    <div class="col-md-3">
+                                      <p>
+                                        {{
+                                          productToDisplay.products[0]
+                                            .services[0].serviceTimeOutUAT
+                                        }}
+                                      </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <label
+                                        ><strong>Service URL : </strong></label
+                                      >
+                                    </div>
+                                    <div class="col-md-2">
+                                      <p>
+                                        {{
+                                          productToDisplay.products[0]
+                                            .services[0].serviceURLUAT
+                                        }}
+                                      </p>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                  </div>
+                           
+                                  <div class="row">
+                                   <div class="col-md-1"></div>
+                                   <div class="col-md-2">
+                                   <label><strong>Service Name : </strong></label>
+                                   </div>
+                                   <div class="col-md-3">
+                                   <p>
+                                   {{
+                                   productToDisplay.products[0].services[0].serviceNameInputUAT
+                                   }}
+                                   </p>
+                                   </div>
+                                   <div class="col-md-2" *ngIf="showUploads == false">
+                                   <label><strong>UAT File : </strong></label>
+                                   </div> 
+                                <div class="col-md-3" *ngIf="showUploads == false">
+                                   <p>
+                                   {{
+                                   productToDisplay.products[0].services[0].uatFile1
+                                   }}
+                                   </p>
+                                   </div>
+                                   <div class="col-md-5" *ngIf="showUploads == true">
+                                   <div class="input-group">
+                                   <input
+                                   readonly
+                                   type="text"
+                                   placeholder="Upload UAT File"
+                                   value="{{
+                                   productToDisplay.products[0].services[0].uatFile1
+                                   }}"
+                                   class="input inputField form-control form-control-line"
+                                   formControlName="updateUploadUatFile"
+                                   />
+                                   <span class="input-group-btn">
+                                   <button
+                                   class="btn uploadButton"
+                                   (click)="updateUploadUatFile()"
+                                   style="width:100%; background-color: #051b2d; color: #ffffff"
+                                   type="button"
+                                   >
+                                   Browse
+                                   </button>
+                                   <input
+                                   type="file"
+                                   accept=".wsdl , .yaml"
+                                   id="updateUploadUatFile"
+                                   (change)="
+                                   updateUploadUatFileEvent($event)
+                                   "
+                                   style="display:none"
+                                   />
+                                   </span>
+                                   </div>
+                                   <div class="col-md-6">
+                                   <p class="error" *ngIf="
+                                   uploadFlag == 'notproperFile' "
+                                   >
+                                   <span class="glyphicon glyphicon-alert">Please Upload yaml or wsdl file</span>
+                                   </p>
+                                   </div>
+                                   <div class="col-md-6">
+                                   <p class="error" *ngIf="
+                                   uploadFlag == 'properFile' "
+                                   >
+                                   <span class="glyphicon glyphicon-alert"></span>
+                                   </p>
+                                   </div>
+                                   </div>
+                                   </div>
+                                   
+                                  <br />
+                                  <div>
+                                    <div class="row">
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-2">
+                                        <label
+                                          ><strong
+                                            >Service Timeout :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-3">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0].serviceTimeOutUAT2
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-3">
+                                        <label
+                                          ><strong
+                                            >Service URL :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-2">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0].serviceURLUAT2
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-1"></div>
+                                    </div>
+                                 
+                                  </div>
+                                  <div class="row">
+                                   <div class="col-md-1"></div>
+                                   <div class="col-md-2">
+                                   <label><strong>Service Name : </strong></label>
+                                   </div>
+                                   <div class="col-md-3">
+                                   <p>
+                                   {{
+                                   productToDisplay.products[0].services[0].serviceNameInputUAT2
+                                   }}
+                                   </p>
+                                   </div>
+                                   <div class="col-md-2" *ngIf="showUploads == false">
+                                   <label><strong>UAT File : </strong></label>
+                                   </div> 
+                                  <div class="col-md-3" *ngIf="showUploads == false">
+                                   <p>
+                                   {{
+                                   productToDisplay.products[0].services[0].uatFile1
+                                   }}
+                                   </p>
+                                   </div>
+                                   <div class="col-md-5" *ngIf="showUploads == true">
+                                   <div class="input-group">
+                                   <input
+                                   readonly
+                                   type="text"
+                                   placeholder="Upload UAT File"
+                                   value="{{
+                                   productToDisplay.products[0].services[0].uatFile2
+                                   }}"
+                                   class="input inputField form-control form-control-line"
+                                   formControlName="updateUploadUatFile2"
+                                   />
+                                   <span class="input-group-btn">
+                                   <button
+                                   class="btn uploadButton"
+                                   (click)="updateUploadUatFile2()"
+                                   style="width:100%; background-color: #051b2d; color: #ffffff"
+                                   type="button"
+                                   >
+                                   Browse
+                                   </button>
+                                   <input
+                                   type="file"
+                                   accept=".wsdl , .yaml"
+                                   id="updateUploadUatFile2"
+                                   (change)="
+                                   updateUploadUatFileEvent2($event)
+                                   "
+                                   style="display:none"
+                                   />
+                                   </span>
+                                   </div>
+                                   <div class="col-md-6">
+                                   <p class="error" *ngIf="
+                                   uploadFlagUAT2 == 'notproperFile' "
+                                   >
+                                   <span class="glyphicon glyphicon-alert">Please Upload yaml or wsdl file</span>
+                                   </p>
+                                   </div>
+                                   <div class="col-md-6">
+                                   <p class="error" *ngIf="
+                                   uploadFlagUAT2 == 'properFile' "
+                                   >
+                                   <span class="glyphicon glyphicon-alert"></span>
+                                   </p>
+                                   </div>
+                                   </div>
+                                   </div>
+                                   
+                                  <br />
+                                  <br />
+                                </ng-template>
+                              </ngb-tab>
+                            </ngb-tabset>
+                          </div>
+                        </div>
+                        <br />
+                      </ng-template>
+                    </ngb-panel>
+                  </ngb-accordion>
+
+                  <hr class="style-one" />
+                  <br />
+                  <ngb-accordion #acc="ngbAccordion">
+                    <ngb-panel title="Production Details" id="static-4">
+                      <ng-template ngbPanelContent>
+                        <div class="border border-secondary">
+                          <br />
+                          <div style="margin:1%">
+                            <div class="col-md-6 col-xs-6">
+                              <p class="title" style="font-size: 18px;">
+                                Production Details
+                              </p>
+                            </div>
+                          </div>
+
+                          <div style="margin:1%" class="row">
+                            <div
+                              class="col-md-6 col-xs-6 mb-sm-4"
+                              *ngIf="readyForProductionFlag == 'false'"
+                            >
+                              <label class="textLabelColor" for="uatUsername">Production IP</label>
+                              <input
+                                readonly
+                                id="prodIp"
+                                type="text"
+                                placeholder="Production IP"
+                                class="input inputField form-control form-control-line"
+                                formControlName="prodIp"
+                              />
+                            </div>
+                            <div
+                              class="col-md-6 col-xs-6 mb-sm-4"
+                              *ngIf="readyForProductionFlag == 'true'"
+                            >
+                              <label class="textLabelColor" for="uatUsername">Production IP</label>
+                              <input
+                                id="prodIp"
+                                type="text"
+                                placeholder="Production IP"
+                                class="input inputField form-control form-control-line"
+                                formControlName="prodIp"
+                                readonly
+                              />
+                            </div>
+                            <div
+                              class="col-md-6 col-xs-6"
+                              *ngIf="readyForProductionFlag == 'false'"
+                            >
+                              <label class="textLabelColor" for="prodUsername"
+                                >Production Host Name</label
+                              >
+                              <input
+                                readonly
+                                id="prodUsername"
+                                type="text"
+                                placeholder="Production Host Name"
+                                class="input inputField form-control form-control-line"
+                                [value]="
+                                  productToDisplay.products[0].services[0]
+                                    .hostNameUat
+                                "
+                              />
+                            </div>
+                            <div
+                              class="col-md-6 col-xs-6"
+                              *ngIf="readyForProductionFlag == 'true'"
+                            >
+                              <label class="textLabelColor" for="prodUsername"
+                                >Production Host Name</label
+                              >
+                              <input
+                                id="prodUsername"
+                                type="text"
+                                placeholder="Production Host Name"
+                                class="input inputField form-control form-control-line"
+                                [value]="
+                                  productToDisplay.products[0].services[0]
+                                    .hostNameUat
+                                "
+                                readonly
+                              />
+                            </div>
+                          </div>
+                          <br />
+                          <div style="margin:1%" class="row">
+                            <div
+                              class="col-md-6 col-xs-6 mb-sm-6"
+                              *ngIf="readyForProductionFlag == 'false'"
+                            >
+                              <label class="textLabelColor" for="prodPort">Production Port</label>
+
+                              <input
+                                readonly
+                                id="prodPort"
+                                type="text"
+                                placeholder="Production Port"
+                                class="input inputField form-control form-control-line"
+                                formControlName="prodPort"
+                              />
+                            </div>
+                            <div
+                              class="col-md-6 col-xs-6 mb-sm-6"
+                              *ngIf="readyForProductionFlag == 'true'"
+                            >
+                              <label class="textLabelColor" for="prodPort">Production Port</label>
+
+                              <input
+                                id="prodPort"
+                                type="text"
+                                placeholder="Production Port"
+                                class="input inputField form-control form-control-line"
+                                formControlName="prodPort"
+                                readonly
+                              />
+                            </div>
+                            <div class="col-md-4 ">
+                              Note:Preferred port is 9443. The series of Port
+                              from 8050 to 8150 are not available at bank’s end
+                              for white listing
+                            </div>
+                          </div>
+                          <div style="margin:1%" class="row">
+                            <div
+                              class="col-md-6 col-xs-6 mb-sm-6"
+                              *ngIf="readyForProductionFlag == 'false'"
+                            >
+                              <label class="textLabelColor" for="prodPort"
+                                >Communication Protocol</label
+                              >
+                              <input
+                                readonly
+                                type="text"
+                                placeholder="Protocol"
+                                class="input inputField form-control form-control-line"
+                                [value]="
+                                  productToDisplay.products[0].services[0]
+                                    .communicationProtocolProd
+                                "
+                              />
+                            </div>
+                            <div
+                              class="col-md-6 col-xs-6 mb-sm-6"
+                              *ngIf="readyForProductionFlag == 'true'"
+                            >
+                              <label class="textLabelColor" for="prodPort"
+                                >Communication Protocol</label
+                              >
+                              <input
+                                type="text"
+                                placeholder="Protocol"
+                                class="input inputField form-control form-control-line"
+                                [value]="
+                                  productToDisplay.products[0].services[0]
+                                    .communicationProtocolProd
+                                "
+                                readOnly
+                              />
+                            </div>
+                            <div
+                              class="offset-md-1 col-md-4 col-xs-4 mb-sm-4"
+                              style="margin-left:0%;"
+                            >
+                              <strong
+                                >HTTP Certificate :
+                                {{
+                                  productToDisplay.products[0].services[0]
+                                    .httpCertificateProd
+                                }}
+                              </strong>
+                            </div>
+                            
+                          </div>
+
+                          <br />
+                          <div style="margin:2%">
+                            <ngb-tabset
+                              class="nav-justified serviceDetailsTabs"
+                              style="padding: 0px !important;"
+                            >
+                              <ngb-tab>
+                                <ng-template ngbTabTitle
+                                  >Uploaded Swagger for your API</ng-template
+                                >
+
+                                <ng-template ngbTabContent>
+                                  <br />
+                                  <br />
+                                  <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-2">
+                                      <label
+                                        ><strong
+                                          >Service Timeout :
+                                        </strong></label
+                                      >
+                                    </div>
+                                    <div class="col-md-3">
+                                      <p>
+                                        {{
+                                          productToDisplay.products[0]
+                                            .services[0].serviceNameInputProd
+                                        }}
+                                      </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <label
+                                        ><strong>Service URL : </strong></label
+                                      >
+                                    </div>
+                                    <div class="col-md-2">
+                                      <p>
+                                        {{
+                                          productToDisplay.products[0]
+                                            .services[0].serviceURLProd
+                                        }}
+                                      </p>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                  </div>
+                                  <div class="row">
+                                   <div class="col-md-1"></div>
+                                   <div class="col-md-2">
+                                   <label><strong>Service Name : </strong></label>
+                                   </div>
+                                   <div class="col-md-3">
+                                   <p>
+                                   {{
+                                   productToDisplay.products[0].services[0].serviceNameInputProd
+                                   }}
+                                   </p>
+                                   </div>
+                                   <div class="col-md-2" *ngIf="showUploads == false">
+                                   <label><strong>UAT File : </strong></label>
+                                   </div> 
+                                  <div class="col-md-3" *ngIf="showUploads == false">
+                                   <p>
+                                   {{
+                                   productToDisplay.products[0].services[0].prodFile1
+                                   }}
+                                   </p>
+                                   </div>
+                                   <div class="col-md-5" *ngIf="showUploads == true">
+                                   <div class="input-group">
+                                   <input
+                                   readonly
+                                   type="text"
+                                   placeholder="Upload Prod File"
+                                   value="{{
+                                   productToDisplay.products[0].services[0].prodFile1
+                                   }}"
+                                   class="input inputField form-control form-control-line"
+                                   formControlName="updateUploadProdFile"
+                                   />
+                                   <span class="input-group-btn">
+                                   <button
+                                   class="btn uploadButton"
+                                   (click)="updateUploadProdFile()"
+                                   style="width:100%; background-color: #051b2d; color: #ffffff"
+                                   type="button"
+                                   >
+                                   Browse
+                                   </button>
+                                   <input
+                                   type="file"
+                                   accept=".wsdl , .yaml"
+                                   id="updateUploadProdFile"
+                                   (change)="
+                                   updateUploadProdFileEvent($event)
+                                   "
+                                   style="display:none"
+                                   />
+                                   </span>
+                                   </div>
+                                   <div class="col-md-6">
+                                   <p class="error" *ngIf="
+                                   uploadFlagProd == 'notproperFile' "
+                                   >
+                                   <span class="glyphicon glyphicon-alert">Please Upload yaml or wsdl file</span>
+                                   </p>
+                                   </div>
+                                   <div class="col-md-6">
+                                   <p class="error" *ngIf="
+                                   uploadFlagProd == 'properFile' "
+                                   >
+                                   <span class="glyphicon glyphicon-alert"></span>
+                                   </p>
+                                   </div>
+                                   </div>
+                                   </div>
+                                  <br />
+                                  <div>
+                                    <div class="row">
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-2">
+                                        <label
+                                          ><strong
+                                            >Service Timeout :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-3">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0].serviceTimeOutProd2
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-3">
+                                        <label
+                                          ><strong
+                                            >Service URL :
+                                          </strong></label
+                                        >
+                                      </div>
+                                      <div class="col-md-2">
+                                        <p>
+                                          {{
+                                            productToDisplay.products[0]
+                                              .services[0].serviceURLProd2
+                                          }}
+                                        </p>
+                                      </div>
+                                      <div class="col-md-1"></div>
+                                    </div>
+                                
+                                    <div class="row">
+                                          <div class="col-md-1"></div>
+                                          <div class="col-md-2">
+                                          <label><strong>Service Name : </strong></label>
+                                          </div>
+                                          <div class="col-md-3">
+                                          <p>
+                                          {{
+                                          productToDisplay.products[0].services[0].serviceNameInputProd
+                                          }}
+                                          </p>
+                                          </div>
+                                          <div class="col-md-2" *ngIf="showUploads == false">
+                                          <label><strong>UAT File : </strong></label>
+                                          </div> 
+                                         <div class="col-md-3" *ngIf="showUploads == false">
+                                          <p>
+                                          {{
+                                          productToDisplay.products[0].services[0].prodFile1
+                                          }}
+                                          </p>
+                                          </div>
+                                          <div class="col-md-5" *ngIf="showUploads == true">
+                                          <div class="input-group">
+                                          <input
+                                          readonly
+                                          type="text"
+                                          placeholder="Upload Prod File"
+                                          value="{{
+                                          productToDisplay.products[0].services[0].prodFile2
+                                          }}"
+                                          class="input inputField form-control form-control-line"
+                                          formControlName="updateUploadProdFile2"
+                                          />
+                                          <span class="input-group-btn">
+                                          <button
+                                          class="btn uploadButton"
+                                          (click)="updateUploadProdFile2()"
+                                          style="width:100%; background-color: #051b2d; color: #ffffff"
+                                          type="button"
+                                          >
+                                          Browse
+                                          </button>
+                                          <input
+                                          type="file"
+                                          accept=".wsdl , .yaml"
+                                          id="updateUploadProdFile2"
+                                          (change)="
+                                          updateUploadProdFileEvent2($event)
+                                          "
+                                          style="display:none"
+                                          />
+                                          </span>
+                                          </div>
+                                          <div class="col-md-6">
+                                          <p class="error" *ngIf="
+                                          uploadFlagProd2 == 'notproperFile' "
+                                          >
+                                          <span class="glyphicon glyphicon-alert">Please Upload yaml or wsdl file</span>
+                                          </p>
+                                          </div>
+                                          <div class="col-md-6">
+                                          <p class="error" *ngIf="
+                                          uploadFlagProd2 == 'properFile' "
+                                          >
+                                          <span class="glyphicon glyphicon-alert"></span>
+                                          </p>
+                                          </div>
+                                          </div>
+                                          </div>
+                                   </div>
+                              
+                                  <br />
+                           
+                                  <br />
+                                  <br />
+                                </ng-template>
+                              </ngb-tab>
+                            </ngb-tabset>
+                          </div>
+                          <br />
+                        </div>
+                      </ng-template>
+                    </ngb-panel>
+                  </ngb-accordion>
+                </div>
+                <div
+                  class="col-md-4 col-xs-6 p-l-20"
+                  style="background: #f1f1f1;"
+                >
+                  <p
+                    class="title"
+                    style="font-size: 25px;font-family: Arial, Helvetica, sans-serif;"
+                  >
+                    Selected Product-Feature
+                  </p>
+                  <hr class="style-one" />
+                  <br />
+                  <div style="margin-left:10%" class="row">
+                    <!-- <div class="col-md-7 col-xs-6 m-t-10">
+ <p style="font-size: 16px">{{summaryProductName}}</p>
+ </div> -->
+                  </div>
+                  <div class="row">
+                    <p style="font-size: 16px">
+                      <strong>Product Name : </strong>AccountInsights
+                    </p>
+                  </div>
+                  <hr class="style-one" />
+                  <div class="row">
+                    <strong style="font-size: 16px">Service Name : </strong>
+                    <p style="font-size: 16px" *ngIf="serviceName">
+                      {{ serviceName }}
+                      <!-- {{
+ serviceName.length > 25
+ ? (serviceName | slice: 0:25) + "..."
+ : serviceName
+ }} -->
+                    </p>
+                  </div>
+                  <hr class="style-one" />
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </form>
+    <!-- Tabset ends here -->
+  </div>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+</div>

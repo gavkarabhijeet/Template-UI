@@ -1,0 +1,2754 @@
+<!-- Header starts here-->
+
+<header
+class="topbar"
+[attr.data-navbarbg]="options.navbarbg"
+style="  background: #ffffff;height: 50px;position: fixed;width:100%;"
+>
+
+<!--Navbar -->
+<nav class="navbarColor mb-1 navbar navbar-expand-lg navbar-dark info-color border-bottom" style="height: 55px !important">
+<div>
+  <div class="navbarBankName">Deutsche Bank</div>
+  <div class="navbarAPIProgram">API Program</div>
+</div>
+
+<!-- <a class="navbar-brand">
+  <img
+    alt="img"
+    src="assets/images/ICICI Bank Logo Orange Bg.png"
+    style="width: 173px;
+       height: 39px;"
+    class="img-fluid"
+  />
+</a> -->
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+  aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent-4" >
+  <ul class="navbar-nav ml-auto">
+    <!-- <li class="nav-item " style="background: #f5821f !important;">
+      <a class="nav-link" [routerLink]="['']">
+        <span
+          
+        style="font-size: 16px;font-family: Arial,Helvetica,sans-serif;color:white !important;"
+        >Home</span>
+      </a>
+    </li> -->
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/change-password/changePassword']">
+        <span class="navLinkColor" style="font-size: 16px;">Change Password</span>
+        </a>
+      </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="logout()">
+      <span class="navLinkColor" style="font-size: 16px;">Logout</span>
+      </a>
+    </li>
+   
+    <!-- <li class="nav-item">
+      <a class="nav-link navbarColor" (click)="clickSubscription()">&nbsp;
+        <i class="fa fa-puzzle-piece home-color"><i class="navLinkColor" style="font-family: Arial,Helvetica,sans-serif;">&nbsp;Subscribe Now !</i></i></a>
+    </li> -->
+  </ul>
+</div>
+</nav>
+<!--/.Navbar -->
+</header>
+<div class="card">
+  <div class="card-body  m-r-40 m-l-40" style="margin-top:35px;">
+    
+    <form class="form-horizontal form-material" [formGroup]="addRegisterData">
+      <!-- Tabset Starts here -->
+      <ngb-tabset
+        type="pills"
+        class="custom-pills nav-justified mainTabset"
+        #t="ngbTabset"
+      >
+        <ngb-tab id="userDetails" title="Organization Details" *ngIf="true">
+          <ng-template ngbTabContent>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-8 col-xs-6 p-r-25 ">
+                  <p
+                    class="title"
+                    style="color: #053c6d;font-size: 25px;font-family: Arial, Helvetica, sans-serif; margin-top: 7%;"
+                  >
+                    Organization Details
+                  </p>
+                  <hr class="style-one" />
+                  <br />
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <label class="control-label col-md-4"
+                          ><b>Organization Name</b></label
+                        >
+                        <label class="control-label col-md-2"><b>:</b></label>
+                        <p style="margin-left:1%">
+                          {{ dataToDisplay?.organisation }}
+                        </p>
+                      </div>
+                    </div>
+                    <!--/span-->
+                    <!--/span-->
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <label class="control-label col-md-4"
+                          ><b>ICICI Bank Current Account Number</b></label
+                        >
+                        <label class="control-label col-md-2"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>{{ dataToDisplay?.bankAccountNumber }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <!--/span-->
+                    <div
+                      *ngIf="serviceName == 'ECollection with Remitter Validation in Intermediary Account' || serviceName == 'ECollection with Two Level Validation at Bank and Client’s End'"
+                      class="col-md-12"
+                    >
+                      <div class="form-group row">
+                        <label class="control-label col-md-4"
+                          ><b>ICICI Intermediary Account Number</b></label
+                        >
+                        <label class="control-label col-md-2"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>{{ dataToDisplay?.poolAccountNumber }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="col-md-12"
+                      *ngIf="dataToDisplay?.accountManagerName != '';else accountManagerName"
+                    >
+                      <div class="form-group row">
+                        <label class="control-label col-md-4">
+                          <b>
+                            Account Manager/Implementation Team Member Name
+                          </b>
+                        </label>
+                        <label class="control-label col-md-2"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>{{dataToDisplay?.accountManagerName}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <ng-template #accountManagerName >
+                    <div
+                      class="col-md-12"
+                    >
+                      <div class="form-group row">
+                        <label class="control-label col-md-4">
+                          <b>
+                            Account Manager/Implementation Team Member Name
+                          </b>
+                        </label>
+                        <label class="control-label col-md-2"><b>:</b></label>
+                        <div class="col-md-6" >
+                          <input
+                            type="text"
+                            placeholder="Account Manager (AM)/Implementation (IM) Team Member Name"
+                            class="input inputField form-control form-control-line"
+                            formControlName="accountManagerName"
+                          />
+                          <div>
+                              <p class="error" *ngIf="
+                                  addRegisterData
+                                    .get('accountManagerName')
+                                    .hasError('required') &&
+                                  addRegisterData.get('accountManagerName')
+                                    .touched
+                                ">
+                                <span class="glyphicon glyphicon-alert"></span>Please enter (AM)/(IM) name
+                              </p>
+                            </div>
+                            <div>
+                              <p class="error" *ngIf="
+                                  addRegisterData
+                                    .get('accountManagerName')
+                                    .hasError('pattern')
+                                ">
+                                <span class="glyphicon glyphicon-alert"></span>Please Enter Valid (AM)/(IM) name
+                              </p>
+                            </div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                    </ng-template>
+                    <!-- changes by sanchita 14-December-2019 ends-->
+                    <div class="col-md-12" *ngIf="dataToDisplay?.mobileNumberAM != '';else mobileNumberAMenter">
+                      <div class="form-group row">
+                        <label class="control-label col-md-4">
+                          <b>
+                            AM/IM Mobile Number
+                          </b>
+                        </label>
+                        <label class="control-label col-md-2"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>{{ dataToDisplay?.mobileNumberAM }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <ng-template #mobileNumberAMenter >
+                        <div
+                          class="col-md-12"
+                        >
+                          <div class="form-group row">
+                            <label class="control-label col-md-4">
+                              <b>
+                                  AM/IM Mobile Number
+                              </b>
+                            </label>
+                            <label class="control-label col-md-2"><b>:</b></label>
+                            <div class="col-md-6" >
+                              <input
+                                type="text"
+                                placeholder="AM/IM Mobile Number" maxlength="10"
+                                class="input inputField form-control form-control-line"
+                                formControlName="mobileNumberAM"
+                              />
+                              <div>
+                                  <p class="error" *ngIf="
+                                      addRegisterData
+                                        .get('mobileNumberAM')
+                                        .hasError('required') &&
+                                      addRegisterData.get('mobileNumberAM')
+                                        .touched
+                                    ">
+                                    <span class="glyphicon glyphicon-alert"></span>Please enter Mobile no
+                                  </p>
+                                </div>
+                                <div>
+                                  <p class="error" *ngIf="
+                                      addRegisterData
+                                        .get('mobileNumberAM')
+                                        .hasError('pattern')
+                                    ">
+                                    <span class="glyphicon glyphicon-alert"></span>Please Enter Valid Mobile no
+                                  </p>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        </ng-template>
+                    <div class="col-md-12" *ngIf="dataToDisplay?.emailIdAM != '';else emailIdAMenter">
+                      <div class="form-group row">
+                        <label class="control-label col-md-4">
+                          <b>
+                            AM/IM Email Id
+                          </b>
+                        </label>
+                        <label class="control-label col-md-2"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>{{ dataToDisplay?.emailIdAM }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <ng-template #emailIdAMenter >
+                        <div
+                          class="col-md-12"
+                        >
+                          <div class="form-group row">
+                            <label class="control-label col-md-4">
+                              <b>
+                                  AM/IM Email Id
+                              </b>
+                            </label>
+                            <label class="control-label col-md-2"><b>:</b></label>
+                            <div class="col-md-6" >
+                              <input
+                                type="text"
+                                placeholder="AM/IM Email Id"
+                                class="input inputField form-control form-control-line"
+                                formControlName="emailIdAM"
+                              />
+                              <div>
+                                  <p class="error" *ngIf="
+                                      addRegisterData
+                                        .get('emailIdAM')
+                                        .hasError('required') &&
+                                      addRegisterData.get('emailIdAM').touched
+                                    ">
+                                    <span class="glyphicon glyphicon-alert"></span>Please enter Email Id
+                                  </p>
+                                </div>
+                                <div>
+                                  <p class="error" *ngIf="
+                                      addRegisterData
+                                        .get('emailIdAM')
+                                        .hasError('pattern')
+                                    ">
+                                    <span class="glyphicon glyphicon-alert"></span>Please Enter Valid Email Id
+                                  </p>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        </ng-template>
+                  </div>
+                  <hr class="style-one" style="margin-top:2%" />
+                  <ngb-accordion #acc="ngbAccordion">
+                    <ngb-panel title="Business Contact Details" id="static-4">
+                      <ng-template ngbPanelContent>
+                        <hr class="style-one" style="margin-top:2%" />
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="control-label col-md-4"
+                                ><b>First Name</b></label
+                              >
+                              <label class="control-label col-md-2"
+                                ><b>:</b></label
+                              >
+                              <div class="col-md-6">
+                                <p>{{ dataToDisplay?.firstNameBusinessSpoc }}</p>
+                              </div>
+                            </div>
+                          </div>
+                          <!--/span-->
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="control-label col-md-4"
+                                ><b>Last Name</b></label
+                              >
+                              <label class="control-label col-md-2"
+                                ><b>:</b></label
+                              >
+                              <div class="col-md-6">
+                                <p>{{ dataToDisplay?.lastNameBusinessSpoc }}</p>
+                              </div>
+                            </div>
+                          </div>
+                          <!--/span-->
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="control-label col-md-4"
+                                ><b>Mobile Number</b></label
+                              >
+                              <label class="control-label col-md-2"
+                                ><b>:</b></label
+                              >
+                              <div class="col-md-6">
+                                <p>
+                                  {{ dataToDisplay?.mobileNumberBusinessSpoc }}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <!--/span-->
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="control-label col-md-4"
+                                ><b>Email Id</b></label
+                              >
+                              <label class="control-label col-md-2"
+                                ><b>:</b></label
+                              >
+                              <div class="col-md-6">
+                                <p>{{ dataToDisplay?.emailIdBusinessSpoc }}</p>
+                              </div>
+                            </div>
+                          </div>
+                          <!--/span-->
+                        </div>
+                      </ng-template>
+                    </ngb-panel>
+                  </ngb-accordion>
+                  <ngb-accordion
+                    #acc="ngbAccordion"
+                    *ngIf="dataToDisplay?.have_an_ICICI_account == 'yes'"
+                  >
+                    <ngb-panel title="IT Contact Details" id="static-4">
+                      <ng-template ngbPanelContent>
+                        <div>
+                          <hr class="style-one" />
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-4"
+                                  ><b>First Name</b></label
+                                >
+                                <label class="control-label col-md-2"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-6">
+                                  <p>{{ dataToDisplay?.firstNameITSpoc }}</p>
+                                </div>
+                              </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-4"
+                                  ><b>Last Name</b></label
+                                >
+                                <label class="control-label col-md-2"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-6">
+                                  <p>{{ dataToDisplay?.lastNameITSpoc }}</p>
+                                </div>
+                              </div>
+                            </div>
+                            <!--/span-->
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-4"
+                                  ><b>Mobile Number</b></label
+                                >
+                                <label class="control-label col-md-2"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-6">
+                                  <p>{{ dataToDisplay?.mobileNumberITSpoc }}</p>
+                                </div>
+                              </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-4"
+                                  ><b>Email Id</b></label
+                                >
+                                <label class="control-label col-md-2"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-6">
+                                  <p>{{ dataToDisplay?.emailIdITSpoc }}</p>
+                                </div>
+                              </div>
+                            </div>
+                            <!--/span-->
+                          </div>
+                        </div>
+                      </ng-template>
+                    </ngb-panel>
+                  </ngb-accordion>
+
+                  <hr class="style-one" style="margin-top:2%" />
+                  <button
+                  class="btn headerButton col-3 m-10 m-l-0"
+                  style="border-color: grey;
+                  background-color: #f3f5f5;
+                  color:#465F75;
+                  border-radius: 4px;
+                  border-width: 2px;"
+                  (click)="t.select('serviceDetails')"
+                >
+                  <span>Next</span>
+                </button>
+                  <button  
+                  class="btn headerButton col-3 m-10 m-l-0"
+                  style="border-color: grey;
+                  background-color: #f3f5f5;
+                  color:#465F75;
+                  border-radius: 4px;
+                  border-width: 2px;"
+                  [routerLink]="['/authentication/Checker']"
+                >
+                  <span>Go to Profile Page</span>
+                </button>
+                <!-- <button class=" btn headerButton col-3 m-10 m-l-0" style="background: #053c6d;font-size: 16px;font-family: Arial, Helvetica, sans-serif;" (click)="capture()"><span>Capture PDF</span></button> -->
+
+                </div>
+                <div
+                  class="col-md-4 col-xs-6 p-l-20 "
+                  style="background: #f1f1f1;margin-bottom: 6%; margin-top: 5%;"
+                >
+                  <p
+                    class="title"
+                    style="color: #053c6d;font-size: 25px;font-family: Arial, Helvetica, sans-serif;"
+                  >
+                    Selected Product-Feature
+                  </p>
+                  <hr class="style-one" />
+                  <br />
+                  <div style="margin-left:10%" class="row">
+                    <div class="col-5 col-md-5 col-xs-5">
+                      <img
+                        style="width:100%; height: 100px;"
+                        [src]="productImage"
+                        class="img-thumnails border m-0"
+                      />
+                    </div>
+                    <div class="col-5 col-md-5 col-xs-5">
+                      <img
+                        style="width:100%; height: 100px;"
+                        [src]="serviceImage"
+                        class="img-thumnails border m-0"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    *ngIf="productName == 'eCollections'"
+                    style="margin-left:10%;height:29%"
+                    class="row"
+                  >
+                    <div class="col-5 col-md-5 col-xs-5">
+                      <p style="font-size: 16px">AccountInsights</p>
+                    </div>
+                    <div class="col-5 col-md-5 col-xs-5" *ngIf="serviceName">
+                      <p style="font-size: 16px">
+                        {{serviceName}}
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    *ngIf="productName == 'iSurePay'"
+                    style="margin-left:10%;height:32.4%"
+                    class="row"
+                  >
+                    <div class="col-5 col-md-5 col-xs-5">
+                      <p style="font-size: 16px">{{ productName }}</p>
+                    </div>
+                    <div class="col-5 col-md-5 col-xs-5">
+                      <p style="font-size: 16px" *ngIf="serviceName">
+                        {{serviceName}}
+                      </p>
+                    </div>
+                  </div>
+                  <br />
+                  <hr class="style-one" /> </div>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="serviceDetails" class="mainTabs" title="Service Details">
+          <ng-template ngbTabContent>
+            <div class="card-body ">
+              <div *ngIf="productName == 'eCollections'" class="row">
+                <div class="col-md-8 col-xs-6 p-r-25 ">
+                  <p
+                    class="title"
+                    style="color: #053c6d;font-size: 25px;font-family: Arial, Helvetica, sans-serif; margin-top: 7%;"
+                  >
+                    Service Details
+                  </p>
+                  <hr class="style-one" />
+                  <br />
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="control-label col-md-5"
+                          ><b>Type of Web Service</b></label
+                        >
+                        <label class="control-label col-md-1"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>
+                            {{
+                              productToDisplay.products[0].services[0]
+                                .webServiceType
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="control-label col-md-5"
+                          ><b>HTTP Method Type</b></label
+                        >
+                        <label class="control-label col-md-1"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>
+                            {{
+                              productToDisplay.products[0].services[0]
+                                .communicationProtocol
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="control-label col-md-5"
+                          ><b>Checksum Required</b></label
+                        >
+                        <label class="control-label col-md-1"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>
+                            {{
+                              productToDisplay.products[0].services[0].checksumControl
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="control-label col-md-5"
+                          ><b>Encryption Method</b></label
+                        >
+                        <label class="control-label col-md-1"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>
+                            {{
+                              productToDisplay.products[0].services[0]
+                                .encryptionMethod
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <hr *ngIf="productEmail > 0" class="style-one" />
+                  <p
+                    *ngIf="productEmail > 0"
+                    class="title"
+                    style="color: #053c6d;font-size: 25px;font-family: Arial, Helvetica, sans-serif;"
+                  >
+                    Emails
+                  </p>
+                  <hr *ngIf="productEmail > 0" class="style-one" />
+                  <br *ngIf="productEmail > 0" />
+                  <table *ngIf="productEmail > 0" class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Srno</th>
+                        <th>Email Id</th>
+                      </tr>
+                    </thead>
+                    <tr
+                      *ngFor="
+                        let i of productToDisplay.products[0].services[0]
+                          .emails;
+                        let a = index
+                      "
+                    >
+                      <td>{{ a + 1 }}.</td>
+                      <td>
+                        {{ i.email }}
+                      </td>
+                    </tr>
+                  </table>
+
+                  <br *ngIf="productEmail > 0" />
+                  <hr class="style-one" />
+                  <br />
+                  <ngb-accordion #acc="ngbAccordion">
+                    <ngb-panel title="UAT & PROD Details" id="static-4">
+                      <ng-template ngbPanelContent>
+                        <div class="border border-secondary">
+                          <br />
+                          <div style="margin:1%" class="row">
+                            <div class="col-md-6 col-xs-6">
+                              <p
+                                class="title"
+                                style="color: #053c6d;font-size: 18px;font-family: Arial, Helvetica, sans-serif;"
+                              >
+                                UAT Details
+                              </p>
+                            </div>
+                            <div class="col-md-6 col-xs-6">
+                              <p
+                                class="title"
+                                style="color: #053c6d;font-size: 18px;font-family: Arial, Helvetica, sans-serif;"
+                              >
+                                Prod Details
+                              </p>
+                            </div>
+                          </div>
+                          <hr color="black" />
+                          <div style="margin:1%" class="row">
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-3"
+                                  ><b>Host Name</b></label
+                                >
+                                <label class="control-label col-md-1"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-8">
+                                  <p>
+                                    {{
+                                      productToDisplay.products[0].services[0]
+                                        .hostNameUat
+                                    }}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-3"
+                                  ><b>Host Name</b></label
+                                >
+                                <label class="control-label col-md-1"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-8">
+                                  <p>
+                                    {{
+                                      productToDisplay.products[0].services[0]
+                                        .hostNameProd
+                                    }}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div style="margin:1%" class="row">
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-3"
+                                  ><b>UAT IP</b></label
+                                >
+                                <label class="control-label col-md-1"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-8">
+                                  <p>
+                                    {{
+                                      productToDisplay.products[0].services[0]
+                                        .uatIp
+                                    }}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-3"
+                                  ><b>Prod IP</b></label
+                                >
+                                <label class="control-label col-md-1"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-8">
+                                  <p>
+                                    {{
+                                      productToDisplay.products[0].services[0]
+                                        .prodIp
+                                    }}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div style="margin:1%" class="row">
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-3"
+                                  ><b>UAT Port</b></label
+                                >
+                                <label class="control-label col-md-1"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-8">
+                                  <p>
+                                    {{
+                                      productToDisplay.products[0].services[0]
+                                        .uatPort
+                                    }}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-3"
+                                  ><b>Prod Port</b></label
+                                >
+                                <label class="control-label col-md-1"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-8">
+                                  <p>
+                                    {{
+                                      productToDisplay.products[0].services[0]
+                                        .prodPort
+                                    }}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- new addition -->
+                          <div style="margin:1%" class="row">
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-3"
+                                  ><b>Communication Protocol</b></label
+                                >
+                                <label class="control-label col-md-1"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-8">
+                                  <p>
+                                    {{
+                                      productToDisplay.products[0].services[0]
+                                        .communicationProtocolUAT
+                                    }}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-3"
+                                  ><b>Communication Protocol</b></label
+                                >
+                                <label class="control-label col-md-1"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-8">
+                                  <p>
+                                    {{
+                                      productToDisplay.products[0].services[0]
+                                        .communicationProtocolProd
+                                    }}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- new addition -->
+                          <div style="margin:1%" class="row">
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-3"
+                                  ><b>Http Certificate</b></label
+                                >
+                                <label class="control-label col-md-1"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-8">
+                                  <p>
+                                    {{
+                                      productToDisplay.products[0].services[0]
+                                        .httpCertificateUAT
+                                    }}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-3"
+                                  ><b>Http Certificate</b></label
+                                >
+                                <label class="control-label col-md-1"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-8">
+                                  <p>
+                                    {{
+                                      productToDisplay.products[0].services[0]
+                                        .httpCertificateProd
+                                    }}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- new addition -->
+                          <div style="margin:1%" class="row">
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-3"
+                                  ><b>Service Timeout</b></label
+                                >
+                                <label class="control-label col-md-1"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-8">
+                                  <p>
+                                    {{
+                                      productToDisplay.products[0].services[0]
+                                        .serviceTimeOutUAT
+                                    }}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-3"
+                                  ><b>Service Timeout</b></label
+                                >
+                                <label class="control-label col-md-1"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-8">
+                                  <p>
+                                    {{
+                                      productToDisplay.products[0].services[0]
+                                        .serviceTimeOutProd
+                                    }}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- new addition -->
+                          <div style="margin:1%" class="row">
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-3"
+                                  ><b>Service URL</b></label
+                                >
+                                <label class="control-label col-md-1"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-8">
+                                  <p>
+                                    {{
+                                      productToDisplay.products[0].services[0]
+                                        .serviceURLUAT
+                                    }}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-3"
+                                  ><b>Service URL</b></label
+                                >
+                                <label class="control-label col-md-1"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-8">
+                                  <p>
+                                    {{
+                                      productToDisplay.products[0].services[0]
+                                        .serviceURLProd
+                                    }}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- new addition -->
+                          <div style="margin:1%" class="row">
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-3"
+                                  ><b>Service Name</b></label
+                                >
+                                <label class="control-label col-md-1"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-8">
+                                  <p>
+                                    {{
+                                      productToDisplay.products[0].services[0]
+                                        .serviceNameInputUAT
+                                    }}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="control-label col-md-3"
+                                  ><b>Service Name</b></label
+                                >
+                                <label class="control-label col-md-1"
+                                  ><b>:</b></label
+                                >
+                                <div class="col-md-8">
+                                  <p>
+                                    {{
+                                      productToDisplay.products[0].services[0]
+                                        .serviceNameInputProd
+                                    }}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- new addition -->
+                          <div
+                            *ngIf="
+                              serviceName !=
+                              'ECollection with Two Level Validation at Bank and Client’s End'
+                            "
+                          >
+                            <div style="margin:1%" class="row">
+                              <div class="col-md-6">
+                                <div class="form-group row">
+                                  <label class="control-label col-md-3"
+                                    ><b>UAT File</b></label
+                                  >
+                                  <label class="control-label col-md-1"
+                                    ><b>:</b></label
+                                  >
+                                  <div class="col-md-8">
+                                    <p>
+                                      {{
+                                        productToDisplay.products[0].services[0]
+                                          .uatFile1
+                                      }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group row">
+                                  <label class="control-label col-md-3"
+                                    ><b>Prod File</b></label
+                                  >
+                                  <label class="control-label col-md-1"
+                                    ><b>:</b></label
+                                  >
+                                  <div class="col-md-8">
+                                    <p>
+                                      {{
+                                        productToDisplay.products[0].services[0]
+                                          .prodFile1
+                                      }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            *ngIf="
+                              serviceName ==
+                              'ECollection with Two Level Validation at Bank and Client’s End'
+                            "
+                          >
+                            <div style="margin:1%" class="row">
+                              <div class="col-md-6">
+                                <div class="form-group row">
+                                  <label class="control-label col-md-3"
+                                    ><b>UAT Confirmation Spec</b></label
+                                  >
+                                  <label class="control-label col-md-1"
+                                    ><b>:</b></label
+                                  >
+                                  <div class="col-md-8">
+                                    <p>
+                                      {{
+                                        productToDisplay.products[0].services[0]
+                                          .uatFile1
+                                      }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group row">
+                                  <label class="control-label col-md-3"
+                                    ><b>Prod Confirmation Spec</b></label
+                                  >
+                                  <label class="control-label col-md-1"
+                                    ><b>:</b></label
+                                  >
+                                  <div class="col-md-8">
+                                    <p>
+                                      {{
+                                        productToDisplay.products[0].services[0]
+                                          .prodFile1
+                                      }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div style="margin:1%" class="row">
+                              <div class="col-md-6">
+                                <div class="form-group row">
+                                  <label class="control-label col-md-3"
+                                    ><b>Service Timeout</b></label
+                                  >
+                                  <label class="control-label col-md-1"
+                                    ><b>:</b></label
+                                  >
+                                  <div class="col-md-8">
+                                    <p>
+                                      {{
+                                        productToDisplay.products[0].services[0]
+                                          .serviceTimeOutUAT2
+                                      }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group row">
+                                  <label class="control-label col-md-3"
+                                    ><b>Service Timeout</b></label
+                                  >
+                                  <label class="control-label col-md-1"
+                                    ><b>:</b></label
+                                  >
+                                  <div class="col-md-8">
+                                    <p>
+                                      {{
+                                        productToDisplay.products[0].services[0]
+                                          .serviceTimeOutProd2
+                                      }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div style="margin:1%" class="row">
+                              <div class="col-md-6">
+                                <div class="form-group row">
+                                  <label class="control-label col-md-3"
+                                    ><b>Service URL</b></label
+                                  >
+                                  <label class="control-label col-md-1"
+                                    ><b>:</b></label
+                                  >
+                                  <div class="col-md-8">
+                                    <p>
+                                      {{
+                                        productToDisplay.products[0].services[0]
+                                          .serviceURLUAT2
+                                      }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group row">
+                                  <label class="control-label col-md-3"
+                                    ><b>Service URL</b></label
+                                  >
+                                  <label class="control-label col-md-1"
+                                    ><b>:</b></label
+                                  >
+                                  <div class="col-md-8">
+                                    <p>
+                                      {{
+                                        productToDisplay.products[0].services[0]
+                                          .serviceURLProd2
+                                      }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div style="margin:1%" class="row">
+                              <div class="col-md-6">
+                                <div class="form-group row">
+                                  <label class="control-label col-md-3"
+                                    ><b>Service Name</b></label
+                                  >
+                                  <label class="control-label col-md-1"
+                                    ><b>:</b></label
+                                  >
+                                  <div class="col-md-8">
+                                    <p>
+                                      {{
+                                        productToDisplay.products[0].services[0]
+                                          .serviceNameInputUAT2
+                                      }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group row">
+                                  <label class="control-label col-md-3"
+                                    ><b>Service Name</b></label
+                                  >
+                                  <label class="control-label col-md-1"
+                                    ><b>:</b></label
+                                  >
+                                  <div class="col-md-8">
+                                    <p>
+                                      {{
+                                        productToDisplay.products[0].services[0]
+                                          .serviceNameInputProd2
+                                      }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div style="margin:1%" class="row">
+                              <div class="col-md-6">
+                                <div class="form-group row">
+                                  <label class="control-label col-md-3"
+                                    ><b>UAT Verification Spec</b></label
+                                  >
+                                  <label class="control-label col-md-1"
+                                    ><b>:</b></label
+                                  >
+                                  <div class="col-md-8">
+                                    <p>
+                                      {{
+                                        productToDisplay.products[0].services[0]
+                                          .uatFile2
+                                      }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group row">
+                                  <label class="control-label col-md-3"
+                                    ><b>Prod Verification Spec</b></label
+                                  >
+                                  <label class="control-label col-md-1"
+                                    ><b>:</b></label
+                                  >
+                                  <div class="col-md-8">
+                                    <p>
+                                      {{
+                                        productToDisplay.products[0].services[0]
+                                          .prodFile2
+                                      }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- div closes over here for the 2 files uploads -->
+                          <br />
+                          <br />
+                        </div>
+                      </ng-template>
+                    </ngb-panel>
+                  </ngb-accordion>
+
+                  <br />
+                  <hr class="style-one" />
+                  <br />
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="control-label col-md-5"
+                          ><b>Retry attempts on failure/no response(in secs)</b></label
+                        >
+                        <label class="control-label col-md-1"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>
+                            {{
+                              productToDisplay.products[0].services[0]
+                                .retryAttempts
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="control-label col-md-5"
+                          ><b>Action to be taken on no response</b></label
+                        >
+                        <label class="control-label col-md-1"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>
+                            {{
+                              productToDisplay.products[0].services[0]
+                                .actionOnNoRes
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr class="style-one" *ngIf="approval == 'true'" />
+                  <br  *ngIf="approval == 'true'"/>
+                  <div class="row" *ngIf="approval == 'true'">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-5 textLabelColor"
+                          ><b>Profound Client Code</b></label
+                        >
+                        <label class="control-label col-md-1"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>
+                            {{
+                             dataToDisplay?.clientCodeProfund
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-5 textLabelColor"
+                          ><b>eCollection IFSC</b></label
+                        >
+                        <label class="control-label col-md-1"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>
+                            {{
+                              dataToDisplay?.IFSCCode
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <div class="row" *ngIf="approval == 'true'">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-5 textLabelColor"
+                          ><b>IPS Client Code</b></label
+                        >
+                        <label class="control-label col-md-1"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>
+                            {{
+                             dataToDisplay?.clientCodeIPS
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-5 textLabelColor"
+                          ><b>IPS Format Code</b></label
+                        >
+                        <label class="control-label col-md-1"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>
+                            {{
+                              dataToDisplay?.formatCode
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr class="style-one" *ngIf="approval == 'false'" />
+                  <br />
+                  <ngb-accordion
+                    #acc="ngbAccordion"
+                    *ngIf="approval == 'false'"
+                  >   
+                    <ngb-panel
+                      id="static-4"
+                    >
+                    <ng-template ngbPanelTitle>
+                      <p
+                      class="title"
+                      style="color: #053c6d;font-size: 16px;font-family: Arial, Helvetica, sans-serif;"
+                    >
+                      <span style="color:red">*</span>Profund/IPS Backend Configuration
+                    </p></ng-template>
+                      <ng-template ngbPanelContent>
+                        <div class="border border-secondary">
+                          <br />
+                          <div
+                            *ngIf="serviceName != 'ECollection Intimation'"
+                            class="form group row"
+                            style="padding-left: 4%;"
+                          >
+                            <div>
+                              <input
+                                id="checkBoxvalue2"
+                                type="checkbox"
+                                (change)="checkBoxvalue2($event)"
+                              />
+                            </div>
+                            <div class="col-md-8">
+                              <label for="checkBoxvalue2"
+                                ><h5>
+                                  Enable Transaction Reversal File Processing
+                                </h5></label
+                              >
+                            </div>
+                          </div>
+                          <br />
+                          <!-- Abhijeet -->
+                          <div style="margin:1%" class="row">
+                            <div class="col-md-12 col-xs-12">
+                              <span style="color:red">*</span><label class="textLabelColor" for="clientCodeProfund">Profund Client Code</label>
+                              <input
+                                id="profoundClientCode"
+                               
+                                type="text"
+                                placeholder="Enter Profund Client Code "
+                                class="input inputField form-control form-control-line"
+                                formControlName="clientCodeProfund"
+                                [formControl]="
+                                  addRegisterData.controls['clientCodeProfund']"
+                                  (change)="codeOfIFSC($event);"
+                              />
+                            </div>
+                            <div>
+                              <p class="error" *ngIf="
+                                  addRegisterData
+                                    .get('clientCodeProfund')
+                                    .hasError('required') &&
+                                  addRegisterData.get('clientCodeProfund').touched
+                                ">
+                                <span class="glyphicon glyphicon-alert" style="color:red !important;margin-left: 10px;margin-top: 10px;">Please Enter Profund Client Code</span>
+                              </p>
+                            </div>
+                            <div>
+                              <p class="error" *ngIf="
+                                  addRegisterData
+                                    .get('clientCodeProfund')
+                                    .hasError('acc1')
+                                ">
+                                <span class="glyphicon glyphicon-alert" style="color:red !important;margin-left: 10px;margin-top: 10px;">This client code is already used. Please enter different client code.</span>
+                              </p>
+                            </div>
+                            <div>
+                                <p class="error" *ngIf="
+                                    addRegisterData
+                                      .get('clientCodeProfund')
+                                      .hasError('acc')
+                                  ">
+                                  <span class="glyphicon glyphicon-alert" style="color:red !important;margin-left: 10px;margin-top: 10px;">Please Enter Profund Client Code</span>
+                                </p>
+                              </div>
+                              <div>
+                                <p class="error" *ngIf="
+                                addRegisterData
+                                .get('clientCodeProfund')
+                                .hasError('pattern')
+                                ">
+                                <span class="glyphicon glyphicon-alert" style="color:red !important;margin-left: 10px;margin-top: 10px;">Please Enter valid Profund Client Code</span>
+                                </p>
+                                </div>
+                          </div>
+                          <br />
+                          <div style="margin:1%" class="row">
+                            <div class="col-md-12 col-xs-12">
+                              <span style="color:red">*</span><label class="textLabelColor" for="ifscCode">eCollection IFSC</label>
+                              <input [readOnly]="IFSCCCODE"
+                                type="text"
+                                placeholder="Enter eCollection IFSC"
+                                class="input inputField form-control form-control-line"
+                                formControlName="ifscCode"
+                              />
+                            </div>
+                            <div>
+                              <p class="error" *ngIf="
+                                  addRegisterData
+                                    .get('ifscCode')
+                                    .hasError('required') &&
+                                  addRegisterData.get('ifscCode').touched
+                                ">
+                                <span class="glyphicon glyphicon-alert" style="color:red !important;margin-left: 10px;margin-top: 10px">Please Enter eCollection IFSC</span>
+                              </p>
+                            </div>
+                            <div>
+                                <p class="error" *ngIf="
+                                    addRegisterData
+                                      .get('ifscCode')
+                                      .hasError('acc')
+                                  ">
+                                  <span class="glyphicon glyphicon-alert" style="color:red !important;margin-left: 10px;margin-top: 10px;">Please Enter eCollection IFSC</span>
+                                </p>
+                              </div>
+                          </div>
+                          <br />
+                          <div style="margin:1%" class="row">
+                            <div class="col-md-12 col-xs-12">
+                              <span style="color:red">*</span><label class="textLabelColor" for="clientCodeIPS">IPS Client Code</label>
+                              <input
+                                id="ipsClientCode"
+                                type="text"
+                                placeholder="Enter IPS Client Code"
+                                class="input inputField form-control form-control-line"
+                                formControlName="clientCodeIPS"
+                                [formControl]="
+                                addRegisterData.controls['clientCodeIPS']"
+                              />
+                            </div>
+                            <div>
+                              <p class="error" *ngIf="
+                                  addRegisterData
+                                    .get('clientCodeIPS')
+                                    .hasError('required') &&
+                                  addRegisterData.get('clientCodeIPS').touched
+                                ">
+                                <span class="glyphicon glyphicon-alert" style="color:red !important;margin-left: 10px;margin-top: 10px">Please Enter IPS Client Code</span>
+                              </p>
+                            </div>
+                            <div>
+                              <p class="error" *ngIf="
+                                  addRegisterData
+                                    .get('clientCodeIPS')
+                                    .hasError('acc1')
+                                ">
+                                <span class="glyphicon glyphicon-alert" style="color:red !important;margin-left: 10px;margin-top: 10px;">This client code is already used. Please enter different client code.</span>
+                              </p>
+                            </div>
+                            <div>
+                                <p class="error" *ngIf="
+                                    addRegisterData
+                                      .get('clientCodeIPS')
+                                      .hasError('acc')
+                                  ">
+                                  <span class="glyphicon glyphicon-alert" style="color:red !important;margin-left: 10px;margin-top: 10px;">Please Enter IPS Client Code</span>
+                                </p>
+                              </div>
+                          </div>
+                          <br />
+                          <div style="margin:1%" class="row">
+                            <div class="col-md-12 col-xs-12">
+                              <label class="textLabelColor" for="formatCode">IPS Format Code</label>
+                              <input
+                                id="formatCode"
+                               
+                                type="text"
+                                placeholder="Enter IPS Format Code "
+                                class="input inputField form-control form-control-line"
+                                formControlName="formatCode"
+                                [formControl]="
+                                  addRegisterData.controls['formatCode']"
+                                 
+                              />
+                            </div>
+                            <br>
+                            <br>
+                            <!--<div>
+                              <p class="error" *ngIf="
+                                  addRegisterData
+                                    .get('formatCode')
+                                    .hasError('required') &&
+                                  addRegisterData.get('formatCode').touched
+                                ">
+                                <span class="glyphicon glyphicon-alert" style="color:red !important;margin-left: 10px;margin-top: 10px;">Please Enter Profund Client Code</span>
+                              </p>
+                            </div>
+                             <div>
+                              <p class="error" *ngIf="
+                                  addRegisterData
+                                    .get('formatCode')
+                                    .hasError('acc1')
+                                ">
+                                <span class="glyphicon glyphicon-alert" style="color:red !important;margin-left: 10px;margin-top: 10px;">This client code is already used. Please enter different client code.</span>
+                              </p>
+                            </div>
+                            <div>
+                                <p class="error" *ngIf="
+                                    addRegisterData
+                                      .get('formatCode')
+                                      .hasError('acc')
+                                  ">
+                                  <span class="glyphicon glyphicon-alert" style="color:red !important;margin-left: 10px;margin-top: 10px;">Please Enter Format Code</span>
+                                </p>
+                              </div>
+                              <div>
+                                <p class="error" *ngIf="
+                                addRegisterData
+                                .get('formatCode')
+                                .hasError('pattern')
+                                ">
+                                <span class="glyphicon glyphicon-alert" style="color:red !important;margin-left: 10px;margin-top: 10px;">Please Enter valid Profund Client Code</span>
+                                </p>
+                                </div> -->
+                          </div>
+                          <br>
+                          
+                          <br />
+                        </div>
+                      </ng-template>
+                    </ngb-panel>
+                  </ngb-accordion>
+                  <hr class="style-one" *ngIf="approval == 'false'" />
+                  <div *ngIf="approval == 'false'">
+                    <button
+                    data-toggle="modal" data-target="#myModal1"
+                      class="btn headerButton col-3 m-10 m-l-0"
+                      style="border-color: grey;
+                      background-color: #f3f5f5;
+                      color:#465F75;
+                      border-radius: 4px;
+                      border-width: 2px;"
+                    >
+                      <span>Approve</span>
+                    </button>
+                    <button
+                    data-toggle="modal" data-target="#myModal"
+                      class="btn headerButton col-3 m-10 m-l-0"
+                      style="border-color: grey;
+                      background-color: #f3f5f5;
+                      color:#465F75;
+                      border-radius: 4px;
+                      border-width: 2px;"
+                    >
+                      <span>Reject</span>
+                    </button>
+                    <button
+                    
+                    class="btn headerButton col-3 m-10 m-l-0"
+                    style="border-color: grey;
+                    background-color: #f3f5f5;
+                    color:#465F75;
+                    border-radius: 4px;
+                    border-width: 2px;"
+                    [routerLink]="['/authentication/Checker']"
+                  >
+                    <span>Go to Profile Page</span>
+                  </button>
+                  <!-- <button class=" btn headerButton col-3 m-10 m-l-0" style="background: #053c6d;font-size: 16px;font-family: Arial, Helvetica, sans-serif;" (click)="capture()"><span>Capture PDF</span></button> -->
+
+                  </div>
+                  <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">
+                            &times;
+                          </button>
+                          <h4 class="modal-title"> </h4>
+                        </div>
+                  
+                        <div class="modal-body">
+                          <h4>
+                            Rejection Reason
+                          </h4>
+                          <div class="col-md-12 col-xs-12">
+                            <textarea
+                            #rejectReason
+                              type="text"
+                              [formControl]="
+                              addRegisterData.controls['rejectReason']"
+                              placeholder="Enter Rejection Reason"
+                              class="inputField form-control form-control-line"
+                              formControlName="rejectReason"
+                              (keyup)="rejectReasonCheck(rejectReason.value);"
+                              
+                            ></textarea>
+                          </div>
+                          <!-- <div *ngIf="displayReasonError">
+                          <span class="error">Reject Reason cannot be empty</span>
+                        </div> -->
+                        </div>
+                        <div class="modal-footer">
+                       
+                          <button type="button" [disabled]="displayReasonError"  (click)="rejectData(addRegisterData.value)"  class="btn btn-default"
+                            data-dismiss="modal">
+                            Submit
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="myModal1" class="modal fade" role="dialog1">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">
+                            &times;
+                          </button>
+                          <h4 class="modal-title"> </h4>
+                        </div>
+                  
+                        <div class="modal-body">
+                          <h4>
+                            Are you sure you want to Approve this Customer?
+                          </h4>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default"
+                            data-dismiss="modal">
+                            No
+                          </button>
+                       
+                          <button type="button" type="submit" class="btn btn-default"
+                            (click)="approveData(addRegisterData.value)" data-dismiss="modal">
+                            YES
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- changes by sanchita 14-December-2019 starts-->
+                  <div *ngIf="approval == 'true'">
+                    <button
+                      type="button"
+                      class="btn headerButton col-3 m-10"
+                      style="background: #053c6d;font-size: 16px;font-family: Arial, Helvetica, sans-serif;"
+                      (click)="t.select('userDetails')"
+                    >
+                      <span>Back</span>
+                    </button>
+                    <button
+                    class="btn headerButton col-3 m-10 m-l-0"
+                    style="border-color: grey;
+                    background-color: #f3f5f5;
+                    color:#465F75;
+                    border-radius: 4px;
+                    border-width: 2px;"
+                    [routerLink]="['/authentication/Checker']"
+                  >
+                    <span>Go to Profile Page</span>
+                  </button>
+                  <button class=" btn headerButton col-3 m-10 m-l-0" style="background: #053c6d;font-size: 16px;font-family: Arial, Helvetica, sans-serif;" (click)="capture()"><span>Capture PDF</span></button>
+
+                  </div>
+                  
+                  <!-- changes by sanchita 14-December-2019 ends -->
+                </div>
+                <div
+                  class="col-md-4 col-xs-6 p-l-20 m-t-40"
+                  style="background: #f1f1f1;margin-bottom: 6%;"
+                >
+                  <p
+                    class="title"
+                    style="color: #053c6d;font-size: 25px;font-family: Arial, Helvetica, sans-serif; margin-top: 5%;"
+                  >
+                    Selected Product-Feature
+                  </p>
+                  <hr class="style-one" />
+                  <br />
+                  <div style="margin-left:10%" class="row">
+                    <div class="col-5 col-md-5 col-xs-5">
+                      <img
+                        style="width:100%; height: 100px;"
+                        [src]="productImage"
+                        class="img-thumnails border m-0"
+                      />
+                    </div>
+                    <div class="col-5 col-md-5 col-xs-5">
+                      <img
+                        style="width:100%; height: 100px;"
+                        [src]="serviceImage"
+                        class="img-thumnails border m-0"
+                      />
+                    </div>
+                  </div>
+                  <div style="margin-left:10%;height:16%" class="row">
+                    <div class="col-5 col-md-5 col-xs-5">
+                      <p style="font-size: 16px">AccountInsights</p>
+                    </div>
+                    <div class="col-5 col-md-5 col-xs-5" *ngIf="serviceName">
+                      <p style="font-size: 16px">
+                        {{serviceName}}
+                      </p>
+                    </div>
+                  </div>
+                  <br />
+                  <hr class="style-one" *ngIf="approval == 'false'" />
+                </div>
+              </div>
+<!-- isurePay values start here -->
+              <div *ngIf="productName == 'iSurePay'" class="row">
+                <div class="col-md-8 col-xs-6 p-r-25">
+                  <p
+                    class="title"
+                    style="color: #053c6d;font-size: 25px;font-family: Arial, Helvetica, sans-serif;"
+                  >
+                    Service Details
+                  </p>
+                  <hr class="style-one" />
+                  <br />
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="control-label col-md-5"
+                          ><b>Type of Web Service</b></label
+                        >
+                        <label class="control-label col-md-1"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>
+                            {{
+                              productToDisplay.products[0].services[0]
+                                .webServiceType
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="control-label col-md-5"
+                          ><b>HTTP Method Type</b></label
+                        >
+                        <label class="control-label col-md-1"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>
+                            {{
+                              productToDisplay.products[0].services[0]
+                                .isure_communication_protocol
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="control-label col-md-5"
+                          ><b>Checksum Required</b></label
+                        >
+                        <label class="control-label col-md-1"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>
+                            {{
+                              productToDisplay.products[0].services[0]
+                                .checksumControl
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="control-label col-md-5"
+                          ><b>Encryption Method</b></label
+                        >
+                        <label class="control-label col-md-1"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>
+                            {{
+                              productToDisplay.products[0].services[0]
+                                .encryptionMethod
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <hr *ngIf="productEmail > 0" class="style-one" />
+                  <p
+                    *ngIf="productEmail > 0"
+                    class="title"
+                    style="color: #053c6d;font-size: 25px;font-family: Arial, Helvetica, sans-serif;"
+                  >
+                    Emails
+                  </p>
+                  <hr *ngIf="productEmail > 0" class="style-one" />
+                  <br *ngIf="productEmail > 0" />
+                  <table *ngIf="productEmail > 0" class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Srno</th>
+                        <th>Email Id</th>
+                      </tr>
+                    </thead>
+                    <tr
+                      *ngFor="
+                        let i of productToDisplay.products[0].services[0]
+                          .emails;
+                        let a = index
+                      "
+                    >
+                      <td *ngIf="i.lenght > 0">{{ a + 1 }}.</td>
+                      <td *ngIf="i.lenght > 0">
+                        {{ i.email }}
+                      </td>
+                    </tr>
+                  </table>
+
+                  <br *ngIf="productEmail > 0" />
+                  <hr class="style-one" />
+                  <p
+                    class="title"
+                    style="color: #053c6d;font-size: 25px;font-family: Arial, Helvetica, sans-serif;"
+                  >
+                    Setup Info
+                  </p>
+                  <hr class="style-one" />
+                  <br />
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="control-label col-md-5"
+                          ><b>Expected Transaction per day</b></label
+                        >
+                        <label class="control-label col-md-1"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>{{ productToDisplay.products[0].services[0].txnPerday }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="control-label col-md-5"
+                          ><b
+                            >Validation request parameter of unique ID</b
+                          ></label
+                        >
+                        <label class="control-label col-md-1"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>{{ productToDisplay.products[0].services[0].reqParameter }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="control-label col-md-5"
+                        ><b
+                          >Mode of payment</b
+                        ></label
+                      >
+                      <label class="control-label col-md-1"><b>:</b></label>
+                      <div class="col-md-6">
+                        <p>{{ productToDisplay.products[0].paymentOptionType}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="control-label col-md-5"
+                        ><b
+                          >Payment Details</b
+                        ></label
+                      >
+                      <label class="control-label col-md-1"><b>:</b></label>
+                      <div class="col-md-6">
+                        <p>{{ productToDisplay.products[0].paymentDetails}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  <div class="row">
+                  </div>
+                  <hr class="style-one" />
+                  <br />
+                  <div class="border border-secondary">
+                    <br />
+                    <div style="margin:1%" class="row">
+                      <div class="col-md-6 col-xs-6">
+                        <p
+                          class="title"
+                          style="color: #053c6d;font-size: 18px;font-family: Arial, Helvetica, sans-serif;"
+                        >
+                          UAT Details
+                        </p>
+                      </div>
+                      <div class="col-md-6 col-xs-6">
+                        <p
+                          class="title"
+                          style="color: #053c6d;font-size: 18px;font-family: Arial, Helvetica, sans-serif;"
+                        >
+                          Prod Details
+                        </p>
+                      </div>
+                    </div>
+                    <hr color="black" />
+                    <div style="margin:1%" class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Host Name</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0].hostNameUat
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Host Name</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0].hostNameProd
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="margin:1%" class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>UAT IP</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0].uatIp
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Prod IP</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0].prodIp
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="margin:1%" class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>UAT Port</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0].uatPort
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Prod Port</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0]
+                                  .prodPort
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="margin:1%" class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Communication Protocol</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0].communicationProtocolUAT
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Communication Protocol</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0]
+                                  .communicationProtocolProd
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="margin:1%" class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>HTTP Certificate</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0].httpCertificateUAT
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>HTTP Certificate</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0]
+                                  .httpCertificateProd
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="margin:1%" class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Service Timeout</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0].serviceTimeOutUAT
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Service Timeout</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0]
+                                  .serviceTimeOutProd
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="margin:1%" class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Service URL</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0].serviceURLUAT
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Service URL</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0]
+                                  .serviceURLProd
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="margin:1%" class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Service Name</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0].serviceNameInputUAT
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Service Name</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0]
+                                  .serviceNameInputProd
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="margin:1%" class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>UAT File</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0]
+                                  .uatFile1
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Prod File</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0]
+                                  .prodFile1
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="margin:1%" class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Service Timeout</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0].serviceTimeOutUAT2
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Service Timeout</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0]
+                                  .serviceTimeOutProd2
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="margin:1%" class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Service URL</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0].serviceURLUAT2
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Service URL</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0]
+                                  .serviceURLProd2
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="margin:1%" class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Service Name</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0].serviceNameInputUAT2
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Service Name</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0]
+                                  .serviceNameInputProd2
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="margin:1%" class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>UAT File2</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0]
+                                  .uatFile2
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label col-md-3"
+                            ><b>Prod File2</b></label
+                          >
+                          <label class="control-label col-md-1"><b>:</b></label>
+                          <div class="col-md-8">
+                            <p>
+                              {{
+                                productToDisplay.products[0].services[0]
+                                  .prodFile2
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <br />
+                    <br />
+                  </div>
+                  <br />
+                  <hr class="style-one" />
+                  <br />
+                  <div class="row" *ngIf="approval == 'true'">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="control-label col-md-5"
+                          ><b>iCore Client Code</b></label
+                        >
+                        <label class="control-label col-md-1"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>
+                            {{
+                             dataToDisplay?.iCoreClientCode
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="control-label col-md-5"
+                          ><b>Profund Client Code</b></label
+                        >
+                        <label class="control-label col-md-1"><b>:</b></label>
+                        <div class="col-md-6">
+                          <p>
+                            {{
+                              dataToDisplay?.collectionCode
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="border border-secondary"
+                    *ngIf="approval == 'false'"
+                  >
+                    <div style="margin:1%">
+                      <div class="col-md-6 col-xs-6">
+                        <p
+                          class="title"
+                          style="color: #053c6d;font-size: 16px;font-family: Arial, Helvetica, sans-serif;"
+                        >
+                          <span style="color:red">*</span>Profund/IPS Backend Configuration
+                        </p>
+                      </div>
+                    </div>
+                    <br />
+                    <div style="margin:1%" class="row">
+                        <div class="col-md-12 col-xs-12">
+                          <span style="color:red">*</span><label for="iCoreClientCode">iCore Client Code</label>
+                          <input
+                            type="text"
+                            placeholder="Enter iCore Client Code"
+                            class="input inputField form-control form-control-line"
+                            formControlName="iCoreClientCode"
+                          />
+                        </div>
+                        <div>
+                          <p class="error" *ngIf="
+                              addRegisterData
+                                .get('iCoreClientCode')
+                                .hasError('required') &&
+                              addRegisterData.get('iCoreClientCode').touched
+                            ">
+                            <span class="glyphicon glyphicon-alert" style="color:red !important;margin-left: 10px;margin-top: 10px">Please Enter iCore Client Code</span>
+                          </p>
+                        </div>
+                        <div>
+                            <p class="error" *ngIf="
+                                addRegisterData
+                                  .get('iCoreClientCode')
+                                  .hasError('acc')
+                              ">
+                              <span class="glyphicon glyphicon-alert" style="color:red !important;margin-left: 10px;margin-top: 10px;">Please Enter iCore Client Code</span>
+                            </p>
+                          </div>
+                      </div>
+                      <br />
+                    <div style="margin:1%" class="row">
+                      <div class="col-md-12 col-xs-12">
+                        <span style="color:red">*</span><label for="collectionCode">Profund Client code</label>
+                        <input
+                          id="ipsClientCode"
+                          type="text"
+                          placeholder="Enter Profund Client code"
+                          class="input inputField form-control form-control-line"
+                          formControlName="collectionCode"
+                          [formControl]="
+                          addRegisterData.controls['collectionCode']"
+                        />
+                      </div>
+                      <div>
+                        <p class="error" *ngIf="
+                            addRegisterData
+                              .get('collectionCode')
+                              .hasError('required') &&
+                            addRegisterData.get('collectionCode').touched
+                          ">
+                          <span class="glyphicon glyphicon-alert" style="color:red !important;margin-left: 10px;margin-top: 10px">Please Enter IPS Client Code</span>
+                        </p>
+                      </div>
+                      <div>
+                          <p class="error" *ngIf="
+                              addRegisterData
+                                .get('collectionCode')
+                                .hasError('acc')
+                            ">
+                            <span class="glyphicon glyphicon-alert" style="color:red !important;margin-left: 10px;margin-top: 10px;">Please Enter IPS Client Code</span>
+                          </p>
+                        </div>
+                    </div>
+                   
+                
+                    <br />
+                  </div>
+                  <br />
+                  <hr class="style-one" *ngIf="approval == 'false'" />
+                  <div *ngIf="approval == 'false'">
+                    <button
+                      data-toggle="modal" data-target="#myModal1"
+                      class="btn headerButton col-3 m-10 m-l-0"
+                      style="background: #053c6d;font-size: 16px;font-family: Arial, Helvetica, sans-serif;"
+                    >
+                      <span>Approve</span>
+                    </button>
+                    <button
+                    data-toggle="modal" data-target="#myModal"
+                      class="btn headerButton col-3 m-10 m-l-0"
+                      style="background: #053c6d;font-size: 16px;font-family: Arial, Helvetica, sans-serif;"
+                    >
+                      <span>Reject</span>
+                    </button>
+                    <button  
+                    class="btn headerButton col-3 m-10 m-l-0"
+                    style="background: #053c6d;font-size: 16px;font-family: Arial, Helvetica, sans-serif;"
+                    [routerLink]="['/authentication/Checker']"
+                  >
+                    <span>Go to Profile Page</span>
+                  </button>
+                    <!-- <button class=" btn headerButton col-3 m-10 m-l-0" style="background: #053c6d;font-size: 16px;font-family: Arial, Helvetica, sans-serif;" (click)="capture()"><span>Capture PDF</span></button> -->
+
+                   
+                  </div>
+                  <div id="myModal" class="modal fade" role="dialog">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                              &times;
+                            </button>
+                            <h4 class="modal-title"> </h4>
+                          </div>
+                    
+                          <div class="modal-body">
+                            <h4>
+                              Rejection Reason
+                            </h4>
+                            <div class="col-md-12 col-xs-12">
+                              <textarea
+                                type="text"
+                                placeholder="Enter Rejection Reason"
+                                class="inputField form-control form-control-line"
+                                formControlName="rejectReason"
+                              ></textarea>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                         
+                            <button type="button"   (click)="rejectData(addRegisterData.value)"  class="btn btn-default"
+                              data-dismiss="modal">
+                              Submit
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="myModal1" class="modal fade" role="dialog1">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                              &times;
+                            </button>
+                            <h4 class="modal-title"> </h4>
+                          </div>
+                    
+                          <div class="modal-body">
+                            <h4>
+                              Are you sure you want to Approve this Customer?
+                            </h4>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default"
+                              data-dismiss="modal">
+                              No
+                            </button>
+                         
+                            <button type="button" type="submit" class="btn btn-default"
+                              (click)="approveData(addRegisterData.value)" data-dismiss="modal">
+                              YES
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <!-- changes by sanchita 14-December-2019 starts-->
+                  <div *ngIf="approval == 'true'">
+                    <button
+                      type="button"
+                      class="btn headerButton col-3 m-10"
+                      style="background: #053c6d;font-size: 16px;font-family: Arial, Helvetica, sans-serif;"
+                      (click)="t.select('userDetails')"
+                    >
+                      <span>Back</span>
+                    </button>
+                    <button  
+                    class="btn headerButton col-3 m-10 m-l-0"
+                    style="background: #053c6d;font-size: 16px;font-family: Arial, Helvetica, sans-serif;"
+                    [routerLink]="['/authentication/Checker']"
+                  >
+                    <span>Go to Profile Page</span>
+                  </button>
+                  <button class=" btn headerButton col-3 m-10 m-l-0" style="background: #053c6d;font-size: 16px;font-family: Arial, Helvetica, sans-serif;" (click)="capture()"><span>Capture PDF</span></button>
+  
+                  </div>
+                  <!-- changes by sanchita 14-December-2019 ends -->
+                </div>
+                <div
+                  class="col-md-4 col-xs-6 p-l-20"
+                  style="background: #f1f1f1;margin-bottom: 6%;"
+                >
+                  <p
+                    class="title"
+                    style="color: #053c6d;font-size: 25px;font-family: Arial, Helvetica, sans-serif;"
+                  >
+                    Selected Product-Feature
+                  </p>
+                  <hr class="style-one" />
+                  <br />
+                  <div style="margin-left:10%" class="row">
+                    <div class="col-5 col-md-5 col-xs-5">
+                      <img
+                        style="width:100%; height: 100px;"
+                        [src]="productImage"
+                        class="img-thumnails border m-0"
+                      />
+                    </div>
+                    <div class="col-5 col-md-5 col-xs-5">
+                      <img
+                        style="width:100%; height: 100px;"
+                        [src]="serviceImage"
+                        class="img-thumnails border m-0"
+                      />
+                    </div>
+                  </div>
+                  <div style="margin-left:10%;height:20.9%" class="row">
+                    <div class="col-5 col-md-5 col-xs-5">
+                      <p style="font-size: 16px">AccountInsights</p>
+                    </div>
+                    <div class="col-5 col-md-5 col-xs-5" *ngIf="serviceName">
+                      <p style="font-size: 16px">
+                        {{serviceName}}
+                        <!-- {{
+                          serviceName?.length > 25
+                            ? (serviceName | slice: 0:25) + "..."
+                            : serviceName
+                        }} -->
+                      </p>
+                    </div>
+                  </div>
+                  <br />
+                  <hr class="style-one" />
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </form>
+    <!-- Tabset ends here -->
+  </div>
+</div>
+
+<!-- <footer class="footer text-right" id="footerCss">
+  <p style="color: black">Â© 2018 ICICI. API Developer {{projectVersion}}</p>
+</footer> -->
+<!-- <footer class="footer text-right" style="height: 54px" id="footercss">
+  <p id="footerContent">Â© 2018 ICICI. API Developer {{version}}</p>
+</footer> -->
+<footer class="footer text-right" id="footercss">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <div>
+      <p style="text-align:left" class="db-white">Curious about what’s next</p>
+      </div>
+      <div>
+          <p class="db-lighterblue" style="text-align:left">Subscribe to our newsletter to keep up with updates,
+              events and more.
+              </p>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-7 col-xs-12 col-sm-12 d-none d-lg-block">
+            <input class="emailInput inputField form-control form-control-line" type="email"
+            placeholder="Email address"/>
+        </div>
+        <div class="col-md-5 col-xs-12 col-sm-12 d-none d-lg-block">
+            <div class="input-group mb-3">
+                <div (click)="loginData(addLoginData.value)" class="module-border-wrap" style="border-radius: 4px;">
+                    <div class="subscribeButton" style=" border: 2px solid transparent;
+                    border-radius: 1px;
+                    cursor: pointer;
+                    transition: border-color .2s;">
+                    <span style="text-align: center;">Subscribe</span>
+                    </div></div>
+              </div>
+        </div>
+        </div>
+        <div class="d-sm-none">
+            <input class="emailInput inputField form-control form-control-line" type="email"
+            placeholder="Email address"/>
+            <br/>
+            <div class="input-group mb-3">
+                <div (click)="loginData(addLoginData.value)" class="module-border-wrap" style="border-radius: 4px;">
+                    <div class="subscribeButton" style=" border: 2px solid transparent;
+                    border-radius: 1px;
+                    cursor: pointer;
+                    transition: border-color .2s;">
+                    <span style="text-align: center;">Subscribe</span>
+                    </div></div>
+              </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 col-sm-2 col-lg-1">
+              <div style="float:center">
+                  <input type="checkbox">
+<span class="checkmark"></span>
+              </div>
+            </div>
+          <div class="col-xs-8 col-sm-8 col-lg-9" style="text-align:center">
+              <p class="db-lighterblue">I agree that Deutsche Bank AG sends me newsletters about Deutsche Bank API Program. I can withdraw my consent at any time by sending an e-mail to newsletter.dbapi@db.com. For further information please see our Data Privacy Notice.</p>
+          </div>
+        </div>
+    </div>
+    </div>  
+    <br/>
+    <br/>
+    <div class="border-h-dark"></div>
+    <!-- <p id="footerContent">Â© 2018 ICICI. API Developer {{version}}</p> -->
+    <br/>
+    <div class="row">
+        <div class="col-md-1"></div>
+      <div class="col-md-4">
+        <p style="text-align:left" class="db-lighterblue">© 2019 Deutsche Bank AG, Frankfurt am Main</p>
+      </div>
+      <div class="col-md-6">
+          <a><small class="db-lighterblue">Release Notes</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">FAQ</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">Imprint</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">Terms and Conditions</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">Cookie Note</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">Privacy Notice</small></a>
+      </div>
+    </div>
+    </footer>
+<div class="alert myalert alert-info" id="a">
+  <i class="fa fa-check-circle" style="margin-right: 15px;"></i>Subscription Approved Sucessfully!
+</div>
+<div class="alert myalert2 alert-info" id="b">
+  <i class="fa fa-check-circle" style="margin-right: 15px;"></i>Subscription Rejected Sucessfully!
+</div>

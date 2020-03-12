@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"ICICI.file"}],"uuid":"3a57e0d082a04ea3a2f6a317809c3884"}

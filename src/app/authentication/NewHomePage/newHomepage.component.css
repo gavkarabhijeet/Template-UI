@@ -1,0 +1,259 @@
+
+    /* header */
+    #topbar1 {
+        /* background-color: #333; */
+        position: fixed;
+        top: 0;
+        width: 100%;
+        display: block;
+        transition: top 0.3s;
+      }
+	.db-white{
+	    color: #fff;
+	    font-size:x-large;
+	    }
+	    .db-lighterblue {
+	    color: #9eb8cf;
+	    }
+	    .emailInput{
+	    background-color: #273843!important;
+	    height:50px!important;
+	    border-color: #273843;
+	    }
+	    .module-border-wrap {
+	    max-width: 250px;
+	    padding: 1rem;
+	    position: relative;
+	    background: linear-gradient(0deg,#2aa2da,#52ffff);
+	    padding: 3px;
+	    }
+	    
+	    .subscribeButton{
+	    background: #051b2d;
+	    color: #fff;
+	    padding:9px;
+	    width:85px;
+	    height:44px!important;
+	    text-align: center;
+	    }
+	    .checkmark {
+	    background-color: #2196F3;
+	    }
+	    .db-lighterblue {
+	    color: #9eb8cf;
+	    }
+	
+	
+	/* header */
+.logo1{
+    height: 10%; width: 10%; margin-left: 12%; margin-top: 1%;
+}
+.divPop{
+    border: 1px solid black; text-align: justify; margin-left: 12%; margin-top: 1%; z-index: 9;background-color: #fff; box-shadow: -4px 0px 2px grey;
+     
+}
+.div1{
+    margin-left: 100%; background-color: #4E9AF7; color: white; border-radius: 50%; margin-top: 7%; width: 30px; height: 28px; padding: 3px 0px 0px 11px;
+}
+.div2{
+    margin-left: 100%; background-color: #4E9AF7; color: white; border-radius: 50%; margin-top: 7%; width: 30px; height: 28px; padding: 3px 0px 0px 11px;
+}
+.div3{
+    margin-left: 100%; background-color: #4E9AF7; color: white; border-radius: 50%; margin-top: 7%; width: 30px; height: 28px; padding: 3px 0px 0px 11px;
+}
+.rightDiv{
+    background-image: url('../../../assets/images/bag3.png');
+    background-repeat: no-repeat;
+    background-position: 1%;
+}
+.cancelButton{
+    color: #4E9AF7;
+     /* margin-bottom: 1%; */
+}
+.prevButton{
+    color: #4E9AF7; margin-right: 2%;
+}
+.nextButton{
+    background-color: #4E9AF7; color: white;   
+}
+.right{
+    margin-bottom: 10%; margin-top: 25%; margin-left: 20%; margin-right: 15%; 
+}
+.circle {
+    display: block;
+  height: 23px;
+  width: 23px;
+  line-height: 23px;
+  
+  -moz-border-radius: 30px; /* or 50% */
+  border-radius: 30px; /* or 50% */
+  
+  background-color: #4E9AF7;
+  color: white;
+  text-align: center;
+  }
+
+.circle1{
+    margin-left: -11%;
+    z-index: 9;
+    margin-right: 9%;
+}
+.circle2{
+    margin-left: -11%;
+    z-index: 9;
+    margin-right: 9%;
+    background-color: #fff;
+    color: #D3D2D7;
+    border: 1px solid #D3D2D7;
+}
+.circle3{
+    margin-left: -11%;
+    z-index: 9;
+    margin-right: 9%;
+    background-color: #fff;
+    color: #D3D2D7;
+    border: 1px solid #D3D2D7;
+}
+.backImg{
+    background-image: url('/assets/images/bag2.png');
+    background-repeat: no-repeat;
+    
+}
+
+/* footer */
+.footerText {
+    color: #000000 !important;
+  }
+  
+  .footerText:hover {
+    color: #8c8b8b !important;
+  }
+  .db-lighterblue {
+    color: #9eb8cf;
+  }
+  .db-white{
+    color: #fff;
+    font-size:x-large;
+  }
+  .module-border-wrap {
+    max-width: 250px;
+    padding: 1rem;
+    position: relative;
+    background: linear-gradient(0deg,#2aa2da,#52ffff);
+    padding: 3px;
+  }
+  .subscribeButton{
+    background: #051b2d;
+    color: #fff;
+    padding:9px;
+    width:85px;
+    height:44px!important;
+    text-align: center;
+  }
+  .emailInput{
+    background-color: #273843!important;
+    height:50px!important;
+    border-color: #273843;
+  }
+  .checkmark {
+    background-color: #2196F3;
+  }
+  .border-h-dark {
+    border-bottom: 1px solid #1a3248;
+    margin-bottom: -2px;
+    width: 100%;
+  }
+
+/* footer */
+
+
+
+
+
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .circle1{
+        margin-left: -14%;
+        margin-bottom: -11%;
+    }
+    .circle2{
+        margin-left: -14%;
+        margin-bottom: -11%;
+    }
+    .circle3{
+        margin-left: -14%;
+        margin-bottom: -11%;
+    }
+    
+}
+@media (min-width: 481px) and (max-width: 767px) {
+    .prevButton{
+        /* margin-left: 21%; */
+    }
+    .circle1{
+        margin-left: -22%;
+        margin-bottom: -10%;
+    }
+    .circle2{
+        margin-left: -22%;
+        margin-bottom: -10%;
+    }
+    .circle3{
+        margin-left: -22%;
+        margin-bottom: -10%;
+    }
+
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+.prevButton{
+        margin-left: 21%;
+    }
+    .circle1{
+        margin-left: -14%;
+        margin-bottom: -16%;
+    }
+    .circle2{
+        margin-left: -14%;
+        margin-bottom: -11%;
+    }
+    .circle3{
+        margin-left: -14%;
+        margin-bottom: -12%;
+    }
+    
+}
+@media (min-width:1025px) and (max-width: 1919px){
+    .prevButton{
+        margin-left: 21%;
+    }
+    .circle1{
+        margin-left: -11%;
+        margin-bottom: -16%;
+    }
+    .circle2{
+        margin-left: -11%;
+        margin-bottom: -11%;
+    }
+    .circle3{
+        margin-left: -11%;
+        margin-bottom: -12%;
+    }
+}
+@media (min-width:1920px) and (max-width: 2560px){
+    .circle1{
+        margin-left: -8%;
+        margin-bottom: 7%;
+    }
+    .circle2{
+        margin-left: -8%;
+        margin-bottom: 7%;
+    }
+    .circle3{
+        margin-left: -8%;
+        margin-bottom: 7%;
+    }
+    .prevButton{
+        margin-left: 23%;
+    }
+}

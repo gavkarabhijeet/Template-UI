@@ -1,0 +1,40 @@
+<svg id="c5de405a-fef4-46cc-a6a3-8d2e865f4eb1" data-name="Clean Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 97 115">
+  <defs>
+    <mask id="022221ef-72af-49a8-97ac-3ef5947b38cd" x="3.35" y="16.1" width="92.42" height="76.44" maskUnits="userSpaceOnUse">
+      <g>
+        <line x1="80.37" y1="28.39" x2="61.57" y2="28.39" style="fill: none;stroke: #fff;stroke-miterlimit: 10"/>
+        <line x1="71.69" y1="87.69" x2="45.66" y2="87.69" style="fill: none;stroke: #fff;stroke-miterlimit: 10"/>
+        <line x1="36.98" y1="21.16" x2="10.95" y2="21.16" style="fill: none;stroke: #fff;stroke-miterlimit: 10"/>
+        <line x1="58.68" y1="28.39" x2="55.79" y2="28.39" style="fill: none;stroke: #fff;stroke-miterlimit: 10"/>
+        <line x1="52.89" y1="28.39" x2="50" y2="28.39" style="fill: none;stroke: #fff;stroke-miterlimit: 10"/>
+        <line x1="47.11" y1="28.39" x2="44.21" y2="28.39" style="fill: none;stroke: #fff;stroke-miterlimit: 10"/>
+        <line x1="28.31" y1="48.64" x2="21.07" y2="48.64" style="fill: none;stroke: #fff;stroke-miterlimit: 10"/>
+        <line x1="23.97" y1="54.43" x2="5.17" y2="54.43" style="fill: none;stroke: #fff;stroke-miterlimit: 10"/>
+        <line x1="15.29" y1="48.64" x2="18.18" y2="48.64" style="fill: none;stroke: #fff;stroke-miterlimit: 10"/>
+        <line x1="34.09" y1="64.55" x2="15.29" y2="64.55" style="fill: none;stroke: #fff;stroke-miterlimit: 10"/>
+      </g>
+    </mask>
+    <linearGradient id="3167596e-f261-40d5-95f4-67ea372db7fb" data-name="Verlauf" x1="49.56" y1="16.1" x2="49.56" y2="92.55" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4ef2f1"/>
+      <stop offset="1" stop-color="#299ed4"/>
+    </linearGradient>
+  </defs>
+  <title>_</title>
+  <g id="6c961f10-672a-4449-9135-7673ae6e3923" data-name="3 - Fill">
+    <path d="M83.26,47.2H41.32A4.26,4.26,0,0,1,37,51.53V66a4.26,4.26,0,0,1,4.34,4.34H83.26A4.26,4.26,0,0,1,87.6,66V51.53A4.26,4.26,0,0,1,83.26,47.2ZM62.29,66c-3.59,0-6.51-3.24-6.51-7.23s2.92-7.24,6.51-7.24,6.51,3.24,6.51,7.24S65.89,66,62.29,66Z" style="fill: #bcc0c4"/>
+  </g>
+  <g id="84b26179-8da2-4036-9d57-9970cef7a679" data-name="1 - Stroke">
+    <polyline points="29.75 64.55 29.75 39.96 94.83 39.96 94.83 77.57 29.75 77.57 29.75 68.89" style="fill: none;stroke: #526468;stroke-miterlimit: 10"/>
+  </g>
+  <g id="f4ffac97-b5f7-46ee-962b-d342bd3467aa" data-name="0 - Hover">
+    <g style="mask: url(#022221ef-72af-49a8-97ac-3ef5947b38cd)">
+      <rect x="3.35" y="16.1" width="92.42" height="76.44" style="fill: url(#3167596e-f261-40d5-95f4-67ea372db7fb)"/>
+    </g>
+  </g>
+  <g id="b73ef933-cc00-46ae-a2d6-c14e97147df2" data-name="1 - Stroke">
+    <path d="M83.26,70.34H41.32A4.26,4.26,0,0,0,37,66h0V51.53h0a4.26,4.26,0,0,0,4.34-4.33H83.26a4.26,4.26,0,0,0,4.34,4.33V66h0a4.26,4.26,0,0,0-4.34,4.34Z" style="fill: none;stroke: #526468;stroke-miterlimit: 10"/>
+    <ellipse cx="62.29" cy="58.77" rx="6.51" ry="7.23" style="fill: none;stroke: #526468;stroke-miterlimit: 10"/>
+    <line x1="45.66" y1="58.77" x2="48.55" y2="58.77" style="fill: none;stroke: #526468;stroke-miterlimit: 10"/>
+    <line x1="76.03" y1="58.77" x2="78.93" y2="58.77" style="fill: none;stroke: #526468;stroke-miterlimit: 10"/>
+  </g>
+</svg>

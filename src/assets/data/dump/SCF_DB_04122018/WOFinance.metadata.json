@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"SCF_DB_04122018.WOFinance"}],"uuid":"88745e512ea94a278fe6677a3dcecb6b"}

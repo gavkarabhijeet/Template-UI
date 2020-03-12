@@ -1,0 +1,169 @@
+<div>
+  <header class="topbar" [attr.data-navbarbg]="options.navbarbg"
+    style="  background: #ffffff;height:50px;position: fixed;width:100%;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white navbar-custom border-bottom"
+      style="background: #f5821f !important;height:55px">
+      <!-- <a style="background: white !important;"> -->
+        <a [routerLink]="['/authentication/Home']"><img alt="img" src="assets/images/ICICI Bank Logo Orange Bg.png" style="width: 173px;
+      height: 39px;" class="img-fluid " /></a>
+      <!-- <img
+        alt="img"
+        src="assets/images/ICICI-Bank-PNG-Icon-1024x1024.png"
+        style="width: 173px;
+    height: 39px;"
+        class="img-fluid "
+      />
+      <img
+        alt="img"
+        src="assets/images/icici_bank_logo_text.png"
+        style="width: 173px;
+  height: 39px;"
+        class="img-fluid "
+      /> -->
+      <!-- </a> -->
+
+      <!-- <div class="input-group col-5 float-center " style="float:center;padding-left: 10%;">
+        <span class="input-group-append">
+          <div
+            class="input-group-text searchInput"
+            style="border-right: none;"
+          >
+            <i class="fa fa-search"></i>
+          </div>
+        </span>
+        <input
+          class="form-control searchInput  border-left-0"
+          type="search"
+          placeholder="Search"
+          id="example-search-input"
+        />
+      </div> -->
+      <button class="navbar-toggler" type="button" (click)="toggleNavbar()" style="justify-content: right;">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse pl-20 " [ngClass]="{ show: navbarOpen }" style="padding-left: 58%;">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a [routerLink]="['']"><span class="m-10"
+                style="font-size: 16px;font-family: Arial,Helvetica,sans-serif;color:white !important;">Home</span></a>
+          </li>
+
+          <!-- <li class="nav-item">
+            <a [routerLink]="['/authentication/Catalog']"
+              ><span class="m-10 p-r-20" style="border-right: 1px solid #8c8b8b;"
+                >Catalog</span
+              ></a
+            >
+          </li> -->
+          <!-- 
+          <li>
+            <a [routerLink]="['/authentication/Profile']"
+              ><span class="m-20 p-r-20" style="border-right: 1px solid #8c8b8b"
+                >My Account</span
+              ></a
+            >
+          </li> -->
+
+          <!-- <li>
+            <a href="#"
+              ><span
+                class="m-10 p-r-20"
+                style="font-size: 16px;font-family: Arial,Helvetica,sans-serif;color:white !important;"
+                >Help</span
+              ></a
+            >
+          </li> -->
+          <li>
+            <a [routerLink]="['/authentication/login']"><span class="m-10"
+                style="font-size: 16px;font-family: Arial,Helvetica,sans-serif;color:white !important;">Login</span></a>
+          </li>
+          <!-- <li>
+            <a
+              [routerLink]="['/authentication/appDetails']"
+              style="font-size: 16px;font-family: Arial,Helvetica,sans-serif;color:white !important;"
+              ><span>SignUp</span></a
+            >
+          </li> -->
+        </ul>
+      </div>
+
+      <button class="btn headerButton m-10" (click)="subscribeNow()"
+        style="background:#053c6d !important;border-radius: 5%;">
+        <i class="fa fa-puzzle-piece mr-2"></i><span>Subscribe Now !</span>
+      </button>
+    </nav>
+  </header>
+
+  <div class="row border-bottom border-secondary">
+    <!-- Set 1 -->
+    <!-- <div class=""> -->
+    <div class="card col-sm-12 col-md-6 border-right border-secondary m-0" style="border-style: solid;">
+      <div class="card-body col-sm-12" height="500px;" style="margin-top:50px">
+        <!-- <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery> -->
+        <div *ngIf="productDescription != undefined">
+          <img alt="front" style="height:400px;width:100%" class="img-responsive" [src]="imagePath" alt="eCollection" />
+        </div>
+        <div class="card flex" *ngIf="productDescription == undefined" style="height: 400px">
+          <br />
+          <br />
+          <img class="card-body align-items-center d-flex justify-content-center" src="assets/images/dataNew.jpg" alt=""
+            width="100%" />
+        </div>
+        <hr *ngIf="productDescription != undefined" color="#f5821f" />
+        <p *ngIf="productDescription != undefined" class="title"
+          style="font-size: 40px;color:#053c6d;font-size: 25px;font-family:Arial, Helvetica, sans-serif">
+          {{ displayService }}
+        </p>
+        <p style="color:#053c6d" class="text-justify">
+          {{ productDescription }}
+        </p>
+      </div>
+    </div>
+    <!-- </div> -->
+    <!-- Set 1 -->
+    <!-- Set 2 -->
+    <!-- <div class=""> -->
+    <div class="card col-sm-12 col-md-6 p-10" style="min-height: 500px;margin-top:50px">
+      <div class="card-body p-10">
+        <p class="title" style="color:#053c6d;font-size: 25px;font-family:Arial, Helvetica, sans-serif">
+          {{ productName }}
+        </p>
+        <hr color="#f5821f" />
+        <p style="color:#053c6d" class="text-justify">{{ description }}</p>
+        <hr color="#f5821f" />
+        <select class="browser-default custom-select m-t-5 m-b-5" required name="serviceName" [(ngModel)]="serviceName"
+          [ngModelOptions]="{ standalone: true }" (ngModelChange)="onChange(serviceName)" *ngIf="browserValue=='false'">
+          <option value="undefined" selected disabled>{{productName.replace('ECollection','eCollection')}}: Please select a
+            Feature</option>
+          <option *ngFor="let value of dropdownData" [ngValue]="value.serviceName" selected="Select Flow">
+            <span>{{value.serviceName.replace('ECollection','eCollection')}}</span>
+          </option>
+        </select>
+        <select
+        class="inputField form-control form-control-line browser-default custom-select" required name="serviceName" [(ngModel)]="serviceName"
+        [ngModelOptions]="{ standalone: true }" (ngModelChange)="onChange(serviceName)" *ngIf="browserValue!='false'"  style="color: black ;"
+            >
+              <option value="undefined" selected disabled style="color: black ;">{{productName.replace('ECollection','eCollection')}}: Please select a
+                Feature</option>
+                <option *ngFor="let value of dropdownData" [ngValue]="value.serviceName" selected="Select Flow" style="color: black;">
+                  {{value.serviceName.replace('ECollection','eCollection')}}
+                </option>
+              
+            </select>
+        <hr color="#f5821f" />
+        <!-- <p style="color:#053c6d" class="text-justify">{{productDescription}}
+        </p> -->
+        <button style="background:#053c6d;float: right;" class="btn pageButtons col-4" (click)="onClick()">
+          Next
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Set 4 -->
+</div>
+<div>
+  <footer class="footer  text-right" id="footerCss">
+    <p style="color: black">Â© 2018 ICICI. API Developer</p>
+  </footer>
+</div>

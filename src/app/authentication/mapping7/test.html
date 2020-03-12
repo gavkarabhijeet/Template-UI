@@ -1,0 +1,81 @@
+<table class="table">
+        <thead class="bg-success text-white" id="theadCss">
+          <tr>
+
+            <th id="displayTableCss22" colspan="5"> Client Application Data </th>
+
+            <th colspan="1" id="borderlessCol12"> </th>
+            <th id="displayTableCss32" colspan="4"> ICICI Application Data </th>
+            <th colspan="1" id="borderlessCol12"> </th>
+            <th id="displayTableCss42" colspan="9">Mapping Data</th>
+          </tr>
+          <tr>
+            <th id="displayTableCss12" rowspan="1">Id </th>
+            <th id="theadCss22" colspan="3">Field Tag Name</th>
+            
+            <th id="theadCss32" colspan="1">Details</th>
+
+
+            <th colspan="1" id="borderlessCol22"> </th>
+            <th id="theadCss52" colspan="3">Field Tag Name</th>
+          
+            <th id="theadCss82" colspan="1">Details</th>
+
+            <th colspan="1" id="borderlessCol22"> </th>
+            <th id="theadCss92" colspan="2">Client Row No</th>
+            <th id="theadCss112" colspan="2">ICICI Field Name</th>
+            <th id="theadCss112" colspan="2">Client Field Name</th>
+
+            <th id="theadCss122" colspan="2">Data Type Verified</th>
+         
+            <th id="displayTableCss52" rowspan="1"> Actions</th>
+
+          </tr>
+        </thead>
+        <tbody>
+         
+            </td>
+            
+            <td *ngIf="data.tdataType==null" colspan="1" id="descriptionName12">
+
+              <label></label>
+            </td>
+            <td *ngIf="data.tdataType!=null" colspan="1" id="descriptionName22">
+
+              <i class="fas fa-info-circle"
+                (click)="descriptionRequest2(a,data,informationRequest3)" id="arrowCss2">
+              </i>
+
+            </td>
+
+            <td colspan="1" id="borderlessCol32"> </td>
+
+            <td colspan="2" id="directRowNo12" style="width:100%;height:100%;"><textarea
+                type="text" value="{{data.directRowNo}}" placeholder="Enter an Id"
+                (change)="enterDirectRowNumberRequest2(data,$event.target.value)"></textarea>
+            </td>
+            <td colspan="2" id="tfieldNameMapping12" style="width:100px;height:38px;">
+              {{data.tfieldNameMapping}}</td>
+
+            <td colspan="2" id="sourceFieldName12" style="width:100px;height:38px;">
+              {{data.sourceFieldName}}</td>
+
+            <td colspan="2" style="width:100px;height:38px;" id="datatypeVerified2"
+              *ngIf="(data.backgroundColor == 'false' && data.datatypeVerified!=null)"
+              style="color: red"><b>
+                {{data.datatypeVerified}}</b></td>
+
+            <td colspan="2" style="width:100px;height:38px;" id="datatypeVerified2"
+              *ngIf="(data.backgroundColor == 'true'  && data.datatypeVerified!=null)">
+              {{data.datatypeVerified}} </td>
+
+            <td colspan="2" *ngIf="data.datatypeVerified==null" id="datatypeVerified2"
+              style="width:100px;height:38px;">{{data.datatypeVerified}}</td>
+
+            <td id="deleteButton12">
+              <i class="fas fa-trash-alt" (click)="deleteValueRequest2(data)" id="iconCss">
+              </i>
+            </td>
+          </tr> 
+        </tbody>
+      </table>

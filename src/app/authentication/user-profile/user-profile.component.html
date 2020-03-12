@@ -1,0 +1,268 @@
+<!-- <header
+  class="topbar"
+  [attr.data-navbarbg]="options.navbarbg"
+  style=" background: #ffffff;height:60px;position: fixed;width:100%;"
+>
+  <nav
+    class="navbar navbar-expand-lg navbar-light bg-white navbar-custom border-bottom"
+    style="background: #f5821f !important;height:60px;"
+  >
+      <img
+      alt="img"
+      src="assets/images/ICICI Bank Logo Orange Bg.png"
+      style="width: 173px;
+         height: 50px;"
+      class="img-fluid"
+      />
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="toggleNavbar()"
+      style="justify-content: right;"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div
+      class="collapse navbar-collapse pl-20 "
+      [ngClass]="{ show: navbarOpen }"
+      style="padding-left: 50%;"
+    >
+    <div>
+      <br/>
+    <div style="color:white">Welcome {{firstName}}</div>
+     <div *ngIf="lastLoggedIn != undefined " style="color:white">You last logged in on {{lastLoggedIn | date}} &nbsp; {{lastLoggedIn | date: "HH:mm:ss"}}</div>&nbsp;
+    </div>
+    <div>
+      <ul class="navbar-nav float-right">
+        <li class="nav-item dropdown show " ngbDropdown placement="bottom-right">
+            <a ngbDropdownToggle class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
+                 aria-haspopup="true" aria-expanded="false">
+                <img src="assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY" ngbDropdownMenu>
+                 <span class="with-arrow  ">
+                    <span class="bg -primary " ></span>
+                </span>
+                <a class="dropdown-item" [routerLink]="['/change-password/changePassword']">
+                    <i class="ti-user m-r-5 m-l-5"></i> Change Password</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item pointer" (click)="logout();">
+                    <i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+              
+                
+            </div>
+        </li>
+    
+    </ul>
+    </div>
+    </div>
+  </nav>
+</header> -->
+
+<header
+  class="topbar"
+  [attr.data-navbarbg]="options.navbarbg"
+  style="  background: #ffffff;height: 50px;position: fixed;width:100%;"
+>
+
+ <!--Navbar -->
+<nav class="navbarColor mb-1 navbar navbar-expand-lg navbar-dark info-color border-bottom" style="height: 55px !important">
+  <div>
+    <div class="navbarBankName">Deutsche Bank</div>
+    <div class="navbarAPIProgram">API Program</div>
+  </div>
+  
+  <!-- <a class="navbar-brand">
+    <img
+      alt="img"
+      src="assets/images/ICICI Bank Logo Orange Bg.png"
+      style="width: 173px;
+         height: 39px;"
+      class="img-fluid"
+    />
+  </a> -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+    aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-4" >
+    <ul class="navbar-nav ml-auto">
+      <!-- <li class="nav-item " style="background: #f5821f !important;">
+        <a class="nav-link" [routerLink]="['']">
+          <span
+            
+          style="font-size: 16px;font-family: Arial,Helvetica,sans-serif;color:white !important;"
+          >Home</span>
+        </a>
+      </li> -->
+      <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/change-password/changePassword']">
+          <span class="navLinkColor" style="font-size: 16px;">Change Password</span>
+          </a>
+        </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="logout()">
+        <span class="navLinkColor" style="font-size: 16px;">Logout</span>
+        </a>
+      </li>
+     
+      <!-- <li class="nav-item">
+        <a class="nav-link navbarColor" (click)="clickSubscription()">&nbsp;
+          <i class="fa fa-puzzle-piece home-color"><i class="navLinkColor" style="font-family: Arial,Helvetica,sans-serif;">&nbsp;Subscribe Now !</i></i></a>
+      </li> -->
+    </ul>
+  </div>
+</nav>
+<!--/.Navbar -->
+</header>
+<div class="card">
+   <div class="card-body" style="margin-top: 90px;">
+      <div class="row">
+         <!-- Three tabs -->
+         <div class="col-12">
+            <div class="card">
+               <div class="card-body">
+                  <ngb-tabset
+                     type="pills"
+                     class="custom-pills profileTabset border-bottom"
+                     #tabRef="ngbTabset"
+                     >
+                     <ngb-tab class="profileTabs" title="List of Projects Created">
+                        <ng-template ngbTabContent>
+                           <div class="row" *ngFor="let app of getAppResponse; let i=index;">
+                              <table class="table table-striped table-responsive-md btn-table">
+                                 <thead>
+                                    <tr>
+                                       <th><strong>Sr.</strong></th>
+                                       <th><strong>App Name</strong></th>
+                                       <th><strong>App Version</strong></th>
+                                       <th><strong>Organization Name</strong></th>
+                                       <th><strong>Product Name</strong></th>
+                                       <th><strong>Feature Name</strong></th>
+                                       <th><strong>Status</strong></th>
+                                       <!-- <th><strong>Lifecycle Status</strong></th> -->
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    <tr>
+                                       <th scope="row">{{i + 1}}</th>
+                                       <td class="pointer" [routerLink]="['/authentication/Profile']" [queryParams]="{ projectId: app.projectId}">
+                                          <strong>{{app.projectName}}</strong> 
+                                          &nbsp;<span class="badge badge-primary">View</span>
+                                       </td>
+                                       <td>{{app.version}}</td>
+                                       <td>{{app.orgName}}</td>
+                                       <td>{{app.productName}}</td>
+                                       <td>{{serviceName}}</td>
+                                       <td>{{app.status}}</td>
+                                       <!-- <td></td> -->
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                          
+                        </ng-template>
+                     </ngb-tab>
+               </ngb-tabset>
+            </div>
+         </div>
+      </div>
+      <!-- Three tabs ends -->
+   </div>
+</div>
+</div>
+<!-- <hr class="line" /> -->
+<!-- <footer class="footer text-right" id="footerCss">
+   <p id="footerContent">Â© 2018 ICICI. API Developer</p>
+</footer> -->
+<footer class="footer text-right" id="footercss">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <div>
+      <p style="text-align:left" class="db-white">Curious about what’s next</p>
+      </div>
+      <div>
+          <p class="db-lighterblue" style="text-align:left">Subscribe to our newsletter to keep up with updates,
+              events and more.
+              </p>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-7 col-xs-12 col-sm-12 d-none d-lg-block">
+            <input class="emailInput inputField form-control form-control-line" type="email"
+            placeholder="Email address"/>
+        </div>
+        <div class="col-md-5 col-xs-12 col-sm-12 d-none d-lg-block">
+            <div class="input-group mb-3">
+                <div (click)="loginData(addLoginData.value)" class="module-border-wrap" style="border-radius: 4px;">
+                    <div class="subscribeButton" style=" border: 2px solid transparent;
+                    border-radius: 1px;
+                    cursor: pointer;
+                    transition: border-color .2s;">
+                    <span style="text-align: center;">Subscribe</span>
+                    </div></div>
+              </div>
+        </div>
+        </div>
+        <div class="d-sm-none">
+            <input class="emailInput inputField form-control form-control-line" type="email"
+            placeholder="Email address"/>
+            <br/>
+            <div class="input-group mb-3">
+                <div (click)="loginData(addLoginData.value)" class="module-border-wrap" style="border-radius: 4px;">
+                    <div class="subscribeButton" style=" border: 2px solid transparent;
+                    border-radius: 1px;
+                    cursor: pointer;
+                    transition: border-color .2s;">
+                    <span style="text-align: center;">Subscribe</span>
+                    </div></div>
+              </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 col-sm-2 col-lg-1">
+              <div style="float:center">
+                  <input type="checkbox">
+<span class="checkmark"></span>
+              </div>
+            </div>
+          <div class="col-xs-8 col-sm-8 col-lg-9" style="text-align:center">
+              <p class="db-lighterblue">I agree that Deutsche Bank AG sends me newsletters about Deutsche Bank API Program. I can withdraw my consent at any time by sending an e-mail to newsletter.dbapi@db.com. For further information please see our Data Privacy Notice.</p>
+          </div>
+        </div>
+    </div>
+    </div>  
+    <br/>
+    <br/>
+    <div class="border-h-dark"></div>
+    <!-- <p id="footerContent">Â© 2018 ICICI. API Developer {{version}}</p> -->
+    <br/>
+    <div class="row">
+        <div class="col-md-1"></div>
+      <div class="col-md-4">
+        <p style="text-align:left" class="db-lighterblue">© 2019 Deutsche Bank AG, Frankfurt am Main</p>
+      </div>
+      <div class="col-md-6">
+          <a><small class="db-lighterblue">Release Notes</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">FAQ</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">Imprint</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">Terms and Conditions</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">Cookie Note</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">Privacy Notice</small></a>
+      </div>
+    </div>
+    </footer>
+
+<!-- <svg> -->

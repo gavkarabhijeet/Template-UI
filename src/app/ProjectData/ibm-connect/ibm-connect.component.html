@@ -1,0 +1,90 @@
+<h4>API Validator</h4>
+
+<br>
+<br>
+<label>To successfully test and monitor the API's </label>
+<div style="text-align:center">
+    <div>
+             
+        &nbsp;<button style="width: 5%;" class="btn btn-secondary" (click)=nextLink()>Save</button>
+    </div>
+</div>
+
+<br>
+<br>
+
+<br>
+
+<div class="row">
+    <div class="col-md-12" style = "margin-bottom: 30px">
+        <label class="col-md-2">Method:
+
+            <!-- formControlName="method" class="form-control input-sm" -->
+            <select style="width:100%" [(ngModel)]="method">
+                <option *ngFor="let value of methods" [ngValue]="value">{{value}}</option>
+            </select>
+        </label>
+        <label class="col-md-7">Url:
+            <input type="text" style="width:100%" [(ngModel)]="url">
+        </label>
+
+        <label class="col-md-3">
+            <button style="width:100%" class="btn btn-secondary"
+                (click)="submitUrl(requestText,method,url,authUsername,authPassword,authorizationToken)">Test</button>
+        </label>
+
+
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="col-md-12" style="height:650px">
+        <ul class="nav nav-tabs side_nav" role="tablist">
+            <li *ngFor="let wallet of tab; let first = first;" [ngClass]="{firstItem: first}" role="presentation"
+                class="accounts_li" [class.active]="selectedwallet===tab">
+                <button (click)="selectedwallet = wallet" style="margin-left:30px" class="btn btn-secondary"
+                    aria-controls="one" role="tab" data-toggle="tab">{{wallet}}</button>
+
+            </li>
+        </ul>
+
+<br>
+        <div class="tab-content" style="height:550px">
+            <div *ngIf="selectedwallet === tab[0]" role="tabpanel" class="tab-pane active" ><br>
+                <h5>Basic Auth </h5>
+                <br>
+                <label>Enter Username : </label>
+                <input type="text" [(ngModel)]="authUsername" style="height:80px;width:400px;">
+                <br>
+                <br>
+
+                <label> Enter Password : </label>
+                <input type="text" [(ngModel)]="authPassword" style="height:80px;width:400px;">
+            </div>
+            <div *ngIf="selectedwallet === tab[1]" role="tabpanel" class="tab-pane active" >
+
+           <br>
+                <label>Enter Authorization Token: </label>
+                <textarea type="textarea" [(ngModel)]="authorizationToken"
+                    style="height:80px;width:900px;overflow-wrap: break-word;"> </textarea>
+            </div>
+        
+        <div *ngIf="selectedwallet === tab[2]" role="tabpanel" class="tab-pane active">
+            <br>
+            <label>Enter Request/JSON : </label>
+            <textarea type="textarea" [(ngModel)]="requestText"
+                style="height:490px;width:900px;overflow-wrap: break-word;"></textarea>
+
+
+
+        </div>
+    
+    <div *ngIf="selectedwallet === tab[3]" role="tabpanel" class="tab-pane active" >
+<br>
+        <label>Status: </label>{{  statusCode }} {{ statusResponse}}
+        <textarea type="textarea" [(ngModel)]="responseText"
+            style="height:490px;width:900px;overflow-wrap: break-word;"> </textarea>
+    </div>
+</div>
+</div>
+</div>

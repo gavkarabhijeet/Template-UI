@@ -1,0 +1,54 @@
+nav-tabs .nav-link {
+  color: black !important;
+  // width:231px
+}
+.nav-link:hover, .nav-link:focus {
+  color: black;
+  text-decoration: none;
+}
+.nav-link {
+   color: black;
+}
+.nav-tabs .nav-link.active {
+  color: black !important;
+}
+.mainTabs .nav-item .nav-link.active {
+  color: black !important;
+  border-bottom: 2px solid black !important;
+}
+.mainTabs .nav-item .nav-link {
+  color: black !important;
+  
+}
+
+.serviceDetailsTabs .nav-item .nav-link.active {
+  background-color: #aaaaaa;
+}
+.serviceDetailsTabs .nav-item .nav-link {
+  border: 1px solid #8c8b8b;
+}
+
+.serviceDetailsTabs .tab-content > .active {
+  border: 1px solid #8c8b8b;
+  border-top: none !important;
+}
+
+.mainTabset .nav-pills .nav-link {
+  border-bottom: 1px solid #8c8b8b;
+  font-size: 18px;
+  padding: 20px;
+}
+.mainTabset .nav-pills .nav-link.active {
+  border-bottom: 2px solid #39c3e7;
+
+}
+
+
+
+// .custom-pills .serviceDetailsTabs .nav-pills .nav-link {
+//   color: green !important;
+// }
+
+// :host ::ng-deep .serviceDetailsTabs a.nav-link {
+//   color: green;
+// }

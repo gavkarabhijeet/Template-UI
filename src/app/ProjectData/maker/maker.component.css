@@ -1,0 +1,181 @@
+#approvalButton{
+
+    color:white;
+    border:none;
+    background:#f07800;
+    margin-left:10px;
+}
+
+
+#rejectButton{
+    color:white;
+    border:none;
+    background:#f07800;
+    margin-left:10px;
+}
+
+#submitButtonCss{
+    color:white;
+    border:none;
+    background:#f07800;
+}
+
+#tableResponsiveDiv{
+    margin-top: -77px;
+  }
+
+#theadCss{
+    background: #0B3C6D !important;
+    border:none;
+  }
+
+
+#imageCss{
+    width:240px;height:240px;
+}
+
+#displayTableCss{
+
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+} 
+
+#displayTableCss1{
+
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+} 
+
+#displayTableCss2{
+
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+} 
+
+#displayTableCss3{
+
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+} 
+
+#displayTableCss4{
+
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+} 
+
+#displayTableCss5{
+
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+} 
+
+#displayTableCss6{
+
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+} 
+
+#displayTableCss7{
+
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+} 
+
+#displayTableCss8{
+
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+} 
+
+#displayTableCss9{
+
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+} 
+
+#displayTableCss10{
+
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+} 
+
+
+#usersSize{
+    font-size: 195%;
+  }
+  
+  #searchCss{
+    height:46px !important;
+  }
+  
+  #paginationCss{
+    padding-left:250px;
+  }
+  
+  
+  /* Responsive layout */
+  
+  @media (min-width: 320px) and (max-width: 480px) {
+   
+    #paginationCss{
+        padding-left:0px !important;
+      }
+      #iconButton1{
+        margin-left: 40px;
+    }
+
+    #displayTableCss10{
+        margin-left: 40px;
+        text-align: center;
+        font-family:Arial, Helvetica, sans-serif;
+    } 
+    
+    .fa-edit:before {
+        content: "\f044";
+        margin-left: 40px;
+    }
+  }
+  
+  @media (min-width: 481px) and (max-width: 767px) {
+    #iconButton1{
+        margin-left: 40px;
+    }
+    
+    #paginationCss{
+        padding-left:0px !important;
+      }
+  
+      .fa-edit:before {
+        content: "\f044";
+        margin-left: 40px;
+    }
+  
+  } 
+  @media (min-width: 768px) and (max-width: 1024px) {
+   
+    #iconButton1{
+        margin-left: 40px;
+    }
+    
+    #paginationCss{
+        padding-left:20px !important;
+      }
+
+      #approvalButton{
+
+        color:white;
+        border:none;
+        background:#f07800;
+        margin-left:28px;
+    }
+
+  }
+  @media (min-width:1025px) and (max-width: 1919px){
+    
+    #iconButton1{
+        margin-left: 40px;
+    }
+    
+    
+  }

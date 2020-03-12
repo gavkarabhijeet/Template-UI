@@ -1,0 +1,384 @@
+<!-- breadcrumb -->
+<nav *ngIf="true" class="breadcrumb" style="margin-top:-10px">
+  <a class="breadcrumb-item" [routerLink]="['/ProjectData/ProjectManagement']">Projects</a>
+  <span class="breadcrumb-item active">Products</span>
+</nav>
+<!-- breadcrumb -->
+<ngx-spinner size="medium" color="#f07800" type="ball-spin"></ngx-spinner>
+<div class="form-group row">
+  <label class="col-md-2" id="ProductSize">Product</label>
+  <div *ngIf="displayTable" class="col-md-6">
+    <form>
+      <input type='text' class="form-control" id="searchCss" placeholder='Search' (keyup)='updateFilter($event)' />
+    </form>
+  </div>
+  <button *ngIf="this.organisationName == 'ICICI'" class="btn btn-lg btn-outline-warning " id="addProduct"
+    placement="bottom" ngbTooltip="Add a new Product Here" (click)=" addProduct(content) ;  ">Add
+    Product</button>
+</div>
+<div class="row" id = "fontStyle">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card">
+          <div class="card-body">
+            <ng-template #content let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <h4 class="modal-title" style = "font-family:Arial, Helvetica, sans-serif;" id="modal-basic-title">Add Product Details</h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="addProductCreationData"
+                  (ngSubmit)="productCreationData(addProductCreationData.value) ;">
+                  <div class="form-group row">
+                    <label class="col-sm-4  control-label col-form-label">Product Name :</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" id="ProductName"
+                        [formControl]="addProductCreationData.controls['productName']" formControlName="productName"
+                        placeholder="Enter Product Name">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-4  control-label col-form-label">Version :</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" id="Version" placeholder=" Enter Version"
+                        [formControl]="addProductCreationData.controls['version']" formControlName="version">
+                    </div>
+                  </div>
+                  <button type="submit" id="buttonCss" class="btn btn-outline-dark">Submit</button>
+                </form>
+              </div>
+            </ng-template>
+
+          </div>
+        </div>
+        <div *ngIf="isDataEmpty" id="displayTableCss41">
+          <p id="displayTableCss42">
+            <b> No Data Available </b>
+          </p>
+          <img id="imageCss" src="assets/images/drawkit-folder-man-monochrome-400px.png" alt="logo" />
+        </div>
+        <!-- search bar -->
+        <div *ngIf="!isDataEmpty">
+          <div *ngIf="displayTable">
+            <!--  add product button ends -->
+            <div class="col-lg-12" id="tableResponsiveDiv">
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead class="bg-success text-white" id="theadCss">
+                        <tr>
+                          <th id="displayTableCss21">Id </th>
+                          <th id="displayTableCss22"> Name </th>
+                          <th id="displayTableCss23"> Version </th>
+                          <th id="displayTableCss24" *ngIf="displayCheckBox"> Select</th>
+                          <th id="displayTableCss25" *ngIf="displayStatus">Status</th>
+                          <th id="displayTableCss26">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        <tr
+                          *ngFor="let data of uploadedData| paginate: { itemsPerPage: 5, currentPage: p };let a=index">
+                          <td id="displayTableCss27">{{a+1}}</td>
+                          <td id="displayTableCss28">{{data.productName}}</td>
+                          <td id="displayTableCss29">{{data.version}}</td>
+                          <!-- code for multiple selection of products -->
+                          <!-- <td id="displayTableCss" *ngIf="displayCheckBox">
+                            <input type="checkBox" (change)="onSelectedCheckBox(data, $event)">
+                          </td> -->
+                          <td id="displayTableCss30" *ngIf="displayCheckBox">
+                            <input type="radio" name="flowCheck" (change)="onSelectedCheckBox(data, $event)">
+                          </td>
+                          <td id="displayTableCss31" *ngIf="displayStatus">
+                            Selected
+                          </td>
+                          <td id="displayTableCss32">
+                            <!-- view Flows -->
+                            <button id="iconButtonCss1" aria-label =" viewFlow" type="button" placement="bottom" ngbTooltip="View Flows"
+                              (click)="viewFlow(data)"><i class="fas fa-eye"></i></button>
+                            <!-- edit products -->
+                            <ng-template #contentEdit let-c="close" let-d="dismiss">
+                              <div class="modal-header">
+                                <h4 class="modal-title" id="modal-basic-title">Edit Details</h4>
+                                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="col-md-12">
+                                  <div class="card">
+                                    <div class="card-body">
+                                      <form>
+                                        <div class="form-group row">
+                                          <label class="col-sm-4  control-label ">Product Name :</label>
+                                          <div class="col-sm-6">
+                                            <input type="text" id="ProductName" class="form-control"
+                                              [(ngModel)]="editChosenProductName" [ngModelOptions]="{standalone: true}"
+                                              placeholder="Enter Product Name">
+                                          </div>
+                                        </div>
+                                        <div class="form-group row">
+                                          <label class="col-sm-4  control-label ">Version :</label>
+                                          <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="Version"
+                                              placeholder=" Enter Version" [(ngModel)]="editChosenProductVersion"
+                                              [ngModelOptions]="{standalone: true}">
+                                          </div>
+                                        </div>
+                                        <button type="submit" id="buttonCss"
+                                          (click)="productEditData(editChosenProductName,editChosenProductVersion) ;"
+                                          class="btn btn-outline-dark">Submit</button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </ng-template>
+                            <button id="iconButtonCss2" type="button" aria-label ="editProducts " placement="bottom" ngbTooltip="Edit Product"
+                              (click)="editProductsData(data,contentEdit)"><i class="far fa-edit"></i></button>
+
+                            <!-- Upload file/url/json -->
+                            <ng-template #contentUpload let-c="close" let-d="dismiss">
+                              <div class="modal-header">
+                                <h4 class="modal-title" id="modal-basic-title">Upload Data</h4>
+                                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="col-md-12">
+                                  <div class="card">
+                                    <div class="card-body">
+                                      <ngb-tabset>
+                                        <ngb-tab>
+                                          <ng-template ngbTabTitle><b>Upload WSDL/YAML/JSON File</b></ng-template>
+                                          <ng-template ngbTabContent>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <div class="col-sm-13">
+                                              <input type="file" (change)="fileChangeEvent($event)" id="fileCss"
+                                                placeholder="Upload a file" multiple />
+                                            </div>
+                                            <br>
+                                            <br>
+
+                                            <button (click)="submitFile()" id="buttonCss"
+                                              class="btn btn-outline-dark">Submit</button>
+                                          </ng-template>
+                                        </ngb-tab>
+                                        <ngb-tab>
+                                          <ng-template ngbTabTitle><b>URL</b></ng-template>
+                                          <ng-template ngbTabContent>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <div class="col-lg-10">
+                                              <input type="text" id="urlJson" placeholder="Enter Url"
+                                                class="form-control" [(ngModel)]="requestUrl">
+                                            </div>
+                                            <br>
+                                            <br>
+
+                                            <button (click)="submitUrl(requestUrl)" id="buttonCss"
+                                              class="btn btn-outline-dark">Submit</button>
+                                          </ng-template>
+                                        </ngb-tab>
+                                        <ngb-tab>
+                                          <ng-template ngbTabTitle><b>JSON</b></ng-template>
+                                          <ng-template ngbTabContent>
+                                            <textarea type="textarea" [(ngModel)]="requestJSON" class="form-control"
+                                              id="jsonCss"></textarea>
+                                            <br>
+                                            <br>
+                                            <button (click)="submitJson(requestJSON)" id="buttonCss"
+                                              class="btn btn-outline-dark">Submit</button>
+                                          </ng-template>
+                                        </ngb-tab>
+                                      </ngb-tabset>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </ng-template>
+                            <button id="iconButtonCss3" aria-label ="editProductModal1 " type="button" placement="bottom" ngbTooltip="Upload Data"
+                              (click)="editProduct(data,contentUpload)"><i class="fas fa-upload"></i></button>
+                            <button id="iconButtonCss4" aria-label ="deleteProductModal1 " type="button" placement="bottom" ngbTooltip="Delete Product"
+                              (click)="deleteProduct(data)"><i class="fas fa-trash-alt"></i></button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div id="paginationCss">
+                      <pagination-controls class="my-pagination" (pageChange)="p= $event"></pagination-controls>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!displayTable">
+            <!--  add product button ends -->
+            <div class="col-lg-12" id="tableResponsiveDiv">
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead class="bg-success text-white" id="theadCss">
+                        <tr>
+                          <th id="displayTableCss33">Id </th>
+                          <th id="displayTableCss34"> Name </th>
+                          <th id="displayTableCss35"> Version </th>
+                          <th id="displayTableCss36">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          *ngFor="let data of uploadedData| paginate: { itemsPerPage: 5, currentPage: p };let a=index">
+                          <td id="displayTableCss37">{{a+1}}</td>
+                          <td id="displayTableCss38">{{data.productName}}</td>
+                          <td id="displayTableCss39">{{data.version}}</td>
+                          <td id="displayTableCss40">
+                            <!-- view Flows -->
+                            <button id="iconButtonCss5" aria-label ="viewFlow1 " type="button" placement="bottom" ngbTooltip="View Flows"
+                              (click)="viewFlow(a)"><i class="fas fa-eye"></i></button>
+                            <!-- view services -->
+                            <button id="iconButtonCss6" aria-label ="viewServices " type="button" placement="bottom" ngbTooltip="View Services"
+                              (click)="viewServices(productData,a)"><i class="fas fa-eye"></i></button>
+                            <!-- edit products -->
+                            <ng-template #contentEdit let-c="close" let-d="dismiss">
+                              <div class="modal-header">
+                                <h4 class="modal-title" id="modal-basic-title">Edit Details</h4>
+                                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="col-md-12">
+                                  <div class="card">
+                                    <div class="card-body">
+                                      <form>
+                                        <div class="form-group row">
+                                          <label class="col-sm-4  control-label ">Product Name :</label>
+                                          <div class="col-sm-6">
+                                            <input type="text" id="ProductName" class="form-control"
+                                              [(ngModel)]="editChosenProductName" [ngModelOptions]="{standalone: true}"
+                                              placeholder="Enter Product Name">
+                                          </div>
+                                        </div>
+                                        <div class="form-group row">
+                                          <label class="col-sm-4  control-label ">Version :</label>
+                                          <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="Version"
+                                              placeholder=" Enter Version" [(ngModel)]="editChosenProductVersion"
+                                              [ngModelOptions]="{standalone: true}">
+                                          </div>
+                                        </div>
+                                        <button type="submit" id="buttonCss"
+                                          (click)="productEditData(editChosenProductName,editChosenProductVersion) ;"
+                                          class="btn btn-outline-dark">Submit</button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </ng-template>
+                            <button id="iconButtonCss7" aria-label =" editProductsModal" type="button" placement="bottom" ngbTooltip="Edit Product"
+                              (click)="editProductsData(data,contentEdit)"><i class="far fa-edit"></i></button>
+
+                            <!-- Upload file/url/json -->
+                            <ng-template #contentUpload let-c="close" let-d="dismiss">
+                              <div class="modal-header">
+                                <h4 class="modal-title" id="modal-basic-title">Upload Data</h4>
+                                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="col-md-12">
+                                  <div class="card">
+                                    <div class="card-body">
+                                      <ngb-tabset>
+                                        <ngb-tab>
+                                          <ng-template ngbTabTitle><b>Upload WSDL/YAML/JSON File</b></ng-template>
+                                          <ng-template ngbTabContent>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <div class="col-sm-13">
+                                              <input type="file" (change)="fileChangeEvent($event)" id="fileCss"
+                                                placeholder="Upload a file" multiple />
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <button (click)="submitFile()" id="buttonCss"
+                                              class="btn btn-outline-dark">Submit</button>
+                                          </ng-template>
+                                        </ngb-tab>
+                                        <ngb-tab>
+                                          <ng-template ngbTabTitle><b>URL</b></ng-template>
+                                          <ng-template ngbTabContent>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <div class="col-lg-10">
+                                              <input type="text" id="urlJson" placeholder="Enter Url"
+                                                class="form-control" [(ngModel)]="requestUrl">
+                                            </div>
+                                            <br>
+                                            <br>
+
+                                            <button (click)="submitUrl(requestUrl)" id="buttonCss"
+                                              class="btn btn-outline-dark">Submit</button>
+                                          </ng-template>
+                                        </ngb-tab>
+                                        <ngb-tab>
+                                          <ng-template ngbTabTitle><b>JSON</b></ng-template>
+                                          <ng-template ngbTabContent>
+                                            <textarea type="textarea" [(ngModel)]="requestJSON" class="form-control"
+                                              id="jsonCss"></textarea>
+                                            <br>
+                                            <br>
+                                            <button (click)="submitJson(requestJSON)" id="buttonCss"
+                                              class="btn btn-outline-dark">Submit</button>
+                                          </ng-template>
+                                        </ngb-tab>
+                                      </ngb-tabset>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </ng-template>
+                            <button id="iconButtonCss8" aria-label ="editProductModal2 " type="button" placement="bottom" ngbTooltip="Upload Data"
+                              (click)="editProduct(data,contentUpload)"><i class="fas fa-upload"></i></button>
+                            <button id="iconButtonCss9" aria-label ="deleteProductModal2 " type="button" placement="bottom" ngbTooltip="Delete Product"
+                              (click)="deleteProduct(data)"><i class="fas fa-trash-alt"></i></button>
+
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div id="paginationCss">
+                      <pagination-controls class="my-pagination" (pageChange)="p= $event"></pagination-controls>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Table ends -->
+        <div *ngIf="showButton">
+           <button type="button" class="btn btn-warning " id="finalSubmitCss" [disabled]="finalSubmit"
+          (click)="submitProduct()">Submit</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--row & card ends -->

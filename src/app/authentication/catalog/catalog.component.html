@@ -1,0 +1,234 @@
+<header class="topbar" [attr.data-navbarbg]="options.navbarbg"
+  style=" background-color:rgb(236, 234, 234) ; margin-bottom:0px">
+
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-white navbar-custom">
+
+    <div class="col-1"></div>
+    <div class="input-group col-5 float-center" style="float:center;">
+
+    </div>
+    <button class="navbar-toggler" type="button" (click)="toggleNavbar()" style="justify-content: right;">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a [routerLink]="['']"><span class="m-10 p-r-20"
+              style="border-right: 1px solid #8c8b8b; color: black">Home</span></a>
+        </li>
+
+        <li class="nav-item">
+          <a [routerLink]= "['/authentication/Catalog']"><span class="m-10 p-r-20" style="border-right: 1px solid #8c8b8b; color: black">Catalog</span></a>
+        </li>
+
+        <li>
+          <a [routerLink]= "['/authentication/Profile']"><span class="m-10 p-r-20" style="border-right: 1px solid #8c8b8b; color: black">My Account</span></a>
+        </li>
+
+        <li>
+          <a href="#"><span class="m-10 p-r-20" style="border-right: 1px solid #8c8b8b; color: black">Help</span></a>
+        </li>
+        <li>
+          <a href="#"><span class="m-10 p-r-20" style="border-right: 1px solid #8c8b8b; color: black">Login</span></a>
+        </li>
+        <li>
+          <a href="#"><span style=" color: black">SignUp</span></a>
+        </li>
+      </ul>
+    </div>
+
+    <button class="btn btn-secondary m-10" [routerLink]= "['/authentication/appDetails']">
+      <i class="fa fa-puzzle-piece mr-2"></i><span>New App</span>
+    </button>
+  </nav>
+
+
+</header>
+<!-- Header ends -->
+<!-- Tagline -->
+<div class="card " style=" background-color:rgb(236, 234, 234); margin-bottom:0px">
+  <div class="card-body">
+    <br>
+    <br>
+    <div class="container">
+      <div class="title" style="text-align: center; margin: 20px;">
+          <p class="m-b-40 m-t-40" style="font-size: 40px;">Tagline describing Express Connect</p>
+          <hr class="line col-3" style="float:center;" />
+      </div>
+
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="input-group col-5 float-center" style="float:center;">
+            <span class="input-group-append">
+              <div
+                class="input-group-text bg-light"
+                style="border-right: none;"
+              >
+                <i class="fa fa-search"></i>
+              </div>
+            </span>
+            <input
+              class="form-control py-2 border-left-0"
+              type="search"
+              placeholder="Search"
+              id="example-search-input"
+            />
+          </div>
+
+        <div class="col-3">
+          <button class="btn btn-secondary"> Submit </button>
+        </div>
+        <br>
+       
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Tagline ends -->
+
+<div class="card">
+  <div class="card-body">
+    <!-- Featured Categories -->
+    <h1 style="text-align:center">Featured Categories</h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+      dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+      exea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+      fugiat nulla pariatur.
+    </p>
+
+    <!-- Featured Categories ends -->
+
+    <table>
+      <thead></thead>
+      <tbody>
+        <tr>
+          <td style="width:200px">
+
+          </td>
+          <td>
+            <img src="../../../assets/images/alert/alert.png" width="70%" height="60%">
+          </td>
+          <td>
+            <img src="../../../assets/images/alert/alert.png" width="70%" height="60%">
+          </td>
+          <td>
+            <img src="../../../assets/images/alert/alert.png" width="70%" height="60%">
+
+          </td>
+          <td>
+            <img src="../../../assets/images/alert/alert.png" width="70%" height="60%">
+
+          </td>
+          <td style="width:200px"></td>
+        </tr>
+      </tbody>
+    </table>
+    <hr>
+    <table>
+      <thead></thead>
+      <tbody>
+        <tr>
+          <td style="width:400px;">
+            <img src="../../../assets/images/alert/alert.png" width="80%" height="70%">
+          </td>
+          <td class="verticalLine1"></td>
+          <td>
+            <h1 style="text-align:center">Newsletter</h1>
+            <div>
+              <span>
+
+                <div class="col-md-3"></div>
+                <div class=" col-md -9">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua.</div>
+              </span>
+            </div>
+            <br>
+
+            <div class="col-12 p-30 row">
+              <div class="col-md-6">
+                <input class="form-control py-2 border" type="text" value="Email Address" />
+              </div>
+
+              <div class="col-md-4 ml-2">
+                <button class="btn btn-secondary" routerLink="#">
+                  Subscribe
+                </button>
+              </div>
+            </div>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+    <hr>
+    <table>
+      <tbody>
+
+        <tr>
+          <td style="width:400px; margin-left:25px">
+
+            <h1> Header Regarding Your Products</h1>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.</p>
+
+            <div style="text-align:center">
+              <button class="btn btn-secondary m-10" routerLink="#">
+                Browse All </button>
+
+            </div>
+          </td>
+          <td class="verticalLine2"></td>
+          <td>
+            <div style = "margin-top:10%"></div>
+            <!-- first row -->
+            <div class="row" >
+              <div class="col-md-6" >
+                <img src="../../../assets/images/ECollections.png" width="40%" class = "spacing" height="60%"> <span class = "spacing">ECollections</span>
+              </div>
+              <div class="col-md-6">
+                <img src="../../../assets/images/iSurePay.jpg" width="40%" class = "spacing" height="60%"> <span class = "spacing">ISurePay</span>
+              </div>
+            </div>
+            <!-- second row -->
+
+            <div class="row" >
+              <div class="col-md-6">
+                <img src="../../../assets/images/alert/alert.png" width="40%" class = "spacing" height="60%"> <span class = "spacing" >Product Name</span>
+              </div>
+              <div class="col-md-6">
+                <img src="../../../assets/images/alert/alert.png" width="40%" class = "spacing" height="60%"> <span class = "spacing">Product Name</span>
+              </div>
+            </div>
+            <!-- third row -->
+
+            <div class="row" >
+              <div class="col-md-6">
+                <img src="../../../assets/images/alert/alert.png" width="40%" class = "spacing" height="60%"> <span class = "spacing">Product Name</span>
+              </div>
+              <div class="col-md-6">
+                <img src="../../../assets/images/alert/alert.png" width="40%" class = "spacing" height="60%"><span class = "spacing"> Product Name</span>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <footer class="footer text-center border-top" id="footerCss">
+      <div class="m-r-10">
+          <a [routerLink]= "['']"><span class="m-10 p-r-20" style="border-right: 1px solid #8c8b8b">Home</span></a>
+          <a [routerLink]= "['/authentication/Catalog']"><span class="m-10 p-r-20" style="border-right: 1px solid #8c8b8b">Catalog</span></a>
+          <a [routerLink]= "['/authentication/Profile']"><span class="m-10 p-r-20" style="border-right: 1px solid #8c8b8b">My Account</span></a>
+          <a href="#"><span class="m-10 p-r-20">Help</span></a>
+         
+      </div>
+      <br>
+      <div>
+          <p style="color: black">Â© 2018 ICICI. API Developer</p>
+      </div>
+  </footer>

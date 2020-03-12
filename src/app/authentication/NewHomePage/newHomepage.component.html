@@ -1,0 +1,230 @@
+<!-- header -->
+<header
+  class="topbar"
+  id="topbar1"
+  [attr.data-navbarbg]="options.navbarbg"
+  style="  background: #ffffff;height: 50px;position: fixed;width:100%;transition: top 0.2s ease-in-out;"
+>
+
+ <!--Navbar -->
+<nav class="navbarColor mb-1 navbar navbar-expand-lg navbar-dark info-color " style="height: 55px !important">
+  <div>
+    <div class="navbarBankName">Deutsche Bank</div>
+    <div class="navbarAPIProgram">API Program</div>
+  </div>
+  
+  <!-- <a class="navbar-brand">
+    <img
+      alt="img"
+      src="assets/images/ICICI Bank Logo Orange Bg.png"
+      style="width: 173px;
+         height: 39px;"
+      class="img-fluid"
+    />
+  </a> -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+    aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-4" >
+    <ul class="navbar-nav ml-auto">
+      <!-- <li class="nav-item " style="background: #f5821f !important;">
+        <a class="nav-link" [routerLink]="['']">
+          <span
+            
+          style="font-size: 16px;font-family: Arial,Helvetica,sans-serif;color:white !important;"
+          >Home</span>
+        </a>
+      </li> -->
+      <li class="nav-item d-sm-none">
+        <a id="loginButton" class="nav-link" data-toggle="modal" data-target=".bd-example-modal">
+        <span class="navLinkColor" style="font-size: 16px;;">Login</span>
+        </a>
+      </li>
+      <li class="nav-item d-none d-lg-block">
+        <a id="loginButton1" class="nav-link" data-toggle="modal" data-target=".bd-example-modal-xl">
+        <span class="navLinkColor" style="font-size: 16px;;">Login</span>
+        </a>
+      </li>
+      <li class="nav-item">
+          <a id="loginButton1" class="nav-link" (click)="onSubscribe()">
+          <span class="navLinkColor" style="font-size: 16px;">Subscribe Now!</span>
+          </a>
+        </li>
+      <!-- <div class="module-border-wrap" style="border-radius: 5px;">
+          <div class="module" style=" border: 2px solid transparent;
+          border-radius: 5px;
+          transition: border-color .2s;">
+          Subscribe Now!
+          </div></div> -->
+      <!-- <li class="nav-item">
+        <a class="nav-link navbarColor" (click)="clickSubscription()">&nbsp;
+          <i class="fa fa-puzzle-piece home-color"><i class="navLinkColor" style="font-family: Arial,Helvetica,sans-serif;">&nbsp;Subscribe Now !</i></i></a>
+      </li> -->
+    </ul>
+  </div>
+</nav>
+<!--/.Navbar -->
+</header>
+
+
+<!-- header -->
+<div class="container-fluid">
+    <div class="row " style="height: 100vh;">
+        <div class="col-md-7 col-sm-6" style="background-color: #E9E9EB;padding-top: 5%;">
+            <!-- <img src="/assets/images/Kqmv0kqaXT.jpg" [routerLink]="['']" class=" logo1" style="max-width: 100%; height: auto;"> -->
+            <div class="col-md-12 divPop">
+                
+                <router-outlet>
+                    <div *ngIf = "IsActive == 1" ><app-product (messageEvent)="receiveMessage($event)"></app-product> </div>
+                  <div *ngIf = "IsActive == 2">
+                    <app-organization (messageEvent)="receiveMessage($event)"></app-organization>
+                  </div>
+                  <div *ngIf = "IsActive == 3">
+                    <app-application (messageEvent)="receiveMessage($event)"></app-application>
+                  </div>
+                </router-outlet>
+            <br>
+            <!-- <hr style="margin-top: -1%;" > -->
+            <!-- <div  >
+            <button type="button" class="btn cancelButton col-md-3" >Cancel</button>
+            <button type="button" class="btn prevButton col-md-3" > < Previous step</button>
+            <button type="button" class="btn nextButton col-md-3" >Next step ></button>
+            </div> -->
+            </div>
+        </div>
+        
+        <div class="col-md-5 col-sm-6 rightDiv" id="rightDiv" style="background-color: #0A0E30;padding-top: 5%; ">
+           
+            <div class="right">
+               <div class="row">
+                 
+               <span class="circle circle1 " id="circle1">1</span>
+            
+                <h5 style="color: white;" id="selectProd">Select a product to get started</h5>
+            </div>
+                <p class="selectProd12" id="selectProd1" style=" color: white; font-size: 75%; text-align: justify; ">This variant of eCollection allows Corporate Customers to receive funds transferred through RTGS/NEFT/FT/IMPS. Remitters will use Virtual Account Number as the beneficiary account number for transferring the funds to Corporate Customers. As soon as the Bank receives transaction, alert is sent to Corporate Customer over defined API informing about the remitter and other transaction details. </p>
+                <p  class="selectProd22" id="selectProd1" style=" color: white; font-size: 75%; text-align: justify; ">This variant of eCollection allows Corporate Customers to receive funds transferred through RTGS/NEFT/FT/IMPS. Remitters will use Virtual Account Number as the beneficiary account number for transferring the funds to Corporate Customers. </p>
+                <p class="selectProd32" id="selectProd1" style=" color: white; font-size: 75%; text-align: justify; ">This variant of eCollection allows Corporate Customers to receive funds transferred through RTGS/NEFT/FT/IMPS. Remitters will use Virtual Account Number as the beneficiary account number for transferring the funds to Corporate Customers. As soon as the Bank receives transaction, alert is sent to Corporate Customer over defined API informing about the remitter and other transaction details. </p>
+                <p class="selectProd42" style="color: white; font-size: 85%; text-align: justify;">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi, nesciunt facere minus p>
+            </div>
+            <div style="margin-bottom: 10%; margin-left: 20%; margin-right: 15%;">
+                <div class="row">
+                <span class="circle circle2" id="circle2">2</span>
+    
+                <h5 id="orgg" style="color: white; text-align: justify;">Tell us more about your organisation</h5>
+            </div>
+                <p id="orgg1" style="color: white; font-size: 85%; text-align: justify;">Lorem ipsum dolor sit amet consectetur adipisicing elit. A placeat voluptatibus quibusdam maiores impedit est, asperiores recusandae </p>
+                <p id="orgg2" style="color: white; font-size: 85%; text-align: justify;">Please enter Basic Details</p>
+                <p id="orgg3" style="color: white; font-size: 85%; text-align: justify;">Please enter Business Details</p>
+                <p id="orgg4" style="color: white; font-size: 85%; text-align: justify;">Please enter IT Details</p>
+            </div>
+            <div style="margin-bottom: 10%; margin-left: 20%; margin-right: 15%;">
+               <div class="row">
+                <span class="circle circle3" id="circle3">3</span>
+    
+                <h5 id="application" style="color: white; text-align: justify;">Tell us more about your application</h5>
+            </div>
+                <p id="application1" style="color: white; font-size: 85%;text-align: justify;">Lorem ipsum dolor sit amet consectetur adipisicing elit. A placeat voluptatibus quibusdam maiores impedit est, asperiores recusandae </p>
+                <p id="app2" style="color: white; font-size: 85%; text-align: justify;">Please enter Service Details</p>
+                <p id="app3" style="color: white; font-size: 85%; text-align: justify;">Please enter UAT Details</p>
+                <p id="app4" style="color: white; font-size: 85%; text-align: justify;">Please enter Production Details</p>
+            </div>
+            <!-- <img src="/assets/images/bag3.png" class="img-responsive" style="height: 107%; width: 100%; margin-left: -51%; margin-top: -107%;" alt=""> -->
+        </div>
+    </div>
+    
+    </div>
+    <!-- <app-footer></app-footer> -->
+    <div>
+        <footer class="footer text-right" id="footercss">
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <div class="row">
+              <div class="col-md-1"></div>
+          <div class="col-md-4">
+            <div>
+            <p style="text-align:left" class="db-white">Curious about what’s next</p>
+            </div>
+            <div>
+                <p class="db-lighterblue" style="text-align:left">Subscribe to our newsletter to keep up with updates,
+                    events and more.
+                    </p>
+            </div>
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-7 col-xs-12 col-sm-12 d-none d-lg-block">
+                  <input class="emailInput inputField form-control form-control-line" type="email"
+                  placeholder="Email address"/>
+              </div>
+              <div class="col-md-5 col-xs-12 col-sm-12 d-none d-lg-block">
+                  <div class="input-group mb-3">
+                      <div (click)="loginData(addLoginData.value)" class="module-border-wrap" style="border-radius: 4px;">
+                          <div class="subscribeButton" style=" border: 2px solid transparent;
+                          border-radius: 1px;
+                          cursor: pointer;
+                          transition: border-color .2s;">
+                          <span style="text-align: center;">Subscribe</span>
+                          </div></div>
+                    </div>
+              </div>
+              </div>
+              <div class="d-sm-none">
+                  <input class="emailInput inputField form-control form-control-line" type="email"
+                  placeholder="Email address"/>
+                  <br/>
+                  <div class="input-group mb-3">
+                      <div (click)="loginData(addLoginData.value)" class="module-border-wrap" style="border-radius: 4px;">
+                          <div class="subscribeButton" style=" border: 2px solid transparent;
+                          border-radius: 1px;
+                          cursor: pointer;
+                          transition: border-color .2s;">
+                          <span style="text-align: center;">Subscribe</span>
+                          </div></div>
+                    </div>
+              </div>
+              <div class="row">
+                  <div class="col-xs-2 col-sm-2 col-lg-1">
+                    <div style="float:center">
+                        <input type="checkbox">
+        <span class="checkmark"></span>
+                    </div>
+                  </div>
+                <div class="col-xs-8 col-sm-8 col-lg-9" style="text-align:center">
+                    <p class="db-lighterblue">I agree that Deutsche Bank AG sends me newsletters about Deutsche Bank API Program. I can withdraw my consent at any time by sending an e-mail to newsletter.dbapi@db.com. For further information please see our Data Privacy Notice.</p>
+                </div>
+              </div>
+          </div>
+          </div>  
+          <br/>
+          <br/>
+          <div class="border-h-dark"></div>
+          <!-- <p id="footerContent">Â© 2018 ICICI. API Developer {{version}}</p> -->
+          <br/>
+          <div class="row">
+              <div class="col-md-1"></div>
+            <div class="col-md-3">
+              <p style="text-align:center" class="db-lighterblue">© 2019 Deutsche Bank AG, Frankfurt am Main</p>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-6">
+                <a><small class="db-lighterblue">Release Notes</small></a>
+                &nbsp;|&nbsp;
+                <a><small class="db-lighterblue">FAQ</small></a>
+                &nbsp;|&nbsp;
+                <a><small class="db-lighterblue">Imprint</small></a>
+                &nbsp;|&nbsp;
+                <a><small class="db-lighterblue">Terms and Conditions</small></a>
+                &nbsp;|&nbsp;
+                <a><small class="db-lighterblue">Cookie Note</small></a>
+                &nbsp;|&nbsp;
+                <a><small class="db-lighterblue">Privacy Notice</small></a>
+            </div>
+          </div>
+          </footer>
+        
+    </div>

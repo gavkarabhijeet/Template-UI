@@ -1,0 +1,868 @@
+<!-- breadcrumb -->
+
+<nav *ngIf="true" class="breadcrumb" style="margin-top:-10px">
+  <a class="breadcrumb-item" [routerLink]="['/ProjectData/ProjectsManagement']">Projects</a>
+  <a class="breadcrumb-item" [routerLink]="['/ProjectData/ProductsData']">Products</a>
+  <a class="breadcrumb-item" [routerLink]="['/ProjectData/SequencesDiagram']">Flows</a>
+  <span class="breadcrumb-item active">Mapping Data</span>
+</nav>
+
+
+
+<!-- breadcrumb -->
+
+
+
+<div class="form-group row">
+  <label class="col-md-2" id="mappingSize">Mapping</label>
+  <!-- Buttons shown on top beside Mapping Starts-->
+  <div>
+    <!-- <button class="btn btn-lg btn-outline-warning" id="addButton" type="button" placement="bottom"
+      ngbTooltip="Add a new Data on Button Click" (click)="addFieldValue1(addDataModal)">Add</button>
+    <button class="btn btn-lg btn-outline-warning" id="uploadButton" type="button" placement="bottom"
+      ngbTooltip="Upload Source and Target Files on Button Click" (click)="addSourceNTargetField(uploadFile)">Upload
+      Source File</button> -->
+
+    <ng-template #addDataModal let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addModalData" (ngSubmit)="addData(addModalData.value);">
+          <div class="row">
+            <div class="col-md-6">
+              <label id="fontSize"> -(Source Application Data)</label>
+              <hr>
+              <div class="form-group row">
+                <label class="col-sm-6  control-label col-form-label">Source/Request Resolved Path :</label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" id="SourceName" formControlName="sourceName"
+                    [formControl]="addModalData.controls['sourceName']" placeholder="Enter Source Name">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6  control-label col-form-label">Field Name :</label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" id="SfieldName" placeholder=" Enter Technical Name"
+                    formControlName="sfieldName" [formControl]="addModalData.controls['sfieldName']">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6  control-label col-form-label">Data Type :</label>
+                <div class="col-sm-6">
+                  <select id="select1" class="browser-default custom-select" required formControlName="sdataType"
+                    [formControl]="addModalData.controls['sdataType']">
+                    <option *ngFor="let val of dataTypeValue">
+                      {{val.value}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label id="fontSize"> -(Target Application Data)</label>
+              <hr>
+              <div class="form-group row">
+                <label class="col-sm-6  control-label col-form-label">Target/Response Resolved Path :</label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" id="targetName" formControlName="targetName"
+                    [formControl]="addModalData.controls['targetName']" placeholder="Enter Target Name">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6  control-label col-form-label">Field Name :</label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" id="targetName" formControlName="tfieldName"
+                    [formControl]="addModalData.controls['tfieldName']" placeholder="Enter Technical Name">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6  control-label col-form-label">Data Type</label>
+                <div class="col-sm-6">
+                  <select id="select1" class="browser-default custom-select" required formControlName="tdataType"
+                    [formControl]="addModalData.controls['tdataType']">
+                    <option *ngFor="let val of dataTypeValue">
+                      {{val.value}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <label id="fontSize"> -(Additional Information)</label>
+          <hr>
+          <div class="form-group row">
+            <label class="col-sm-4  control-label col-form-label">Urgency :</label>
+            <div class="col-sm-6">
+              <label *ngFor="let item of itemsForUrgency" style="display:initial !important;">
+                <input type="radio" [formControl]="addModalData.controls['urgencyName']" formControlName="urgencyName"
+                  [value]="item">
+                {{item}}
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4  control-label col-form-label">Description :</label>
+            <div class="col-sm-3">
+              <input type="text" class="form-control" id="descriptionName" formControlName="tfieldName"
+                [formControl]="addModalData.controls['descriptionName']" placeholder="Enter Description Name">
+            </div>
+          </div>
+          <button type="submit" id="buttonCss" class="btn btn-lg btn-outline-warning">Submit</button>
+        </form>
+      </div>
+    </ng-template>
+    <!-- Template for Add Details Ends -->
+    <!-- Template for  Upload Source and Target File Starts -->
+    <ng-template #uploadFile let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Upload</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <hr>
+      <div class="modal-body">
+        <form>
+          <div class="form-group row">
+            <label class="col-sm-4  control-label col-form-label">Select Source file</label>
+            <div class="col-sm-6">
+              <input id="cin" type="file" (change)="fileSourceChangeEvent($event)" placeholder="Upload Target file"
+                multiple />
+            </div>
+          </div>
+          <!-- <div class="form-group row">
+                                    <label class="col-sm-4  control-label col-form-label">Select Target file</label>
+                                    <div class="col-sm-6">
+                                      <input id="cin" type="file" (change)="fileTargetChangeEvent($event)"
+                                        placeholder="Upload Target file" multiple />
+                                    </div>
+                                  </div> -->
+          <button type="submit" id="buttonCSS" class="btn btn-lg btn-outline-warning"
+            (click)="sourceNTargetModalButton();" class="btn btn-secondary">
+            Submit</button>
+        </form>
+      </div>
+    </ng-template>
+    <button class="btn btn-lg btn-outline-warning" id="captureButton" type="button" placement="bottom"
+      ngbTooltip="Download Field Mapping" (click)="capture()">Capture
+      PDF</button>
+    <button class="btn btn-lg btn-outline-warning" id="generateButton" type="button" placement="bottom"
+      ngbTooltip="Generate ESQL Flies on Button Click" (click)="generatefiles()">Submit</button>
+    <button class="btn btn-lg btn-outline-warning" id="nextLinkButton" placement="bottom"
+      ngbTooltip="Save the Data Present on Screen" type="button" (click)="SubmitForMapping()">Save</button>
+  </div>
+  <!-- Buttons shown on top beside mapping Ends -->
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <ngb-tabset>
+      <ngb-tab>
+        <ng-template ngbTabTitle><b>Request</b></ng-template>
+        <ng-template ngbTabContent>
+
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card">
+                    <div class="card-body">
+                      <!-- Template for Add Details Starts -->
+
+                      <!-- Template for  Upload Source and Target File Ends -->
+                      <!-- Table Starts -->
+                      <div class="col-lg-12" id="tableDivCss">
+                        <div class="card">
+                          <div class="card-body" id="tableResponsive"
+                            style="margin-left: -7% !important;margin-right:-7%;">
+                            <div class="table-responsive">
+                              <table class="table">
+                                <thead class="bg-success text-white" id="theadCss">
+                                  <tr>
+                                    <th id="displayTableCss1" rowspan="2">Sr.No </th>
+                                    <th id="displayTableCss2" colspan="6"> -(Source Application Data) </th>
+                                    <th id="displayTableCss3" colspan="10"> -(Target Application Data) </th>
+                                    <th id="displayTableCss4" colspan="10">Direct Mapping from Source Data</th>
+                                    <th id="displayTableCss5" rowspan="2"> Actions</th>
+                                  </tr>
+                                  <tr>
+                                    <th id="theadCss1" colspan="2">Source/Request Resolved Path</th>
+                                    <th id="theadCss2" colspan="2">Field Name</th>
+                                    <th id="theadCss3" colspan="2">Data Type</th>
+                                    <th id="theadCss4" colspan="2">Target/Response Resolved Path</th>
+                                    <th id="theadCss5" colspan="2">Field Name</th>
+                                    <th id="theadCss6" colspan="2">Data Type</th>
+                                    <th id="theadCss7" colspan="2">Priority</th>
+                                    <th id="theadCss8" colspan="2">Description</th>
+                                    <th id="theadCss9" colspan="3">Source Field Row No</th>
+                                    <th id="theadCss10" colspan="3">Source Field Path</th>
+                                    <th id="theadCss11" colspan="2">Source Field Name</th>
+                                    <th id="theadCss12" colspan="2">Data Type Verified</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let data of responseData; let i=index;let a=index">
+                                    <td>{{data.id}}</td>
+                                    <td colspan="2">{{data.sourceName}}</td>
+                                    <td colspan="2">{{data.sfieldName}}</td>
+                                    <td colspan="2">{{data.sdataType}}</td>
+                                    <td colspan="2">{{data.targetName}}</td>
+                                    <td colspan="2">{{data.tfieldName}}</td>
+                                    <td colspan="2">{{data.tdataType}}</td>
+                                    <td colspan="2"> {{data.urgencyName}}</td>
+                                    <td *ngIf="data.descriptionName==null" colspan="2">
+                                      <textarea type="text" rows="2" cols="20"
+                                        style="max-width:120px; word-wrap: break-word;overflow-wrap: break-word;"
+                                        (click)="openModalDescription(a,data.id);"></textarea>
+                                    </td>
+                                    <td *ngIf="data.descriptionName!=null" colspan="2"><textarea type="text" rows="2"
+                                        cols="20"
+                                        style="max-width:120px; word-wrap: break-word;overflow-wrap: break-word;"
+                                        (click)="openModalDescription(a,data.id);"> {{data.descriptionName}}</textarea>
+                                    </td>
+                                    <td colspan="3" style="width:100px;height:38px;">{{data.directRowNo}}</td>
+                                    <td colspan="3" style="width:100px;height:38px;">{{data.sourceFieldPath}}</td>
+                                    <td colspan="2" style="width:100px;height:38px;">{{data.sourceFieldName}}</td>
+
+                                    <td colspan="2" style="width:100px;height:38px;"
+                                      *ngIf="(data.backgroundColor == 'false' && data.datatypeVerified!=null)"
+                                      style="background-color: red">
+                                      {{data.datatypeVerified}}</td>
+
+                                    <td colspan="2" style="width:100px;height:38px;"
+                                      *ngIf="(data.backgroundColor == 'true'  && data.datatypeVerified!=null)">
+                                      {{data.datatypeVerified}} </td>
+
+                                    <td colspan="2" *ngIf="data.datatypeVerified==null"
+                                      style="width:100px;height:38px;">{{data.datatypeVerified}}</td>
+                                    <td>
+
+                                      <i class=" fas fa-arrow-circle-left" (click)="addFieldValue2(a,data,resetModal)"
+                                        id="arrowCss">
+                                      </i>
+                                      <i class="fas fa-edit" (click)="editValueModal(a,data,editModal)" id="iconCss">
+                                      </i>
+                                      <i class="fas fa-trash-alt" (click)="deleteValue(data)" id="iconCss">
+                                      </i>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Table Ends -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab>
+        <ng-template ngbTabTitle><b>Response</b></ng-template>
+        <ng-template ngbTabContent>
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card">
+                    <div class="card-body">
+                      <!-- Template for Add Details Starts -->
+                      <!-- <ng-template #addDataModal1 let-c="close" let-d="dismiss">
+                              <div class="modal-header">
+                                <h4 class="modal-title" id="modal-basic-title">Add Details</h4>
+                                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form [formGroup]="addModalData" (ngSubmit)="addData(addModalData.value);">
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                      <label id="fontSize"> -(Source Application Data)</label>
+                                      <hr>
+                                      <div class="form-group row">
+                                        <label class="col-sm-6  control-label col-form-label">Source/Request Resolved Path :</label>
+                                        <div class="col-sm-6">
+                                          <input type="text" class="form-control" id="SourceName" formControlName="sourceName"
+                                            [formControl]="addModalData.controls['sourceName']" placeholder="Enter Source Name">
+                                        </div>
+                                      </div>
+                                      <div class="form-group row">
+                                        <label class="col-sm-6  control-label col-form-label">Field Technical Name :</label>
+                                        <div class="col-sm-6">
+                                          <input type="text" class="form-control" id="SfieldName" placeholder=" Enter Technical Name"
+                                            formControlName="sfieldName" [formControl]="addModalData.controls['sfieldName']">
+                                        </div>
+                                      </div>
+                                      <div class="form-group row">
+                                        <label class="col-sm-6  control-label col-form-label">Data Type :</label>
+                                        <div class="col-sm-6">
+                                          <select id="select1" class="browser-default custom-select" required
+                                            formControlName="sdataType" [formControl]="addModalData.controls['sdataType']">
+                                            <option *ngFor="let val of dataTypeValue">
+                                              {{val.value}}
+                                            </option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <label id="fontSize"> -(Target Application Data)</label>
+                                      <hr>
+                                      <div class="form-group row">
+                                        <label class="col-sm-6  control-label col-form-label">Target/Response Resolved Path :</label>
+                                        <div class="col-sm-6">
+                                          <input type="text" class="form-control" id="targetName" formControlName="targetName"
+                                            [formControl]="addModalData.controls['targetName']" placeholder="Enter Target Name">
+                                        </div>
+                                      </div>
+                                      <div class="form-group row">
+                                        <label class="col-sm-6  control-label col-form-label">Field Technical Name :</label>
+                                        <div class="col-sm-6">
+                                          <input type="text" class="form-control" id="targetName" formControlName="tfieldName"
+                                            [formControl]="addModalData.controls['tfieldName']" placeholder="Enter Name">
+                                        </div>
+                                      </div>
+                                      <div class="form-group row">
+                                        <label class="col-sm-6  control-label col-form-label">Data Type</label>
+                                        <div class="col-sm-6">
+                                          <select id="select1" class="browser-default custom-select" required
+                                            formControlName="tdataType" [formControl]="addModalData.controls['tdataType']">
+                                            <option *ngFor="let val of dataTypeValue">
+                                              {{val.value}}
+                                            </option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <hr>
+                                  <label id="fontSize"> -(Additional Information)</label>
+                                  <hr>
+                                  <div class="form-group row">
+                                    <label class="col-sm-4  control-label col-form-label">Urgency :</label>
+                                    <div class="col-sm-6">
+                                      <label *ngFor="let item of itemsForUrgency" style="display:initial !important;">
+                                        <input type="radio" [formControl]="addModalData.controls['urgencyName']"
+                                          formControlName="urgencyName" [value]="item">
+                                        {{item}}
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-sm-4  control-label col-form-label">Description :</label>
+                                    <div class="col-sm-3">
+                                      <input type="text" class="form-control" id="descriptionName" formControlName="tfieldName"
+                                        [formControl]="addModalData.controls['descriptionName']" placeholder="Enter Description Name">
+                                    </div>
+                                  </div>
+                                  <button type="submit" id="buttonCss" class="btn btn-lg btn-outline-warning">Submit</button>
+                                </form>
+                              </div>
+                            </ng-template> -->
+                      <!-- Template for Add Details Ends -->
+                      <!-- Template for  Upload Source and Target File Starts -->
+                      <!-- <ng-template #uploadFile1 let-c="close" let-d="dismiss">
+                              <div class="modal-header">
+                                <h4 class="modal-title" id="modal-basic-title">Upload</h4>
+                                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <hr>
+                              <div class="modal-body">
+                                <form>
+                                  <div class="form-group row">
+                                    <label class="col-sm-4  control-label col-form-label">Select Source file</label>
+                                    <div class="col-sm-6">
+                                      <input id="cin" type="file" (change)="fileSourceChangeEvent($event)"
+                                        placeholder="Upload Target file" multiple />
+                                    </div>
+                                  </div>
+                                 
+                                  <button type="submit" id="buttonCSS" class="btn btn-lg btn-outline-warning"
+                                    (click)="sourceNTargetModalButton();" class="btn btn-secondary">
+                                    Submit</button>
+                                </form>
+                              </div>
+                            </ng-template> -->
+                      <!-- Template for  Upload Source and Target File Ends -->
+                      <!-- Table Starts -->
+                      <div class="col-lg-12" id="tableDivCss">
+                        <div class="card">
+                          <div class="card-body" id="tableResponsive"
+                            style="margin-left: -7% !important;margin-right:-7%;">
+                            <div class="table-responsive">
+                              <table class="table">
+                                <thead class="bg-success text-white" id="theadCss">
+                                  <tr>
+                                    <th id="displayTableCss1" rowspan="2">Sr.No </th>
+                                    <th id="displayTableCss2" colspan="6"> -(Source Application Data) </th>
+                                    <th id="displayTableCss3" colspan="10"> -(Target Application Data) </th>
+                                    <th id="displayTableCss4" colspan="10">Direct Mapping from Source Data</th>
+                                    <th id="displayTableCss5" rowspan="2"> Actions</th>
+                                  </tr>
+                                  <tr>
+                                    <th id="theadCss13" colspan="2">11111 Source/Response Resolved Path</th>
+                                    <th id="theadCss14" colspan="2">11111 Field Name</th>
+                                    <th id="theadCss15" colspan="2">11111 Data Type</th>
+                                    <th id="theadCss16" colspan="2">Target/Response Resolved Path</th>
+                                    <th id="theadCss17" colspan="2">Field Name</th>
+                                    <th id="theadCss18" colspan="2">Data Type</th>
+                                    <th id="theadCss19" colspan="2">Priority</th>
+                                    <th id="theadCss20" colspan="2">Description</th>
+                                    <th id="theadCss21" colspan="3">Source Field Row No</th>
+                                    <th id="theadCss22" colspan="3">Source Field Path</th>
+                                    <th id="theadCss23" colspan="2">Source Field Name</th>
+                                    <th id="theadCss24" colspan="2">Data Type Verified</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let data of responseDataForResponse; let i=index;let a=index">
+                                    <td>{{data.id}}</td>
+                                    <td colspan="2">{{data.sourceNameResponse}}</td>
+                                    <td colspan="2">{{data.sfieldNameResponse}}</td>
+                                    <td colspan="2">{{data.sdataTypeResponse}}</td>
+                                    <td colspan="2">{{data.targetNameResponse}}</td>
+                                    <td colspan="2">{{data.tfieldNameResponse}}</td>
+                                    <td colspan="2">{{data.tdataTypeResponse}}</td>
+                                    <td colspan="2"> {{data.urgencyNameResponse}}</td>
+                                    <td *ngIf="data.descriptionName==null" colspan="2">
+                                      <textarea type="text" rows="2" cols="20"
+                                        style="max-width:120px; word-wrap: break-word;overflow-wrap: break-word;"
+                                        (click)="openModalDescription(a,data.id);"></textarea>
+                                    </td>
+                                    <td *ngIf="data.descriptionName!=null" colspan="2"><textarea type="text" rows="2"
+                                        cols="20"
+                                        style="max-width:120px; word-wrap: break-word;overflow-wrap: break-word;"
+                                        (click)="openModalDescription(a,data.id);"> {{data.descriptionNameResponse}}</textarea>
+                                    </td>
+                                    <td colspan="3" style="width:100px;height:38px;">{{data.directRowNoResponse}}</td>
+                                    <td colspan="3" style="width:100px;height:38px;">{{data.sourceFieldPathResponse}}
+                                    </td>
+                                    <td colspan="2" style="width:100px;height:38px;">{{data.sourceFieldNameResponse}}
+                                    </td>
+
+                                    <td colspan="2" style="width:100px;height:38px;"
+                                      *ngIf="(data.backgroundColor == 'false' && data.datatypeVerified!=null)"
+                                      style="background-color: red">
+                                      {{data.datatypeVerifiedResponse}}</td>
+
+                                    <td colspan="2" style="width:100px;height:38px;"
+                                      *ngIf="(data.backgroundColor == 'true'  && data.datatypeVerified!=null)">
+                                      {{data.datatypeVerifiedResponse}} </td>
+
+                                    <td colspan="2" *ngIf="data.datatypeVerified==null"
+                                      style="width:100px;height:38px;">{{data.datatypeVerifiedResponse}}</td>
+                                    <td>
+
+                                      <i class=" fas fa-arrow-circle-left"
+                                        (click)="addFieldValueResponse(a,data,resetModal2)" id="arrowCss">
+                                      </i>
+                                      <i class="fas fa-edit" (click)="editValueModalResponse(a,data,editModal2)"
+                                        id="iconCss">
+                                      </i>
+                                      <i class="fas fa-trash-alt" (click)="deleteValueResponse(data)" id="iconCss">
+                                      </i>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Table Ends -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-tab>
+
+    </ngb-tabset>
+  </div>
+</div>
+
+
+<br>
+<br>
+<br>
+
+<!-- Request Modals -->
+<ng-template #editModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+<!-- BY Sanchita -->
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Add Details</h4>
+  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="addModalData" (ngSubmit)="addData(addModalData.value);">
+    <div class="row">
+      <div class="col-md-6">
+        <label id="fontSize"> -(Source Application Data)</label>
+        <hr>
+        <div class="form-group row">
+          <label class="col-sm-6  control-label col-form-label">Source/Request Resolved Path :</label>
+          <div class="col-sm-6">
+            <input type="text" [(ngModel)]="sourceNameEdit" class="form-control" [ngModelOptions]="{standalone: true}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-6  control-label col-form-label">Field Name :</label>
+          <div class="col-sm-6">
+            <input type="text" [(ngModel)]="sfieldNameEdit" class="form-control" [ngModelOptions]="{standalone: true}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-6  control-label col-form-label">Data Type :</label>
+          <div class="col-sm-6">
+            <select id="select1" class="browser-default custom-select" required [(ngModel)]="sdataTypeEditResp"
+            class="form-control" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let val of dataTypeValue">
+              {{val.value}}
+            </option>
+          </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label id="fontSize"> -(Target Application Data)</label>
+        <hr>
+        <div class="form-group row">
+          <label class="col-sm-6  control-label col-form-label">Target/Response Resolved Path :</label>
+          <div class="col-sm-6">
+            <input type="text" [(ngModel)]="targetNameEdit" class="form-control" [ngModelOptions]="{standalone: true}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-6  control-label col-form-label">Field Name :</label>
+          <div class="col-sm-6">
+            <input type="text" [(ngModel)]="tfieldNameEdit" class="form-control" [ngModelOptions]="{standalone: true}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-6  control-label col-form-label">Data Type</label>
+          <div class="col-sm-6">
+            <select id="select1" class="browser-default custom-select" required [(ngModel)]="tdataTypeEdit"
+            class="form-control" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let val of dataTypeValue">
+              {{val.value}}
+            </option>
+          </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <label id="fontSize"> -(Additional Information)</label>
+    <hr>
+    <div class="form-group row">
+      <label class="col-sm-4  control-label col-form-label">Urgency :</label>
+      <div class="col-sm-6">
+        <label *ngFor="let item of itemsForUrgency">
+          <input type="radio" [(ngModel)]="urgencyNameEdit" class="form-control" [ngModelOptions]="{standalone: true}"
+            [value]="item">
+          {{item}}
+        </label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4  control-label col-form-label">Description :</label>
+      <div class="col-sm-3">
+        <input type="text" [(ngModel)]="descriptionNameEdit" class="form-control"
+        [ngModelOptions]="{standalone: true}">
+      </div>
+    </div>
+    <button type="submit" id="buttonCss" class="btn btn-lg btn-outline-warning">Submit</button>
+  </form>
+</div>
+
+
+
+
+ <!-- By Sanchita ends  -->
+<!--  
+ <br>
+      <label style="font-size: 1.2em !important;
+          font-weight: 500 !important;"> -(Source Application Data)</label>
+      <hr>
+      <div>
+        <label>Source/Request Resolved Path:</label>
+        <div class="col-md-4">
+          <input type="text" [(ngModel)]="sourceNameEdit" class="form-control" [ngModelOptions]="{standalone: true}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label>Field Technical Name:</label>
+        <div class="col-md-4">
+          <input type="text" [(ngModel)]="sfieldNameEdit" class="form-control" [ngModelOptions]="{standalone: true}">
+        </div>
+      </div> <br>
+      <div class="form-group row">
+        <label>Data Type</label>
+        <div class="col-md-4">
+          <select id="select1" class="browser-default custom-select" required [(ngModel)]="sdataTypeEdit"
+            class="form-control" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let val of dataTypeValue">
+              {{val.value}}
+            </option>
+          </select>
+        </div>
+      </div> <br>
+      <label style="font-size: 1.2em !important;
+          font-weight: 500 !important;"> -(Target Application Data)</label>
+      <hr>
+      <div class="form-group row">
+        <label>Target/Response Resolved Path:</label>
+        <div class="col-md-4">
+          <input type="text" [(ngModel)]="targetNameEdit" class="form-control" [ngModelOptions]="{standalone: true}">
+        </div>
+      </div> <br>
+      <div class="form-group row">
+        <label>Field Technical Name:</label>
+        <div class="col-md-4">
+          <input type="text" [(ngModel)]="tfieldNameEdit" class="form-control" [ngModelOptions]="{standalone: true}">
+        </div>
+      </div> <br>
+      <div class="form-group row">
+        <label>Data Type</label>
+        <div class="col-md-4">
+          <select id="select1" class="browser-default custom-select" required [(ngModel)]="tdataTypeEdit"
+            class="form-control" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let val of dataTypeValue">
+              {{val.value}}
+            </option>
+          </select>
+        </div>
+      </div> <br>
+
+      <div class="form-group row">
+        <label> Urgency :</label>
+        <div class="col-md-4">
+          <label *ngFor="let item of itemsForUrgency">
+            <input type="radio" [(ngModel)]="urgencyNameEdit" class="form-control" [ngModelOptions]="{standalone: true}"
+              [value]="item">
+            {{item}}
+          </label>
+        </div>
+      </div> <br>
+
+      <div class="form-group row">
+        <label> Description :</label>
+        <div class="col-md-4">
+          <input type="text" [(ngModel)]="descriptionNameEdit" class="form-control"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+      </div> <br>
+
+      <button style="color:white;border:none;background:#f07800;" type="submit"
+        (click)=" editData(  sourceNameEdit,sfieldNameEdit,sdataTypeEdit , targetNameEdit  , tfieldNameEdit ,tdataTypeEdit , urgencyNameEdit,descriptionNameEdit);"
+        class="btn btn-secondary">
+        <i class="glyphicon glyphicon-icon-shield"></i>&nbsp;Submit</button> -->
+      <br>
+      <br>
+    </form>
+  </div>
+</ng-template>
+
+
+
+<!-- Reset Value -->
+
+
+
+<ng-template #resetModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">For Direct Mapping</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div class="sourceNTargetContainer">
+
+
+      <br>
+      <div class="col-sm-12">
+        <label class="col-sm-3 " style="font-size: 1.2em !important;
+                        font-weight: 500 !important;">Enter Id : </label>
+
+        <input type="text" [(ngModel)]="resetId" class="form-control" [ngModelOptions]="{standalone: true}"
+          placeholder="Enter the Id" />
+      </div>
+
+      <button type="submit" style="color:white;border:none;background:#f07800;" class="btn btn-outline-dark"
+        (click)="resetButton(resetId);" class="btn btn-secondary">
+        Submit</button>
+      <br>
+      <br>
+    </div>
+  </div>
+</ng-template>
+
+
+<!-- Request Modals ends-->
+
+<!-- Response Modal -->
+
+
+<ng-template #editModal2 let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+
+      <br>
+      <label style="font-size: 1.2em !important;
+            font-weight: 500 !important;"> -(Source Application Data)</label>
+      <hr>
+      <div>
+        <label>Source/Response Resolved Path:</label>
+        <div class="col-md-4">
+          <input type="text" [(ngModel)]="sourceNameEditResp" class="form-control"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label>Field Name:</label>
+        <div class="col-md-4">
+          <input type="text" [(ngModel)]="sfieldNameEditResp" class="form-control"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+      </div> <br>
+      <div class="form-group row">
+        <label>Data Type</label>
+        <div class="col-md-4">
+          <select id="select1" class="browser-default custom-select" required [(ngModel)]="sdataTypeEditResp"
+            class="form-control" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let val of dataTypeValue">
+              {{val.value}}
+            </option>
+          </select>
+        </div>
+      </div> <br>
+      <label style="font-size: 1.2em !important;
+            font-weight: 500 !important;"> -(Target Application Data)</label>
+      <hr>
+      <div class="form-group row">
+        <label>Target/Response Resolved Path:</label>
+        <div class="col-md-4">
+          <input type="text" [(ngModel)]="targetNameEditResp" class="form-control"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+      </div> <br>
+      <div class="form-group row">
+        <label>Field Name:</label>
+        <div class="col-md-4">
+          <input type="text" [(ngModel)]="tfieldNameEditResp" class="form-control"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+      </div> <br>
+      <div class="form-group row">
+        <label>Data Type</label>
+        <div class="col-md-4">
+          <select id="select1" class="browser-default custom-select" required [(ngModel)]="tdataTypeEditResp"
+            class="form-control" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let val of dataTypeValue">
+              {{val.value}}
+            </option>
+          </select>
+        </div>
+      </div> <br>
+
+      <div class="form-group row">
+        <label> Urgency :</label>
+        <div class="col-md-4">
+          <label *ngFor="let item of itemsForUrgency">
+            <input type="radio" [(ngModel)]="urgencyNameEditResp" class="form-control"
+              [ngModelOptions]="{standalone: true}" [value]="item">
+            {{item}}
+          </label>
+        </div>
+      </div> <br>
+
+      <div class="form-group row">
+        <label> Description :</label>
+        <div class="col-md-4">
+          <input type="text" [(ngModel)]="descriptionNameEditResp" class="form-control"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+      </div> <br>
+
+      <button style="color:white;border:none;background:#f07800;" type="submit"
+        (click)=" editData(  sourceNameEditResp,sfieldNameEditResp,sdataTypeEditResp , targetNameEditResp  , tfieldNameEditResp ,tdataTypeEditResp , urgencyNameEditResp, descriptionNameEditResp);"
+        class="btn btn-secondary">
+        <i class="glyphicon glyphicon-icon-shield"></i>&nbsp;Submit</button>
+      <br>
+      <br>
+    </form>
+  </div>
+</ng-template>
+
+
+
+<!-- Reset Value -->
+
+
+
+<ng-template #resetModal2 let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">For Direct Mapping</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div class="sourceNTargetContainer">
+
+
+      <br>
+      <div class="col-sm-12">
+        <label class="col-sm-3 " style="font-size: 1.2em !important;
+                          font-weight: 500 !important;">Enter Id : </label>
+
+        <input type="text" [(ngModel)]="resetIdResp" class="form-control" [ngModelOptions]="{standalone: true}"
+          placeholder="Enter the Id" />
+      </div>
+
+      <button type="submit" style="color:white;border:none;background:#f07800;" class="btn btn-outline-dark"
+        (click)="resetButtonResponse(resetIdResp);" class="btn btn-secondary">
+        Submit</button>
+      <br>
+      <br>
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+<!-- Response Modal -->

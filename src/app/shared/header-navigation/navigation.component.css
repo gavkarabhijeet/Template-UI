@@ -1,0 +1,26 @@
+.dropdown-item:active{
+    background-color: #f07800 !important;
+}
+#userCss{
+    font-size: 110%;
+    padding-top: 12%;
+    color: #0B3C6D;
+    cursor: default;
+}
+#logout{
+    cursor: pointer;
+}
+#username{
+    cursor:not-allowed;
+}
+
+
+
+  .num {
+    position: absolute;
+    right: 11px;
+    top: 16px;
+    color: #fff;
+    font-size: 18px;
+  }
+

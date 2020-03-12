@@ -1,0 +1,858 @@
+
+<header
+class="topbar"
+[attr.data-navbarbg]="options.navbarbg"
+style="  background: #ffffff;height: 50px;position: fixed;width:100%;"
+>
+
+<!--Navbar -->
+<nav class="navbarColor mb-1 navbar navbar-expand-lg navbar-dark info-color border-bottom" style="height: 55px !important">
+<div>
+  <div class="navbarBankName">Deutsche Bank</div>
+  <div class="navbarAPIProgram">API Program</div>
+</div>
+
+<!-- <a class="navbar-brand">
+  <img
+    alt="img"
+    src="assets/images/ICICI Bank Logo Orange Bg.png"
+    style="width: 173px;
+       height: 39px;"
+    class="img-fluid"
+  />
+</a> -->
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+  aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent-4" >
+  <ul class="navbar-nav ml-auto">
+    <!-- <li class="nav-item " style="background: #f5821f !important;">
+      <a class="nav-link" [routerLink]="['']">
+        <span
+          
+        style="font-size: 16px;font-family: Arial,Helvetica,sans-serif;color:white !important;"
+        >Home</span>
+      </a>
+    </li> -->
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/change-password/changePassword']">
+        <span class="navLinkColor" style="font-size: 16px;">Change Password</span>
+        </a>
+      </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="logout()">
+      <span class="navLinkColor" style="font-size: 16px;">Logout</span>
+      </a>
+    </li>
+   
+    <!-- <li class="nav-item">
+      <a class="nav-link navbarColor" (click)="clickSubscription()">&nbsp;
+        <i class="fa fa-puzzle-piece home-color"><i class="navLinkColor" style="font-family: Arial,Helvetica,sans-serif;">&nbsp;Subscribe Now !</i></i></a>
+    </li> -->
+  </ul>
+</div>
+</nav>
+<!--/.Navbar -->
+</header>
+<!-- <header
+class="topbar"
+[attr.data-navbarbg]="options.navbarbg"
+style=" background: #ffffff;height:60px;position: fixed;width:100%;"
+>
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-white navbar-custom border-bottom"
+  style="background: #f5821f !important;height:60px;"
+><img
+    alt="img"
+    src="assets/images/ICICI Bank Logo Orange Bg.png"
+    style="width: 173px;
+       height: 50px;"
+    class="img-fluid"
+    />
+  <button
+    class="navbar-toggler"
+    type="button"
+    (click)="toggleNavbar()"
+    style="justify-content: right;"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div
+    class="collapse navbar-collapse pl-20 "
+    [ngClass]="{ show: navbarOpen }"
+    style="padding-left: 50%;"
+  >
+  <div>
+    <br/>
+  <div style="color:white">Welcome {{firstName}}</div>
+   <div *ngIf="lastLoggedIn != undefined " style="color:white">You last logged in on {{lastLoggedIn | date}} &nbsp; {{lastLoggedIn | date: "HH:mm:ss"}}</div>&nbsp;
+  </div>
+  <div>
+    <ul class="navbar-nav float-right">
+      <li class="nav-item dropdown show " ngbDropdown placement="bottom-right">
+          <a ngbDropdownToggle class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
+               aria-haspopup="true" aria-expanded="false">
+              <img src="assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31">
+          </a>
+          <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY" ngbDropdownMenu>
+               <span class="with-arrow  ">
+                  <span class="bg -primary " ></span>
+              </span>
+              <a class="dropdown-item" [routerLink]="['/change-password/changePassword']">
+                  <i class="ti-user m-r-5 m-l-5"></i> Change Password</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item pointer" (click)="logout();">
+                  <i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+            
+              
+          </div>
+      </li>
+  
+  </ul>
+  </div>
+  </div>
+</nav>
+</header> -->
+      <!-- <div class=" zindex" ></div> -->
+<!-- <div class="card zindex"></div> -->
+<div class="card">
+  <div class="card-body "  style="margin-top: 1.5%;">
+
+    <div class="row">
+
+      <!-- Profile Photo -->
+      
+      <!-- Profile Photo ends -->
+
+      <!-- Three tabs -->
+      <div class="col-12 " >
+        <div class="card " >
+          <div class="card-body">
+            <ngb-tabset type="pills" class="custom-pills border-bottom" >
+                <ngb-tab class="profileTabs">
+                    <ng-template ngbTabTitle>
+                      <div class="row" >
+                        New Requests &nbsp;
+                        <span class="circle">{{ numberOfRequests }}</span>
+                      
+                      </div>
+                    </ng-template>
+                    <ng-template ngbTabContent>
+                        <br>
+                        <div class="row" style="margin-top: 5%;">
+                          
+                          <div class="input-group col-5 float-left" style="float: left;">
+                              <span class="input-group-append">
+                                <div
+                                  class="input-group-text bg-light"
+                                  style="border-right: none;"
+                                >
+                                  <i class="fa fa-search"></i>
+                                </div>
+                              </span>
+                              <input
+                                #Input
+                                style="height:99%"
+                                [(ngModel)]="name"
+                                class="input form-control py-2 border-left-0"
+                                type="search"
+                                placeholder="Search"
+                                (keyup)="checkNewRequest(Input.value);"
+                                id="example-search-input"
+                              />
+                            </div>
+                  
+                          <div class="col-1">
+                            <button class="btn btn-secondary uploadButton" (click)="filterItem()" style="border-color: grey;
+                            background-color: #f3f5f5;
+                            color:#465F75;
+                            border-radius: 4px;
+                            border-width: 2px;"> Submit </button>
+                          </div>
+                          <br>
+                         <div class="col-md-6" >
+                            <pagination-controls style="float: right;" class="my-pagination" (pageChange)="p= $event"></pagination-controls>
+                      
+                        </div>
+                        </div>
+                        <br>
+                        <label class="textLabelColor" for="select1">Search By</label>
+                        <br>
+                        <select
+                            id="select1"
+                            [(ngModel)]="selectedValue"
+                            class="input inputField form-control form-control-line browser-default custom-select col-md-3"
+                          >
+                            <!-- <option disabled selected value="undefined">Search by</option> -->
+                            <option selected value="productName">Product name</option>
+                            <option selected value="serviceName">Variant name</option>
+                            <option selected value="organisation">Organisation name</option>
+                            <option value="accountManagerName">AM/IM name</option>
+                            <!-- <option value="emailIdBusinessSpoc">Business Email ID</option>
+                            <option value="mobileNumberBusinessSpoc">Business Mobile Number</option> -->
+                        </select>
+                        <br>
+                        <br>
+                        <br>
+                        
+                      
+                        
+                      <br />
+                        <div *ngIf="filteredItems?.length != 0">
+                          <div class="row">
+
+                         <div class="card col-6" *ngFor="let i of filteredItems | paginate: { itemsPerPage: 10, currentPage: p }">
+                        <div
+                          class="card border profileCards p-10 box"
+                          style="background-color: #f1f1f1;"
+                        >
+                          <div style="margin-left: 1%">
+                              <div>
+                                  <span style="font-size: 16px;">
+                                  <strong>Organization Name: </strong>
+                                  {{i.organisation}}</span>
+                                  </div>
+                                  <div>
+                                  <span style="font-size: 16px;">
+                                  <strong>Product Name: </strong>{{
+                                  i.productName
+                                  }}</span>
+                                  </div>
+                                  <div>
+                                  <span style="font-size: 16px;">
+                                  <strong>Service Name: </strong>{{
+                                  i.serviceName
+                                  }}</span>
+                                  </div>
+                                  <div>
+                                  <span style="font-size: 16px;">
+                                  <strong>Requested Date: </strong>{{
+                                    i.subDate
+                                  }}
+                                  </span>
+                                  </div>  
+                            <div class="row">
+                             <div
+                                class="col-md-8"
+                                style="padding-top:2%;padding-left:0%;"
+                              >
+                                <span class="col-md-5" style="padding-top: 10%;">
+                                  <i
+                                    class="fa fa-hourglass-start"
+                                    style="font-size:18px;color:#053c6d"
+                                  ></i
+                                  > Awaiting approval</span
+                                ><span class="col-md-3" *ngIf="i.rejectReason != null"><strong>Reject Reason :</strong> {{i.rejectReason}} &nbsp; <strong>Status : </strong> <strong style="color:red">Rejected</strong></span>
+                                <!-- <span *ngIf="i.checkerApproval==false"> </span> -->
+                              </div>
+                              <div
+                                class="col-md-4"
+                                style="padding-top: 1%; text-align: right;"
+                              >
+                                <!-- [routerLink]="['/authentication/makerDetails']" -->
+                                <button
+                                  class="btn"
+                                  (click)="moreDetails(i)"
+                                  style="cursor:pointer;width:35%;border-color: grey;
+                                  background-color: #f3f5f5;
+                                  color:#465F75;
+                                  border-radius: 4px;
+                                  border-width: 2px;"
+                                >
+                                  More
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <br />
+                        </div>
+                           </div>
+                          </div>
+
+                        </div>
+                    <div *ngIf="filteredItems?.length == 0" >
+                      <p style="font-weight: bolder; color: crimson; font-size: x-large; text-align: center;">No Data Found</p>
+                    </div>
+                    </ng-template>
+                  </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle>Subscription approved </ng-template>
+                <ng-template ngbTabContent>
+                  <!-- <p
+                    class="title m-b-10 m-t-10"
+                    style="font-size: 25px;color: #053c6d"
+                  >
+                    Recent Approvals
+                  </p> -->
+                  <br>
+                  <div class="row" style="margin-top: 5%;">
+                          
+                      <div class="input-group col-5 float-left" style="float: left;">
+                          <span class="input-group-append">
+                            <div
+                              class="input-group-text bg-light"
+                              style="border-right: none;"
+                            >
+                              <i class="fa fa-search"></i>
+                            </div>
+                          </span>
+                          <input
+                            #Input2
+                            style="height:99%"
+                            [(ngModel)]="nameforApprove"
+                            class="input form-control py-2 border-left-0"
+                            type="search"
+                            (keyup)="checkApprove(Input2.value)"
+                            placeholder="Search"
+                            id="example-search-input"
+                          />
+                        </div>
+              
+                      <div class="col-1">
+                        <button class="btn btn-secondary uploadButton" (click)="filterItemForApproved()" style="border-color: grey;
+                        background-color: #f3f5f5;
+                        color:#465F75;
+                        border-radius: 4px;
+                        border-width: 2px;"> Submit </button>
+                      </div>
+                      <br>
+                     <div class="col-md-6" >
+                        <pagination-controls style="float: right;" class="my-pagination" (pageChange)="b= $event"></pagination-controls>
+                  
+                    </div>
+                    </div>
+                    <br>
+                    <label class="textLabelColor" for="select1">Search By</label>
+                    <br>
+                    <select
+                        id="select1"
+                        [(ngModel)]="selectedValueForApproved"
+                        placeholder="Search by"
+                        class="input inputField form-control form-control-line browser-default custom-select col-md-3"
+                      >
+                        <!-- <option disabled selected value="undefined">Search by</option> -->
+                        <option selected value="productName">Product name</option>
+                        <option selected value="serviceName">Variant name</option>
+                        <option selected value="organisation">Organisation name</option>
+                        <option value="accountManagerName">AM/IM name</option>
+                        <!-- <option value="emailIdBusinessSpoc">Business Email ID</option>
+                        <option value="mobileNumberBusinessSpoc">Business Mobile Number</option> -->
+                        <option value="createdBy">Approved by</option>
+
+                    </select>
+                    <br>
+                    <br>
+                  <br>
+          
+                  <!-- <div class="col-1">
+                 </div> -->
+                  <!-- <br> -->
+                 <!-- <div class="col-md-6" >
+                
+                </div> -->
+                 <br>
+                  <!-- <div class="row card-group"> -->
+                  <!-- <div class="col-6"> -->
+                    <div *ngIf="filteredItemsForApproved?.length != 0">
+                    
+                    <div class="row">
+                    <div class="card col-6" *ngFor="let i of filteredItemsForApproved | paginate: { itemsPerPage: 10, currentPage: b }">
+                      <div (click)="approvedData(i);"
+                        class="card-body border box"
+                        style="cursor:pointer;background-color: #f1f1f1;"
+                      >
+                      <div>
+                          <span style="font-size: 12px;">
+                          <strong>Organisation Name: </strong>
+                          {{ i.orgName }}</span>
+                          </div>
+                          <div>
+                          <span style="font-size: 12px;">
+                          <strong>Product Name: </strong>{{
+                          i.productName
+                          }}</span>
+                          </div>
+                          <div>
+                          <span style="font-size: 12px;">
+                          <strong>Service Name: </strong>{{
+                          i.serviceName
+                          }}</span>
+                          </div>
+                          <div>
+                          <span style="font-size: 12px;">
+                          <strong>Requested Date: </strong>
+                          {{i.subDate}}
+                          </span>
+                          </div>
+                          <div>
+                          <span style="font-size: 12px;">
+                          <strong>Approved By: </strong>
+                          {{i.createdBy}}
+                          </span>
+                          </div>
+                          <div>
+                          <span style="font-size: 12px;">
+                          <strong>Approved On: </strong>
+                          {{i.approvedDate}}
+                          </span>
+                          </div>
+                          <div>
+                          <span style="font-size: 12px;">
+                          <strong>AM / IM Name: </strong>
+                          {{i.accountManagerName}}
+                          </span>
+                          </div>
+                      <div class="row">
+                          <span class="col-md-8" style="padding-top: 2%;">
+                            <i
+                              class="fa fa-check-circle"
+                              style="font-size:18px;color:green"
+                            ></i>
+                            <strong>Approved</strong>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                    </div>
+                    <div *ngIf="filteredItemsForApproved?.length == 0" >
+                      <p style="font-weight: bolder; color: crimson; font-size: x-large; text-align: center;">No Data Found</p>
+                    </div>
+
+                  <!-- </div> -->
+                  <!-- </div> -->
+                  <!-- <hr class="line" /> -->
+
+                 
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle>Subscription Rejected</ng-template>
+                <ng-template ngbTabContent>
+                  <!-- <p
+                    class="title m-b-10 m-t-10"
+                    style="font-size: 25px;color: #053c6d"
+                  >
+                    Rejected List
+                  </p> -->
+                  <br>
+                  <div class="row" style="margin-top: 5%;">
+                          
+                      <div class="input-group col-5 float-left" style="float: left;">
+                          <span class="input-group-append">
+                            <div
+                              class="input-group-text bg-light"
+                              style="border-right: none;"
+                            >
+                              <i class="fa fa-search"></i>
+                            </div>
+                          </span>
+                          <input
+                            #Input3
+                            style="height:99%"
+                            [(ngModel)]="nameforReject"
+                            class="input form-control py-2 border-left-0"
+                            type="search"
+                            (keyup)="checkReject(Input3.value)"
+                            placeholder="Search"
+                            id="example-search-input"
+                          />
+                        </div>
+              
+                      <div class="col-1">
+                        <button class="btn btn-secondary uploadButton" (click)="filterItemForRejected()" style="border-color: grey;
+                        background-color: #f3f5f5;
+                        color:#465F75;
+                        border-radius: 4px;
+                        border-width: 2px;"> Submit </button>
+                      </div>
+                      <br>
+                     <div class="col-md-6" >
+                        <pagination-controls style="float: right;" class="my-pagination" (pageChange)="b= $event"></pagination-controls>
+                  
+                    </div>
+                    </div>
+                    <br>
+                    <label class="textLabelColor" for="select1">Search By</label>
+                    <br>
+                    <select
+                        id="select1"
+                        [(ngModel)]="selectedValueRejected"
+                        class="input inputField form-control form-control-line browser-default custom-select col-md-3"
+                      >
+                        <!-- <option disabled selected value="undefined">Search by</option> -->
+                        <option selected value="productName">Product name</option>
+                        <option selected value="serviceName">Variant name</option>
+                        <option selected value="organisation">Organisation name</option>
+                        <option value="accountManagerName">AM/IM name</option>
+                        <!-- <option value="emailIdBusinessSpoc">Business Email ID</option>
+                        <option value="mobileNumberBusinessSpoc">Business Mobile Number</option> -->
+                        <option value="createdBy">Rejected by</option>
+
+                    </select>
+                    <br>
+                    <br>
+                  <br>
+                  <!-- <div class="row card-group"> -->
+                  <!-- <div class="col-6"> -->
+                    <div *ngIf="filteredItemsForRejected?.length != 0">
+                 
+                    <div class="row">
+                    <div class="card col-6" *ngFor="let i of filteredItemsForRejected | paginate: { itemsPerPage: 10, currentPage: c }">
+                      <div (click)="approvedData(i);"
+                        class="card-body border box"
+                        style="cursor:pointer;background-color: #f1f1f1;"
+                      >
+                        <div>
+                          <span
+                            ><b>{{ i.firstName }}</b
+                            ><b class="pl-1">{{ i.lastName }}</b>
+                            </span
+                          >
+                        </div>
+                        <div>
+                          <span
+                            ><b>{{ i.orgName }}</b></span
+                          >
+                        </div>
+                        <span *ngIf="i.rejectReason != null">
+                          <strong>Reject Reason :</strong> {{i.rejectReason}}
+                          <br>
+                          <strong>Status :</strong> {{i.status}}
+                        </span>
+                        <div class="row">
+                          <span class="col-md-8" style="padding-top: 5%;">
+                            <i
+                              class="fa fa-window-close"
+                              style="font-size:18px;color:red"
+                            ></i>
+                            <strong style="color:red"> Rejected</strong>
+                          </span> 
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                    </div>
+                  <div *ngIf="filteredItemsForRejected?.length == 0" >
+                    <p style="font-weight: bolder; color: crimson; font-size: x-large; text-align: center;">No Data Found</p>
+                  </div>
+                  <!-- </div> -->
+                  <!-- </div> -->
+                  <!-- <hr class="line" /> -->
+
+                 
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                  <ng-template ngbTabTitle>
+                      <div class="row">
+                          Production Ready requests &nbsp;
+                        <span class="circle">{{ listOfProductionInitiatedRequest.length }}</span>
+                      
+                      </div>
+                    </ng-template>
+                  <ng-template ngbTabContent>
+                    <br>
+                    
+                    <!-- <div class="row" style="margin-top: 5%;">
+                          
+                      <div class="input-group col-5 float-left" style="float: left;">
+                          <span class="input-group-append">
+                            <div
+                              class="input-group-text bg-light"
+                              style="border-right: none;"
+                            >
+                              <i class="fa fa-search"></i>
+                            </div>
+                          </span>
+                          <input
+                            #Input4
+                            style="height:99%"
+                            [(ngModel)]="nameforReady"
+                            class="form-control py-2 border-left-0"
+                            type="search"
+                            (keyup)="checkReady(Input4.value)"
+                            placeholder="Search"
+                            id="example-search-input"
+                          />
+                        </div>
+              
+                      <div class="col-1">
+                        <button class="btn btn-secondary" (click)="filterItemForReady()" style="background-color: #053c6d;height:100%;"> Submit </button>
+                      </div>
+                      <br>
+                     <div class="col-md-6" >
+                        <pagination-controls style="float: right;" class="my-pagination" (pageChange)="b= $event"></pagination-controls>
+                  
+                    </div>
+                    </div>
+                    <br>
+                    <label for="select1">Search By</label>
+                    <br>
+                    <select
+                        id="select1"
+                        [(ngModel)]="selectedValueReady"
+                        class="inputField form-control form-control-line browser-default custom-select col-md-3"
+                      > -->
+                        <!-- <option disabled selected value="undefined">Search by</option> -->
+                        <!-- <option selected value="organisation">Organisation</option>
+                        <option value="emailIdBusinessSpoc">Business Email ID</option>
+                        <option value="mobileNumberBusinessSpoc">Business Mobile Number</option>
+                    </select>
+                    <br> -->
+                    <br>
+                    <br>
+                    <br>
+                  <br>
+                        <div class="row">
+                            <!-- <div style="margin:1%;">
+                                <i class="fa fa-info"></i> : Click on the card to fill Check list
+                              </div> -->
+                              <br>
+                            <div class="card col-6" *ngFor="let i of listOfProductionInitiatedRequest">
+                            
+                              <div
+                                class="card-body border box"
+                                style="cursor:pointer;background-color: #f1f1f1;"
+                                >
+                                <div>
+                                  <span><strong>Project Name : </strong>{{ i.projectName }}</span>
+                                  <br/>
+                                  <span><strong>Organisation Name : </strong>{{ i.orgName }}</span>
+                                  <br/>
+                                  <!-- <div *ngIf="i.status==Ready for Production Request Initiated"> -->
+                                  <strong>Status : </strong><b class="pl-1" style="color:green">{{ i.status }}</b>
+                                <!-- </div> -->
+                                </div>
+                                <div class="row">
+                                    <div
+                                       class="col-md-8"
+                                       style="padding-top:5%;padding-left:0%;"
+                                     >
+                                      
+                                     </div>
+                                     <div
+                                       class="col-md-4"
+                                       style="padding-top: 4%; text-align: right;"
+                                     >
+                                       <!-- [routerLink]="['/authentication/makerDetails']" -->
+                                       <button
+                                         class="btn"
+                                         [routerLink]="['/authentication/checkproduction']" [queryParams]="{ projectId: i.projectId}"
+                                         style="width:35%;border-color: grey;
+                                         background-color: #f3f5f5;
+                                         color:#465F75;
+                                         border-radius: 4px;
+                                         border-width: 2px;"
+                                       >
+                                         View
+                                       </button>
+                                     </div>
+                                   </div>
+                              </div>
+                              
+                            
+                            </div>
+                          </div>
+  
+                    <!-- </div> -->
+                    <!-- </div> -->
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                  </ng-template>
+                </ngb-tab>
+                <ngb-tab>
+                  <ng-template ngbTabTitle>
+                      <div class="row">
+                          Production Approved requests &nbsp;
+                        <span class="circle">{{ listOfProductionApprovedRequest.length }}</span>
+                      
+                      </div>
+                    </ng-template>
+                  <ng-template ngbTabContent>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                        <div class="row">
+                            <!-- <div style="margin:1%;">
+                                <i class="fa fa-info"></i> : Click on the card to fill Check list
+                              </div> -->
+                              <br>
+                            <div class="card col-6" *ngFor="let i of listOfProductionApprovedRequest">
+                            
+                              <div
+                                class="card-body border box"
+                                style="cursor:pointer;background-color: #f1f1f1;"
+                                >
+                                <div>
+                                  <span><strong>Project Name : </strong>{{ i.projectName }}</span>
+                                  <br/>
+                                  <span><strong>Organisation Name : </strong>{{ i.orgName }}</span>
+                                  <br/>
+                                  <!-- <div *ngIf="i.status==Ready for Production Request Initiated"> -->
+                                  <strong>Status : </strong><b class="pl-1" style="color:green">{{ i.status }}</b>
+                                <!-- </div> -->
+                                </div>
+                                <div class="row">
+                                    <div
+                                       class="col-md-8"
+                                       style="padding-top:5%;padding-left:0%;"
+                                     >
+                                      
+                                     </div>
+                                     <div
+                                       class="col-md-4"
+                                       style="padding-top: 4%; text-align: right;"
+                                     >
+                                       <!-- [routerLink]="['/authentication/makerDetails']" -->
+                                       <button
+                                         class="btn"
+                                         [routerLink]="['/authentication/checkproduction']" [queryParams]="{ projectId: i.projectId}"
+                                         style="width:35%; background-color: #053c6d !important; font-family: Arial, Helvetica, sans-serif !important; color:#ffffff !important;"
+                                       >
+                                         View
+                                       </button>
+                                     </div>
+                                   </div>
+                              </div>
+                              
+                            
+                            </div>
+                          </div>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                    <!-- </div> -->
+                    <!-- </div> -->
+                  </ng-template>
+                </ngb-tab>
+       
+            </ngb-tabset>
+          </div>
+        </div>
+     
+      </div>
+      <!-- Three tabs ends -->
+    </div>
+  </div>
+</div>
+<!-- <ngb-pagination
+class="d-flex justify-content-center"
+(pageChange)="getPageFromService()"
+[collectionSize]="numberOfRequests"
+[(page)]="page"
+[boundaryLinks]="true">
+</ngb-pagination> -->
+<!-- <footer class="footer text-right" id="footerCss">
+  <p style="color: black">Â© 2018 ICICI. API Developer</p>
+</footer> -->
+<!-- <footer class="footer text-right" style="height: 54px" id="footercss">
+  <p id="footerContent">Â© 2018 ICICI. API Developer {{version}}</p>
+</footer> -->
+<footer class="footer text-right" id="footercss">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <div>
+      <p style="text-align:left" class="db-white">Curious about what’s next</p>
+      </div>
+      <div>
+          <p class="db-lighterblue" style="text-align:left">Subscribe to our newsletter to keep up with updates,
+              events and more.
+              </p>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-7 col-xs-12 col-sm-12 d-none d-lg-block">
+            <input class="emailInput inputField form-control form-control-line" type="email"
+            placeholder="Email address"/>
+        </div>
+        <div class="col-md-5 col-xs-12 col-sm-12 d-none d-lg-block">
+            <div class="input-group mb-3">
+                <div (click)="loginData(addLoginData.value)" class="module-border-wrap" style="border-radius: 4px;">
+                    <div class="subscribeButton" style=" border: 2px solid transparent;
+                    border-radius: 1px;
+                    cursor: pointer;
+                    transition: border-color .2s;">
+                    <span style="text-align: center;">Subscribe</span>
+                    </div></div>
+              </div>
+        </div>
+        </div>
+        <div class="d-sm-none">
+            <input class="emailInput inputField form-control form-control-line" type="email"
+            placeholder="Email address"/>
+            <br/>
+            <div class="input-group mb-3">
+                <div (click)="loginData(addLoginData.value)" class="module-border-wrap" style="border-radius: 4px;">
+                    <div class="subscribeButton" style=" border: 2px solid transparent;
+                    border-radius: 1px;
+                    cursor: pointer;
+                    transition: border-color .2s;">
+                    <span style="text-align: center;">Subscribe</span>
+                    </div></div>
+              </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 col-sm-2 col-lg-1">
+              <div style="float:center">
+                  <input type="checkbox">
+<span class="checkmark"></span>
+              </div>
+            </div>
+          <div class="col-xs-8 col-sm-8 col-lg-9" style="text-align:center">
+              <p class="db-lighterblue">I agree that Deutsche Bank AG sends me newsletters about Deutsche Bank API Program. I can withdraw my consent at any time by sending an e-mail to newsletter.dbapi@db.com. For further information please see our Data Privacy Notice.</p>
+          </div>
+        </div>
+    </div>
+    </div>  
+    <br/>
+    <br/>
+    <div class="border-h-dark"></div>
+    <!-- <p id="footerContent">Â© 2018 ICICI. API Developer {{version}}</p> -->
+    <br/>
+    <div class="row">
+        <div class="col-md-1"></div>
+      <div class="col-md-4">
+        <p style="text-align:left" class="db-lighterblue">© 2019 Deutsche Bank AG, Frankfurt am Main</p>
+      </div>
+      <div class="col-md-6">
+          <a><small class="db-lighterblue">Release Notes</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">FAQ</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">Imprint</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">Terms and Conditions</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">Cookie Note</small></a>
+          &nbsp;|&nbsp;
+          <a><small class="db-lighterblue">Privacy Notice</small></a>
+      </div>
+    </div>
+    </footer>

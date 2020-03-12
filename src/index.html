@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Developer Portal</title>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Description" content="ICICI_index.html file">
+    <meta name="author" content="ICICI_team">
+
+    <link rel="icon" type="image/png" sizes="16x16" alt="icici" href="assets/images/deutscheBank.jpg">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+    <link rel="manifest" href="./manifest.json" crossorigin="use-credentials">
+
+    <!-- //for performance only
+    <img class="img-responsive" style = "visibility:hidden" src="'http://myproject.test/assets/images/ICICI-Bank-PNG-Icon-1024x1024.png'" alt="my picture" />
+  
+    <img class="img-responsive" style = "visibility:hidden" src="'http://myproject.test/assets/images/drawkit-folder-man-monochrome-400px.png'" alt="my picture" />
+
+    <img class="img-responsive" style = "visibility:hidden" src="'http://myproject.test/assets/images/insta.BIZ.banner.d.jpg.png'" alt="my picture" />
+
+    <img class="img-responsive"  style = "visibility:hidden" src="'http://myproject.test/assets/images/icici_bank_logo_text.png'" alt="my picture" />
+
+    <img class="img-responsive" style = "visibility:hidden" src="'http://myproject.test/assets/images/icici_bank_logo_symbol.png'" alt="my picture" />
+
+    <img class="img-responsive" style = "visibility:hidden" src="'http://myproject.test/assets/images/fd-invest-your-idle-fund-new-primer.jpg'" alt="my picture" />
+
+    <img class="img-responsive" style = "visibility:hidden" src="'http://myproject.test/assets/images/ICICI-Bank-PNG-Icon-1024x1024.png'" alt="my picture" />
+
+    <img class="img-responsive" style = "visibility:hidden" src="'http://myproject.test/assets/images/insta.BIZ.banner.d.jpg.png'" alt="my picture" /> -->
+
+    <!-- <link rel="stylesheet" href="src/assets/scss/bootstrap.min.css">
+     -->
+    <link rel="stylesheet" href="assets/data/bootstrap4.0.0.min.css">
+</head>
+
+<body>
+    <script src="assets/data/jquery3.3.1.min.js"></script>
+    <script src="assets/data/popper.min.js"></script>
+    <script src="assets/data/bootstrap4.0.0.min.js"></script>
+    <!-- <script src="src/assets/data/jquery3.3.1.min.js"></script>
+        <script src="src/assets/data/popper.min.js"></script>
+        <script src="src/assets/data/bootstrap4.0.0.min.js"></script> -->
+
+    <!-- <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://unpkg.com/slick-carousel@1.6.0/slick/slick.js"></script>
+    <script async src="assets/jquery.min.js" defer></script> -->
+    <!-- oncontextmenu="return false" oncopy="return false;" -->
+    <script language="JavaScript">
+        
+        window.onload = function () {
+            window.history.pushState(null, "", window.location.href);
+
+            document.addEventListener("contextmenu", function (e) {
+                e.preventDefault();
+            }, false);
+            document.addEventListener("keydown", function (e) {
+                // document.onkeydown = function(e) {
+                // "I" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+                    disabledEvent(e);
+                }
+                // "J" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+                    disabledEvent(e);
+                }
+                // "S" key + macOS
+                if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+                    disabledEvent(e);
+                }
+                // "U" key
+                if (e.ctrlKey && e.keyCode == 85) {
+                    disabledEvent(e);
+                }
+                // "F12" key
+                if (e.keyCode == 123) {
+                    disabledEvent(e);
+                }
+                //  "print scrn" key
+                if (e.keyCode == 44) {
+                    disabledEvent(e);
+                }
+            }, false);
+
+            function disabledEvent(e) {
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                } else if (window.event) {
+                    window.event.cancelBubble = true;
+                }
+                e.preventDefault();
+                return false;
+            }
+        };
+
+        window.onpopstate = function () {
+            window.history.pushState(null, "", window.location.href);
+        };
+
+    </script>
+
+
+    <app-root></app-root>
+
+</body>
+
+</html>

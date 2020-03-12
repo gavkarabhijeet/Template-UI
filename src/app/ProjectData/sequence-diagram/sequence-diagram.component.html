@@ -1,0 +1,591 @@
+<!-- breadcrumb starts-->
+<nav *ngIf="!fromProjectsSelection" class="breadcrumb" id="breadCrumb">
+  <a class="breadcrumb-item" [routerLink]="['/ProjectData/ProjectManagement']">Projects</a>
+  <span class="breadcrumb-item active">Flows</span>
+</nav>
+<nav *ngIf="fromProjectsSelection" class="breadcrumb" id="breadCrumb">
+  <a class="breadcrumb-item" [routerLink]="['/ProjectData/ProjectManagement']">Projects</a>
+  <!-- <a class="breadcrumb-item" [routerLink]="['/ProjectData/ProductData']">Products</a> -->
+  <span class="breadcrumb-item active">Flows</span>
+</nav>
+<!-- breadcrumb ends-->
+<!-- name,search,button starts-->
+<ngx-spinner size="medium" color="#f07800" type="ball-spin"></ngx-spinner>
+<div class="form-group row">
+  <label class="col-md-2" id="flowsSize">Flows</label>
+  <div *ngIf="displaySearch" class="col-md-6">
+    <form>
+      <input type='text' class="form-control" id="searchSize" placeholder='Search' autocomplete="off"
+        (keyup)='updateFilter($event)' />
+    </form>
+  </div>
+  <button class="btn btn-lg btn-outline-warning" id="addFlows" (click)="addFlow(content) ; ">Add
+    Flow</button>
+</div>
+<!-- name,search,button ends-->
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card">
+          <div class="card-body">
+            <ng-template #content let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Add Flow Details</h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="addFlowData" (ngSubmit)="FlowCreationData(addFlowData.value) ;">
+                  <div class="form-group row">
+                    <label class="col-sm-4 control-label col-form-label">Flow Name :</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" id="FlowName" autocomplete="off"
+                        [formControl]="addFlowData.controls['flowName']" formControlName="flowName"
+                        placeholder="Enter Flow Name">
+                    </div>
+                  </div>
+                  <!-- </div> -->
+                  <div class="form-group row">
+                    <label class="col-sm-4 control-label col-form-label">Upload :</label>
+                    <div class="col-sm-6">
+                      <input type="file" (change)="fileChangeEvent($event)" [formControl]="addFlowData.controls['file']"
+                        formControlName="file" placeholder="Upload a file" multiple />
+                    </div>
+                  </div>
+                  <button type="submit" [disabled]="!addFlowData.valid" id="buttonCss"
+                    class="btn btn-outline-warning">Submit</button>
+                </form>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+        <!-- Display image if data empty starts -->
+        <div *ngIf="isDataEmpty" id="tableDiv45">
+          <p id="tableDiv46">
+            <b> No Data Available </b>
+          </p>
+          <img id="imageCss" src="assets/images/drawkit-folder-man-monochrome-400px.png" alt="logo" />
+        </div>
+        <!-- Display image if data empty ends -->
+        <div *ngIf="!isDataEmpty">
+          <!-- Table1 starts -->
+          <div *ngIf="displaySelected ">
+            <div class="col-lg-12" id="tableResponsiveDiv">
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead class="bg-success text-white" id="theadCss">
+                        <tr>
+                          <th id="tableDiv1"> Id </th>
+                          <th id="tableDiv2"> Flow Name </th>
+                          <th id="tableDiv3"> Document </th>
+                          <th id="tableDiv4" *ngIf="displayRadio"> Select </th>
+                          <th id="tableDiv5" *ngIf="displayStatus">Status</th>
+                          <th id="tableDiv6">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let data of uploadedData ;let a=index">
+                          <td id="tableDiv7">{{a+1}}</td>
+                          <td id="tableDiv8">
+
+                            <!-- Suchheta - New Accordion -->
+
+                            <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+                              <ngb-panel>
+                                <ng-template ngbPanelTitle>
+                                  <b>{{data.flowName}}</b>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                  <div class="row">
+                                    <div class="col-md-12" id="div1">
+
+                                      <div class="form-group row">
+                                        <div class="col-md-2"> <label id="labelMethod">Method</label>
+                                          <select id="select1" class="browser-default custom-select" required
+                                            [(ngModel)]="method" [ngModelOptions]="{standalone: true}">
+                                            <option *ngFor="let value of methods" [ngValue]="value.value">
+                                              {{value.value}}
+                                            </option>
+                                          </select>
+                                        </div>
+                                        <div class="col-md-8"> <label id="labelUrl"> Url</label>
+                                          <input type="text" style="width:100%" [(ngModel)]="url" class="form-control"
+                                            [ngModelOptions]="{standalone: true}">
+                                        </div>
+                                        <div class="col-md-2">
+                                          <button class="btn btn-warning" id="submitUrl"
+                                            (click)="submitUrl(requestText,method,url,authUsername,authPassword,authorizationToken)">Test</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <div class="card">
+                                        <div class="card-body">
+                                          <ngb-tabset [justify]="currentJustify" style="border:1px !important;">
+                                            <ngb-tab title="Authorization">
+                                              <ng-template ngbTabContent>
+                                                <br>
+                                                <label id="basicAuthCss">Basic Auth</label>
+                                                <div class="form-group row">
+                                                  <div class="col-md-2">
+                                                    <label id="usernameCss">Enter Username : </label>
+                                                  </div>
+                                                  <div class="col-md-4">
+                                                    <input type="textarea" [(ngModel)]="authUsername"
+                                                      class="form-control" [ngModelOptions]="{standalone: true}">
+                                                  </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                  <div class="col-md-2">
+                                                    <label id="usernameCss">Enter Password :</label>
+                                                  </div>
+                                                  <div class="col-md-4">
+                                                    <input type="textarea" [(ngModel)]="authPassword"
+                                                      class="form-control" [ngModelOptions]="{standalone: true}">
+                                                  </div>
+                                                </div>
+                                              </ng-template>
+                                            </ngb-tab>
+                                            <ngb-tab title="Headers">
+                                              <ng-template ngbTabContent>
+                                                <br>
+                                                <div class="row">
+                                                  <div class="col-md-4">
+                                                    <input *ngIf="addMore" id="firstTextbox" type="text"
+                                                      class="form-control" placeholder="Key" [(ngModel)]="firstKey"
+                                                      (ngModelChange)="textKeyChanged($event)">
+                                                  </div>
+                                                  <div class="col-md-4">
+                                                    <input *ngIf="addMore" id="secondTextbox" type="text"
+                                                      class="form-control" placeholder="Value" [(ngModel)]="firstValue"
+                                                      (ngModelChange)="textValueChanged($event)">
+                                                  </div>
+                                                  <div class="col-md-2">
+                                                    <button type="button" style="margin-left: 10px" *ngIf="clickAgain"
+                                                      (click)="addOne(firstKey, firstValue)" class="btn btn-success">
+                                                      +</button>
+                                                  </div>
+                                                  <br>
+
+                                                  <div *ngFor="let container of containers; let i = index;"
+                                                    [(ngModel)]="miningname" ngDefaultControl style="width:100%">
+                                                    <ng-container>
+                                                      <div class="form-group row">
+                                                        <div class="col-md-4">
+                                                          <br>
+                                                          <input *ngIf="addMore" id="firstTextbox" type="text"
+                                                            class="form-control" placeholder="Key"
+                                                            [(ngModel)]="container.key2Name"
+                                                            (ngModelChange)="textKeyChangedMore($event,i)">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                          <br>
+                                                          <input *ngIf="addMore" id="secondTextbox" type="text"
+                                                            class="form-control" placeholder="Value"
+                                                            [(ngModel)]="container.value2Name"
+                                                            (ngModelChange)="textValueChangedMore($event,i)">
+                                                        </div>
+
+                                                        <div class="col-md-1">
+                                                          <button type="button" id="addButton"
+                                                            (click)="addOneMore(key2Name,value2Name)"
+                                                            class="btn btn-success"> + </button>
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                          <br>
+                                                          <button type="button" id="subtractButton"
+                                                            (click)="deleteOneMore(i)" class="btn btn-warning"> <i
+                                                              class="fas fa-trash-alt"></i>
+                                                          </button>
+                                                        </div>
+                                                      </div>
+                                                    </ng-container>
+                                                  </div>
+                                                </div>
+                                                <br>
+                                                <div *ngIf="showButton">
+                                                  <button type="button" style="margin-left: 10px;background:#f07800;"
+                                                    (click)="addOne(firstKey, firstValue)" class="btn btn-warning">
+                                                    Add New Pair</button>
+                                                </div>
+                                              </ng-template>
+                                            </ngb-tab>
+                                            <ngb-tab title="Body">
+                                              <ng-template ngbTabContent>
+                                                <br>
+                                                <label id="requestResponseCss">Enter Request/JSON : </label>
+                                                <div id="textArea1">
+                                                  <textarea type="textarea" style="border:2%;" [(ngModel)]="requestText"
+                                                    class="form-control" [ngModelOptions]="{standalone: true}"
+                                                    id="requestJson"></textarea>
+                                                </div>
+                                              </ng-template>
+                                            </ngb-tab>
+                                            <ngb-tab title="Response">
+                                              <ng-template ngbTabContent>
+                                                <br>
+                                                <label id="statusCss">Status: </label>{{  statusCode }}
+                                                {{ statusResponse}}
+                                                <div id="textArea2">
+                                                  <textarea type="textarea" [(ngModel)]="responseText"
+                                                    class="form-control" [ngModelOptions]="{standalone: true}"
+                                                    id="requestStatus"> </textarea>
+                                                </div>
+                                              </ng-template>
+                                            </ngb-tab>
+                                          </ngb-tabset>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+
+                                </ng-template>
+                              </ngb-panel>
+                            </ngb-accordion>
+
+
+                            <!-- Suchheta  - New Accordion Ends  -->
+
+                            <!-- Suchheta New flow tab -->
+                          </td>
+                          <td id="tableDiv9">
+                            <a target="_blank"
+                              href="http://192.168.2.104:3002/api/flow/{{data.filename}}">{{data.filename}}</a>
+                          </td>
+                          <td id="tableDiv10" *ngIf="displayRadio">
+                            <input type="radio" name="flowCheck" (change)="onSelectedTableClicked(data, $event)">
+                          </td>
+                          <td id="tableDiv11" *ngIf="displayStatus">
+                            Selected
+                          </td>
+                          <td id="tableDiv12">
+                            <ng-template #contentUpload let-c="close" let-d="dismiss">
+                              <div class="modal-header">
+                                <h4 class="modal-title" id="modal-basic-title">Edit Details</h4>
+                                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="col-md-12">
+                                  <div class="card">
+                                    <div class="card-body">
+                                      <!-- Form for edit details -->
+                                      <form>
+                                        <div class="form-group row">
+                                          <label class="col-sm-4 control-label ">Flow Name :</label>
+                                          <div class="col-sm-6">
+                                            <input type="text" id="ProjectName" class="form-control"
+                                              [(ngModel)]="editChosenFlowName" [ngModelOptions]="{standalone: true}"
+                                              placeholder="Enter Flow Name">
+                                          </div>
+                                        </div>
+                                        <div class="form-group row">
+                                          <label class="col-sm-4 control-label ">Upload :</label>
+                                          <div class="col-sm-6">
+                                            <input type="file" (change)="fileChangeEvent($event)"
+                                              placeholder="Upload a file" multiple />
+                                          </div>
+                                        </div>
+                                        <button type="submit"
+                                          [disabled]="( editChosenFlowName == null) || (editChosenfile == null )"
+                                          id="buttonCss" (click)="flowEditData(editChosenFlowName,editChosenfile) ;"
+                                          class="btn btn-outline-dark">Submit</button>
+                                      </form>
+                                      <!-- Form for edit details ends -->
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </ng-template>
+                            <!-- Edit button in table-->
+                            <button id="iconButtonCss12" type="button" aria-label=" editFlow" title="Edit Flow"
+                              (click)="editFlow(data,contentUpload)"><i class="far fa-edit"></i></button>
+                            <!-- Delete button in table -->
+                            <button id="iconButtonCss22" type="button" aria-label=" deleteFlow" title="Delete Flow"
+                              (click)="deleteFlow(data)"><i class="fas fa-trash-alt"></i></button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Table1 ends -->
+          <!-- Table2 starts -->
+          <div *ngIf="displayUnSelected">
+            <div class="col-lg-12" id="tableResponsiveDiv">
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead class="bg-success text-white" id="theadCss">
+                        <tr>
+                          <th id="tableDiv13"> Id </th>
+                          <th id="tableDiv14"> Flow Name </th>
+                          <th id="tableDiv15"> Document </th>
+                          <th id="tableDiv16">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          *ngFor="let data of notMatchedData| paginate: { itemsPerPage: 5, currentPage: p };let a=index">
+                          <td id="tableDiv17">{{a+1}}</td>
+                          <td id="tableDiv18">{{data.flowName}}</td>
+                          <td id="tableDiv19">
+                            <a target="_blank"
+                              href="http://192.168.2.104:3002/api/flow/{{data.filename}}">{{data.filename}}</a>
+                          </td>
+                          <td id="tableDiv20">
+                            <ng-template #contentUpload let-c="close" let-d="dismiss">
+                              <div class="modal-header">
+                                <h4 class="modal-title" id="modal-basic-title">Edit Details</h4>
+                                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="col-md-12">
+                                  <div class="card">
+                                    <div class="card-body">
+                                      <form>
+                                        isDataEmpty <div class="form-group row">
+                                          <label class="col-sm-4 control-label ">Flow Name :</label>
+                                          <div class="col-sm-6">
+                                            <input type="text" id="ProjectName" class="form-control" autocomplete="off"
+                                              [(ngModel)]="editChosenFlowName" [ngModelOptions]="{standalone: true}"
+                                              placeholder="Enter Flow Name">
+                                          </div>
+                                        </div>
+                                        <div class="form-group row">
+                                          <label class="col-sm-4 control-label ">Upload :</label>
+                                          <div class="col-sm-6">
+                                            <input type="file" (change)="fileChangeEvent($event)" autocomplete="off"
+                                              [(ngModel)]="editChosenfile" [ngModelOptions]="{standalone: true}"
+                                              placeholder="Upload a file" multiple />
+                                          </div>
+                                        </div>
+                                        <button type="submit" id="buttonCss"
+                                          [disabled]="(editChosenFlowName == null ) || (editChosenfile == null ) "
+                                          (click)="flowEditData(editChosenFlowName,editChosenfile) ;"
+                                          class="btn btn-outline-dark">Submit</button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </ng-template>
+                            <button id="iconButtonCss32" type="button" aria-label="editFlowModal "
+                              (click)="editFlow(data,contentUpload)"><i class="far fa-edit"></i></button>
+                            <button id="iconButtonCss42" type="button" aria-label="deleteFlowModal "
+                              (click)="deleteFlow(data)"><i class="fas fa-trash-alt"></i></button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Table2 ends -->
+        <!-- Table3 starts -->
+        <div *ngIf="displayMultipleUnselected1">
+          <div class="col-lg-12" id="tableResponsiveDiv">
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class="bg-success text-white" id="theadCss">
+                      <tr>
+                        <th id="tableDiv21"> Id </th>
+                        <th id="tableDiv22"> Flow Name </th>
+                        <th id="tableDiv23"> Document </th>
+                        <th id="tableDiv24" *ngIf="displayRadio"> Select </th>
+                        <th id="tableDiv25" *ngIf="displayStatus">Status</th>
+                        <th id="tableDiv26">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        *ngFor="let data of segreggateArray| paginate: { itemsPerPage: 5, currentPage: p };let a=index">
+                        <td id="tableDiv27">{{a+1}}</td>
+                        <td id="tableDiv28">{{data.flowName}}</td>
+                        <td id="tableDiv29">
+                          <a target="_blank"
+                            href="http://192.168.2.104:3002/api/flow/{{data.filename}}">{{data.filename}}</a>
+                        </td>
+                        <td id="tableDiv30" *ngIf="displayRadio">
+                          <input type="radio" name="product1Check" [value]=data.flowName
+                            (change)="onSelectedTable2Clicked(data, $event)">
+                        </td>
+                        <td id="tableDiv31" *ngIf="displayStatus">
+                          Selected
+                        </td>
+                        <td id="tableDiv32">
+                          <ng-template #contentUpload let-c="close" let-d="dismiss">
+                            <div class="modal-header">
+                              <h4 class="modal-title" id="modal-basic-title">Edit Details</h4>
+                              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="col-md-12">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <!-- Form for edit details -->
+                                    <form>
+                                      <div class="form-group row">
+                                        <label class="col-sm-4 control-label ">Flow Name :</label>
+                                        <div class="col-sm-6">
+                                          <input type="text" id="ProjectName" class="form-control"
+                                            [(ngModel)]="editChosenFlowName" [ngModelOptions]="{standalone: true}"
+                                            placeholder="Enter Flow Name">
+                                        </div>
+                                      </div>
+                                      <div class="form-group row">
+                                        <label class="col-sm-4 control-label ">Upload :</label>
+                                        <div class="col-sm-6">
+                                          <input type="file" (change)="fileChangeEvent($event)"
+                                            placeholder="Upload a file" multiple />
+                                        </div>
+                                      </div>
+                                      <button type="submit"
+                                        [disabled]="( editChosenFlowName == null) || (editChosenfile == null )"
+                                        id="buttonCss" (click)="flowEditData(editChosenFlowName,editChosenfile) ;"
+                                        class="btn btn-outline-dark">Submit</button>
+                                    </form>
+                                    <!-- Form for edit details ends -->
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Edit button in table-->
+                          <button id="iconButtonCss52" aria-label=" editFlowModal1" type="button" title="Edit Flow"
+                            (click)="editFlow(data,contentUpload)"><i class="far fa-edit"></i></button>
+                          <!-- Delete button in table -->
+                          <button id="iconButtonCss62" aria-label="deleteFlowModal1 " type="button" title="Delete Flow"
+                            (click)="deleteFlow(data)"><i class="fas fa-trash-alt"></i></button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Table3 ends -->
+        <!-- Table4 starts -->
+        <div *ngIf="displayMultipleUnselected2">
+          <div class="col-lg-12" id="tableResponsiveDiv">
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class="bg-success text-white" id="theadCss">
+                      <tr>
+                        <th id="tableDiv33"> Id </th>
+                        <th id="tableDiv34"> Flow Name </th>
+                        <th id="tableDiv35"> Document </th>
+                        <th id="tableDiv36" *ngIf="displayRadio"> Select </th>
+                        <th id="tableDiv37" *ngIf="displayStatus">Status</th>
+                        <th id="tableDiv38">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of globalArray| paginate: { itemsPerPage: 5, currentPage: p };let a=index">
+                        <td id="tableDiv39">{{a+1}}</td>
+                        <td id="tableDiv40">{{data.flowName}}</td>
+                        <td id="tableDiv41">
+                          <a target="_blank"
+                            href="http://192.168.2.104:3002/api/flow/{{data.filename}}">{{data.filename}}</a>
+                        </td>
+                        <td id="tableDiv42" *ngIf="displayRadio">
+                          <input type="radio" name="product2Check" [value]="product2Check" [value]=data.flowName
+                            (change)="onSelectedTable2Clicked(data, $event)">
+                        </td>
+                        <td id="tableDiv43" *ngIf="displayStatus">
+                          Selected
+                        </td>
+                        <td id="tableDiv44">
+                          <ng-template #contentUpload let-c="close" let-d="dismiss">
+                            <div class="modal-header">
+                              <h4 class="modal-title" id="modal-basic-title">Edit Details</h4>
+                              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="col-md-12">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <!-- Form for edit details -->
+                                    <form>
+                                      <div class="form-group row">
+                                        <label class="col-sm-4 control-label ">Flow Name :</label>
+                                        <div class="col-sm-6">
+                                          <input type="text" id="ProjectName" class="form-control"
+                                            [(ngModel)]="editChosenFlowName" [ngModelOptions]="{standalone: true}"
+                                            placeholder="Enter Flow Name">
+                                        </div>
+                                      </div>
+                                      <div class="form-group row">
+                                        <label class="col-sm-4 control-label ">Upload :</label>
+                                        <div class="col-sm-6">
+                                          <input type="file" (change)="fileChangeEvent($event)"
+                                            placeholder="Upload a file" multiple />
+                                        </div>
+                                      </div>
+                                      <button type="submit"
+                                        [disabled]="( editChosenFlowName == null) || (editChosenfile == null )"
+                                        id="buttonCss" (click)="flowEditData(editChosenFlowName,editChosenfile) ;"
+                                        class="btn btn-outline-dark">Submit</button>
+                                    </form>
+                                    <!-- Form for edit details ends -->
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Edit button in table-->
+                          <button id="iconButtonCss72" aria-label="editFlowModal2 " type="button" title="Edit Flow"
+                            (click)="editFlow(data,contentUpload)"><i class="far fa-edit"></i></button>
+                          <!-- Delete button in table -->
+                          <button id="iconButtonCss82" aria-label="deleteFlowModal2 " type="iconButtonCssbutton"
+                            title="Delete Flow" (click)="deleteFlow(data)"><i class="fas fa-trash-alt"></i></button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Table4 ends -->
+        <div *ngIf="showButton">
+          <button type="button" class="btn btn-warning" id="finalSubmitCss" [disabled]="finalSubmit"
+            (click)="submitFlows()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

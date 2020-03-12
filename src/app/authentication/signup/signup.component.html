@@ -1,0 +1,464 @@
+<header class="topbar" [attr.data-navbarbg]="options.navbarbg" style="    background: #f07800;;position: fixed;width:100%;">
+    <nav class="navbar top-navbar navbar-expand-md"
+        [ngClass]="(options.navbarbg=='skin6')?'navbar-light':'navbar-dark'">
+        <!-- ============================================================== -->
+        <!-- [attr.data-navbarbg]="options.navbarbg" -->
+        <div class="navbar-collapse collapse" id="navbarSupportedContent" style="background:#f07800;"
+            [ngbCollapse]="!isCollapsed">
+            <div>
+                <b class="logo-icon">
+                    <img style="width: 175%;
+                                margin-left: 18%;" src="assets/images/ICICIlogo.png" alt="homepage"
+                        class="dark-logo" />
+                </b>
+            </div>
+            <app-navigation (toggleSidebar)="toggleSidebarType()" class="w-100"></app-navigation>
+            <!-- <div style="margin-right:3%">
+                <div (mouseover)="changeColor=true" (mouseout)="changeColor=false">
+                    <span *ngIf="!changeColor"> <a [href]="loginPath"
+                            style="color:#0B3C6D;font-weight:bold;margin-right: 2%;font-size: 125%;">Login</a> </span>
+                    <span *ngIf="changeColor"> <a [href]="loginPath"
+                            style="color:white;font-weight:bold;margin-right: 2%;font-size: 125%;">Login</a> </span>
+                </div>
+            </div> -->
+            <!-- <div (mouseover)="changeColorSignUp=true" (mouseout)="changeColorSignUp=false" style="width:11%">
+                <span *ngIf="!changeColorSignUp"> <a [href]="signUpPath"
+                        style="color:#0B3C6D;margin-right:2%;font-weight:bold;font-size:125%;">Register</a> </span>
+                <span *ngIf="changeColorSignUp"> <a [href]="signUpPath"
+                        style="color:white;margin-right:2%;font-weight:bold;font-size:125%;">Register</a> </span>
+            </div> -->
+        </div>
+    </nav>
+</header>
+<div class="card">
+    <div class="card-body">
+        <form class="form-horizontal m-t-20" id="registerform" [formGroup]="addRegisterData"
+            (ngSubmit)=" RegisterData(addRegisterData.value)">
+            <!-- Basic Information -->
+            <ngb-accordion #acc="ngbAccordion" activeIds="basicInfo">
+                <ngb-panel id="basicInfo" title="Basic Information">
+                    <ng-template ngbPanelContent>
+                        <div class="form-group row ">
+                            <label class="col-md-4  control-label col-form-label">Username :</label>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" required=" " id="username"
+                                    [formControl]="addRegisterData .controls['username']" formControlName="username"
+                                    placeholder="Enter Username" autoComplete="off">
+                            </div>
+                        </div>
+                        <div>
+                            <p class="error"
+                                *ngIf="addRegisterData.get('username').hasError('required') && addRegisterData.get('username').touched">
+                                <span class="glyphicon glyphicon-alert"></span>User Name is required</p>
+                        </div>
+                        <!-- User Name  -->
+                         <!-- Password -->
+                         <div class="form-group row">
+                                <label class="col-md-4  control-label col-form-label">Password :</label>
+                            <div class="col-6">
+                                <input class="form-control" type="password" required=" " id="password"
+                                    [formControl]="addRegisterData .controls['password']" formControlName="password"
+                                    placeholder="Enter Password">
+                            </div>
+                        </div>
+                        <div>
+                            <p class="error"
+                                *ngIf="addRegisterData.get('password').hasError('required') && addRegisterData.get('password').touched">
+                                <span ></span>Password is required</p>
+                        </div>
+                        <!-- Password -->
+                        <!-- First Name -->
+                        <div class="form-group row ">
+                            <label class="col-md-4  control-label col-form-label">First name :</label>
+                            <div class="col-md-6">
+                                <input class="form-control " type="text" required=" " id="firstName"
+                                    [formControl]="addRegisterData .controls['firstName']" formControlName="firstName"
+                                    placeholder=" Enter First name" autoComplete="off">
+                            </div>
+                        </div>
+                        <div>
+                            <p class="error"
+                                *ngIf="addRegisterData.get('firstName').hasError('required') && addRegisterData.get('firstName').touched">
+                                <span class="glyphicon glyphicon-alert"></span>First Name is required</p>
+                        </div>
+                        <!-- First Name -->
+                        <!-- Last Name -->
+                        <div class="form-group row ">
+                                <label class="col-md-4  control-label col-form-label">Last name :</label>
+                            <div class="col-6">
+                                <input class="form-control " type="text" required=" " id="lastName"
+                                    [formControl]="addRegisterData .controls['lastName']" formControlName="lastName"
+                                    placeholder="Last Name" autoComplete="off">
+                            </div>
+                        </div>
+                        <div>
+                            <p class="error"
+                                *ngIf="addRegisterData.get('lastName').hasError('required') && addRegisterData.get('lastName').touched">
+                                <span class="glyphicon glyphicon-alert"></span>Last Name is required</p>
+                        </div>
+                        <!-- Last Name -->
+                        <!-- Company name -->
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label col-form-label">Company name :</label>
+                            <div class="col-6">
+                                <input class="form-control" type="text" required=" " id="companyName" [formControl]="addRegisterData.controls['companyName']"
+                                formControlName="companyName" placeholder="Enter Company name" autoComplete="off">
+                            </div>
+                        </div>
+                        <!-- Company name -->
+                        <!-- Email -->
+                        <div class="form-group row">
+                                <label class="col-md-4  control-label col-form-label">Offical email ID :</label>
+                            <div class="col-6 ">
+                                <input class="form-control " type="text" required=" " id="email"
+                                    [formControl]="addRegisterData .controls['email']"
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" formControlName="email"
+                                    placeholder="Enter Email" autoComplete="off">
+                            </div>
+                        </div>
+                        <div>
+                            <p class="error"
+                                *ngIf="addRegisterData.get('email').hasError('required') && addRegisterData.get('email').touched">
+                                <span class="glyphicon glyphicon-alert"></span>Email is required</p>
+                        </div>
+                        <div>
+                            <p class="error" *ngIf="addRegisterData.get('email').hasError('pattern') ">
+                                <span class="glyphicon glyphicon-alert"></span>Pattern should match</p>
+                        </div>
+                        <!-- Email -->
+                        <!-- Contact Number -->
+                        <div class="form-group row ">
+                                <label class="col-md-4  control-label col-form-label">Contact number :</label>
+                            <div class="col-6 ">
+                                <input class="form-control " type="text" required=" " id="contactNumber"
+                                    [formControl]="addRegisterData .controls['contactNumber']"
+                                    formControlName="contactNumber" placeholder="Enter Contact Number" autoComplete="off">
+                            </div>
+                        </div>
+                        <div>
+                            <p class="error"
+                                *ngIf="addRegisterData.get('contactNumber').hasError('required') && addRegisterData.get('contactNumber').touched">
+                                <span class="glyphicon glyphicon-alert"></span>Contact Number is required</p>
+                        </div>
+                        <div>
+                            <p class="error" *ngIf="addRegisterData.get('contactNumber').hasError('pattern') ">
+                                <span class="glyphicon glyphicon-alert"></span>Contact Number should not be less than 10
+                                digits</p>
+                        </div>
+                        <!-- Contact Number -->
+                      <!-- RelationShip -->
+                      <div class="form-group row">
+                            <label class="col-md-4  control-label col-form-label">Do you have an existing relation with
+                                ICICI?
+                                :</label>
+                            <div class="col-md-6">
+                                <label *ngFor="let item of radioValueArray" style="display:initial !important;">
+                                    <input type="radio" name="radioValue" [value]="item" (change)="radioValue($event)">
+                                    {{item}}
+                                </label>
+                            </div>
+                        </div>
+                      <!-- RelationShip -->
+                      <!-- Bank Account number -->
+                      <div class="form-group row" *ngIf="displayVan">
+                            <label class="col-sm-4  control-label col-form-label">Bank Account Number :</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="bankAccountNumber"
+                                    formControlName="bankAccountNumber"
+                                    [formControl]="addRegisterData.controls['bankAccountNumber']"
+                                    placeholder="Enter Bank Account Number">
+                            </div>
+                        </div>
+                      <!--Bank Account number -->
+                      <!-- ICICI Intermediary Account Number -->
+                      <div class="form-group row">
+                            <label class="col-sm-4  control-label col-form-label">Account to be used as a pool account :</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="poolAccountNumber"
+                                    formControlName="poolAccountNumber"
+                                    [formControl]="addRegisterData.controls['poolAccountNumber']"
+                                    placeholder="Enter Account to be used as a pool account ">
+                            </div>
+                        </div>
+                       <!-- ICICI Intermediary Account Number -->
+                    </ng-template>
+                </ngb-panel>
+            </ngb-accordion>
+            <!-- Basic Information -->
+            <!-- Organisation Name starts -->
+            <!-- <ngb-accordion #acc="ngbAccordion" activeIds="organisationInfo">
+                <ngb-panel id="organisationInfo" title="Organisation Information">
+                    <ng-template ngbPanelContent>
+                        <div class="form-group row">
+                            <label class="col-md-4  control-label col-form-label">Organisation Name :</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="OrganisationName"
+                                    formControlName="organisationName"
+                                    [formControl]="addRegisterData.controls['organisationName']"
+                                    placeholder="Enter Organisation Name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4  control-label col-form-label">Do you have an existing relation with
+                                ICICI?
+                                :</label>
+                            <div class="col-md-6">
+                                <label *ngFor="let item of radioValueArray" style="display:initial !important;">
+                                    <input type="radio" name="radioValue" [value]="item" (change)="radioValue($event)">
+                                    {{item}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group row" *ngIf="displayVan">
+                            <label class="col-sm-4  control-label col-form-label">VAN :</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="VAN" formControlName="vanNo"
+                                    [formControl]="addRegisterData.controls['vanNo']" placeholder="Enter VAN Number">
+                            </div>
+                        </div>
+                        <div class="form-group row" *ngIf="displayVan">
+                            <label class="col-sm-4  control-label col-form-label">IFSC Code :</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="IFSCCode" formControlName="IFSCCode"
+                                    [formControl]="addRegisterData.controls['IFSCCode']" placeholder="Enter IFSC Code">
+                            </div>
+                        </div>
+                        <div class="form-group row" *ngIf="displayVan">
+                            <label class="col-sm-4  control-label col-form-label">Account Number :</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="AccountNumber"
+                                    formControlName="accountNumber"
+                                    [formControl]="addRegisterData.controls['accountNumber']"
+                                    placeholder="Enter Account Number">
+                            </div>
+                        </div>
+                        <div class="form-group row" *ngIf="displayVan">
+                            <label class="col-sm-4  control-label col-form-label">Credit Account Number-Intermediate
+                                Account :</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="CreditAccountNumber"
+                                    formControlName="creditAccountNumber"
+                                    [formControl]="addRegisterData.controls['creditAccountNumber']"
+                                    placeholder="Enter Credit Account Number">
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-panel>
+            </ngb-accordion> -->
+            <!-- Organisation Information ends -->
+            <!-- Customer Information starts-->
+            <ngb-accordion #acc="ngbAccordion" activeIds="customerInfo">
+                <ngb-panel id="customerInfo" title="Customer Information">
+                    <ng-template ngbPanelContent>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <fieldset class="filedsetUAT">
+                                    <legend class="legendbusinessSPOC">
+                                        <label>Business SPOC</label>
+                                    </legend>
+                                    <div class="form-group row">
+                                        <label class="col-sm-4  control-label col-form-label">Name
+                                            :</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="BusinessName"
+                                                formControlName="businessSpocName"
+                                                [formControl]="addRegisterData.controls['businessSpocName']"
+                                                placeholder="Enter Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" formArrayName="businessSpocEmails"
+                                        *ngFor="let businessSpocEmails of addRegisterData.get('businessSpocEmails').controls; let i = index">
+                                        <label class="col-sm-4  control-label col-form-label">Email
+                                            :</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="BusinessEmail"
+                                                [formControl]="businessSpocEmails.get('businessSpocEmail')"
+                                                placeholder="Enter Email">
+                                        </div>
+                                        <div style="padding-right: 17px" *ngIf="i <1">
+                                            <a>
+                                                <i class=" fas fa-plus-circle" (click)="addbusinessSpocEmail()"></i>
+                                            </a>
+                                        </div>
+                                        <div style="padding-right: 5px" *ngIf="i >=1">
+                                            <i class="fas fa-times" placement="bottom" ngbTooltip="Remove Email Field"
+                                                (click)="removebusinessSpocEmail(i)"></i>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-4  control-label col-form-label">Mobile Number
+                                            :</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="BusinessMobileNumber"
+                                                formControlName="businessSpocMobileNumber"
+                                                [formControl]="addRegisterData.controls['businessSpocMobileNumber']"
+                                                placeholder="Enter Mobile Number">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-6">
+                                <fieldset class="fieldsetitSPOC">
+                                    <legend class="legenditSPOC"> <label>IT SPOC</label>
+                                    </legend>
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-4  control-label col-form-label">Name
+                                            :</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="ITName"
+                                                formControlName="ITSpocName"
+                                                [formControl]="addRegisterData.controls['ITSpocName']"
+                                                placeholder="Enter Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" formArrayName="ITSpocEmails"
+                                        *ngFor="let ITSpocEmails of addRegisterData.get('ITSpocEmails').controls; let i = index">
+                                        <label class="col-sm-4  control-label col-form-label">Email
+                                            :</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="ITEmail"
+                                                [formControl]="ITSpocEmails.get('ITSpocEmail')"
+                                                placeholder="Enter Email">
+                                        </div>
+                                        <div style="padding-right: 17px" *ngIf="i <1">
+                                            <i class=" fas fa-plus-circle" (click)="additSpocEmail();"
+                                                placement="bottom" ngbTooltip="Add New Email"></i>
+                                        </div>
+                                        <div style="padding-right: 5px" *ngIf="i >=1">
+                                            <i class="fas fa-times" placement="bottom" ngbTooltip="remove Email Field"
+                                                (click)="removeitSpocEmail(i)"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-4  control-label col-form-label">Mobile Number
+                                            :</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="ITMobileNumber"
+                                                formControlName="ITSpocMobileNumber"
+                                                [formControl]="addRegisterData.controls['ITSpocMobileNumber']"
+                                                placeholder="Enter Mobile Number">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-panel>
+            </ngb-accordion>
+            <!-- Customer Information ends -->
+            <!-- Technical Information starts -->
+            <ngb-accordion #acc="ngbAccordion" activeIds="technicalInfo">
+                <ngb-panel title="Technical Information" id="technicalInfo">
+                    <ng-template ngbPanelContent>
+                        <div class="form-group row">
+                            <label class="col-sm-4 control-label col-form-label">Types of Web Service
+                                :</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="TypeOfWebService"
+                                    formControlName="webService" [formControl]="addRegisterData.controls['webService']"
+                                    placeholder="Enter Web Service">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <fieldset class="filedsetUAT">
+                                    <legend class="legendUAT"> <label>UAT Environment</label></legend>
+                                    <!-- <hr> -->
+                                    <div class="form-group row">
+                                        <label class="col-sm-6  control-label col-form-label">UAT IP
+                                            :</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="UATPublicIP"
+                                                formControlName="uatPublicIP"
+                                                [formControl]="addRegisterData.controls['uatPublicIP']"
+                                                placeholder="Enter Public IP">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-6  control-label col-form-label">Port Number
+                                            :</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="UATPortNo"
+                                                formControlName="uatPortNo"
+                                                [formControl]="addRegisterData.controls['uatPortNo']"
+                                                placeholder="Enter Port Number">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group row">
+                                    <label class="col-sm-6  control-label col-form-label">Web Service Url
+                                        :</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="UATWebServiceUrl"
+                                            formControlName="uatWebServiceUrl"
+                                            [formControl]="addRegisterData.controls['uatWebServiceUrl']"
+                                            placeholder="Enter Web Service Url">
+                                    </div>
+                                </div> -->
+                                </fieldset>
+                            </div>
+                            <div class="col-md-6">
+                                <fieldset class="fieldproduction">
+                                    <legend class="legendproduction"><label>Production Information</label></legend>
+                                    <div class="form-group row">
+                                        <label class="col-sm-6  control-label col-form-label">Production IP
+                                            :</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="LivePublicIP"
+                                                formControlName="livePublicIP"
+                                                [formControl]="addRegisterData.controls['livePublicIP']"
+                                                placeholder="Enter Public IP">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-6  control-label col-form-label">Port Number
+                                            :</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="LivePortNo"
+                                                formControlName="livePortNo"
+                                                [formControl]="addRegisterData.controls['livePortNo']"
+                                                placeholder="Enter Port Number">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group row">
+                                    <label class="col-sm-6  control-label col-form-label">Web Service Url
+                                        :</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="LiveWebServiceUrl"
+                                            formControlName="liveWebServiceUrl"
+                                            [formControl]="addRegisterData.controls['liveWebServiceUrl']"
+                                            placeholder="Enter Web Service Url">
+                                    </div>
+                                </div> -->
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div  >
+                            <div class = "row" >
+                            <div class = "col-md-6" id="registerData" style="margin-left: 45%;" >
+                            <button class="btn btn-block btn-warning" [disabled]="!addRegisterData.valid" type="submit"
+                                id="registerButton">Register</button>
+                            </div>
+                                
+                                <div  class = "col-md-6" id = "backLink" >
+                                <a href = "#" [routerLink]='["/authentication/login"]'>Back</a>
+                            </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-panel>
+            </ngb-accordion>
+            
+            <!-- Technical Information ends -->
+        </form>
+        
+    </div>
+</div>
+<div>
+    <a href = "#" [routerLink]='["/authentication/login"]'>Back</a>
+</div>
+<div>
+    <footer class="footer text-center" style="background: #0B3C6D !important;">
+    </footer>
+</div>

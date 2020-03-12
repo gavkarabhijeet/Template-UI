@@ -1,0 +1,151 @@
+
+{     
+    "templateName" : "ECollection with Two Level Validation at Bank and Client’s End",
+    "request" : [
+        {
+            "tfieldName" : "CustomerCode",
+            "tdataType" : "string",
+            "urgencyName" : "Mandatory",
+	    "tfieldSize": "100"   ,
+            "descriptionName" : "Unique code assigned to client for transaction identification"
+        },
+        {
+            "tfieldName" : "VirtualAccountNumber",
+            "tdataType" : "string",
+            "urgencyName" : "Mandatory",
+             "tfieldSize": "100",
+            "descriptionName" : "Combination of customer code and uniques code assigned to each payer by client. Used as bene account number by payer while transferring funds"
+        },
+        {
+            "tfieldName" : "TransactionAmount",
+            "tdataType" : "number",
+            "urgencyName" : "Mandatory",
+	    "tfieldSize": "28,2"   ,
+            "descriptionName" : "Amount transferred by payer"
+        },
+        {
+            "tfieldName" : "UTR",
+            "tdataType" : "string",
+            "urgencyName" : "Mandatory",
+	    "tfieldSize": "30"   ,
+            "descriptionName" : "Reference number of the transaction"
+        },
+        {
+            "tfieldName" : "RemitterIFSC",
+            "tdataType" : "string",
+	    "tfieldSize":  "15"  ,
+            "urgencyName" : "Optional",
+            "descriptionName" : "IFSC code of the payer"
+        },
+        {
+            "tfieldName" : "RemitterInformation",
+            "tdataType" : "string",
+	    "tfieldSize":  "100"  ,
+            "urgencyName" : "Optional",
+            "descriptionName" : "Remarks or additional information provided by payer while initiating transaction"
+        },
+        {
+            "tfieldName" : "RemitterAccountNumber",
+            "tdataType" : "string",
+	    "tfieldSize":  "100"  ,
+            "urgencyName" : "Mandatory",
+            "descriptionName" : "Account number of the payer"
+        },
+        {
+            "tfieldName" : "RemitterName",
+            "tdataType" : "string",
+	    "tfieldSize":  "150"  ,
+            "urgencyName" : "Mandatory",
+            "descriptionName" : "Name of the payer"
+        },
+        {
+            "tfieldName" : "PaymentMode",
+            "tdataType" : "string",
+	    "tfieldSize":  "100"  ,
+            "urgencyName" : "Mandatory",
+            "descriptionName" : "Payment mode used by payer. Can be RTGS/NEFT/IMPS/Fund Transfer"
+        },
+        {
+            "tfieldName" : "CustomerAccountNumber",
+            "tdataType" : "string",
+	    "tfieldSize": "30"   ,
+            "urgencyName" : "Mandatory",
+            "descriptionName" : "Account number of client. In case of intermediary account service flow, it will capture intermediary account.If no intermediary account, it captures main current account"
+        },
+        {
+            "tfieldName" : "TransactionDate",
+            "tdataType" : "string",
+	    "tfieldSize":  "20"  ,
+            "urgencyName" : "Mandatory",
+            "descriptionName" : "Date of transaction"
+        },
+        {
+            "tfieldName" : "SourceStatus",
+            "tdataType" : "string",
+	    "tfieldSize":  "100"  ,
+            "urgencyName" : "Optional",
+            "descriptionName" : "Static value to be added by Bank if required by client"
+        },
+        {
+            "tfieldName" : "RemitterBankName",
+            "tdataType" : "string",
+		"tfieldSize":  "500"  ,
+            "urgencyName" : "Optional",
+            "descriptionName" : "Bank name of the payer"
+        },
+        {
+            "tfieldName" : "Currency",
+            "tdataType" : "string",
+            "tfieldSize": "10"   ,
+            "urgencyName" : "Optional",
+            "descriptionName" : "It will be INR always"
+        }
+    ],
+"response" : [
+        {
+            "tfieldName" : "RemitterAccountNumber",
+            "tdataType" : "string",
+	    "tfieldSize":  "100"  ,
+            "urgencyName" : "Optional",
+            "descriptionName" : " "
+        },
+        {
+            "tfieldName" : "CreditNarration",
+            "tdataType" : "string",
+	    "tfieldSize":  "200"  ,
+            "urgencyName" : "Optional",
+            "descriptionName" : " "
+        },
+{
+            "tfieldName" : "IFSC",
+            "tdataType" : "string",
+	    "tfieldSize":  "100"  ,
+            "urgencyName" : "Optional",
+            "descriptionName" : " "
+        },
+        {
+            "tfieldName" : "ValidationStatus",
+            "tdataType" : "string",
+	    "tfieldSize":  "200"  ,
+            "urgencyName" : "Mandatory",
+            "descriptionName" : " "
+        },
+{
+            "tfieldName" : "Remarks",
+            "tdataType" : "string",
+	    "tfieldSize":  "100"  ,
+            "urgencyName" : "Mandatory",
+            "descriptionName" : " "
+        }, 
+        {
+            "tfieldName" : "RefundCode",
+            "tdataType" : "string",
+	    "tfieldSize":  "100"  ,
+            "urgencyName" : "Optional",
+            "descriptionName" : " "
+        }
+        
+    ]
+    
+}
+
