@@ -121,6 +121,10 @@
 }
 
 /* footer */
+.footer{
+    /* position: fixed;
+    bottom: 0; */
+}
 .footerText {
     color: #000000 !important;
   }
@@ -185,6 +189,12 @@
         margin-left: -14%;
         margin-bottom: -11%;
     }
+    .divPop{
+        margin-left: 0%;
+    }
+    .resp{
+        margin-top: 11%;
+    }
     
 }
 @media (min-width: 481px) and (max-width: 767px) {
@@ -203,6 +213,10 @@
         margin-left: -22%;
         margin-bottom: -10%;
     }
+    
+    .resp{
+        margin-top: 3%;
+    }
 
 }
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -220,6 +234,9 @@
     .circle3{
         margin-left: -14%;
         margin-bottom: -12%;
+    }
+    .resp{
+        margin-top: 3%;
     }
     
 }
