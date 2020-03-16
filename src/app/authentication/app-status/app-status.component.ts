@@ -359,7 +359,7 @@ export class AppStatusComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
             $( "#initiateModal" ).trigger( "click" );	
-            // $('.xterm-viewport').css("overflow","hidden");
+            // $('.xterm-viewport').css("overflow-y","inherit");
         // if(this.devOpsStatusArray == undefined){
         //     $( "#initiateModal" ).trigger( "click" );	
 

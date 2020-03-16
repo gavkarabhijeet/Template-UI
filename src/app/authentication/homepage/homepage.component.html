@@ -313,7 +313,7 @@
   <img src={{imagePath}} style="margin-top:20%;height:350px;width:350px">
   </div>
 </div> -->
-<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"> 
+<div class="modal fade  bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="demo"> 
   <div class="modal-dialog modal-xl"> 
     <div class="modal-content"> 
         <div class="row">
@@ -351,7 +351,35 @@
                <div class="input-group mb-3">
                       <h2>
                       Log in
-                      </h2>
+                      </h2><div class="alert myalert alert-info" id="a" >
+                        <i class="fa fa-info-circle" style="margin-right: 15px;"></i>Please Enter All the Fields
+                        </div>
+                         
+                        
+                          <div class="alert myalert4 alert-success" id="d" >
+                            <i class="fa fa-thumbs-up" style="margin-right: 15px;"></i>
+                            Logged In Successfully
+                          </div>
+                          <div class="alert myalert5 alert-danger" id="e" ><i class="fa fa-times-circle" style="margin-right: 15px;"></i>
+                            Username or password is incorrect
+                          </div>
+                          <div class="alert myalert6 alert-danger" id="f" ><i class="fa fa-times-circle" style="margin-right: 15px;"></i>
+                            Please Enter Username and Password
+                          </div>
+                          <div class="alert myalert7 alert-danger" id="g" ><i class="fa fa-times-circle" style="margin-right: 15px;"></i>
+                            Please Enter Password
+                          </div>
+                          <div class="alert myalert8 alert-danger" id="h" ><i class="fa fa-times-circle" style="margin-right: 15px;"></i>
+                            Please Enter Username
+                          </div>
+                          <div class="alert myalert9 alert-danger" id="i" ><i class="fa fa-info-circle" style="margin-right: 15px;"></i>
+                            Role is not present for the user!
+                          </div>
+                          <div class="alert myalert9 alert-danger" id="wrong" ><i class="fa fa-info-circle" style="margin-right: 15px;"></i>
+                          Username or Password is incorrect
+                          </div>
+                          <div class="alert myalert10 alert-info" id="j" ><i class="fa fa-envelope" style="margin-right: 15px;"></i>  Link has been sent to your Registered Email Id
+                          </div>
                     </div>
                       </form>
                       </div>
@@ -384,8 +412,8 @@
                       addLoginData.get('username').touched
                     "
                   >
-                    <span class="glyphicon glyphicon-alert"></span>Username is
-                    required
+                    <span class="glyphicon glyphicon-alert" style="color: red !important;">Username is
+                      required</span>
                   </p>
                 </div>
                 <div class="input-group mb-3">
@@ -409,8 +437,8 @@
                       addLoginData.get('password').touched
                     "
                   >
-                    <span class="glyphicon glyphicon-alert"></span>Password is
-                    required
+                    <span class="glyphicon glyphicon-alert" style="color: red !important; ">Password is
+                      required</span>
                   </p>
                 </div>
                 <div class="input-group mb-3">
@@ -434,7 +462,7 @@
                          
                         "
                       >
-                        <span class="glyphicon glyphicon-alert">Invalid Captcha</span>
+                        <span class="glyphicon glyphicon-alert" style="color: red !important;">Invalid Captcha</span>
                       </p>
                     </div>
                     <div>
@@ -456,8 +484,8 @@
                             addLoginData.get('captchaField').touched
                           "
                         >
-                          <span class="glyphicon glyphicon-alert"></span>Captcha is
-                          required
+                          <span class="glyphicon glyphicon-alert" style="color: red !important;">Captcha is
+                            required</span>
                         </p>
                       </div>
             <select
@@ -518,7 +546,7 @@
     </div> 
   </div> 
 </div>
-<div class="modal fade bd-example-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"> 
+<div class="modal fade bd-example-modal" id="demo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"> 
   <div id="modalPage" class="modal-dialog"> 
     <div class="modal-content"> 
         <div class="row">
@@ -624,7 +652,7 @@
                 <div class="input-group mb-3">
                     <div class="mb-3">
                         <div class="row">
-                          <div><input type="text" formControlName="captchaField" [formControl]="addLoginData.controls['captchaField']" class="input form-control" id="capField" #calValue (keyup)="capCheck(calValue.value)" style="margin-left: 15px;">
+                          <div><input type="text" formControlName="captchaField" [formControl]="addLoginData.controls['captchaField']" class="input form-control" id="capField" #calValue2 (keyup)="capCheck2(calValue2.value)" style="margin-left: 15px;">
                           </div>
                            <img src="assets/images/Refresh2.jpg" (click)=createCaptcha() class="img-fluid image caplogo" style="margin-left: 15px;margin-top: 0 px;height: 45px;">
                            </div>
@@ -964,7 +992,7 @@
       </div>
       </footer>
 
-      <div class="alert myalert alert-info" id="a" >
+      <!-- <div class="alert myalert alert-info" id="a" >
           <i class="fa fa-info-circle" style="margin-right: 15px;"></i>Please Enter All the Fields
           </div>
           <div class="alert myalert2 alert-info" id="c">
@@ -996,4 +1024,4 @@
           Username or Password is incorrect
           </div>
           <div class="alert myalert10 alert-info" id="j" ><i class="fa fa-envelope" style="margin-right: 15px;"></i>  Link has been sent to your Registered Email Id
-          </div>
+          </div> -->
