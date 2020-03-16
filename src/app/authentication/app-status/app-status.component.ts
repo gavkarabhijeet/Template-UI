@@ -211,8 +211,7 @@ export class AppStatusComponent implements OnInit, OnDestroy {
 
         boxed: "full", // two possible values: full, boxed
 
-        navbarbg: "skin1", // six possible values: skin(1/2/3/4/5/6)
-
+        navbarbg: "skin1", // six possible values: skin(/2/3/4/5/6)
         sidebarbg: "skin6", // six possible values: skin(1/2/3/4/5/6)
 
         logobg: "skin6" // six possible values: skin(1/2/3/4/5/6)
@@ -315,7 +314,7 @@ export class AppStatusComponent implements OnInit, OnDestroy {
         for( var i=0;i<a.length;i++){	
         // console.log("i===>",a[i])	
         // var val = a[i]	
-        this.child1.write(`\r\n$ welcome to terminal ${a[i]}`)	
+        // this.child1.write(`\r\n$ welcome to terminal ${a[i]}`)	
         // setTimeout(() => this.child.write(`\r\n$ welcome to terminal ${i}`), 1000)	
         // setTimeout(() => this.child1.write(`\r\n$ welcome to terminal ${i}`), 2000)	
         var last = a[a.length-1];	
@@ -328,8 +327,8 @@ export class AppStatusComponent implements OnInit, OnDestroy {
         console.log("last i=======>>>>",i);	
         // this.child1.write(`\r\n$ welcome to terminal ${a+i}`);	
         }	
-        this.child1.write(`\r\n$ welcome to terminal Model\b\n\r`);	
-        this.child.write(`\r\n$ welcome to terminal ${this.devOpsStatusArray}`);	
+        // this.child1.write(`\r\n$ welcome to terminal Model\b\n\r`);	
+        // this.child.write(`\r\n$ welcome to terminal ${this.devOpsStatusArray}`);	
         this.child.keyEventInput.subscribe(e => {	
         // console.log('keyboard event:' + e.domEvent.keyCode + ', ' + e.key);	
         const ev = e.domEvent;	
@@ -359,26 +358,34 @@ export class AppStatusComponent implements OnInit, OnDestroy {
 
 
     ngOnInit() {
-        $( "#initiateModal" ).trigger( "click" );	
-        var vTimeline = document.getElementById("horizontal-timeline");
-        var hTimeline = document.getElementById("vertical-timeline");
-        activation(vTimeline);
-        activation(hTimeline);
+            $( "#initiateModal" ).trigger( "click" );	
+            // $('.xterm-viewport').css("overflow","hidden");
+        // if(this.devOpsStatusArray == undefined){
+        //     $( "#initiateModal" ).trigger( "click" );	
 
-function activation(timeline) {
-  var divs = timeline.getElementsByTagName("div");
-  for (var i = 0; i < divs.length; i++) {
-    if (
-      divs[i].classList.contains("circle") ||
-      divs[i].classList.contains("link")
-    ) {
-      divs[i].style.background = "#05A5D1";
-      if (divs[i].classList.contains("activated")) {
-        break;
-      }
-    }
-  }
-}
+        // }
+        // else{
+        //     console.log("into second condition")
+        // }
+//         var vTimeline = document.getElementById("horizontal-timeline");
+//         var hTimeline = document.getElementById("vertical-timeline");
+//         activation(vTimeline);
+//         activation(hTimeline);
+
+// function activation(timeline) {
+//   var divs = timeline.getElementsByTagName("div");
+//   for (var i = 0; i < divs.length; i++) {
+//     if (
+//       divs[i].classList.contains("circle") ||
+//       divs[i].classList.contains("link")
+//     ) {
+//       divs[i].style.background = "#05A5D1";
+//       if (divs[i].classList.contains("activated")) {
+//         break;
+//       }
+//     }
+//   }
+// }
 
 
 
@@ -1103,6 +1110,11 @@ function activation(timeline) {
         return false;
 
     }
+    doSetTimeout(val,i){
+        var printer = this.child1
+        setTimeout( function() {printer.write(`\r\n$ ${val}`)},1000*i);		
+          // this.child1.write(`\r\n$ ${this.devOpsStatusArray[i].status }`);
+      }
     getDataAlreadyPresent() {
         console.log("DATA PRESENT ALREADY");
         var urlName = this.projectData[0].products[0].services[0].serviceURLUAT;
@@ -1248,9 +1260,20 @@ function activation(timeline) {
                     status: this.devOpsStatusArray[i].status
                 }
                 this.UATStatusArray.push(tableData);
+             
+            this.doSetTimeout(this.devOpsStatusArray[i].event,(i));
+            this.doSetTimeout(this.devOpsStatusArray[i].status,(i));
+
+                this.child.write(`\r\n$ ${this.devOpsStatusArray[i].event  }`);	
+                this.child.write(`\r\n$ ${this.devOpsStatusArray[i].status }`);
             }
             console.log("devOpsStatusArray: ",this.devOpsStatusArray)
             console.log("this.UATStatusArray: ",this.UATStatusArray)
+            //
+// this.child.write(`\r\n$ ${this.devOpsStatusArray[0].status}`);	
+// this.child1.write(`\r\n$ ${this.devOpsStatusArray[0].status }`);	
+
+//
             // for (var i = 0; i < data.length; i++) {
             //     if(data[i].status != "Draft" || data[i].status != "Ready for Transformation" || data[i].status != "Ready for Deployment-SIT"){
             //         this.devOpsStatusArray.push(data[i]);

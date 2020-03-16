@@ -529,7 +529,7 @@ export class ApplicationComponent implements OnInit {
         accountManagerName: this.registerData.accountManagerName,
         mobileNumberAM: this.registerData.mobileNumberAM,
         emailIdAM: this.registerData.emailIdAM,
-        roles: "roles",
+        roles: "Customer",
         subDate: "formatted_date"
       };
       this.appservice.registerData(this.dataForRegister).then(data => {
