@@ -128,6 +128,7 @@ export class HomepageComponent implements OnInit {
   data;
   serviceData: any;
   selectedIndex1: any;
+  selectRole: any;
   constructor(
     public loginService: LoginService,
     private router: Router,
@@ -176,6 +177,8 @@ export class HomepageComponent implements OnInit {
     $("#h").css("display", "none"); 
     $("#i").css("display", "none"); 
     $("#j").css("display", "none"); 
+    $("#k").css("display", "none"); 
+
     this.addLoginData = this.fb.group({
       username: ["", [Validators.required]],
       password: ["", [Validators.required]],
@@ -784,53 +787,103 @@ export class HomepageComponent implements OnInit {
 loginData(value){
   this.dataObj = {
     username: this.addLoginData.get('username').value,
-    password: "admin1234"
+    password: this.addLoginData.get('password').value
   };
-  this.loginService.userDetails(this.dataObj.username).then(data => {
-    this.userData = data;
-    console.log("fesd",this.userData)
-    localStorage.setItem("data",JSON.stringify(this.userData));
-    if(this.userData == ""){
-      this.loginData(value)
-    }
-   else{
-    this.router.navigate(["/authentication/user-profile"]);
+  this.selectRole=this.addLoginData.get('selectRole').value
+  if(this.addLoginData.invalid){
+   
+      $("#a").css("display","block").delay(2000).fadeOut(200);
+     
 
-   }
+      this.addLoginData.reset();
+      this.createCaptcha();
+  }
+  else if(this.capvalid== true){
+    $("#k").css("display","block").delay(2000).fadeOut(200);
+     
 
-    // this.loginService.getUserAudit(this.dataObj.username).then(auditData => {
-    //   if(auditData != null && auditData != undefined && auditData != ''){
-    //     localStorage.setItem("LastLoggedIn",auditData.Date);
-    //     }
-    //     this.role = this.userData[0].roles[0];
-    // this.loginService.login(this.dataObj).then(data => {
-    //   this.response = data;
-    // console.log("this.response ----------->",this.response);
-    //   if (this.response.message == "Login Successful.") {
-    //     $("#d").css("display","block").delay(1000).fadeOut(200);
-    //     setTimeout(() => {this.router.navigate(["/authentication/user-profile"])}, 1100);
-    //     setTimeout(() => {this.addLoginData.reset()}, 1110);
-        
+    this.addLoginData.reset();
+    this.createCaptcha();
+  }
+  else if(this.selectRole != "Customer"){
+    $("#i").css("display","block").delay(2000).fadeOut(200);
+     
 
+    this.addLoginData.reset();
+    this.createCaptcha();
+  }
+  else{
+    this.loginService.userDetails(this.dataObj.username).then(data => {
+      this.userData = data;
+      console.log("fesd",this.userData)
+      // localStorage.setItem("data",JSON.stringify(this.userData));
+      this.loginService.getUserAudit(this.dataObj.username).then(auditData => {
+        if (this.userData.length === 0) {
+          // this.toastr.error("Please Enter valid Username and Password", "", { timeOut: 3000 });
+          $("#f").css("display","block").delay(2000).fadeOut(200);
+          
+          this.addLoginData.reset();
+          // $("#xyz")[0].selectedIndex = 0;
+          this.createCaptcha();
+        }
+        this.loginService.login(this.dataObj).then(data => {
+          this.response = data;
+          console.log("this.response ----------->",this.response);
+          if (this.response.message == "Login Successful.") {
+             localStorage.setItem("data",JSON.stringify(this.userData));
 
-    //     localStorage.setItem('token',this.response.response.token);
-    //     localStorage.setItem('selectedRole',"Customer")
-    //     this.dataToSendForChangePs=JSON.stringify(this.userData);
-    //     localStorage.setItem("userDataForChecker",this.dataToSendForChangePs);
-    //     // this.router.navigate(["/authentication/user-profile"]);
-    //     this.dataOfUserToSend = JSON.stringify(this.userData);
-    //     localStorage.setItem("dataofUser", this.dataOfUserToSend);
-    //     localStorage.setItem("adminLogin", this.role);
-    //     localStorage.setItem("username", this.dataObj.username);
-    //     // this.toastr.success("Logged In Successfully", "", {
-    //     //   timeOut: 2000
-    //     // });
-    //     // $("#d").css("display","block").delay(3000).fadeOut(200);
+            $("#d").css("display","block").delay(1000).fadeOut(200);
+            setTimeout(() => {this.router.navigate(["/authentication/user-profile"])}, 1100);
+            setTimeout(() => {this.addLoginData.reset()}, 1110);
+          }
+           else if (this.response.message == "") {
+              // this.toastr.error("Please Enter Username and Password", "", {
+              //   timeOut: 3000
+              // });
+              $("#f").css("display","block").delay(3000).fadeOut(200);
 
-    //   }
-    // });
-    //   })
+              this.addLoginData.reset();
+              // $("#xyz")[0].selectedIndex = 0;
+              this.createCaptcha();
+            }
+            else if (this.username === "" || this.password === "") {
+              // this.toastr.error("Please Enter Username and Password", "", {
+              //   timeOut: 3000
+              // });
+              $("#f").css("display","block").delay(3000).fadeOut(200);
+
+              this.addLoginData.reset();
+              this.createCaptcha();
+              this.addLoginData.controls["selectRole"].setValue("");
+            } else if (this.username != "" && this.password === "") {
+              // this.toastr.error("Please Enter Password", "", { timeOut: 3000 });
+              $("#g").css("display","block").delay(3000).fadeOut(200);
+
+              this.addLoginData.reset();
+              this.createCaptcha();
+              this.addLoginData.controls["selectRole"].setValue("");
+            }else if (this.username === "" && this.password != "") {
+              // this.toastr.error("Please Enter Username", "", { timeOut: 3000 });
+              $("#h").css("display","block").delay(3000).fadeOut(200);
+
+              this.addLoginData.reset();
+              this.createCaptcha();
+              this.addLoginData.controls["selectRole"].setValue("");
+            }else{
+              console.log("inside this function")
+              $("#wrong").css("display","block").delay(3000).fadeOut(200);
+              // this.toastr.error(this.response.message, "", { timeOut: 3000 });
+              this.addLoginData.reset();
+              // $("#xyz")[0].selectedIndex = 0;
+               this.createCaptcha();
+            }
+        })
+  
+      
+    })
   })
+  }
+  
 }
 
   createCaptcha() {
