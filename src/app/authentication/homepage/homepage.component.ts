@@ -129,6 +129,7 @@ export class HomepageComponent implements OnInit {
   serviceData: any;
   selectedIndex1: any;
   selectRole: any;
+  tokenValue: any;
   constructor(
     public loginService: LoginService,
     private router: Router,
@@ -831,7 +832,8 @@ loginData(value){
           console.log("this.response ----------->",this.response);
           if (this.response.message == "Login Successful.") {
              localStorage.setItem("data",JSON.stringify(this.userData));
-
+             this.tokenValue=this.response.response.token
+              localStorage.setItem("token",this.tokenValue)
             $("#d").css("display","block").delay(1000).fadeOut(200);
             setTimeout(() => {this.router.navigate(["/authentication/user-profile"])}, 1100);
             setTimeout(() => {this.addLoginData.reset()}, 1110);
