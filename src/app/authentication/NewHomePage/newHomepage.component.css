@@ -62,9 +62,10 @@
     margin-left: 100%; background-color: #4E9AF7; color: white; border-radius: 50%; margin-top: 7%; width: 30px; height: 28px; padding: 3px 0px 0px 11px;
 }
 .rightDiv{
-    background-image: url('../../../assets/images/bag3.png');
+    background-image: url('../../../assets/images/shoppingbag.svg');
     background-repeat: no-repeat;
-    background-position: 1%;
+    background-position: right;
+    background-size: cover;
 }
 .cancelButton{
     color: #4E9AF7;
@@ -121,6 +122,10 @@
 }
 
 /* footer */
+.footer{
+    /* position: fixed;
+    bottom: 0; */
+}
 .footerText {
     color: #000000 !important;
   }
@@ -185,6 +190,12 @@
         margin-left: -14%;
         margin-bottom: -11%;
     }
+    .divPop{
+        margin-left: 0%;
+    }
+    .resp{
+        margin-top: 11%;
+    }
     
 }
 @media (min-width: 481px) and (max-width: 767px) {
@@ -203,6 +214,10 @@
         margin-left: -22%;
         margin-bottom: -10%;
     }
+    
+    .resp{
+        margin-top: 3%;
+    }
 
 }
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -220,6 +235,9 @@
     .circle3{
         margin-left: -14%;
         margin-bottom: -12%;
+    }
+    .resp{
+        margin-top: 3%;
     }
     
 }

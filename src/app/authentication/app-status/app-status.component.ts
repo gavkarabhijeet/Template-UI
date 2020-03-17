@@ -187,6 +187,9 @@ export class AppStatusComponent implements OnInit, OnDestroy {
     dataforproces: any;
     writeSubject = new Subject<string>();	
 	okFlag: boolean;
+    terminalFlag: boolean = false;
+    copyarray= [];
+    tFlag: string;
     @ViewChild(NgbTabset) set content(content: NgbTabset) { this.tabSet = content;}
     @ViewChild('term') child: NgTerminal;	
 	@ViewChild('termModal') child1: NgTerminal;
@@ -211,8 +214,7 @@ export class AppStatusComponent implements OnInit, OnDestroy {
 
         boxed: "full", // two possible values: full, boxed
 
-        navbarbg: "skin1", // six possible values: skin(1/2/3/4/5/6)
-
+        navbarbg: "skin1", // six possible values: skin(/2/3/4/5/6)
         sidebarbg: "skin6", // six possible values: skin(1/2/3/4/5/6)
 
         logobg: "skin6" // six possible values: skin(1/2/3/4/5/6)
@@ -315,7 +317,7 @@ export class AppStatusComponent implements OnInit, OnDestroy {
         for( var i=0;i<a.length;i++){	
         // console.log("i===>",a[i])	
         // var val = a[i]	
-        this.child1.write(`\r\n$ welcome to terminal ${a[i]}`)	
+        // this.child1.write(`\r\n$ welcome to terminal ${a[i]}`)	
         // setTimeout(() => this.child.write(`\r\n$ welcome to terminal ${i}`), 1000)	
         // setTimeout(() => this.child1.write(`\r\n$ welcome to terminal ${i}`), 2000)	
         var last = a[a.length-1];	
@@ -328,8 +330,8 @@ export class AppStatusComponent implements OnInit, OnDestroy {
         console.log("last i=======>>>>",i);	
         // this.child1.write(`\r\n$ welcome to terminal ${a+i}`);	
         }	
-        this.child1.write(`\r\n$ welcome to terminal Model\b\n\r`);	
-        this.child.write(`\r\n$ welcome to terminal ${this.devOpsStatusArray}`);	
+        // this.child1.write(`\r\n$ welcome to terminal Model\b\n\r`);	
+        // this.child.write(`\r\n$ welcome to terminal ${this.devOpsStatusArray}`);	
         this.child.keyEventInput.subscribe(e => {	
         // console.log('keyboard event:' + e.domEvent.keyCode + ', ' + e.key);	
         const ev = e.domEvent;	
@@ -359,12 +361,42 @@ export class AppStatusComponent implements OnInit, OnDestroy {
 
 
     ngOnInit() {
-        $( "#initiateModal" ).trigger( "click" );	
-        // $('.xterm-viewport').css("overflow","hidden")
-        // $(".xterm-viewport").css("","")
-      
+        this.tFlag = localStorage.getItem("terminalFlag");
+        console.log("into tFlag",this.tFlag);
+        
+        $('#loaderId').show()
+        $('#buttonId').hide()
 
+           
 
+            // $( "#loaderId" ).trigger( "click" );	
+            // $('.xterm-viewport').css("overflow-y","inherit");
+        // if(this.devOpsStatusArray == undefined){
+        //     $( "#initiateModal" ).trigger( "click" );	
+
+        // }
+        // else{
+        //     console.log("into second condition")
+        // }
+//         var vTimeline = document.getElementById("horizontal-timeline");
+//         var hTimeline = document.getElementById("vertical-timeline");
+//         activation(vTimeline);
+//         activation(hTimeline);
+
+// function activation(timeline) {
+//   var divs = timeline.getElementsByTagName("div");
+//   for (var i = 0; i < divs.length; i++) {
+//     if (
+//       divs[i].classList.contains("circle") ||
+//       divs[i].classList.contains("link")
+//     ) {
+//       divs[i].style.background = "#05A5D1";
+//       if (divs[i].classList.contains("activated")) {
+//         break;
+//       }
+//     }
+//   }
+// }
 
 
 
@@ -412,6 +444,10 @@ export class AppStatusComponent implements OnInit, OnDestroy {
             } else {
 
                 this.showButton = false;
+                if(this.tFlag == null){
+                    $( "#initiateModal" ).trigger( "click" );	
+    
+                }
 
             }
 
@@ -1089,6 +1125,16 @@ export class AppStatusComponent implements OnInit, OnDestroy {
         return false;
 
     }
+    doSetTimeout(val,i){
+        var printer = this.child1
+        setTimeout( function() {printer.write(`\r\n$ ${val}`)},1000*i);		
+          // this.child1.write(`\r\n$ ${this.devOpsStatusArray[i].status }`);
+      }
+      doSetTimeout2(val,i){
+        var printer2 = this.child
+        setTimeout( function() {printer2.write(`\r\n$ ${val}`)},2000*i);		
+          // this.child1.write(`\r\n$ ${this.devOpsStatusArray[i].status }`);
+      }
     getDataAlreadyPresent() {
         console.log("DATA PRESENT ALREADY");
         var urlName = this.projectData[0].products[0].services[0].serviceURLUAT;
@@ -1220,23 +1266,92 @@ export class AppStatusComponent implements OnInit, OnDestroy {
             // this.devOpsStatusArray = data;
            
             for (var i = 0; i < data.length; i++) {
+
                     if(data[i].status == "Draft" || data[i].status == "Ready for Transformation" || data[i].status == "Ready for Deployment-SIT"){
                         // this.devOpsStatusArray.push(data[i]);
                     } else{
-                        this.devOpsStatusArray.push(data[i]);
+
+                            this.devOpsStatusArray.push(data[i]);
+
+                        console.log("data from api",this.devOpsStatusArray)
+                    
                     }
+               
+
+                    // if(data[i].event == "recording_test_results-SIT" || data[i].event == "recording_test_results_TXN_REV-SIT"){
+                    //     // this.terminalFlag = true;
+                    // console.log("last")
+
+                    // }
+                    // else{
+                    // // this.terminalFlag = false;
+                    // console.log("into else")
+
+                    // }
             }
+
             var tableData = {};
             for(var i=0;i<this.devOpsStatusArray.length;i++){
+                
+
+                
                 console.log("this.devOpsStatusArray[i].status: ",this.devOpsStatusArray[i].status)
                 tableData={
                     event: this.devOpsStatusArray[i].event.replace("SIT", "UAT"),
                     status: this.devOpsStatusArray[i].status
                 }
                 this.UATStatusArray.push(tableData);
+             
+            this.doSetTimeout(this.devOpsStatusArray[i].event,(i));
+            this.doSetTimeout(this.devOpsStatusArray[i].status,(i));
+
+                if(this.readyForProductionFlag == "true" || this.tFlag){
+                    console.log("into first loop")
+                this.child.write(`\r\n$ ${this.devOpsStatusArray[i].event  }`);	
+                this.child.write(`\r\n$ ${this.devOpsStatusArray[i].status }`);
+        }
+        else{
+            console.log("into second loop")
+            this.doSetTimeout2(this.devOpsStatusArray[i].event,(i));
+            this.doSetTimeout2(this.devOpsStatusArray[i].status,(i));
+        }
+            // for(var j=0;j< this.devOpsStatusArray.length;j++){
+            //  setTimeout(()=>{ 
+            //     this.copyarray.push(this.devOpsStatusArray[i]);
+            //     console.log("here data",this.copyarray)
+            //     },2000)
+            // }
+                // this.child.write(`\r\n$ ${this.devOpsStatusArray[i].event  }`);	
+                // this.child.write(`\r\n$ ${this.devOpsStatusArray[i].status }`);
+                // this.child1.write(`\r\n$ ${this.devOpsStatusArray[i].event  }`);	
+                // this.child1.write(`\r\n$ ${this.devOpsStatusArray[i].status }`);
+                // if(this.devOpsStatusArray[i].event =="recording_test_results-SIT"){
+                //     console.log("last")
+                //     this.terminalFlag = true;
+                // }
+                // else{
+                //     console.log("into else")
+                //     this.terminalFlag = false;
+    
+                // }
+                setTimeout(()=> {$('#loaderId').hide()},12000)
+                setTimeout(()=> {$('#buttonId').show()},12000)
+
             }
+            setTimeout(()=> {
+            this.child1.write(`\r\n$ All events completed please press OK to proceed...`);
+        },12100)
+            // this.doSetTimeout(this.devOpsStatusArray[i].status,(i));
+
+
             console.log("devOpsStatusArray: ",this.devOpsStatusArray)
             console.log("this.UATStatusArray: ",this.UATStatusArray)
+            //
+            
+// this.child.write(`\r\n$ ${this.devOpsStatusArray[0].status}`);	
+// this.child1.write(`\r\n$ ${this.devOpsStatusArray[0].status }`);	
+
+//
             // for (var i = 0; i < data.length; i++) {
             //     if(data[i].status != "Draft" || data[i].status != "Ready for Transformation" || data[i].status != "Ready for Deployment-SIT"){
             //         this.devOpsStatusArray.push(data[i]);
@@ -1248,6 +1363,10 @@ export class AppStatusComponent implements OnInit, OnDestroy {
         })
 
 
+    }
+
+    onClick(){
+        localStorage.setItem("terminalFlag","true");
     }
 
     initiateTest(){

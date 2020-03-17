@@ -52,11 +52,19 @@
     .nextButton{
         background-color: #4E9AF7; color: white;   
     }
-    
+   
+    @media (min-width: 320px) and (max-width: 480px) {
+        .nextButton{
+            float: none;
+        }
+    }    
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .topDiv{
         /* margin-left: 20%; */
+    }
+    .nextButton{
+        float: right;
     }
 }
 @media (min-width: 481px) and (max-width: 767px) {
@@ -71,6 +79,9 @@
     .prevButton{
         margin-left: 20%;
     }
+    .nextButton{
+        float: right;
+    }
     
 }
 @media (min-width:1025px) and (max-width: 1919px){
@@ -79,5 +90,8 @@
     }
     .prevButton{
         margin-left: 21%;
+    }
+    .nextButton{
+        float: right;
     }
 }

@@ -352,7 +352,7 @@ export class OrganizationComponent implements OnInit {
     $('#orgg1').css('color','#808080');
     $('#application').css('color','#808080'); 
     $('#application1').css('color','#808080'); 
-    $('#rightDiv').css("background-image", "url('../../../assets/images/bag3.png')");
+    $('#rightDiv').css("background-image", "url('../../../assets/images/shoppingbag.svg')");
 
   }
   prevTab2(){
