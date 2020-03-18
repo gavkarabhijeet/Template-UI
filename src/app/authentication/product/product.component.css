@@ -1,35 +1,4 @@
-.circle {
-    display: block;
-  height: 23px;
-  width: 23px;
-  line-height: 23px;
-  
-  -moz-border-radius: 30px; /* or 50% */
-  border-radius: 30px; /* or 50% */
-  
-  background-color: #4E9AF7;
-  color: white;
-  text-align: center;
-  }
-  .circle1{
-      margin-left: 466%;
-      margin-top: 137%;
-  }
-  .circle2{
-    margin-left: 496%;
-    margin-top: 163%;
-    background-color: #fff;
-    color: #D3D2D7;
-    border: 1px solid #D3D2D7;
-}
-.circle3{
-    margin-left: 498%;
-    margin-top: 45%;
-    background-color: #fff;
-    color: #D3D2D7;
-    border: 1px solid #D3D2D7;
-    
-}
+
 ::ng-deep .nav-pills .nav-link.active{
     color: #007bff !important;
     background-color: white !important;
@@ -93,5 +62,10 @@
     }
     .nextButton{
         float: right;
+    }
+}
+@media (min-width:1920px) and (max-width: 2561px){
+    .topDiv{
+        margin-left: 17%;
     }
 }

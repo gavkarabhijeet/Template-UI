@@ -513,27 +513,30 @@
             </div>
             <div class="col-md-2">
                     <div *ngIf="showButton == true">
-                        <button class="btn headerButton m-10 buttons"
+                        <button class="btn headerButton m-10 buttons" 
                         [disabled]="showButton"
                                 style="border-color: grey;
                                 float:right;
                                 background-color: #f3f5f5;
                                 color:#465F75;
                                 border-radius: 4px;
-                                border-width: 2px;"
+                                border-width: 2px;
+                                width: 85%;
+                                "
                                   type="submit" (click)="initiatesUAT('uat')">
                                   <span>Ready for UAT</span>
                                 </button>
                       </div>
                       <div *ngIf="showButton == false" >
                         <button
-                        class="btn headerButton m-10 buttons"
+                        class="btn headerButton m-10 buttons" 
                         style="border-color: grey;
                                 float:right;
                                 background-color: #f3f5f5;
                                 color:#465F75;
                                 border-radius: 4px;
-                                border-width: 2px;"  
+                                border-width: 2px;
+                                width: 85%;"  
                         (click)="initiatesUAT('uat')"
                           [disabled]="allSuccess"
                          

@@ -312,10 +312,10 @@ export class ApplicationComponent implements OnInit {
         this.dataToDisplay.serviceNameProd
         
       );
-      // this.addSubmitData.controls["fileUploadProd"].setValue(
-      //   localStorage.getItem("file2")
+      this.addSubmitData.controls["fileUploadProd"].setValue(
+        localStorage.getItem("file2")
         
-      // );
+      );
       // dropdown part
       if(this.dataToDisplay.webService != null){
         this.dropDown=true
@@ -617,17 +617,38 @@ this.router.navigateByUrl("/authentication/Home")
       $("#app4").hide()	
       $("#app2").hide()
   }
+
+  uatUpload1() {
+    $(document).ready(function () {
+      $("#uatUpload1").trigger("click");
+    });
+  }
+
+  prodUpload1(){
+    $(document).ready(function () {
+      $("#prodUpload1").trigger("click");
+    });
+  }
+
   uatUpload1Uploaded($event) {    
     this.uatfilename1=$event.target.files[0].name
     this.uatFile1=$event.target.files[0];
     console.log("this.uatFile1",this.uatFile1)
     localStorage.setItem("file1",this.uatfilename1);
+    this.addSubmitData.controls["fileUploadUat"].setValue(
+      $event.target.files[0].name
+
+    );
   }
   prodUpload1Uploaded($event) {
     this.prodfilename1=$event.target.files[0].name
     this.prodFile1=$event.target.files[0];
     console.log("this.prodFile1",this.prodFile1);
     localStorage.setItem("file2",this.prodfilename1);
+    this.addSubmitData.controls["fileUploadProd"].setValue(
+      $event.target.files[0].name
+
+    );
 
 
 

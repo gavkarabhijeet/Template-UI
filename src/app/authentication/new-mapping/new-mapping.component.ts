@@ -249,7 +249,9 @@ export class NewMappingComponent implements OnInit {
 
  ngOnInit() {
   //  localStorage.setItem("token","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTNiZWQ0ZjQ3MjJjZTIxZTZhYTc4ZGIiLCJpYXQiOjE1ODA5ODU3MzZ9.KECi38Pln-X1zXYYkwgot7mQJFbeiyda2HiVuTh4xV8")
- $("#a").css("display", "none");
+ $("body").css("overflow","scroll")
+//  $(".card").css("background-color","#fff")
+  $("#a").css("display", "none");
  $("#b").css("display", "none");
  $("#c").css("display", "none");
  $("#d").css("display", "none");

@@ -57,7 +57,7 @@
                         color: #5264AE;">Checksum Required :</label>
                       </div>
                       <div class="floating-label col-md-6">  
-                        <select class="floating-select" onclick="this.setAttribute('value', this.value);" value="" formControlname="encryUsed">
+                        <select class="floating-select" onclick="this.setAttribute('value', this.value);" value="" formControlName="encryUsed">
                           <option  value="" hidden></option>
                           <option value="YES">YES</option>
                           <option value="NO">NO</option>
@@ -181,10 +181,10 @@
                           <option value="HTTPS">HTTPS</option>
                         </select>
                         <span class="highlight"></span>
-                        <label *ngIf="!dropDown4">Select Communicaton protocol :</label>
+                        <label *ngIf="!dropDown4">Communicaton protocol :</label>
                         <label *ngIf="dropDown4" style="top: -18px;
                         font-size: 14px;
-                        color: #5264AE;">Select Communicaton protocol :</label>
+                        color: #5264AE;">Communicaton protocol :</label>
                       </div>
                   </div>
                   <div class="row " style="margin-left: 6%;margin-top: 2%; "> 
@@ -235,23 +235,31 @@
                           " style="color: red;">Please enter valid Service Name</label>
                             
                           </div>
-                          <div class="floating-label col-md-6" >      
-                            <input class="floating-input" type="file" placeholder=" " formControlName="fileUploadUat" (change)="
+                          <div class="floating-label col-md-6" style="padding-right: 4%;">      
+                            <!-- <input class="floating-input" type="file" placeholder=" " formControlName="fileUploadUat" (change)="
                             uatUpload1Uploaded($event)
                           ">
                             <span class="highlight"></span>
-                            <label>File Upload for UAT </label>
-                            <!-- <div class="form-group">
-                              <input type="file" (change)="
-                              uatUpload1Uploaded($event)"  class="file">
-                              <div class="input-group col-xs-12">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
-                                <input type="text" formControlName="fileUploadUat" class="form-control input-lg" disabled placeholder="Upload file">
-                                <span class="input-group-btn">
-                                  <button class="browse btn btn-primary input-lg" type="button"><i class="glyphicon glyphicon-search"></i> Browse</button>
-                                </span>
-                              </div>
-                            </div> -->
+                            <label>File Upload for UAT </label> -->
+
+                            <div class="formGroup">
+                        
+                              <div class="input-group">
+                            <input type="text" placeholder="Upload .yaml File" readonly
+                              class="inputField form-control form-control-line" id="uatFile1" 
+                              formControlName="fileUploadUat" />
+                            <span class="input-group-btn">
+                              <button class="btn " (click)="uatUpload1()"
+                                style="width:100%; background-color: #053c6d; color: #ffffff" type="button">
+                                Browse
+                              </button>
+                              <input type="file" accept=".wsdl , .yaml" id="uatUpload1" (change)="
+                                  uatUpload1Uploaded($event)
+                                " style="display:none" />
+                            </span>
+                          </div>
+                          </div>
+                         
                           </div>
                         </div>
                   
@@ -264,93 +272,6 @@
                   </div>
               </ng-template>
 
-              
-          <!-- <ng-template ngbTabContent>
-           <div style="margin-top: 2%;">
-            <ngb-accordion>
-                <ngb-panel>
-                    <ng-template ngbPanelTitle>
-                        <span style="color: red;height: 10%;">hello</span>
-                    </ng-template>
-                <ng-template ngbPanelContent>
-                   
-                        <div class="floating-form" style="margin-top: 2%;background-color: #E9E9EB;padding-top: 2.5%;">
-                          <div class="row" style="margin-left: 6%;margin-top: 3%;"> 
-                          <div class="floating-label col-md-6" >      
-                              <input class="floating-input" type="text" placeholder=" ">
-                              <span class="highlight"></span>
-                              <label>Host Name</label>
-                            </div>
-                            <div class="floating-label col-md-6">      
-                              <input class="floating-input" type="text" placeholder=" ">
-                              <span class="highlight"></span>
-                              <label>UAT IP</label>
-                            </div>
-                          </div>
-                           <div class="row" style="margin-left: 6%;padding-bottom: 4%;margin-top: 4%;">
-                            <div class="floating-label col-md-6">      
-                              <input class="floating-input" type="text" placeholder=" ">
-                              <span class="highlight"></span>
-                              <label>UAT Port</label>
-                            </div>
-                            <div class="floating-label col-md-6">  
-                                <select class="floating-select" onclick="this.setAttribute('value', this.value);" value="">
-                                  <option value=""></option>
-                                  <option value="1">HTTP</option>
-                                  <option value="2">HTTPS</option>
-                                </select>
-                                <span class="highlight"></span>
-                                <label>Select Communication protocol</label>
-                              </div>
-                          </div>
-                          
-                        </div>
-                        
-                      
-                </ng-template>
-                </ngb-panel>
-                <ngb-panel title="Panel Two">
-                    <ng-template ngbPanelContent>
-                   
-                        <div class="floating-form" style="margin-top: 2%;background-color: #E9E9EB;padding-top: 2.5%;">
-                          <div class="row" style="margin-left: 6%;margin-top: 3%;"> 
-                          <div class="floating-label col-md-6" >      
-                              <input class="floating-input" type="text" placeholder=" ">
-                              <span class="highlight"></span>
-                              <label>Host Name</label>
-                            </div>
-                            <div class="floating-label col-md-6">      
-                              <input class="floating-input" type="text" placeholder=" ">
-                              <span class="highlight"></span>
-                              <label>UAT IP</label>
-                            </div>
-                          </div>
-                           <div class="row" style="margin-left: 6%;padding-bottom: 4%;margin-top: 4%;">
-                            <div class="floating-label col-md-6">      
-                              <input class="floating-input" type="text" placeholder=" ">
-                              <span class="highlight"></span>
-                              <label>UAT Port</label>
-                            </div>
-                            <div class="floating-label col-md-6">  
-                                <select class="floating-select" onclick="this.setAttribute('value', this.value);" value="">
-                                  <option value=""></option>
-                                  <option value="1">HTTP</option>
-                                  <option value="2">HTTPS</option>
-                                </select>
-                                <span class="highlight"></span>
-                                <label>Select Communication protocol</label>
-                              </div>
-                          </div>
-                          
-                        </div>
-                        
-                      
-                </ng-template>
-                </ngb-panel>
-              
-                </ngb-accordion>
-            </div>
-          </ng-template> -->
            
           
         </ngb-tab>
@@ -409,10 +330,10 @@
                           <option value="HTTPS">HTTPS</option>
                         </select>
                         <span class="highlight"></span>
-                        <label *ngIf="!dropDown5">Select Communicaton protocol :</label>
+                        <label *ngIf="!dropDown5">Communicaton protocol :</label>
                         <label *ngIf="dropDown5" style="top: -18px;
                         font-size: 14px;
-                        color: #5264AE;">Select Communicaton protocol :</label>
+                        color: #5264AE;">Communicaton protocol :</label>
                       </div>
                   </div>
                   <div class="row " style="margin-left: 6%;margin-top: 2%; "> 
@@ -462,23 +383,30 @@
                                .hasError('pattern')
                            " style="color: red;">Please enter valid Service Name</label>
                           </div>
-                          <div class="floating-label col-md-6">      
-                            <input class="floating-input" type="file" placeholder=" " formControlName="fileUploadProd"  (change)="
+                          <div class="floating-label col-md-6" style="padding-right: 4%;">      
+                            <!-- <input class="floating-input" type="file" placeholder=" " formControlName="fileUploadProd"  (change)="
                           prodUpload1Uploaded($event)
                         ">
                             <span class="highlight"></span>
-                            <label>File Upload for Prod </label>
-                            <!-- <div class="form-group">
-                              <input type="file" (change)="
-                              prodUpload1Uploaded($event)"  class="file">
-                              <div class="input-group col-xs-12">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
-                                <input type="text" formControlName="fileUploadProd" class="form-control input-lg" disabled placeholder="Upload file">
-                                <span class="input-group-btn">
-                                  <button class="browse btn btn-primary input-lg" type="button"><i class="glyphicon glyphicon-search"></i> Browse</button>
-                                </span>
-                              </div>
-                            </div> -->
+                            <label>File Upload for Prod </label> -->
+                            
+                            <div class="formGroup">
+                             
+                              <div class="input-group">
+                            <input type="text" placeholder="Upload .yaml File" readonly
+                              class="inputField form-control form-control-line"
+                              formControlName="fileUploadProd" />
+                            <span class="input-group-btn">
+                              <button class="btn " (click)="prodUpload1()"
+                                style="width:100%; background-color: #053c6d; color: #ffffff" type="button">
+                                Browse
+                              </button>
+                              <input type="file" accept=".wsdl , .yaml" id="prodUpload1" (change)="
+                                  prodUpload1Uploaded($event)
+                                " style="display:none" />
+                            </span>
+                          </div>
+                          </div>
                           </div>
                         </div>
                   

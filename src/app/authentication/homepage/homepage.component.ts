@@ -157,8 +157,11 @@ export class HomepageComponent implements OnInit {
       var currentScrollPos = window.pageYOffset;
         if (prevScrollpos > currentScrollPos) {
           document.getElementById("topbar1").style.top = "0";
+          console.log("scroll in")
         } else {
-          document.getElementById("topbar1").style.top = "-70px";
+          document.getElementById("topbar1").style.top = "-50px";
+          console.log("scroll out")
+
         }
         prevScrollpos = currentScrollPos;
       }
@@ -837,6 +840,8 @@ loginData(value){
             $("#d").css("display","block").delay(1000).fadeOut(200);
             setTimeout(() => {this.router.navigate(["/authentication/user-profile"])}, 1100);
             setTimeout(() => {this.addLoginData.reset()}, 1110);
+            // $(".modal-backdrop").remove()
+            // this.router.navigate(["/authentication/user-profile"])
           }
            else if (this.response.message == "") {
               // this.toastr.error("Please Enter Username and Password", "", {
