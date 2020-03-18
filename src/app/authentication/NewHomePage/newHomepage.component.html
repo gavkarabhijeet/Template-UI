@@ -2,7 +2,7 @@
 <header
   class="topbar"
   id="topbar1"
-  [attr.data-navbarbg]="options.navbarbg"
+  [attr.data-navbarbg]="options && options.navbarbg"
   style="  background: #ffffff;height: 50px;position: fixed;width:100%;transition: top 0.2s ease-in-out;"
 >
 
@@ -70,7 +70,7 @@
 
 <!-- header -->
 <div class="container-fluid">
-    <div class="row " style="height: 100vh;">
+    <div class="row " style="height: (100vh - 349px);">
         <div class="col-md-7 col-sm-6 resp" style="background-color: #E9E9EB;padding-top: 5%;">
             <!-- <img src="/assets/images/Kqmv0kqaXT.jpg" [routerLink]="['']" class=" logo1" style="max-width: 100%; height: auto;"> -->
             <div class="col-md-12 divPop">
@@ -135,8 +135,7 @@
     </div>
     
     </div>
-    <!-- <app-footer></app-footer> -->
-    <div>
+    <!-- <div>
         <footer class="footer text-right" id="footercss">
           <br/>
           <br/>
@@ -203,7 +202,6 @@
           <br/>
           <br/>
           <div class="border-h-dark"></div>
-          <!-- <p id="footerContent">Â© 2018 ICICI. API Developer {{version}}</p> -->
           <br/>
           <div class="row">
               <div class="col-md-1"></div>
@@ -227,4 +225,154 @@
           </div>
           </footer>
         
-    </div>
+    </div> -->
+
+    <footer class="row">
+      <div class="footer-container">
+        <!-- First section -->
+        <section class="footer-wrap footer-1-container">
+          <!-- left -->
+          <div class="footer-1-left">
+            <h2>
+              Curious about what’s next
+            </h2>
+            <p>
+              Subscribe to our newsletter to keep up with updates,<br>events and
+              more.
+            </p>
+          </div>
+          <!-- right -->
+          <div class="footer-1-right">
+            <div class="footer-1-right-top">
+              <div class="footerInput col-md-8">
+                <input
+                  class="email-footer"
+                  placeholder="Email address"
+                  type="email"
+                />
+              </div>
+              <div class="footer-subscribe-container col-md-3">
+                <div class="subscribe-border-wrap">
+                  <button class="footer-subscribe-btn">
+                    Subscribe
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              style="display: flex;justify-content: center;align-items: center;"
+            >
+              <div class="footer-checkbox-container" style="position: relative;">
+                <div class="footer-checkbox-frame">
+                  <label for="footer-checkbox" class="footer-checkbox-label">
+                    <input
+                      type="checkbox"
+                      class="footer-checkbox"
+                      id="footer-checkbox"
+                      value = ""
+                    />
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="m-b-1 m-l-1" style="padding: 1em 0;">
+                <small style="line-height: 22px;font-size: 12px;color: #9eb8cf;"
+                  >I agree that Deutsche Bank AG sends me newsletters about
+                  Deutsche Bank API Program. I can withdraw my consent at any
+                  time by sending an e-mail to
+                  <a href=""
+                    >newsletter.dbapi@db.com</a
+                  >. For further information please see our
+                  <a href="">Data Privacy Notice</a>.
+                </small>
+              </div>
+            </div>
+          </div>
+        </section>
+    
+        <!-- Second section -->
+        <section class="">
+          <div class="border-h"></div>
+          <!-- <a class="footer-circle" style="display: block;width: 30px;height: 30px;margin: auto;border: 2px solid #22374d;;border-radius: 50%;margin-top: -15px;background: #071b2d;"> -->
+            <a><span style="height: 100%;text-align: center;display: flex;justify-content: center;align-items: center; ">
+              <svg  
+              width="30px"
+              height="30px"
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 512 512" 
+              class="footer-circle">
+              <path d="M256 504c137 0 248-111 248-248S393 8 256 8 8 119 8 256s111 248 248 248zm0-448c110.5 0 200 89.5 200 200s-89.5 200-200 200S56 366.5 56 256 145.5 56 256 56zM126.1 245.1l121.4-121.4c4.7-4.7 12.3-4.7 17 0l121.4 121.4c4.7 4.7 4.7 12.3 0 17l-19.6 19.6c-4.8 4.8-12.5 4.7-17.2-.2L282 211.2V372c0 6.6-5.4 12-12 12h-28c-6.6 0-12-5.4-12-12V211.2l-67.1 70.3c-4.7 4.9-12.4 5-17.2.2l-19.6-19.6c-4.7-4.7-4.7-12.3 0-17z">
+              </path>
+              </svg>
+            </span>
+          </a>
+        </section>
+    
+        <!-- Third section -->
+        <section class="footer-wrap">
+          <div class="footer-bootom-left">
+            <div class="footer-bootom-left-inner">
+              <small style="color: #9eb8cf;">
+                © 2020 Deutsche Bank AG, Frankfurt am Main
+              </small>
+          </div>
+          <div class="footer-bottom-right">
+            <div
+            class="footer-links m-t-0"
+          >
+            <a class="no-underline" href="/releasenotes">
+              <small>Release Notes</small>
+            </a>
+            <a class="no-underline" href="/faq">
+              <small>FAQ</small>
+            </a>
+            <a class="no-underline" target="_blank">
+              <small
+                style="flex-direction: row; box-sizing: border-box; display: flex; max-height: 100%; place-content: center; align-items: center;"
+                >Imprint
+              </small>
+            </a>
+            <a class="no-underline" href="/termsandconditions">
+              <small>Terms and Conditions</small>
+            </a>
+            <a class="no-underline" href="/cookienote">
+              <small>Cookie Note</small>
+            </a>
+            <a class="no-underline" href="/privacynotice">
+              <small>Privacy Notice</small>
+            </a>
+            </div>
+            <div class="footer-links m-t-0" fxhide="" fxlayout="row" fxlayoutalign="start center" fxshow.lt-md="" style="flex-direction: row; box-sizing: border-box; max-height: 100%; place-content: center flex-start; align-items: center; display: flex;">
+              <a class="no-underline" href="">
+                <small>Release Notes</small>
+              </a>
+              <a class="no-underline" href="">
+                <small>FAQ</small>
+              </a>
+              <a class="no-underline" href="" target="_blank">
+                <small fxlayout="row" fxlayoutalign="center center" style="flex-direction: row; box-sizing: border-box; display: flex; max-height: 100%; place-content: center; align-items: center;">Imprint 
+                  <mat-icon aria-label="Link to Deutsche Bank Imprint" class="small-icon p-l-s db-lighterblue mat-icon notranslate mat-icon-no-color" role="img" svgicon="external" aria-hidden="true">
+                    <svg data-name="db_external-link-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fit height="100%" width="100%" style="height: 16px;width: 16px;fill: #9eb8cf;margin-left: 5px; margin-bottom:10px" preserveAspectRatio="xMidYMid meet" focusable="false">
+                    <path d="M16,10.5a.5.5,0,0,0-.5.5v6A1.5,1.5,0,0,1,14,18.5H3A1.5,1.5,0,0,1,1.5,17V6A1.5,1.5,0,0,1,3,4.5H9a.5.5,0,0,0,0-1H3A2.5,2.5,0,0,0,.5,6V17A2.5,2.5,0,0,0,3,19.5H14A2.5,2.5,0,0,0,16.5,17V11A.5.5,0,0,0,16,10.5Z"></path>
+                    <path d="M19.46.81a.51.51,0,0,0-.27-.27A.41.41,0,0,0,19,.5H13a.5.5,0,0,0,0,1h4.79L7.65,11.65a.48.48,0,0,0,0,.7.48.48,0,0,0,.7,0L18.5,2.21V7a.5.5,0,0,0,1,0V1A.43.43,0,0,0,19.46.81Z"></path>
+                  </svg>
+                </mat-icon>
+              </small>
+            </a>
+          </div>
+            <div class="footer-bootom-right-end footer-links m-t-0" fxhide="" fxlayout="row" fxlayoutalign="start center" fxshow.lt-md="">
+            <a class="no-underline" href="">
+              <small>Terms and Conditions</small>
+            </a>
+            <a class="no-underline" href="">
+              <small>Cookie Note</small>
+            </a>
+            <a class="no-underline" href="">
+              <small>Privacy Notice</small>
+            </a>
+            </div>
+          </div>
+        </div>
+        </section>
+      </div>
+    </footer>
