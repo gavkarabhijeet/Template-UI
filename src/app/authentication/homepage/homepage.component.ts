@@ -837,11 +837,11 @@ loginData(value){
              localStorage.setItem("data",JSON.stringify(this.userData));
              this.tokenValue=this.response.response.token
               localStorage.setItem("token",this.tokenValue)
-            // $("#d").css("display","block").delay(1000).fadeOut(200);
-            // setTimeout(() => {this.router.navigate(["/authentication/user-profile"])}, 1100);
-            // setTimeout(() => {this.addLoginData.reset()}, 1110);
+            $("#d").css("display","block").delay(1000).fadeOut(200);
+            setTimeout(() => {this.router.navigate(["/authentication/user-profile"])}, 1100);
+            setTimeout(() => {this.addLoginData.reset()}, 1110);
             // $(".modal-backdrop").remove()
-            this.router.navigate(["/authentication/user-profile"])
+            // this.router.navigate(["/authentication/user-profile"])
           }
            else if (this.response.message == "") {
               // this.toastr.error("Please Enter Username and Password", "", {
