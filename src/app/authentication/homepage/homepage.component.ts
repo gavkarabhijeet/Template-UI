@@ -129,6 +129,7 @@ export class HomepageComponent implements OnInit {
   serviceData: any;
   selectedIndex1: any;
   selectRole: any;
+  tokenValue: any;
   constructor(
     public loginService: LoginService,
     private router: Router,
@@ -156,8 +157,11 @@ export class HomepageComponent implements OnInit {
       var currentScrollPos = window.pageYOffset;
         if (prevScrollpos > currentScrollPos) {
           document.getElementById("topbar1").style.top = "0";
+          console.log("scroll in")
         } else {
-          document.getElementById("topbar1").style.top = "-70px";
+          document.getElementById("topbar1").style.top = "-50px";
+          console.log("scroll out")
+
         }
         prevScrollpos = currentScrollPos;
       }
@@ -831,10 +835,13 @@ loginData(value){
           console.log("this.response ----------->",this.response);
           if (this.response.message == "Login Successful.") {
              localStorage.setItem("data",JSON.stringify(this.userData));
-
-            $("#d").css("display","block").delay(1000).fadeOut(200);
-            setTimeout(() => {this.router.navigate(["/authentication/user-profile"])}, 1100);
-            setTimeout(() => {this.addLoginData.reset()}, 1110);
+             this.tokenValue=this.response.response.token
+              localStorage.setItem("token",this.tokenValue)
+            // $("#d").css("display","block").delay(1000).fadeOut(200);
+            // setTimeout(() => {this.router.navigate(["/authentication/user-profile"])}, 1100);
+            // setTimeout(() => {this.addLoginData.reset()}, 1110);
+            // $(".modal-backdrop").remove()
+            this.router.navigate(["/authentication/user-profile"])
           }
            else if (this.response.message == "") {
               // this.toastr.error("Please Enter Username and Password", "", {

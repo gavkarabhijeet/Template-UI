@@ -1,7 +1,6 @@
-
 :host ::ng-deep .xterm .xterm-viewport{
-  overflow-y: inherit !important;
-  }
+overflow-y: inherit !important;
+}
 /* loader */
 #fountainTextG{
 	width:234px;

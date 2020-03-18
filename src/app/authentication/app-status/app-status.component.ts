@@ -401,7 +401,7 @@ export class AppStatusComponent implements OnInit, OnDestroy {
 
 
 
-        localStorage.setItem("token","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTNiZWQ0ZjQ3MjJjZTIxZTZhYTc4ZGIiLCJpYXQiOjE1ODA5ODU3MzZ9.KECi38Pln-X1zXYYkwgot7mQJFbeiyda2HiVuTh4xV8")
+        // localStorage.setItem("token","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTNiZWQ0ZjQ3MjJjZTIxZTZhYTc4ZGIiLCJpYXQiOjE1ODA5ODU3MzZ9.KECi38Pln-X1zXYYkwgot7mQJFbeiyda2HiVuTh4xV8")
         // this.callSITMethods();  
         // this.uatTab = true;
         // $(window).scroll(function () {

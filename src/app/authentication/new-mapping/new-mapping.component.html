@@ -1,5 +1,5 @@
 
-<div class="card">
+<div class="card" style="background-color: #fff !important ;">
   <div class="mappingMainHeaderDiv">
     <h3 class="mappingMainHeader">API Requests Mapping</h3>
     <div class="col-md-1" *ngIf="isLoading">
@@ -12,11 +12,11 @@
       <input #vanNum (keyup)="vanValue(vanNum.value)"  class="input inputField form-control form-control-line" [(ngModel)] = "vanNumber"/>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-3">
-      <div class="yourFeildHeader">Your API Fields</div>
-      <div class="card yourFeildHeaderValues" *ngFor = "let API of requestDataSource">
-        <div class="card-body" (dragstart)="dragStart($event)" draggable="true">
+  <div class="row" style="background-color: #fff !important;">
+    <div class="col-md-3" style="background-color: #fff !important;">
+      <div class="yourFeildHeader"  style="background-color: #fff !important;">Your API Fields</div>
+      <div class="card yourFeildHeaderValues" *ngFor = "let API of requestDataSource"  style="background-color: #fff !important;" >
+        <div class="card-body" (dragstart)="dragStart($event)" draggable="true"  style="background-color: #fff !important;">
           {{API.sfieldName}}
         </div>
          <!-- <div class="card-body">
@@ -57,7 +57,7 @@
       <div class="row iciciFeildHeaderDiv">
         <div class="col-md-3">
           <span class="iciciFeildHeader">ICICI API Fields</span>
-          <div class="card" *ngFor = "let API of requestData">
+          <div class="card" *ngFor = "let API of requestData" style="background-color: #fff !important;">
             <div class="card-body" (drop)="drop($event)"  >
               {{API.tfieldName}}
             </div>

@@ -84,12 +84,12 @@ export class UserProfileComponent implements OnInit {
       })
       }
     ngOnInit() {
-      $(".modal-backdrop").removeClass("modal-backdrop fade show")
+      // $(".modal-backdrop").removeClass("modal-backdrop fade show")
     //for disabling back button
-    localStorage.setItem("token","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTNiZWQ0ZjQ3MjJjZTIxZTZhYTc4ZGIiLCJpYXQiOjE1ODA5ODU3MzZ9.KECi38Pln-X1zXYYkwgot7mQJFbeiyda2HiVuTh4xV8")
+    // localStorage.setItem("token","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTNiZWQ0ZjQ3MjJjZTIxZTZhYTc4ZGIiLCJpYXQiOjE1ODA5ODU3MzZ9.KECi38Pln-X1zXYYkwgot7mQJFbeiyda2HiVuTh4xV8")
     // $(".modal-backdrop").css("opacity","0")
     // $(".modal-backdrop").removeClass("modal-backdrop fade show")
-    $(".modal-backdrop").remove()
+    // $(".modal-backdrop").remove()
 
 
     window.history.pushState(null, "", window.location.href);
